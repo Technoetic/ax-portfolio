@@ -369,8 +369,9 @@
   }
 
   /* ===== CV 요약 슬라이드 (표지 다음, 한 장에 전모 — 내부 스크롤) ===== */
-  #scv{justify-content:flex-start;padding-top:var(--s6);padding-bottom:var(--s6)}
-  .cv{width:100%;max-width:1000px;margin:0 auto}
+  #scv{justify-content:center;padding-top:var(--s5);padding-bottom:var(--s5)}
+  .cv{width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(16px,3.4vh,46px)}
+  .cv>*{margin:0!important}
   .cv-head{display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
   .cv-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
   .cv-head .role{font-family:var(--mono);font-size:13px;color:var(--accent-2)}
