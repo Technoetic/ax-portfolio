@@ -368,6 +368,40 @@
     .cell{transform:scale(1)!important}
   }
 
+  /* ===== CV 요약 슬라이드 (표지 다음, 한 장에 전모 — 내부 스크롤) ===== */
+  #scv{justify-content:flex-start;padding-top:var(--s6);padding-bottom:var(--s6)}
+  .cv{width:100%;max-width:1000px;margin:0 auto}
+  .cv-head{display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
+  .cv-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
+  .cv-head .role{font-family:var(--mono);font-size:13px;color:var(--accent-2)}
+  .cv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);margin-bottom:var(--s3)}
+  @media(max-width:760px){.cv-stats{grid-template-columns:repeat(2,1fr)}}
+  .cv-stat{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:var(--s2);text-align:center}
+  .cv-stat .n{font-family:var(--mono);font-size:clamp(20px,2.6vw,28px);font-weight:800;color:var(--accent-2);line-height:1}
+  .cv-stat .l{font-size:11.5px;color:var(--fg-dim);margin-top:5px}
+  .cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+  @media(max-width:760px){.cv-grid{grid-template-columns:1fr}}
+  .cv-block .bt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);margin-bottom:var(--s2);display:flex;align-items:center;gap:var(--s1)}
+  .cv-block .bt::after{content:"";flex:1;height:1px;background:var(--line)}
+  .cv-about{font-size:14px;color:var(--fg-dim);line-height:1.7;grid-column:1/-1}
+  .cv-about b{color:var(--fg);font-weight:600}.cv-about .hl{color:var(--accent-2);font-weight:600}
+  .cv-line{display:flex;gap:var(--s2);padding:7px 0;font-size:13.5px;border-bottom:1px solid #1d232c66}
+  .cv-line:last-child{border-bottom:none}
+  .cv-line .w{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);flex:0 0 116px}
+  .cv-line .d{color:var(--fg-dim)}.cv-line .d b{color:var(--fg);font-weight:600}
+  .cv-line a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed var(--line)}
+  .cv-line a:hover{color:var(--accent-2);border-color:var(--accent-2)}
+  .cv-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2)}
+  .cv-chips a{font-family:var(--mono);font-size:11.5px;background:var(--accent-soft);border:1px solid #3b82f640;color:var(--accent-2);padding:4px 10px;border-radius:7px;text-decoration:none;transition:background .25s,transform .2s}
+  .cv-chips a:hover{background:#3b82f626;transform:translateY(-2px)}
+  .cv-proj a{display:flex;align-items:center;justify-content:space-between;gap:var(--s1);padding:8px 0;font-size:13.5px;color:var(--fg);text-decoration:none;border-bottom:1px solid #1d232c66}
+  .cv-proj a:last-child{border-bottom:none}
+  .cv-proj a:hover{color:var(--accent-2)}
+  .cv-proj .pn{font-weight:600}.cv-proj .pm{font-family:var(--mono);font-size:11px;color:var(--fg-mute)}
+  .cv-cta{display:inline-flex;align-items:center;gap:8px;margin-top:var(--s3);font-size:13px;color:var(--accent-2);text-decoration:none;background:var(--accent-soft);border:1px solid #3b82f659;border-radius:8px;padding:9px 16px;transition:background .25s,transform .2s}
+  .cv-cta:hover{background:#3b82f626;transform:translateY(-2px)}
+  .cv-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+
   /* 인쇄/PDF: 9개 슬라이드를 9페이지로 순차 출력 */
   @media print{
     body{overflow:visible!important;background:#fff;color:#111}
@@ -417,6 +451,62 @@
       <a href="mailto:technoetic@hotmail.com"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
       <a href="tel:01076335021"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>010-7633-5021</a>
       <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>인천광역시 서구 신석로 71</span>
+    </div>
+    <a class="linkbtn rise" href="jeon-munjun-portfolio.pdf" download aria-label="포트폴리오 PDF 다운로드" style="margin-top:var(--s4)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg>
+      포트폴리오 PDF 다운로드
+    </a>
+  </section>
+
+  <!-- CV 요약 (표지 다음 — 한 장에 전모) -->
+  <section class="slide" id="scv">
+    <div class="cv rise">
+      <div class="cv-head">
+        <h2>전문준</h2>
+        <span class="role">AX 엔지니어 · 빌딩 HMI 10년 → AI 전환</span>
+      </div>
+      <div class="cv-stats">
+        <div class="cv-stat"><div class="n">10년</div><div class="l">빌딩 HMI 경력</div></div>
+        <div class="cv-stat"><div class="n">91</div><div class="l">GitHub 레포</div></div>
+        <div class="cv-stat"><div class="n">1,665</div><div class="l">누적 커밋</div></div>
+        <div class="cv-stat"><div class="n">191</div><div class="l">블로그 글</div></div>
+      </div>
+      <p class="cv-about">
+        지난 <b>10년간 빌딩 HMI 엔지니어</b>로서 <span class="hl">코엑스</span>를 비롯한 랜드마크 현장의 빌딩 자동제어(BAS·BEMS)를 담당했고,
+        2023년 LLM을 마주하며 <b>AX 전환에 기여</b>, 2025년 AI 기반 개발에 뛰어들어 국비 AI 과정을 <span class="hl">전 과제 1등</span>으로 수료했습니다.
+        <b>설비·제어·에너지 현장을 아는 AI 적용 인재</b>가 제 차별점입니다.
+      </p>
+      <div class="cv-grid" style="margin-top:var(--s4)">
+        <div class="cv-block">
+          <div class="bt">Career</div>
+          <div class="cv-line"><span class="w">2025.12~26.06</span><span class="d"><b>KDT HDC랩스</b> AI 부트캠프 · <a href="https://nova.igrowth.kr/" target="_blank" rel="noopener">전 과제 1등 수료</a></span></div>
+          <div class="cv-line"><span class="w">2018.07~25.10</span><span class="d"><b>(주)에스티엔비</b> 빌딩 HMI 엔지니어 · <a href="http://stnv.co.kr/" target="_blank" rel="noopener">stnv.co.kr</a></span></div>
+          <div class="cv-line"><span class="w">2014.10~18.07</span><span class="d"><b>(주)웹콘</b> 빌딩 HMI 엔지니어 · <a href="https://webcon.co.kr/" target="_blank" rel="noopener">webcon.co.kr</a></span></div>
+          <div class="cv-chips">
+            <a href="https://www.coex.co.kr/" target="_blank" rel="noopener">코엑스</a>
+            <a href="https://seoulsquare.com/" target="_blank" rel="noopener">서울스퀘어</a>
+            <a href="https://www.centropolis.co.kr/" target="_blank" rel="noopener">센트로폴리스</a>
+            <a href="https://www.centerfield.co.kr/" target="_blank" rel="noopener">센터필드</a>
+            <a href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener">타워팰리스</a>
+            <a href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener">타임스퀘어</a>
+          </div>
+        </div>
+        <div class="cv-block cv-proj">
+          <div class="bt">Projects &amp; Activity</div>
+          <a href="https://github.com/Technoetic/harness107" target="_blank" rel="noopener"><span class="pn">하네스 107</span><span class="pm">LLM 워크플로 엔진 ↗</span></a>
+          <a href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener"><span class="pn">커스텀 슬래시 커맨드 20</span><span class="pm">자동화 ↗</span></a>
+          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><span class="pn">GitHub 91 repos</span><span class="pm">1,665 commits ↗</span></a>
+          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><span class="pn">기술 블로그 191편</span><span class="pm">매일 학습 ↗</span></a>
+          <div class="cv-chips" style="margin-top:var(--s2)">
+            <span style="font-family:var(--mono);font-size:11px;color:var(--fg-mute)">자격</span>
+            <span style="font-family:var(--mono);font-size:11.5px;color:var(--fg-dim)">정보처리기능사 (2024.12)</span>
+          </div>
+        </div>
+      </div>
+      <a class="cv-cta" href="cv.html">
+        <svg viewBox="0 0 24 24"><path d="M14 3v5h5M9 13h6M9 17h6M7 21h10a2 2 0 002-2V8l-5-5H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        전체 이력서(CV) 한 페이지로 보기 →
+      </a>
     </div>
   </section>
 
