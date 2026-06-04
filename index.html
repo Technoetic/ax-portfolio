@@ -385,6 +385,13 @@
   .cv-block .bt::after{content:"";flex:1;height:1px;background:var(--line)}
   .cv-about{font-size:14px;color:var(--fg-dim);line-height:1.7;grid-column:1/-1}
   .cv-about b{color:var(--fg);font-weight:600}.cv-about .hl{color:var(--accent-2);font-weight:600}
+  /* CV 기본사항 행 */
+  .cv-info{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}
+  @media(max-width:760px){.cv-info{grid-template-columns:repeat(2,1fr)}}
+  .cv-info .it{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+  .cv-info .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
+  .cv-info .v{font-size:13.5px;font-weight:600;margin-top:3px}
+  .cv-info .s{font-size:11px;color:var(--fg-mute);margin-top:1px}
   .cv-line{display:flex;gap:var(--s2);padding:7px 0;font-size:13.5px;border-bottom:1px solid #1d232c66}
   .cv-line:last-child{border-bottom:none}
   .cv-line .w{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);flex:0 0 116px}
@@ -394,6 +401,13 @@
   .cv-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2)}
   .cv-chips a{font-family:var(--mono);font-size:11.5px;background:var(--accent-soft);border:1px solid #3b82f640;color:var(--accent-2);padding:4px 10px;border-radius:7px;text-decoration:none;transition:background .25s,transform .2s}
   .cv-chips a:hover{background:#3b82f626;transform:translateY(-2px)}
+  /* CV 빌딩 로고 칩 (흰 카드) */
+  .cv-logos{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2)}
+  .cv-logos a{background:#f4f6f8;border:1px solid var(--line);border-radius:8px;height:38px;width:88px;
+    display:flex;align-items:center;justify-content:center;padding:6px 8px;
+    transition:border-color .25s,transform .2s,box-shadow .25s}
+  .cv-logos a:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px #0006}
+  .cv-logos img{max-width:100%;max-height:24px;object-fit:contain}
   .cv-proj a{display:flex;align-items:center;justify-content:space-between;gap:var(--s1);padding:8px 0;font-size:13.5px;color:var(--fg);text-decoration:none;border-bottom:1px solid #1d232c66}
   .cv-proj a:last-child{border-bottom:none}
   .cv-proj a:hover{color:var(--accent-2)}
@@ -476,19 +490,26 @@
         2023년 LLM을 마주하며 <b>AX 전환에 기여</b>, 2025년 AI 기반 개발에 뛰어들어 국비 AI 과정을 <span class="hl">전 과제 1등</span>으로 수료했습니다.
         <b>설비·제어·에너지 현장을 아는 AI 적용 인재</b>가 제 차별점입니다.
       </p>
+      <div class="cv-info">
+        <div class="it"><div class="k">생년월일</div><div class="v">1988. 12. 20.</div><div class="s">만 37세</div></div>
+        <div class="it"><div class="k">연락처</div><div class="v">010-7633-5021</div><div class="s">technoetic@hotmail.com</div></div>
+        <div class="it"><div class="k">주소</div><div class="v">인천광역시 서구</div><div class="s">신석로 71</div></div>
+        <div class="it"><div class="k">학력</div><div class="v">인천대인고등학교</div><div class="s">인문계열 · 2004.03~2007.02</div></div>
+        <div class="it"><div class="k">자격증</div><div class="v">정보처리기능사</div><div class="s">2024.12 취득</div></div>
+      </div>
       <div class="cv-grid" style="margin-top:var(--s4)">
         <div class="cv-block">
           <div class="bt">Career</div>
           <div class="cv-line"><span class="w">2025.12~26.06</span><span class="d"><b>KDT HDC랩스</b> AI 부트캠프 · <a href="https://nova.igrowth.kr/" target="_blank" rel="noopener">전 과제 1등 수료</a></span></div>
           <div class="cv-line"><span class="w">2018.07~25.10</span><span class="d"><b>(주)에스티엔비</b> 빌딩 HMI 엔지니어 · <a href="http://stnv.co.kr/" target="_blank" rel="noopener">stnv.co.kr</a></span></div>
           <div class="cv-line"><span class="w">2014.10~18.07</span><span class="d"><b>(주)웹콘</b> 빌딩 HMI 엔지니어 · <a href="https://webcon.co.kr/" target="_blank" rel="noopener">webcon.co.kr</a></span></div>
-          <div class="cv-chips">
-            <a href="https://www.coex.co.kr/" target="_blank" rel="noopener">코엑스</a>
-            <a href="https://seoulsquare.com/" target="_blank" rel="noopener">서울스퀘어</a>
-            <a href="https://www.centropolis.co.kr/" target="_blank" rel="noopener">센트로폴리스</a>
-            <a href="https://www.centerfield.co.kr/" target="_blank" rel="noopener">센터필드</a>
-            <a href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener">타워팰리스</a>
-            <a href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener">타임스퀘어</a>
+          <div class="cv-logos">
+            <a href="https://www.coex.co.kr/" target="_blank" rel="noopener" aria-label="코엑스"><img src="assets/logos/coex.png" alt="코엑스" loading="lazy"></a>
+            <a href="https://seoulsquare.com/" target="_blank" rel="noopener" aria-label="서울스퀘어"><img src="assets/logos/seoulsquare.png" alt="서울스퀘어" loading="lazy"></a>
+            <a href="https://www.centropolis.co.kr/" target="_blank" rel="noopener" aria-label="센트로폴리스"><img src="assets/logos/centropolis-dark.svg" alt="센트로폴리스" loading="lazy"></a>
+            <a href="https://www.centerfield.co.kr/" target="_blank" rel="noopener" aria-label="센터필드"><img src="assets/logos/centerfield-dark.svg" alt="센터필드" loading="lazy"></a>
+            <a href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener" aria-label="타워팰리스"><img src="assets/logos/towerpalace.png" alt="타워팰리스" loading="lazy"></a>
+            <a href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener" aria-label="타임스퀘어"><img src="assets/logos/timessquare.png" alt="타임스퀘어" loading="lazy"></a>
           </div>
         </div>
         <div class="cv-block cv-proj">
@@ -503,10 +524,6 @@
           </div>
         </div>
       </div>
-      <a class="cv-cta" href="cv.html">
-        <svg viewBox="0 0 24 24"><path d="M14 3v5h5M9 13h6M9 17h6M7 21h10a2 2 0 002-2V8l-5-5H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-        전체 이력서(CV) 한 페이지로 보기 →
-      </a>
     </div>
   </section>
 
