@@ -396,7 +396,9 @@
   .cv-line{display:flex;gap:var(--s2);padding:7px 0;font-size:13.5px;border-bottom:1px solid #1d232c66}
   .cv-line:last-child{border-bottom:none}
   .cv-line .w{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);flex:0 0 116px}
+  .cv-line .org{flex:0 0 118px;color:var(--fg);font-weight:600}
   .cv-line .d{color:var(--fg-dim)}.cv-line .d b{color:var(--fg);font-weight:600}
+  @media(max-width:760px){.cv-line .org{flex:0 0 96px}}
   .cv-line a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed var(--line)}
   .cv-line a:hover{color:var(--accent-2);border-color:var(--accent-2)}
   .cv-line{align-items:center}
@@ -418,6 +420,9 @@
   .cv-proj a{display:flex;align-items:center;justify-content:space-between;gap:var(--s1);padding:8px 0;font-size:13.5px;color:var(--fg);text-decoration:none;border-bottom:1px solid #1d232c66}
   .cv-proj a:last-child{border-bottom:none}
   .cv-proj a:hover{color:var(--accent-2)}
+  .cv-proj .pr{display:flex;align-items:center;gap:7px;flex:0 0 auto}
+  .cv-proj .go{width:13px;height:13px;stroke:var(--fg-mute);fill:none;stroke-width:1.8;transition:stroke .25s}
+  .cv-proj a:hover .go{stroke:var(--accent-2)}
   .cv-proj .pn{font-weight:600}.cv-proj .pm{font-family:var(--mono);font-size:11px;color:var(--fg-mute)}
   .cv-cta{display:inline-flex;align-items:center;gap:8px;margin-top:var(--s3);font-size:13px;color:var(--accent-2);text-decoration:none;background:var(--accent-soft);border:1px solid #3b82f659;border-radius:8px;padding:9px 16px;transition:background .25s,transform .2s}
   .cv-cta:hover{background:#3b82f626;transform:translateY(-2px)}
@@ -507,9 +512,9 @@
       <div class="cv-grid" style="margin-top:var(--s4)">
         <div class="cv-block">
           <div class="bt">Career</div>
-          <div class="cv-line"><span class="w">2025.12~26.06</span><a class="lg" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스" loading="lazy"></a><span class="d"><b>KDT HDC랩스</b> AI 부트캠프 · 전 과제 1등 수료</span></div>
-          <div class="cv-line"><span class="w">2018.07~25.10</span><a class="lg" href="http://stnv.co.kr/" target="_blank" rel="noopener" aria-label="(주)에스티엔비"><img src="assets/logos/stnb.png" alt="에스티엔비" loading="lazy"></a><span class="d"><b>(주)에스티엔비</b> 빌딩 HMI 엔지니어</span></div>
-          <div class="cv-line"><span class="w">2014.10~18.07</span><a class="lg" href="https://webcon.co.kr/" target="_blank" rel="noopener" aria-label="(주)웹콘"><img src="assets/logos/webcon.png" alt="웹콘" loading="lazy"></a><span class="d"><b>(주)웹콘</b> 빌딩 HMI 엔지니어</span></div>
+          <div class="cv-line"><span class="w">2025.12~26.06</span><a class="lg" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스" loading="lazy"></a><span class="org">KDT HDC랩스</span><span class="d">AI 부트캠프 · 전 과제 1등 수료</span></div>
+          <div class="cv-line"><span class="w">2018.07~25.10</span><a class="lg" href="http://stnv.co.kr/" target="_blank" rel="noopener" aria-label="(주)에스티엔비"><img src="assets/logos/stnb.png" alt="에스티엔비" loading="lazy"></a><span class="org">(주)에스티엔비</span><span class="d">빌딩 HMI 엔지니어</span></div>
+          <div class="cv-line"><span class="w">2014.10~18.07</span><a class="lg" href="https://webcon.co.kr/" target="_blank" rel="noopener" aria-label="(주)웹콘"><img src="assets/logos/webcon.png" alt="웹콘" loading="lazy"></a><span class="org">(주)웹콘</span><span class="d">빌딩 HMI 엔지니어</span></div>
           <div class="cv-logos">
             <a href="https://www.coex.co.kr/" target="_blank" rel="noopener" aria-label="코엑스"><img src="assets/logos/coex.png" alt="코엑스" loading="lazy"></a>
             <a href="https://seoulsquare.com/" target="_blank" rel="noopener" aria-label="서울스퀘어"><img src="assets/logos/seoulsquare.png" alt="서울스퀘어" loading="lazy"></a>
@@ -521,10 +526,10 @@
         </div>
         <div class="cv-block cv-proj">
           <div class="bt">Projects &amp; Activity</div>
-          <a href="https://github.com/Technoetic/harness107" target="_blank" rel="noopener"><span class="pn">하네스 107</span><span class="pm">LLM 워크플로 엔진 ↗</span></a>
-          <a href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener"><span class="pn">커스텀 슬래시 커맨드 20</span><span class="pm">자동화 ↗</span></a>
-          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><span class="pn">GitHub 91 repos</span><span class="pm">1,665 commits ↗</span></a>
-          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><span class="pn">기술 블로그 191편</span><span class="pm">매일 학습 ↗</span></a>
+          <a href="https://github.com/Technoetic/harness107" target="_blank" rel="noopener"><span class="pn">하네스 107</span><span class="pr"><span class="pm">LLM 워크플로 엔진</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener"><span class="pn">커스텀 슬래시 커맨드 20</span><span class="pr"><span class="pm">자동화</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><span class="pn">GitHub 91 repos</span><span class="pr"><span class="pm">1,665 commits</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><span class="pn">기술 블로그 191편</span><span class="pr"><span class="pm">매일 학습</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
         </div>
       </div>
     </div>
