@@ -370,31 +370,33 @@
 
   /* ===== CV 요약 슬라이드 (표지 다음, 한 장에 전모 — 내부 스크롤) ===== */
   #scv{justify-content:center;padding-top:var(--s5);padding-bottom:var(--s5)}
-  .cv{width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(16px,3.4vh,46px)}
+  .cv{width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:var(--s3)}
   .cv>*{margin:0!important}
-  .cv-head{display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
+  .cv-head{display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap}
   .cv-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
   .cv-head .role{font-family:var(--mono);font-size:13px;color:var(--accent-2)}
-  .cv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);margin-bottom:var(--s3)}
+  .cv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2)}
   @media(max-width:760px){.cv-stats{grid-template-columns:repeat(2,1fr)}}
-  .cv-stat{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:var(--s2);text-align:center}
-  .cv-stat .n{font-family:var(--mono);font-size:clamp(20px,2.6vw,28px);font-weight:800;color:var(--accent-2);line-height:1}
+  .cv-stat{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:var(--s1) var(--s2);text-align:center}
+  .cv-stat .n{font-family:var(--mono);font-size:clamp(20px,2.6vw,24px);font-weight:800;color:var(--accent-2);line-height:1}
   .cv-stat .n .u{font-family:var(--sans);font-weight:700;font-size:.72em;margin-left:1px}
-  .cv-stat .l{font-size:11.5px;color:var(--fg-dim);margin-top:5px}
-  .cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
-  @media(max-width:760px){.cv-grid{grid-template-columns:1fr}}
+  .cv-stat .l{font-size:11.5px;color:var(--fg-dim);margin-top:4px}
+  /* CV 하단 2열 비대칭 (좌:Career+Projects | 우:부트캠프 3카드) */
+  .cv-lower{display:grid;grid-template-columns:1.05fr 1fr;gap:var(--s3);align-items:start}
+  @media(max-width:760px){.cv-lower{grid-template-columns:1fr}}
+  .cv-lower .cv-block + .cv-block{margin-top:var(--s3)}
   .cv-block .bt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);margin-bottom:var(--s2);display:flex;align-items:center;gap:var(--s1)}
   .cv-block .bt::after{content:"";flex:1;height:1px;background:var(--line)}
-  .cv-about{font-size:14px;color:var(--fg-dim);line-height:1.7;grid-column:1/-1}
+  .cv-about{font-size:13px;color:var(--fg-dim);line-height:1.5;flex:1 1 360px}
   .cv-about b{color:var(--fg);font-weight:600}.cv-about .hl{color:var(--accent-2);font-weight:600}
   /* CV 기본사항 행 */
-  .cv-info{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}
+  .cv-info{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2)}
   @media(max-width:760px){.cv-info{grid-template-columns:repeat(2,1fr)}}
-  .cv-info .it{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+  .cv-info .it{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:8px 12px}
   .cv-info .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
   .cv-info .v{font-size:13.5px;font-weight:600;margin-top:3px}
   .cv-info .s{font-size:11px;color:var(--fg-mute);margin-top:1px}
-  .cv-line{display:flex;gap:var(--s2);padding:7px 0;font-size:13.5px;border-bottom:1px solid #1d232c66}
+  .cv-line{display:flex;gap:var(--s2);padding:6px 0;font-size:13.5px;border-bottom:1px solid #1d232c66}
   .cv-line:last-child{border-bottom:none}
   .cv-line .w{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);flex:0 0 116px}
   .cv-line .org{flex:0 0 118px;color:var(--fg);font-weight:600}
@@ -412,13 +414,13 @@
   .cv-chips a{font-family:var(--mono);font-size:11.5px;background:var(--accent-soft);border:1px solid #3b82f640;color:var(--accent-2);padding:4px 10px;border-radius:7px;text-decoration:none;transition:background .25s,transform .2s}
   .cv-chips a:hover{background:#3b82f626;transform:translateY(-2px)}
   /* CV 빌딩 로고 칩 (흰 카드) */
-  .cv-logos{display:flex;flex-wrap:nowrap;gap:5px;margin-top:var(--s2)}
-  .cv-logos a{flex:1;min-width:0;background:#f4f6f8;border:1px solid var(--line);border-radius:8px;height:38px;
-    display:flex;align-items:center;justify-content:center;padding:6px 8px;
+  .cv-logos{display:flex;flex-wrap:nowrap;gap:5px;margin-top:var(--s1)}
+  .cv-logos a{flex:1;min-width:0;background:#f4f6f8;border:1px solid var(--line);border-radius:8px;height:30px;
+    display:flex;align-items:center;justify-content:center;padding:5px 8px;
     transition:border-color .25s,transform .2s,box-shadow .25s}
   .cv-logos a:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px #0006}
-  .cv-logos img{max-width:100%;max-height:24px;object-fit:contain}
-  .cv-proj a{display:flex;align-items:center;gap:var(--s2);padding:8px 0;font-size:13.5px;color:var(--fg);
+  .cv-logos img{max-width:100%;max-height:20px;object-fit:contain}
+  .cv-proj a{display:flex;align-items:center;gap:var(--s2);padding:6px 0;font-size:13.5px;color:var(--fg);
     text-decoration:none;border-bottom:1px solid #1d232c66}
   .cv-proj a:last-child{border-bottom:none}
   .cv-proj a:hover .pn{color:var(--accent-2)}
@@ -431,17 +433,16 @@
     transition:border-color .25s,color .25s,background .25s}
   .cv-proj a:hover .pr{border-color:var(--accent);color:var(--accent-2);background:#161b22}
   .cv-proj .go{flex:0 0 auto;width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8}
-  /* 부트캠프 실증 프로젝트 (전체 폭 · 가로 3컬럼 카드) */
-  .cv-bcp-head{display:flex;align-items:center;gap:var(--s2);margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid #1d232c}
+  /* 부트캠프 실증 프로젝트 (CV 우측 컬럼 · 세로 3카드) */
+  .cv-bcp-head{display:flex;align-items:center;gap:var(--s2);margin-top:0;padding-top:0;border-top:none}
   .cv-bcp-head .bt{margin:0}
   .cv-bcp-head .tag{font-family:var(--mono);font-size:10.5px;color:var(--accent-2);background:var(--accent-soft);border:1px solid #3b82f640;border-radius:6px;padding:2px 8px}
-  .cv-bcp{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin-top:var(--s3)}
-  @media(max-width:760px){.cv-bcp{grid-template-columns:1fr}}
+  .cv-bcp{display:grid;grid-template-columns:1fr;gap:var(--s2);margin-top:var(--s2)}
   .cv-bcp .row{display:flex;flex-direction:column;gap:6px;background:var(--bg-2);border:1px solid var(--line);
-    border-radius:12px;padding:var(--s3);transition:border-color .25s,transform .2s,box-shadow .25s}
+    border-radius:12px;padding:var(--s2);transition:border-color .25s,transform .2s,box-shadow .25s}
   .cv-bcp .row:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 22px #0007}
-  .cv-bcp .pn{font-weight:700;font-size:14px;color:var(--fg);line-height:1.25}
-  .cv-bcp .pd{font-size:11.5px;color:var(--fg-dim);line-height:1.4;flex:1}
+  .cv-bcp .pn{font-weight:700;font-size:13.5px;color:var(--fg);line-height:1.25}
+  .cv-bcp .pd{font-size:11.5px;color:var(--fg-dim);line-height:1.4;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .cv-bcp .lk{display:flex;gap:6px;margin-top:4px}
   .cv-bcp .lk a{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;
     color:var(--fg-mute);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:5px 10px;
@@ -531,8 +532,13 @@
       <div class="cv-head">
         <h2>전문준</h2>
         <span class="role">AX 엔지니어 · 빌딩 HMI 10년 → AI 전환</span>
+        <p class="cv-about">
+          지난 <b>10년간 빌딩 HMI 엔지니어</b>로서 <span class="hl">코엑스</span>를 비롯한 랜드마크 현장의 빌딩 자동제어(BAS·BEMS)를 담당했고,
+          2023년 LLM을 마주하며 <b>AX 전환에 기여</b>, 2025년 AI 기반 개발에 뛰어들어 국비 AI 과정을 <span class="hl">전 과제 1등</span>으로 수료했습니다.
+          <b>빌딩 설비와 제어 현장을 아는 AI 적용 인재</b>가 제 차별점입니다.
+        </p>
       </div>
-      <div class="cv-info" style="margin-top:0;margin-bottom:var(--s3)">
+      <div class="cv-info">
         <div class="it"><div class="k">생년월일</div><div class="v">1988. 12. 20.</div><div class="s">만 37세</div></div>
         <div class="it"><div class="k">연락처</div><div class="v">010-7633-5021</div><div class="s">technoetic@hotmail.com</div></div>
         <div class="it"><div class="k">주소</div><div class="v">인천광역시 서구</div><div class="s">신석로 71</div></div>
@@ -545,12 +551,8 @@
         <div class="cv-stat"><div class="n">1,701</div><div class="l">누적 커밋</div></div>
         <div class="cv-stat"><div class="n">195</div><div class="l">블로그 글</div></div>
       </div>
-      <p class="cv-about">
-        지난 <b>10년간 빌딩 HMI 엔지니어</b>로서 <span class="hl">코엑스</span>를 비롯한 랜드마크 현장의 빌딩 자동제어(BAS·BEMS)를 담당했고,
-        2023년 LLM을 마주하며 <b>AX 전환에 기여</b>, 2025년 AI 기반 개발에 뛰어들어 국비 AI 과정을 <span class="hl">전 과제 1등</span>으로 수료했습니다.
-        <b>빌딩 설비와 제어 현장을 아는 AI 적용 인재</b>가 제 차별점입니다.
-      </p>
-      <div class="cv-grid" style="margin-top:var(--s4)">
+      <div class="cv-lower">
+        <div class="cv-col-left">
         <div class="cv-block">
           <div class="bt">Career</div>
           <div class="cv-line"><span class="w">2025.12~26.06</span><a class="lg" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스" loading="lazy"></a><span class="org">KDT HDC랩스</span><span class="d">AI 부트캠프 · 전 과제 1등 수료</span></div>
@@ -572,10 +574,11 @@
           <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">GitHub 95 repos</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
           <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg><span class="pn">기술 블로그 195편</span><span class="pr"><span class="pm">블로그에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
         </div>
-      </div>
-      <!-- 부트캠프 실증 프로젝트 (전체 폭 · 가로 3컬럼) -->
-      <div class="cv-bcp-head"><div class="bt">부트캠프 실증 프로젝트</div><span class="tag">KDT HDC랩스</span></div>
-      <div class="cv-bcp">
+        </div>
+        <div class="cv-col-right">
+        <!-- 부트캠프 실증 프로젝트 (우측 컬럼 · 세로 3카드) -->
+        <div class="cv-bcp-head"><div class="bt">부트캠프 실증 프로젝트</div><span class="tag">KDT HDC랩스</span></div>
+        <div class="cv-bcp">
         <div class="row">
           <span class="pn">S-DoT 서울 스마트시티 대시보드</span>
           <span class="pd">서울시 IoT 센서 1,155건 실시간 수집 · 구별 대기·환경 이상 감지 · 지도 관제</span>
@@ -599,6 +602,8 @@
             <a href="https://saju-mbti-fusion.fly.dev/" target="_blank" rel="noopener" aria-label="월하몽 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
             <a href="https://github.com/Technoetic/saju-mbti-fusion" target="_blank" rel="noopener" aria-label="월하몽 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
           </span>
+        </div>
+        </div>
         </div>
       </div>
     </div>
