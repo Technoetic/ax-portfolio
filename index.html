@@ -1057,6 +1057,29 @@ window.addEventListener('load',function(){
   window.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
   window.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));},{passive:true});
 
+  /* 마우스 휠 스크롤로 슬라이드 이동 (스로틀 + 모달/내부스크롤 보호) */
+  let wheelLock=false;
+  window.addEventListener('wheel',e=>{
+    const m=document.getElementById('stepModal');
+    const dm=document.getElementById('stepDetail');
+    if((m&&m.classList.contains('open'))||(dm&&dm.classList.contains('open')))return; // 모달 열림 시 차단(모달 내부 스크롤 보호)
+    // 스크롤 가능한 내부 요소(코드패널 등) 위에서는 그 요소가 끝까지 스크롤되기 전까지 슬라이드 이동 보류
+    for(let el=e.target;el&&el!==document.body;el=el.parentElement){
+      if(el.scrollHeight>el.clientHeight+2){
+        const cs=getComputedStyle(el);
+        if(/(auto|scroll)/.test(cs.overflowY)){
+          const atTop=el.scrollTop<=0, atBottom=el.scrollTop+el.clientHeight>=el.scrollHeight-2;
+          if((e.deltaY>0&&!atBottom)||(e.deltaY<0&&!atTop))return; // 내부 스크롤 우선
+        }
+      }
+    }
+    if(Math.abs(e.deltaY)<8)return; // 미세 스크롤 무시
+    if(wheelLock)return;
+    wheelLock=true;
+    go(cur+(e.deltaY>0?1:-1));
+    setTimeout(()=>{wheelLock=false;},700); // 전환 애니메이션(.6s)보다 약간 길게
+  },{passive:true});
+
   /* 마우스 패럴랙스 (글로우) */
   const g1=document.getElementById('glow1'),g2=document.getElementById('glow2');
   const mouse={x:-9999,y:-9999};
