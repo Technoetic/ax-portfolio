@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; }
+  img, svg, video { max-width: 100%; height: auto; }
+</style>
+</head>
+<body>
+<title>토큰 계측기 — AI 입력 비용을 눈으로 보기</title>
+
+<style>
+  :root {
+    /* 계측기 팔레트 — 중성색에 옅은 청록 편향을 준 냉정한 지면 */
+    --bg:        #ECEEEA;
+    --surface:   #FFFFFF;
+    --surface-2: #F4F6F2;
+    --ink:       #16191C;
+    --ink-2:     #3D474B;
+    --muted:     #5C666B;
+    --line:      #D2D6D0;
+    --line-2:    #E2E5DF;
+
+    --accent:    #136F63;   /* 측정값 — 토큰 */
+    --accent-b:  #E4EFEC;
+    --signal:    #B4491A;   /* 금액 — 비용 */
+    --signal-b:  #F7E7DE;
+    --gold:      #8A6D1F;   /* 숫자 */
+    --gold-b:    #F4EEDC;
+
+    --shadow: 0 1px 2px rgba(20,28,26,.05), 0 8px 24px -12px rgba(20,28,26,.16);
+
+    --font-sans: 'Pretendard Variable','Pretendard','Apple SD Gothic Neo',
+                 'Malgun Gothic','맑은 고딕','Noto Sans KR',system-ui,-apple-system,sans-serif;
+    --font-mono: 'JetBrains Mono','Consolas','SFMono-Regular','Menlo','D2Coding',
+                 'Courier New',monospace;
+
+    --maxw: 1120px;
+    --r: 6px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #15181B;
+      --surface:   #1D2226;
+      --surface-2: #23292D;
+      --ink:       #E9ECEA;
+      --ink-2:     #BCC4C2;
+      --muted:     #8F9A9E;
+      --line:      #2E353A;
+      --line-2:    #262C31;
+
+      --accent:    #4FBFAE;
+      --accent-b:  #16302E;
+      --signal:    #E5895F;
+      --signal-b:  #35211A;
+      --gold:      #D0AE5C;
+      --gold-b:    #302819;
+
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+    }
+  }
+
+  /* 뷰어 토글이 미디어쿼리를 양방향으로 이겨야 한다 */
+  :root[data-theme="dark"] {
+    --bg:#15181B; --surface:#1D2226; --surface-2:#23292D;
+    --ink:#E9ECEA; --ink-2:#BCC4C2; --muted:#8F9A9E;
+    --line:#2E353A; --line-2:#262C31;
+    --accent:#4FBFAE; --accent-b:#16302E;
+    --signal:#E5895F; --signal-b:#35211A;
+    --gold:#D0AE5C; --gold-b:#302819;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+  :root[data-theme="light"] {
+    --bg:#ECEEEA; --surface:#FFFFFF; --surface-2:#F4F6F2;
+    --ink:#16191C; --ink-2:#3D474B; --muted:#5C666B;
+    --line:#D2D6D0; --line-2:#E2E5DF;
+    --accent:#136F63; --accent-b:#E4EFEC;
+    --signal:#B4491A; --signal-b:#F7E7DE;
+    --gold:#8A6D1F; --gold-b:#F4EEDC;
+    --shadow: 0 1px 2px rgba(20,28,26,.05), 0 8px 24px -12px rgba(20,28,26,.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ── 헤더 ─────────────────────────────────────── */
+  .masthead {
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .masthead .wrap {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    align-items: baseline; justify-content: space-between;
+    padding-top: 28px; padding-bottom: 26px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 8px;
+  }
+  h1 {
+    font-size: clamp(26px, 3.4vw, 38px);
+    line-height: 1.18; margin: 0; letter-spacing: -.02em;
+    font-weight: 800; text-wrap: balance;
+  }
+  .lede {
+    margin: 12px 0 0; color: var(--ink-2);
+    max-width: 46ch; font-size: 15.5px;
+  }
+  .stamp {
+    font-family: var(--font-mono); font-size: 11.5px;
+    color: var(--muted); text-align: right; line-height: 1.8;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── 섹션 ─────────────────────────────────────── */
+  section { padding: 44px 0; }
+  section + section { border-top: 1px solid var(--line-2); }
+
+  .sec-head { margin-bottom: 24px; }
+  .sec-num {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .16em; color: var(--muted);
+    display: block; margin-bottom: 6px;
+  }
+  h2 {
+    font-size: clamp(19px, 2.2vw, 24px); margin: 0;
+    letter-spacing: -.015em; font-weight: 750; text-wrap: balance;
+  }
+  .sec-sub { margin: 8px 0 0; color: var(--ink-2); max-width: 62ch; font-size: 15px; }
+
+  h3 { font-size: 15px; margin: 0 0 10px; font-weight: 700; letter-spacing: -.005em; }
+
+  /* ── 계측 패널 ─────────────────────────────────── */
+  .panel {
+    display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr);
+    gap: 20px; align-items: start;
+  }
+  @media (max-width: 900px) { .panel { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r); box-shadow: var(--shadow);
+  }
+  .card-pad { padding: 18px; }
+
+  .card-label {
+    font-family: var(--font-mono); font-size: 10.5px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+    padding: 11px 18px; border-bottom: 1px solid var(--line-2);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+
+  textarea {
+    width: 100%; min-height: 132px; resize: vertical;
+    font-family: var(--font-sans); font-size: 15.5px; line-height: 1.7;
+    color: var(--ink); background: var(--surface-2);
+    border: 1px solid var(--line); border-radius: var(--r);
+    padding: 12px 14px;
+  }
+  textarea:focus-visible, select:focus-visible, input:focus-visible,
+  button:focus-visible, .chipbtn:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+
+  .presets { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+  .chipbtn {
+    font-family: var(--font-sans); font-size: 12.5px;
+    padding: 5px 11px; border-radius: 999px; cursor: pointer;
+    background: var(--surface-2); color: var(--ink-2);
+    border: 1px solid var(--line);
+  }
+  .chipbtn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── 토큰 조각 시각화 ──────────────────────────── */
+  .slices {
+    margin-top: 16px; padding: 14px;
+    background: var(--surface-2); border: 1px solid var(--line-2);
+    border-radius: var(--r);
+    display: flex; flex-wrap: wrap; gap: 3px 3px;
+    max-height: 240px; overflow-y: auto;
+  }
+  .slice {
+    font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5;
+    padding: 2px 5px; border-radius: 3px; white-space: pre;
+    border-bottom: 2px solid transparent;
+  }
+  .slice[data-k="hangul"] { background: var(--signal-b); border-bottom-color: var(--signal); }
+  .slice[data-k="latin"]  { background: var(--accent-b); border-bottom-color: var(--accent); }
+  .slice[data-k="digit"]  { background: var(--gold-b);   border-bottom-color: var(--gold); }
+  .slice[data-k="cjk"]    { background: var(--signal-b); border-bottom-color: var(--signal); }
+  .slice[data-k="other"],
+  .slice[data-k="punct"]  { background: transparent; color: var(--muted); }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+  /* ── 판독부 ───────────────────────────────────── */
+  .readout { display: flex; flex-direction: column; gap: 2px; }
+  .ro-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px; padding: 9px 0; border-bottom: 1px dashed var(--line-2);
+  }
+  .ro-row:last-child { border-bottom: 0; }
+  .ro-k { font-size: 13.5px; color: var(--ink-2); }
+  .ro-v {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    font-size: 15px; font-weight: 600;
+  }
+
+  .bignum {
+    padding: 16px 18px; border-top: 1px solid var(--line);
+    background: var(--surface-2);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .bn-k {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 3px;
+  }
+  .bn-v {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    font-size: clamp(20px, 2.6vw, 27px); font-weight: 700; letter-spacing: -.02em;
+    line-height: 1.15; display: block;
+  }
+  .bn-v.cost { color: var(--signal); }
+  .bn-v.tok  { color: var(--accent); }
+  .bn-sub { font-size: 11.5px; color: var(--muted); font-family: var(--font-mono); }
+
+  /* ── 폼 컨트롤 ────────────────────────────────── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+
+  label.fld { display: block; }
+  /* label.fld의 display:block이 UA의 [hidden]을 이기므로 명시적으로 눌러준다 */
+  [hidden] { display: none !important; }
+  .fld-k {
+    font-size: 12px; color: var(--muted); display: block; margin-bottom: 5px;
+    font-weight: 600; letter-spacing: .01em;
+  }
+  select, input[type="number"] {
+    width: 100%; font-family: var(--font-sans); font-size: 14px;
+    padding: 8px 10px; color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--r);
+  }
+  input[type="number"] {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  }
+
+  /* ── 비교표 ───────────────────────────────────── */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+  table { width: 100%; border-collapse: collapse; min-width: 720px; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line-2); }
+  th {
+    font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+    background: var(--surface-2); position: sticky; top: 0; white-space: nowrap;
+  }
+  td.num, th.num { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr.is-sel { background: var(--accent-b); }
+  .m-name { font-weight: 650; font-size: 14px; }
+  .m-id { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+  .vendor {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 3px; border: 1px solid var(--line);
+    color: var(--muted); white-space: nowrap;
+  }
+
+  .bar { height: 7px; border-radius: 2px; background: var(--signal); min-width: 2px; }
+  .bar-cell { width: 130px; }
+  .bar-track { background: var(--line-2); border-radius: 2px; height: 7px; }
+
+  .badge {
+    font-family: var(--font-mono); font-size: 10px; padding: 1px 5px;
+    border-radius: 3px; white-space: nowrap;
+  }
+  .badge.meas { background: var(--accent-b); color: var(--accent); }
+  .badge.est  { background: var(--gold-b); color: var(--gold); }
+
+  /* ── 한국어 대 영어 ───────────────────────────── */
+  .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .versus { grid-template-columns: 1fr; } }
+  .vs-quote {
+    font-size: 15px; line-height: 1.7; margin: 0 0 14px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--line-2);
+    color: var(--ink);
+  }
+  .vs-stat { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; }
+  .vs-stat b {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    font-size: 17px; font-weight: 700;
+  }
+  .vs-note {
+    margin-top: 18px; padding: 14px 16px; border-radius: var(--r);
+    background: var(--signal-b); color: var(--ink);
+    border-left: 3px solid var(--signal); font-size: 14.5px;
+  }
+
+  /* ── 각주 ─────────────────────────────────────── */
+  .notes { font-size: 13.5px; color: var(--ink-2); }
+  .notes h3 { color: var(--ink); margin-top: 20px; }
+  .notes ul { padding-left: 18px; margin: 8px 0; }
+  .notes li { margin: 5px 0; }
+  .notes a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  code {
+    font-family: var(--font-mono); font-size: .88em;
+    background: var(--surface-2); padding: 1px 5px; border-radius: 3px;
+    border: 1px solid var(--line-2);
+  }
+  .caveat {
+    border: 1px solid var(--line); border-left: 3px solid var(--gold);
+    background: var(--surface); border-radius: var(--r);
+    padding: 14px 16px; margin: 16px 0; font-size: 14px;
+  }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 26px 0 40px;
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  .chipbtn, .bar { transition: all .15s ease; }
+</style>
+
+
+<header class="masthead">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">토큰 계측기</p>
+      <h1>AI에게 한 문장 보내면<br>정확히 얼마가 나가는가</h1>
+      <p class="lede">
+        “토큰”은 AI가 글을 읽고 쓸 때 쓰는 계량 단위입니다. 아래에 평소 쓰는 문장을
+        넣어 보세요. 문장이 어떻게 조각나는지, 그 조각이 원화로 얼마인지 바로 보입니다.
+      </p>
+    </div>
+    <div class="stamp">
+      가격 기준일 2026-07-29<br>
+      Anthropic · OpenAI · Google 공식 가격표
+    </div>
+  </div>
+</header>
+
+
+<!-- ══ 1. 측정 ══════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">측정</span>
+      <h2>문장을 넣으면 조각으로 잘립니다</h2>
+      <p class="sec-sub">
+        AI는 글을 글자 단위로 읽지 않습니다. 자주 붙어 다니는 덩어리로 잘라서 읽고,
+        그 <strong>덩어리 하나가 토큰 1개</strong>입니다. 요금은 글자 수가 아니라 이 토큰 수로 매겨집니다.
+      </p>
+    </div>
+
+    <div class="panel">
+      <!-- 입력 -->
+      <div class="card">
+        <div class="card-label">
+          <span>입력할 내용</span>
+          <span id="charCount">0자</span>
+        </div>
+        <div class="card-pad">
+          <textarea id="input" spellcheck="false"
+            aria-label="비용을 계산할 문장을 입력하세요"></textarea>
+
+          <div class="presets" id="presets"></div>
+
+          <div class="slices" id="slices" aria-live="polite"
+               aria-label="입력한 문장이 토큰 조각으로 나뉜 모습"></div>
+
+          <div class="legend">
+            <span><i class="sw" style="background:var(--signal)"></i> 한글 · 한자</span>
+            <span><i class="sw" style="background:var(--accent)"></i> 영문</span>
+            <span><i class="sw" style="background:var(--gold)"></i> 숫자</span>
+            <span>조각 아래 숫자 = 그 조각이 먹는 토큰</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 판독 -->
+      <div class="card">
+        <div class="card-label"><span>계산 조건</span></div>
+        <div class="card-pad">
+          <label class="fld" style="margin-bottom:12px">
+            <span class="fld-k">모델</span>
+            <select id="model"></select>
+          </label>
+
+          <div class="grid2" style="margin-bottom:12px">
+            <label class="fld">
+              <span class="fld-k">AI 답변 길이</span>
+              <select id="outLen">
+                <option value="200">짧게 (한글 200자)</option>
+                <option value="600" selected>보통 (한글 600자)</option>
+                <option value="2000">길게 (한글 2,000자)</option>
+                <option value="8000">문서 작성 (한글 8,000자)</option>
+                <option value="same">입력한 문장과 같은 길이</option>
+                <option value="custom">직접 입력…</option>
+              </select>
+            </label>
+            <label class="fld">
+              <span class="fld-k">하루 사용 횟수</span>
+              <input type="number" id="perDay" value="20" min="1" max="100000" step="1">
+            </label>
+          </div>
+
+          <label class="fld" id="customRow" hidden style="margin-bottom:12px">
+            <span class="fld-k">답변 길이 직접 입력 — 한글 몇 자</span>
+            <input type="number" id="outCustom" value="1200" min="1" max="500000" step="100">
+          </label>
+
+          <div class="readout" id="readout"></div>
+        </div>
+
+        <div class="bignum">
+          <div>
+            <span class="bn-k">1회 비용</span>
+            <span class="bn-v cost" id="costOnce">₩0</span>
+            <span class="bn-sub" id="costOnceUsd">$0</span>
+          </div>
+          <div>
+            <span class="bn-k" id="monthLabel">월 비용</span>
+            <span class="bn-v cost" id="costMonth">₩0</span>
+            <span class="bn-sub" id="costMonthUsd">$0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 2. 모델 비교 ═════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">비교</span>
+      <h2>같은 문장, 모델별로 얼마나 차이 나는가</h2>
+      <p class="sec-sub">
+        위에 넣은 문장과 조건을 그대로 적용한 <strong>월 비용</strong>입니다.
+        모델 간 성능 차이는 여기 나타나지 않습니다 — 가격만 비교한 표라는 점에 유의하세요.
+      </p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>모델</th>
+            <th>제공사</th>
+            <th class="num">입력 $/100만</th>
+            <th class="num">출력 $/100만</th>
+            <th class="num">1회</th>
+            <th class="num">월 (22일)</th>
+            <th class="bar-cell">상대 비용</th>
+          </tr>
+        </thead>
+        <tbody id="cmpBody"></tbody>
+      </table>
+    </div>
+    <p class="sec-sub" style="margin-top:12px; font-size:13.5px">
+      가장 싼 모델과 가장 비싼 모델의 차이가 <strong id="spread">—</strong>배입니다.
+      같은 일을 시켜도 어떤 모델을 고르느냐로 이만큼 갈립니다.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ 3. 한국어의 값 ═══════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">한국어</span>
+      <h2>한국어는 영어보다 비쌉니다</h2>
+      <p class="sec-sub">
+        토큰은 영어를 기준으로 설계됐습니다. 영어는 단어 하나가 대체로 토큰 하나인데,
+        한글은 한 글자가 통째로 토큰을 먹습니다. 아래 수치는 <strong>위에서 고른 모델 기준</strong>이며,
+        모델을 바꾸면 배수도 바뀝니다 — 특히 <strong>Claude는 GPT의 약 1.9배</strong>입니다.
+      </p>
+    </div>
+
+    <div class="versus">
+      <div class="card card-pad">
+        <h3 style="color:var(--signal)">한국어</h3>
+        <p class="vs-quote" id="vsKoText"></p>
+        <div class="vs-stat"><span>글자 수</span><b id="vsKoChars">—</b></div>
+        <div class="vs-stat"><span>토큰</span><b style="color:var(--signal)" id="vsKoTok">—</b></div>
+      </div>
+      <div class="card card-pad">
+        <h3 style="color:var(--accent)">같은 뜻의 영어</h3>
+        <p class="vs-quote" id="vsEnText"></p>
+        <div class="vs-stat"><span>글자 수</span><b id="vsEnChars">—</b></div>
+        <div class="vs-stat"><span>토큰</span><b style="color:var(--accent)" id="vsEnTok">—</b></div>
+      </div>
+    </div>
+
+    <p class="vs-note">
+      같은 내용인데 한국어가 토큰을 <strong id="vsRatio">—</strong>배 씁니다.
+      비용도 그만큼 더 듭니다. 다만 영어로 바꿔 쓰라는 뜻은 아닙니다 — 번역에 드는
+      사람의 시간이 아낀 요금보다 훨씬 비쌉니다. <strong>알고 있으면 되는 사실</strong>에 가깝습니다.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ 4. 방법과 한계 ═══════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">근거</span>
+      <h2>이 숫자는 어디서 왔는가</h2>
+    </div>
+
+    <div class="notes">
+      <h3 style="margin-top:0">토큰 수는 추정값입니다</h3>
+      <p style="margin-top:0">
+        각 회사의 정확한 토큰 계산기는 프로그램 설치가 필요해 이 페이지에 넣을 수 없습니다.
+        대신 실제 토크나이저(OpenAI <code>o200k_base</code>, Google <code>gemini-1.5-flash</code>)를
+        내려받아 한국 제조업 실무 문장으로 측정한 뒤, 그 결과에 맞춘 추정식을 넣었습니다.
+      </p>
+      <ul>
+        <li>피팅에 쓰지 않은 업무 문장 <strong>185개</strong>로 따로 검증했습니다.</li>
+        <li><strong>총액은 정확합니다.</strong> 여러 문장을 합산한 값은 실제와 OpenAI 계열 −1.7%,
+            Google 계열 −0.2% 차이였습니다. 이 도구가 내놓는 월 비용은 이 수준으로 믿을 만합니다.</li>
+        <li><strong>문장 하나하나는 덜 정확합니다.</strong> 한 문장 기준 오차 중앙값 5%,
+            길이가 있는 업무 문장이면 평균 3~4%입니다.</li>
+        <li><strong>짧고 흔한 표현은 과다 계상됩니다.</strong> “확인했습니다. 감사합니다.” 같은
+            상투어는 AI가 통째로 외우고 있어 실제 토큰이 훨씬 적습니다(이 경우 실제 6개, 추정 9개).
+            추정식은 글자 종류만 보고 계산할 뿐 어떤 표현이 흔한지는 모르기 때문입니다.</li>
+      </ul>
+
+      <div class="caveat">
+        <strong>⚠️ Claude는 한국어에 토큰을 훨씬 많이 씁니다 — 이 도구의 가장 중요한 발견입니다.</strong>
+        한글 한 글자가 <strong>GPT는 0.71토큰인데 Claude는 1.37토큰</strong>입니다. <strong>약 1.9배</strong>입니다.
+        100만 토큰당 단가만 비교하면 Claude가 싸 보여도, 한국어 문서를 넣으면 토큰이 두 배 가까이 잡히므로
+        <strong>실제 청구액은 역전될 수 있습니다.</strong> 이 도구는 그 차이를 반영해 계산합니다.
+      </div>
+
+      <h3>한글 1자당 토큰 — 네 계열 모두 직접 측정</h3>
+      <div class="tablewrap">
+        <table style="min-width:520px">
+          <thead><tr><th>모델 계열</th><th class="num">한글 1자</th><th class="num">GPT 대비</th><th>측정 방법</th></tr></thead>
+          <tbody>
+            <tr><td>Gemini 전 모델 (2.5~3.6)</td><td class="num"><strong>0.634</strong></td><td class="num">0.89배</td><td>실제 API 응답의 토큰 수</td></tr>
+            <tr><td>GPT-5 계열</td><td class="num">0.715</td><td class="num">기준</td><td>tiktoken <code>o200k_base</code> 실행</td></tr>
+            <tr class="is-sel"><td>Claude Opus 5 · Sonnet 5 · Fable 5</td><td class="num"><strong>1.375</strong></td><td class="num"><strong>1.92배</strong></td><td><code>count_tokens</code> API 실호출</td></tr>
+            <tr><td>Claude Haiku 4.5</td><td class="num">1.384</td><td class="num">1.94배</td><td><code>count_tokens</code> API 실호출</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:13.5px; color:var(--ink-2); margin-top:10px">
+        영어는 반대로 <strong>Haiku 4.5가 유리</strong>합니다(영문 조각당 0.60 vs Opus·Sonnet 계열 1.00).
+        구세대 토크나이저를 쓰기 때문입니다. 모델을 직접 대조해 보니 Claude 토크나이저는
+        <strong>3세대</strong>로 갈립니다 — ①Opus 5·Sonnet 5·Fable 5·Opus 4.8(동일)
+        ②Opus 4.7(단독) ③Opus 4.6·Sonnet 4.6·Haiku 4.5·Opus 4.5(동일).
+        같은 문장을 넣으면 세대마다 토큰 수가 다르게 나옵니다.
+      </p>
+
+      <h3>측정 경로와 검증</h3>
+      <ul style="margin-top:0">
+        <li><strong>GPT</strong> — tiktoken <code>o200k_base</code>를 직접 실행. 실제 GPT-5 API 응답과
+            대조해 <strong>모든 표본에서 정확히 +6 토큰 차이</strong>(대화 형식의 고정 오버헤드)만 났습니다.
+            즉 이 토크나이저가 GPT-5의 실제 토크나이저와 일치합니다.</li>
+        <li><strong>Gemini</strong> — 실제 API 응답의 토큰 수를 읽어 측정.
+            <strong>2.5부터 3.6까지 Pro·Flash·Lite 전 모델이 같은 토크나이저</strong>를 씁니다(대조 확인).</li>
+        <li><strong>Claude</strong> — <code>count_tokens</code> API 실호출. 아래 참조.</li>
+      </ul>
+
+      <h3>Claude는 어떻게 측정했나</h3>
+      <p style="margin-top:0">
+        Anthropic은 토크나이저를 공개하지 않아 내려받아 돌려볼 수 없습니다. 대신 Anthropic이 제공하는
+        <code>count_tokens</code> API를 실제로 호출했습니다. 이 API는 <strong>무료</strong>이고
+        (토큰 과금 없음) 해당 모델의 진짜 토크나이저 기준으로 세어 줍니다.
+        한국 제조업 실무 문장 <strong>107개</strong>를 모델별로 전부 보내 측정한 뒤 회귀로 계수를 맞췄고,
+        피팅에 쓰지 않은 문장으로 검증해 <strong>평균 오차 5%, 합산 −1.1%</strong>를 확인했습니다.
+      </p>
+      <p>
+        ⚠️ 호출에는 Console API 키가 따로 필요합니다.
+        <strong>Claude Code·Pro 구독 로그인으로는 안 됩니다</strong> — 서버가
+        <code>jwt auth is not yet supported on count_tokens</code>로 거부합니다.
+      </p>
+
+      <h3>가격은 공식 가격표를 그대로 옮겼습니다</h3>
+      <ul>
+        <li>Anthropic — <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">모델 개요</a> (Sonnet 5는 2026-08-31까지 도입가 $2/$10 적용 중)</li>
+        <li>OpenAI — <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">API 가격</a></li>
+        <li>Google — <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener">Gemini API 가격</a></li>
+      </ul>
+
+      <h3>계산에 넣지 않은 것</h3>
+      <ul>
+        <li><strong>추론(thinking) 토큰</strong> — 요즘 모델은 답하기 전에 속으로 생각하고, 그 분량도 출력 요금으로 청구됩니다. 실제 비용은 여기 표시된 값보다 높을 수 있습니다.</li>
+        <li><strong>캐시 할인</strong> — 같은 내용을 반복해 보내면 입력 요금이 최대 90%까지 싸집니다. 반복 작업이라면 실제로는 더 쌉니다.</li>
+        <li><strong>대량 처리(Batch) 50% 할인</strong> — 급하지 않은 작업을 모아 돌리면 절반 가격입니다.</li>
+        <li><strong>긴 문서 할증</strong> — 입력이 아주 길어지면(OpenAI 27만 토큰, Gemini Pro 20만 토큰 초과) 단가가 올라갑니다.</li>
+      </ul>
+
+      <h3>환율</h3>
+      <p>
+        1 USD = <strong id="fxShow">1,470</strong>원으로 계산했습니다(2026-07-28 기준).
+        <label style="display:inline-flex; align-items:center; gap:8px; margin-left:8px">
+          <span class="fld-k" style="margin:0">직접 수정</span>
+          <input type="number" id="fx" value="1470" min="500" max="3000" step="10"
+                 style="width:110px" aria-label="원달러 환율">
+        </label>
+      </p>
+      <p style="color:var(--muted); font-size:12.5px">
+        환율은 실시간이 아닙니다. 실제 청구는 카드사 환율과 부가세에 따라 달라집니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    토큰 계측기 · 가격 2026-07-29 확인 · 토큰 수는 추정값(합산 기준 실제와 2% 이내)<br>
+    성능이 아니라 <strong>가격만</strong> 비교하는 도구입니다. 모델 선택은 성능·속도·보안을 함께 봐야 합니다.
+  </div>
+</footer>
+
+
+<script>
+(() => {
+  "use strict";
+
+  /* ══ 토큰 추정 계수 ════════════════════════════════════
+     실제 토크나이저에 비음수 릿지 회귀로 피팅한 값.
+     latinPiece/digitPiece는 BPE가 긴 단어·숫자를 조각내는 것을 반영해
+     "조각 수"에 곱한다. 선행 공백 1칸은 뒤 토큰에 병합되므로 무료.        */
+  const COEF = {
+    gpt: { hangul:0.7149, latinPiece:0.5494, digitPiece:1.8821,
+           punct:0.6250, cjk:0.5774, other:1.7982, wsExtra:0.0835 },
+    /* Gemini — chat/completions 의 usage.prompt_tokens 로 직접 측정.
+       Gemini 2.5~3.6 전 모델(Pro·Flash·Lite)이 동일 토크나이저임을 대조 확인.
+       표본 107개 회귀, 홀드아웃 평균오차 9%·합산 −0.7%. */
+    gemini: { hangul:0.6340, latinPiece:0.5536, digitPiece:2.8887,
+              punct:0.7303, cjk:0.7295, other:1.6739, wsExtra:0.7743 },
+    /* Claude — Anthropic count_tokens API를 실제 호출해 직접 측정한 값.
+       표본 107개(한국 제조업 실무 문장)로 회귀 피팅. 홀드아웃 평균오차 5%, 합산 −1.1%.
+       토크나이저는 3세대로 갈린다(직접 대조 확인):
+         gen5  = Opus 5 · Sonnet 5 · Fable 5 · Opus 4.8   (동일)
+         4.7   = Opus 4.7 단독 세대 (이 도구 대상 아님)
+         gen45 = Opus 4.6 · Sonnet 4.6 · Haiku 4.5 · Opus 4.5 (동일) */
+    claudeGen5: { hangul:1.3749, latinPiece:1.0029, digitPiece:1.4858,
+                punct:0.8892, cjk:1.3051, other:7.2620, wsExtra:0.0743 },
+    claudeGen45:  { hangul:1.3844, latinPiece:0.5966, digitPiece:1.4129,
+                punct:0.7541, cjk:1.2590, other:5.3097, wsExtra:0.6702 }
+  };
+
+  const cls = (ch) => {
+    const o = ch.codePointAt(0);
+    if ((o>=0xAC00&&o<=0xD7A3)||(o>=0x1100&&o<=0x11FF)||(o>=0x3130&&o<=0x318F)) return "hangul";
+    if (ch===" "||ch==="\t") return "ws";
+    if (ch==="\n"||ch==="\r") return "nl";
+    if (o>=0x30&&o<=0x39) return "digit";
+    if ((o>=0x41&&o<=0x5A)||(o>=0x61&&o<=0x7A)) return "latin";
+    if ((o>=0x4E00&&o<=0x9FFF)||(o>=0x3400&&o<=0x4DBF)||
+        (o>=0x3040&&o<=0x30FF)||(o>=0xF900&&o<=0xFAFF)) return "cjk";
+    if (o>=0x20&&o<=0x7E) return "punct";
+    if (/\s/.test(ch)) return "ws";
+    return "other";
+  };
+
+  /* 문자열을 세그먼트로 스캔. 선행 공백은 뒤 세그먼트에 붙인다. */
+  function segment(text) {
+    const chars = Array.from(text);
+    const segs = [];
+    let i = 0;
+    while (i < chars.length) {
+      let ws = "";
+      while (i < chars.length && cls(chars[i]) === "ws") { ws += chars[i]; i++; }
+      if (i >= chars.length) { if (ws) segs.push({ k:"ws", t:ws, ws:"" }); break; }
+      const k = cls(chars[i]);
+      let t = chars[i]; i++;
+      if (k==="hangul"||k==="latin"||k==="digit"||k==="cjk"||k==="nl") {
+        while (i < chars.length && cls(chars[i]) === k) { t += chars[i]; i++; }
+      }
+      segs.push({ k, t, ws });
+    }
+    return segs;
+  }
+
+  function segTokens(seg, c) {
+    let n = 0;
+    const wsLen = seg.ws ? Array.from(seg.ws).length : 0;
+    if (wsLen > 1) n += (wsLen - 1) * c.wsExtra;
+    const len = Array.from(seg.t).length;
+    switch (seg.k) {
+      case "latin":  n += Math.max(1, Math.ceil(len/4)) * c.latinPiece; break;
+      case "digit":  n += Math.max(1, Math.ceil(len/3)) * c.digitPiece; break;
+      case "hangul": n += len * c.hangul; break;
+      case "cjk":    n += len * c.cjk;    break;
+      case "punct":  n += c.punct;        break;
+      case "nl":     n += len * c.wsExtra; break;
+      case "ws":     n += Math.max(0, len-1) * c.wsExtra; break;
+      default:       n += c.other;
+    }
+    return n;
+  }
+
+  const countTokens = (text, fam) => {
+    const c = COEF[fam];
+    return segment(text).reduce((s, g) => s + segTokens(g, c), 0);
+  };
+
+  /* ══ 모델 데이터 (공식 가격표, 2026-07-29 확인) ══════════
+     inp/out = USD per 1M tokens. fam = 토큰 추정에 쓸 계수 계열.
+     basis: "measured" 실측 계수 | "proxy" 대리 실측 | "est" 추정      */
+  const MODELS = [
+    // Anthropic — platform.claude.com
+    { id:"claude-opus-5",     name:"Claude Opus 5",     v:"Anthropic", inp:5,    out:25,   fam:"claudeGen5", basis:"measured" },
+    { id:"claude-sonnet-5",   name:"Claude Sonnet 5",   v:"Anthropic", inp:2,    out:10,   fam:"claudeGen5", basis:"measured",
+      note:"도입가 · 2026-08-31 이후 $3/$15" },
+    { id:"claude-haiku-4-5",  name:"Claude Haiku 4.5",  v:"Anthropic", inp:1,    out:5,    fam:"claudeGen45",  basis:"measured" },
+    { id:"claude-fable-5",    name:"Claude Fable 5",    v:"Anthropic", inp:10,   out:50,   fam:"claudeGen5", basis:"measured" },
+    // OpenAI — developers.openai.com
+    { id:"gpt-5.6-sol",       name:"GPT-5.6 Sol",       v:"OpenAI",    inp:5,    out:30,   fam:"gpt",    basis:"measured" },
+    { id:"gpt-5.6-terra",     name:"GPT-5.6 Terra",     v:"OpenAI",    inp:2.5,  out:15,   fam:"gpt",    basis:"measured" },
+    { id:"gpt-5.6-luna",      name:"GPT-5.6 Luna",      v:"OpenAI",    inp:1,    out:6,    fam:"gpt",    basis:"measured" },
+    { id:"gpt-5-mini",        name:"GPT-5 mini",        v:"OpenAI",    inp:0.25, out:2,    fam:"gpt",    basis:"measured" },
+    { id:"gpt-5-nano",        name:"GPT-5 nano",        v:"OpenAI",    inp:0.05, out:0.4,  fam:"gpt",    basis:"measured" },
+    // Google — ai.google.dev
+    { id:"gemini-3.6-flash",      name:"Gemini 3.6 Flash",      v:"Google", inp:1.5,  out:7.5,  fam:"gemini", basis:"measured" },
+    { id:"gemini-3.1-pro-preview",name:"Gemini 3.1 Pro",        v:"Google", inp:2,    out:12,   fam:"gemini", basis:"measured",
+      note:"프리뷰 가격 · 정식 출시 때 변동 가능" },
+    { id:"gemini-2.5-pro",        name:"Gemini 2.5 Pro",        v:"Google", inp:1.25, out:10,   fam:"gemini", basis:"measured" },
+    { id:"gemini-2.5-flash",      name:"Gemini 2.5 Flash",      v:"Google", inp:0.3,  out:2.5,  fam:"gemini", basis:"measured" },
+    { id:"gemini-2.5-flash-lite", name:"Gemini 2.5 Flash-Lite", v:"Google", inp:0.1,  out:0.4,  fam:"gemini", basis:"measured" }
+  ];
+
+  const PRESETS = [
+    { label:"업무 메일", text:"안녕하세요, 김 부장님. 지난번에 말씀하신 견적 건으로 연락드립니다. 요청하신 사양대로 검토한 결과 납기는 발주 후 6주 정도 소요될 것으로 예상됩니다. 단가는 수량에 따라 조정 가능하니 필요 물량을 알려주시면 다시 안내드리겠습니다." },
+    { label:"보고서 요약 요청", text:"첨부한 월간 생산 실적 보고서를 읽고 경영진 보고용으로 한 장 분량으로 요약해 주세요. 불량률 추이와 납기 준수율은 반드시 포함하고, 전월 대비 악화된 항목은 원인 추정까지 덧붙여 주세요." },
+    { label:"짧은 질문", text:"이 계약서에서 우리에게 불리한 조항이 있나요?" },
+    { label:"영어 문장", text:"Please review the attached contract and send us your comments by Friday. We need to confirm the delivery schedule before placing the purchase order." },
+    { label:"숫자가 많은 표", text:"2026년 상반기 매출 45억 8,700만원, 영업이익 3억 2,400만원, 불량률 1.1%, 납기 준수율 96.4%, 재고회전율 8.2회입니다." }
+  ];
+
+  /* 한국어 대 영어 — 같은 뜻의 문장 쌍 */
+  const VS = {
+    ko: "우리 회사는 배전반과 수배전 설비를 제조하며, 최근 생산관리 시스템을 개선하기 위해 여러 자동화 도구를 검토하고 있습니다.",
+    en: "Our company manufactures switchgear and power distribution equipment, and we are currently evaluating automation tools to improve our production management system."
+  };
+
+  /* ══ DOM ═══════════════════════════════════════════ */
+  const $ = (id) => document.getElementById(id);
+  const el = {
+    input:$("input"), presets:$("presets"), slices:$("slices"), charCount:$("charCount"),
+    model:$("model"), outLen:$("outLen"), perDay:$("perDay"), readout:$("readout"),
+    outCustom:$("outCustom"), customRow:$("customRow"),
+    costOnce:$("costOnce"), costOnceUsd:$("costOnceUsd"),
+    costMonth:$("costMonth"), costMonthUsd:$("costMonthUsd"), monthLabel:$("monthLabel"),
+    cmpBody:$("cmpBody"), spread:$("spread"), fx:$("fx"), fxShow:$("fxShow"),
+    vsKoText:$("vsKoText"), vsEnText:$("vsEnText"),
+    vsKoChars:$("vsKoChars"), vsEnChars:$("vsEnChars"),
+    vsKoTok:$("vsKoTok"), vsEnTok:$("vsEnTok"), vsRatio:$("vsRatio")
+  };
+
+  const DAYS = 22;
+  /* 1회 비용은 보통 1원 미만이라 반올림하면 ₩0으로 뭉개진다.
+     월 비용과 대조가 안 되므로 소액일수록 소수점을 살린다. */
+  const won = (n) => {
+    if (n <= 0) return "₩0";
+    if (n < 1)   return "₩" + n.toFixed(2);
+    if (n < 100) return "₩" + n.toFixed(1);
+    return "₩" + Math.round(n).toLocaleString("ko-KR");
+  };
+  const usd = (n) => "$" + (n < 0.01 ? n.toFixed(5) : n < 1 ? n.toFixed(4) : n.toFixed(2));
+  const num = (n) => Math.round(n).toLocaleString("ko-KR");
+
+  /* 모델 선택 목록 — 제공사별 그룹 */
+  ["Anthropic","OpenAI","Google"].forEach(v => {
+    const g = document.createElement("optgroup");
+    g.label = v;
+    MODELS.filter(m => m.v === v).forEach(m => {
+      const o = document.createElement("option");
+      o.value = m.id;
+      o.textContent = m.name;
+      g.appendChild(o);
+    });
+    el.model.appendChild(g);
+  });
+  el.model.value = "claude-sonnet-5";
+
+  /* 프리셋 버튼 */
+  PRESETS.forEach(p => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chipbtn";
+    b.textContent = p.label;
+    b.addEventListener("click", () => { el.input.value = p.text; render(); el.input.focus(); });
+    el.presets.appendChild(b);
+  });
+
+  /* 조각 시각화 — 세그먼트별 추정 토큰을 함께 보여준다 */
+  function drawSlices(text, fam) {
+    el.slices.textContent = "";
+    if (!text) {
+      const p = document.createElement("span");
+      p.style.color = "var(--muted)";
+      p.style.fontSize = "13.5px";
+      p.textContent = "위에 문장을 입력하면 여기에 조각이 나타납니다.";
+      el.slices.appendChild(p);
+      return;
+    }
+    const c = COEF[fam];
+    const segs = segment(text);
+    const MAX = 220; // 아주 긴 입력은 앞부분만 그린다
+    segs.slice(0, MAX).forEach(g => {
+      if (g.k === "nl" || g.k === "ws") return;
+      const s = document.createElement("span");
+      s.className = "slice";
+      s.dataset.k = g.k;
+      s.textContent = g.t;
+      s.title = segTokens(g, c).toFixed(1) + " 토큰";
+      el.slices.appendChild(s);
+    });
+    if (segs.length > MAX) {
+      const more = document.createElement("span");
+      more.style.color = "var(--muted)";
+      more.style.fontSize = "12.5px";
+      more.style.alignSelf = "center";
+      more.textContent = " … 이하 " + (segs.length - MAX).toLocaleString("ko-KR") + "조각 생략";
+      el.slices.appendChild(more);
+    }
+  }
+
+  function calc(model, inTok, outTok, fx) {
+    const u = inTok/1e6*model.inp + outTok/1e6*model.out;
+    return { usd:u, krw:u*fx };
+  }
+
+  /* 답변 길이 → 출력 토큰.
+     모델 계열마다 계수가 다르므로 비교표에서도 모델별로 다시 계산한다.   */
+  function resolveOut(fam, text) {
+    const mode = el.outLen.value;
+    if (mode === "same") {
+      // 입력 문장을 그대로 분량 기준으로 — 번역·다듬기처럼 길이가 보존되는 작업
+      const chars = Array.from(text).length;
+      return { tok: countTokens(text, fam),
+               label: "입력과 동일 · " + chars.toLocaleString("ko-KR") + "자" };
+    }
+    const chars = mode === "custom"
+      ? Math.max(1, Number(el.outCustom.value) || 1)
+      : Number(mode);
+    return { tok: chars * COEF[fam].hangul,
+             label: "한글 " + chars.toLocaleString("ko-KR") + "자" };
+  }
+
+  function render() {
+    const text = el.input.value;
+    const fx = Math.max(1, Number(el.fx.value) || 1470);
+    el.fxShow.textContent = fx.toLocaleString("ko-KR");
+    el.charCount.textContent = Array.from(text).length.toLocaleString("ko-KR") + "자";
+
+    const model = MODELS.find(m => m.id === el.model.value) || MODELS[0];
+
+    // "직접 입력"을 골랐을 때만 숫자 칸을 연다
+    el.customRow.hidden = el.outLen.value !== "custom";
+
+    const out = resolveOut(model.fam, text);
+    const outTok = out.tok;
+    const inTok = countTokens(text, model.fam);
+    const perDay = Math.max(1, Number(el.perDay.value) || 1);
+
+    drawSlices(text, model.fam);
+
+    const one = calc(model, inTok, outTok, fx);
+    const month = { usd: one.usd*perDay*DAYS, krw: one.krw*perDay*DAYS };
+
+    el.costOnce.textContent = won(one.krw);
+    el.costOnceUsd.textContent = usd(one.usd);
+    el.monthLabel.textContent = "월 비용 · " + (perDay*DAYS).toLocaleString("ko-KR") + "회";
+    el.costMonth.textContent = won(month.krw);
+    el.costMonthUsd.textContent = usd(month.usd);
+
+    // 판독부
+    const badge = '<span class="badge meas">직접 측정</span>';
+    const rows = [
+      ["보내는 글(입력)", num(inTok) + " 토큰"],
+      ["받는 글(출력)", num(outTok) + " 토큰 <span style='color:var(--muted);font-weight:400'>= " + out.label + "</span>"],
+      ["입력 요금", usd(inTok/1e6*model.inp) + " <span style='color:var(--muted);font-weight:400'>@ $" + model.inp + "</span>"],
+      ["출력 요금", usd(outTok/1e6*model.out) + " <span style='color:var(--muted);font-weight:400'>@ $" + model.out + "</span>"],
+      ["토큰 계산 근거", badge]
+    ];
+    el.readout.innerHTML = rows.map(([k, v]) =>
+      `<div class="ro-row"><span class="ro-k">${k}</span><span class="ro-v">${v}</span></div>`
+    ).join("");
+    if (model.note) {
+      el.readout.insertAdjacentHTML("beforeend",
+        `<div class="ro-row"><span class="ro-k" style="color:var(--muted);font-size:12px">${model.note}</span></div>`);
+    }
+
+    renderCompare(text, perDay, fx, model.id);
+    renderVersus(model.fam);
+  }
+
+  function renderCompare(text, perDay, fx, selId) {
+    const rows = MODELS.map(m => {
+      const it = countTokens(text, m.fam);
+      const ot = resolveOut(m.fam, text).tok;
+      const one = calc(m, it, ot, fx);
+      return { m, one, month: one.krw*perDay*DAYS };
+    }).sort((a, b) => a.month - b.month);
+
+    const max = Math.max(...rows.map(r => r.month), 1e-9);
+    const min = Math.min(...rows.map(r => r.month));
+    el.spread.textContent = min > 0 ? (max/min).toFixed(0) : "—";
+
+    el.cmpBody.innerHTML = rows.map(r => {
+      const b = '<span class="badge meas" title="해당 모델의 실제 토크나이저 또는 실제 API 응답으로 직접 측정">직접</span>';
+      const pct = Math.max(1.2, r.month/max*100);
+      return `<tr class="${r.m.id===selId ? "is-sel" : ""}">
+        <td><span class="m-name">${r.m.name}</span> ${b}<br><span class="m-id">${r.m.id}</span></td>
+        <td><span class="vendor">${r.m.v}</span></td>
+        <td class="num">$${r.m.inp}</td>
+        <td class="num">$${r.m.out}</td>
+        <td class="num">${won(r.one.krw)}</td>
+        <td class="num" style="font-weight:700;color:var(--signal)">${won(r.month)}</td>
+        <td class="bar-cell"><div class="bar-track"><div class="bar" style="width:${pct}%"></div></div></td>
+      </tr>`;
+    }).join("");
+  }
+
+  function renderVersus(fam) {
+    el.vsKoText.textContent = VS.ko;
+    el.vsEnText.textContent = VS.en;
+    const koC = Array.from(VS.ko).length, enC = Array.from(VS.en).length;
+    const koT = countTokens(VS.ko, fam), enT = countTokens(VS.en, fam);
+    el.vsKoChars.textContent = koC.toLocaleString("ko-KR") + "자";
+    el.vsEnChars.textContent = enC.toLocaleString("ko-KR") + "자";
+    el.vsKoTok.textContent = num(koT);
+    el.vsEnTok.textContent = num(enT);
+    el.vsRatio.textContent = (koT/enT).toFixed(1);
+  }
+
+  ["input","change"].forEach(ev => {
+    el.input.addEventListener(ev, render);
+    el.model.addEventListener(ev, render);
+    el.outLen.addEventListener(ev, render);
+    el.outCustom.addEventListener(ev, render);
+    el.perDay.addEventListener(ev, render);
+    el.fx.addEventListener(ev, render);
+  });
+
+  el.input.value = PRESETS[0].text;
+  render();
+})();
+</script>
+</body>
+</html>
