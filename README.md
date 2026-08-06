@@ -6,7 +6,7 @@
 
 ## 구성
 - `index.html` — 9슬라이드 인터랙티브 덱 (단일 파일 · 의존성은 CDN)
-- `steps-data.js` — 하네스 107 step 본문 데이터
+- `steps-data.js` — 하네스 50 step 본문 데이터
 - `commands-data.js` — 커스텀 슬래시 커맨드 20개 본문 데이터
 - `assets/logos/` — 담당 현장·경력사 로고
 
