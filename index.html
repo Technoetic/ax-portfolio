@@ -122,7 +122,6 @@
   .career-card:hover .go{stroke:var(--accent-2)}
   .career-card .logo{background:#f4f6f8;border-radius:10px;height:72px;display:flex;align-items:center;justify-content:center;padding:10px var(--s2)}
   .career-card .logo img{max-width:86%;max-height:52px;object-fit:contain}
-  .career-card .logo.text-logo{color:#172033;font-family:var(--mono);font-size:20px;font-weight:800;letter-spacing:-.02em}
   /* 가로로 긴 로고(ST&V)는 너비를 꽉 채워 위아래 여백 최소화 */
   .career-card .logo img.wide{max-width:100%;max-height:56px}
   .career-card .period{font-family:var(--mono);font-size:12.5px;color:var(--accent-2)}
@@ -422,7 +421,6 @@
   .cv-line .lg{flex:0 0 auto;width:46px;height:26px;background:#f4f6f8;border:1px solid var(--line);border-radius:6px;
     display:flex;align-items:center;justify-content:center;padding:3px;
     transition:border-color .25s,transform .2s,box-shadow .25s}
-  .cv-line .lg.dh-badge{color:#172033;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:.04em}
   a.lg:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px #0006}
   .cv-line .lg img{max-width:100%;max-height:18px;object-fit:contain}
   .cv-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2)}
@@ -582,7 +580,7 @@
         <div class="cv-col-left">
         <div class="cv-block">
           <div class="bt">Career</div>
-          <div class="cv-line"><span class="w">2026.07 ~ 2026.08</span><span class="lg dh-badge" aria-hidden="true">DH</span><span class="org">(주)DH 일렉</span><span class="d">AX 영업혁신 · 4주 업무위탁</span></div>
+          <div class="cv-line"><span class="w">2026.07 ~ 2026.08</span><a class="lg" href="https://dh-elec.co.kr/" target="_blank" rel="noopener" aria-label="(주)디에이치아이에스"><img src="assets/logos/dhis.png" alt="디에이치아이에스" loading="lazy"></a><span class="org">(주)디에이치아이에스</span><span class="d">AX 영업혁신 · 4주 업무위탁</span></div>
           <div class="cv-line"><span class="w">2025.12 ~ 2026.06</span><a class="lg" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스" loading="lazy"></a><span class="org">KDT HDC랩스</span><span class="d">AI 부트캠프 · 전 과제 1등 수료</span></div>
           <div class="cv-line"><span class="w">2018.07 ~ 2025.10</span><a class="lg" href="http://stnv.co.kr/" target="_blank" rel="noopener" aria-label="(주)에스티엔비"><img src="assets/logos/stnb.png" alt="에스티엔비" loading="lazy"></a><span class="org">(주)에스티엔비</span><span class="d">빌딩 HMI 엔지니어</span></div>
           <div class="cv-line"><span class="w">2014.10 ~ 2018.07</span><a class="lg" href="https://webcon.co.kr/" target="_blank" rel="noopener" aria-label="(주)웹콘"><img src="assets/logos/webcon.png" alt="웹콘" loading="lazy"></a><span class="org">(주)웹콘</span><span class="d">빌딩 HMI 엔지니어</span></div>
@@ -679,12 +677,13 @@
         <div class="desc">AI 엔지니어 부트캠프 교육생</div>
       </a>
       <div class="career-arrow" aria-hidden="true">→</div>
-      <div class="career-card" aria-label="(주)DH 일렉 AX 영업혁신 업무위탁 프로젝트">
-        <div class="logo text-logo" aria-hidden="true"><strong>DH ELECTRIC</strong></div>
+      <a class="career-card" href="https://dh-elec.co.kr/" target="_blank" rel="noopener" aria-label="(주)디에이치아이에스 웹사이트를 새 탭에서 보기">
+        <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
+        <div class="logo"><img src="assets/logos/dhis.png" alt="(주)디에이치아이에스 DHIS" loading="lazy"></div>
         <div class="period">2026.07 ~ 2026.08</div>
-        <div class="org">(주)DH 일렉</div>
+        <div class="org">(주)디에이치아이에스</div>
         <div class="desc">AX 영업혁신 · 업무위탁 프로젝트</div>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -698,8 +697,9 @@
       2023년 LLM이라는 새로운 흐름을 마주하면서<br>
       <b>(주)에스티엔비 재직 중 회사의 AX 전환에 기여</b>했고,<br><br>
       2025년에는 바이브 코딩 흐름을 포착해 <b>AI 기반 개발에 뛰어들었습니다</b>.<br><br>
-      본격적인 AI 피벗을 위해 국비지원 AI 엔지니어 양성 과정을 <b>전 과제 1등</b>으로 수료했으며,<br>
-      지금도 매일 학습하고 있습니다.
+      본격적인 AI 피벗을 위해 국비지원 AI 엔지니어 양성 과정을 <b>전 과제 1등</b>으로 수료했고,<br>
+      2026년 <b>(주)디에이치아이에스의 AX 영업혁신 업무를 수탁</b>해<br>
+      변압기 영업 DB·견적 자동화·수출 업무 디지털화를 <b>실제 기업 현장에 적용</b>했습니다.
     </p>
     <div class="sites-label rise">직접 담당한 랜드마크 현장</div>
     <div class="sites rise">
