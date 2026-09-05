@@ -1,0 +1,7 @@
+{
+  "publicRepos": { "value": 136, "asOf": "2026-09-06", "source": "https://api.github.com/users/Technoetic" },
+  "blogPosts": { "value": 255, "asOf": "2026-08-07", "source": "https://blog.naver.com/hdc-labs-nova" },
+  "dualHostPlugins": { "value": 2, "asOf": "2026-09-06", "projects": ["harness50", "agentic-vault"] },
+  "publishedTutorials": { "value": 5, "asOf": "2026-09-06" },
+  "activityChart": { "from": "2026-02-01", "asOf": "2026-08-07" }
+}
