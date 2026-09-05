@@ -4,534 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
-<meta name="description" content="전문준 · AX 엔지니어 포트폴리오 — 빌딩 HMI 10년에서 AI 엔지니어로. 공개 레포 128개, 누적 커밋 2,033건, 블로그 255편.">
+<meta name="description" content="빌딩 HMI 10년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, Claude Code·Codex 플러그인과 공개 데모.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="전문준 · AX 엔지니어 포트폴리오">
-<meta property="og:description" content="빌딩 HMI 10년에서 AI 엔지니어로. 공개 레포 128개, 누적 커밋 2,033건, 블로그 255편 — 매일 학습하고 매일 커밋한다.">
+<meta property="og:description" content="현장 업무를 자동화하는 AX 엔지니어. 실무 AX 사례와 직접 배포한 Claude Code·Codex 플러그인, 인터랙티브 튜토리얼을 확인하세요.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="전문준 · AX 엔지니어 포트폴리오">
-<meta name="twitter:description" content="빌딩 HMI 10년에서 AI 엔지니어로. 매일 학습하고 매일 커밋한다.">
+<meta name="twitter:description" content="전문준 · 현장 업무를 자동화하는 AX 엔지니어. 실무 사례, 공개 프로젝트, 이력서.">
+<link rel="canonical" href="https://technoetic.github.io/ax-portfolio/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Ctext x='16' y='23' font-size='19' fill='%233b82f6' text-anchor='middle' font-family='monospace' font-weight='bold'%3EAX%3C/text%3E%3C/svg%3E">
 <!-- Pretendard 웹폰트 (CDN, 동적 서브셋). 실패 시 OS 기본 폰트로 폴백 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<style>
-  /* D2Coding (네이버 코딩 폰트) — 코드 패널 전용. 실패 시 JetBrains Mono로 폴백 */
-  @font-face{
-    font-family:'D2Coding';font-style:normal;font-weight:400;font-display:swap;
-    src:local('D2Coding'),
-      url('https://cdn.jsdelivr.net/gh/wan2land/d2coding/fonts/d2coding-ligature-full.woff2') format('woff2'),
-      url('https://cdn.jsdelivr.net/gh/wan2land/d2coding/fonts/d2coding-ligature-full.woff') format('woff');
-  }
-</style>
-<style>
-  /* ===== Design Tokens (AI-Slop 방지: 8px 그리드 / 폰트 2종 / 액센트 1색 / radius 0·4·8·12·16) ===== */
-  :root{
-    --bg:#0a0c10; --bg-2:#12161c; --bg-3:#1d232c; --line:#252c36;
-    --fg:#e9eef5; --fg-dim:#9aa4b2; --fg-mute:#828d9c;  /* WCAG AA(4.5:1) 충족 명도로 상향 */
-    --accent:#3b82f6; --accent-2:#60a5fa; --accent-soft:#3b82f61a;
-    --grass-0:#161b22; --grass-1:#0e4429; --grass-2:#006d32; --grass-3:#26a641; --grass-4:#39d353;
-    --mono:"JetBrains Mono","Courier New",monospace;
-    --sans:"Pretendard Variable","Pretendard","Helvetica Neue","Segoe UI","Malgun Gothic",sans-serif;
-    --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:40px;--s6:48px;--s8:64px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    background:var(--bg);color:var(--fg);font-family:var(--sans);overflow:hidden;
-    line-height:1.6;-webkit-font-smoothing:antialiased;
-  }
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
-  /* ===== 깊이감: 뉴럴넷 캔버스 + 그리드 + 글로우 + 노이즈 ===== */
-  .bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none}
-  #net,#three{position:absolute;inset:0;width:100%;height:100%;display:block}
-  #three{display:none}            /* Three.js 성공 시 JS가 켬 */
-  .bg-grid{position:absolute;inset:0;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:48px 48px;opacity:.22;
-    mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 75%);
-    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%,#000 30%,transparent 75%);
-  }
-  .bg-glow{position:absolute;width:60vw;height:60vw;border-radius:50%;
-    background:radial-gradient(circle,#3b82f61f,transparent 65%);
-    top:-15vw;right:-10vw;transition:transform .3s ease-out;filter:blur(20px)}
-  .bg-glow.two{background:radial-gradient(circle,#60a5fa14,transparent 65%);top:auto;right:auto;bottom:-20vw;left:-12vw}
-  .bg-noise{position:absolute;inset:0;opacity:.035;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-  /* ===== Deck ===== */
-  .deck{height:100vh;width:100vw;position:relative;z-index:1}
-  .slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
-    padding:var(--s8) 7vw;opacity:0;visibility:hidden;transform:translateY(20px);
-    transition:opacity .5s ease,transform .5s ease,visibility .5s;overflow-y:auto}
-  .slide.active{opacity:1;visibility:visible;transform:none}
-  .slide.center{align-items:center;text-align:center}
-
-  /* stagger 등장 */
-  .slide .rise{opacity:0;transform:translateY(18px);transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1)}
-  .slide.active .rise{opacity:1;transform:none}
-  .slide.active .rise:nth-child(1){transition-delay:.05s}
-  .slide.active .rise:nth-child(2){transition-delay:.13s}
-  .slide.active .rise:nth-child(3){transition-delay:.21s}
-  .slide.active .rise:nth-child(4){transition-delay:.29s}
-  .slide.active .rise:nth-child(5){transition-delay:.37s}
-
-  .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--accent-2);
-    text-transform:uppercase;margin-bottom:var(--s3);display:flex;align-items:center;gap:var(--s1)}
-  .kicker::before{content:"";width:28px;height:2px;background:var(--accent)}
-
-  h1{font-size:clamp(44px,7.5vw,92px);font-weight:800;line-height:1.02;letter-spacing:-.03em}
-  h2{font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.02em;margin-bottom:var(--s4)}
-  .lead{font-size:clamp(16px,1.7vw,21px);color:var(--fg-dim);max-width:60ch}
-  .lead b{color:var(--fg);font-weight:600}
-  .accent{color:var(--accent-2)}
-
-  /* 표지 */
-  #s0{align-items:flex-start}
-  #s0 .title-role{font-family:var(--sans);font-size:clamp(20px,2.6vw,30px);font-weight:700;color:var(--fg);
-    letter-spacing:-.01em;margin-top:var(--s2)}
-  #s0 .title-role .ax-full{color:var(--fg-mute);font-weight:500;font-size:.7em;margin-left:2px}
-  #s0 .role{font-family:var(--sans);color:var(--fg-dim);font-size:clamp(15px,1.8vw,21px);font-weight:500;
-    letter-spacing:-.01em;margin-top:var(--s4);border-left:2px solid var(--accent);padding-left:var(--s2)}
-  #s0 .role b{color:var(--accent-2);font-weight:700}
-  .contacts{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);font-family:var(--sans);font-size:15px;font-weight:500;color:var(--fg-dim)}
-  .contacts a,.contacts span{display:flex;align-items:center;gap:var(--s1);color:var(--fg-dim);text-decoration:none;transition:color .3s}
-  .contacts a:hover{color:var(--accent-2)}
-  .ico{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:1.8;flex:0 0 auto}
-
-  /* 정보 카드 */
-  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--s2);margin-top:var(--s2)}
-  .info-card{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:var(--s3);
-    transition:border-color .3s,transform .3s}
-  .info-card:hover{border-color:var(--accent);transform:translateY(-3px)}
-  .info-card .label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--accent-2);text-transform:uppercase;
-    margin-bottom:var(--s1);display:flex;align-items:center;gap:6px}
-  .info-card .value{font-size:18px;font-weight:600}
-  .info-card .sub{font-size:13px;color:var(--fg-dim);margin-top:4px}
-
-  /* 경력 — 수평 카드 4칸 (중간 화면 2×2, 모바일 1열) */
-  .career{display:flex;align-items:stretch;gap:var(--s2);margin-top:var(--s4)}
-  .career-card{flex:1;min-width:0;background:var(--bg-2);border:1px solid var(--line);border-radius:14px;
-    padding:var(--s3);display:flex;flex-direction:column;gap:var(--s2);position:relative;
-    text-decoration:none;color:inherit;
-    transition:border-color .3s,transform .3s,box-shadow .3s}
-  .career-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 10px 28px #0007}
-  .career-card:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .career-card .go{position:absolute;top:var(--s3);right:var(--s3);width:14px;height:14px;
-    stroke:var(--fg-mute);fill:none;stroke-width:1.8;transition:stroke .3s}
-  .career-card:hover .go{stroke:var(--accent-2)}
-  .career-card .logo{background:#f4f6f8;border-radius:10px;height:72px;display:flex;align-items:center;justify-content:center;padding:10px var(--s2)}
-  .career-card .logo img{max-width:86%;max-height:52px;object-fit:contain}
-  /* 가로로 긴 로고(ST&V)는 너비를 꽉 채워 위아래 여백 최소화 */
-  .career-card .logo img.wide{max-width:100%;max-height:56px}
-  .career-card .period{font-family:var(--mono);font-size:12.5px;color:var(--accent-2)}
-  .career-card .org{font-size:19px;font-weight:700;line-height:1.2}
-  .career-card .desc{font-size:14px;color:var(--fg-dim);margin-top:auto}
-  .career-arrow{display:flex;align-items:center;color:var(--fg-mute);font-size:22px;flex:0 0 auto}
-  @media(max-width:1100px){
-    .career{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2);margin-top:var(--s2)}
-    .career-arrow{display:none}
-    .career-card{padding:var(--s2);gap:var(--s1)}
-    .career-card .logo{height:56px}
-  }
-  @media(max-width:760px){.career{grid-template-columns:1fr;padding-bottom:72px}}
-
-  /* 베스트 글 링크 카드 (블로그 슬라이드) — 높이 균일 */
-  .posts{display:flex;flex-direction:column;gap:var(--s2)}
-  .post{display:flex;align-items:center;gap:var(--s3);text-decoration:none;
-    background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:0 var(--s3);
-    height:72px;box-sizing:border-box;
-    transition:border-color .3s,transform .25s,background .3s}
-  .post:hover{border-color:var(--accent);transform:translateX(4px);background:#161b22}
-  .post:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .post .rank{font-family:var(--mono);font-size:13px;color:var(--accent-2);flex:0 0 auto;font-weight:700}
-  .post .body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:3px}
-  .post .ttl{font-size:15px;font-weight:600;color:var(--fg);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .post .why{font-size:12.5px;color:var(--fg-dim);line-height:1.4;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .post .tag{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--fg-mute);text-transform:uppercase}
-  .post .go{flex:0 0 auto;width:15px;height:15px;stroke:var(--fg-mute);fill:none;stroke-width:1.8;transition:stroke .3s}
-  .post:hover .go{stroke:var(--accent-2)}
-
-  /* 칩 */
-  .chips{display:flex;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s4)}
-  .chip{font-family:var(--mono);font-size:13px;background:var(--accent-soft);border:1px solid #3b82f640;color:var(--accent-2);
-    padding:6px 14px;border-radius:8px;transition:background .3s,transform .2s}
-  .chip:hover{background:#3b82f626;transform:translateY(-2px)}
-
-  /* 링크 버튼 (외부 GitHub/블로그 이동) */
-  .linkbtn{display:inline-flex;align-items:center;gap:var(--s1);margin-top:var(--s4);
-    font-family:var(--mono);font-size:14px;color:var(--accent-2);text-decoration:none;
-    background:var(--accent-soft);border:1px solid #3b82f659;border-radius:8px;padding:10px 18px;
-    transition:background .3s,border-color .3s,transform .2s}
-  .linkbtn:hover{background:#3b82f626;border-color:var(--accent);transform:translateY(-2px)}
-  .linkbtn:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .linkbtn .url{color:var(--fg-mute);font-size:12px;border-left:1px solid #3b82f659;padding-left:var(--s1);margin-left:2px}
-  .linkbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8}
-  @media(max-width:760px){.linkbtn .url{display:none}}
-
-  /* 랜드마크 빌딩 로고 카드 (담당 현장) */
-  .sites-label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--fg-mute);
-    text-transform:uppercase;margin-top:var(--s5);margin-bottom:var(--s2)}
-  .sites{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--s2)}
-  @media(max-width:1100px){.sites{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:560px){.sites{grid-template-columns:repeat(2,1fr)}}
-  .site{background:#f4f6f8;border:1px solid var(--line);border-radius:12px;position:relative;
-    height:96px;display:flex;align-items:center;justify-content:center;padding:var(--s2);
-    transition:border-color .3s,transform .3s,box-shadow .3s}
-  .site:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 24px #0006}
-  .site:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .site img{max-width:84%;max-height:48px;object-fit:contain}
-  .site .go{position:absolute;top:8px;right:8px;width:13px;height:13px;stroke:#9aa4b2;fill:none;stroke-width:1.8;
-    opacity:0;transition:opacity .3s,stroke .3s}
-  .site:hover .go{opacity:1;stroke:var(--accent)}
-  /* 로고 없는 빌딩: 세리프 텍스트 */
-  .site .tp{display:flex;flex-direction:column;align-items:center;color:#1a2230;font-family:Georgia,"Times New Roman",serif;text-align:center}
-  .site .tp .nm{font-size:14px;font-weight:600;letter-spacing:.02em;line-height:1.2}
-  .site .tp .en{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:#7a8290;margin-top:4px}
-
-  /* 2-컬럼 split */
-  .split{display:grid;grid-template-columns:1.1fr 1fr;gap:var(--s8);align-items:center}
-  @media(max-width:900px){.split{grid-template-columns:1fr;gap:var(--s5)}}
-
-  /* 거대 숫자 + 코드 패널 */
-  .bignum{font-family:var(--mono);font-size:clamp(72px,13vw,160px);font-weight:800;line-height:.85;
-    background:linear-gradient(135deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;
-    margin-bottom:var(--s3)}
-  /* 거대 숫자 옆 버전 배지 (107 → 50 압축 표기) */
-  .bignum-row{display:flex;align-items:flex-end;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s3)}
-  .bignum-row .bignum{margin-bottom:0}
-  .vbadge{display:inline-flex;align-items:center;gap:7px;margin-bottom:10px;padding:4px 11px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.04em;white-space:nowrap;
-    color:var(--accent-2);background:var(--accent-soft);border:1px solid #3b82f640;border-radius:999px}
-  .vbadge i{font-style:normal;color:var(--fg-dim)}
-  .project-heading{display:flex;align-items:center;flex-wrap:wrap;gap:var(--s1) var(--s2);margin-bottom:var(--s2)}
-  .project-heading h2,.project-heading .vbadge{margin-bottom:0}
-  .codepanel{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:'D2Coding',var(--mono);font-size:14px}
-  .codepanel .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--bg-3);border-bottom:1px solid var(--line)}
-  .codepanel .dot{width:11px;height:11px;border-radius:50%}
-  .codepanel .fname{margin-left:8px;color:var(--fg-dim);font-size:12px}
-  .codepanel pre{font-family:'D2Coding',var(--mono);padding:var(--s3);overflow-x:auto;line-height:1.7;color:var(--fg-dim)}
-  .codepanel .k{color:#ff7b72}.codepanel .s{color:#a5d6ff}.codepanel .c{color:var(--fg-mute)}.codepanel .f{color:#d2a8ff}.codepanel .n{color:#79c0ff}
-  /* 더보기 토글 */
-  .codepanel .more-btn{color:var(--accent-2);cursor:pointer;user-select:none;transition:color .2s}
-  .codepanel .more-btn:hover{color:#fff;text-decoration:underline}
-  .codepanel .more-lines{display:none}
-  .codepanel.open .more-lines{display:inline}
-  .codepanel.open .more-btn .more-label::after{content:' ▴'}
-  .codepanel .more-btn .more-label::after{content:' ▾'}
-  /* 커맨드 목록 그리드 정렬 (# 세로선 자동 맞춤) */
-  .cmds{padding:var(--s3);font-family:'D2Coding',var(--mono);font-size:14px;line-height:1.7;overflow-x:auto}
-  .cmds .head{color:var(--fg-mute);margin-bottom:6px}
-  .cmd-row{display:grid;grid-template-columns:165px 1fr;gap:var(--s2)}
-  .cmd-row .f{color:#d2a8ff}
-  .cmd-row .c{color:var(--fg-mute)}
-  .cmd-row.clickable .f{cursor:pointer;border-radius:4px;transition:color .2s,background .2s;padding:0 2px;margin:0 -2px}
-  .cmd-row.clickable:hover .f{color:#fff;background:#d2a8ff22}
-  .cmd-row.clickable .f::after{content:' ↗';font-size:10px;color:var(--fg-mute);opacity:0;transition:opacity .2s}
-  .cmd-row.clickable:hover .f::after{opacity:1}
-  .cmds .more-lines{display:none}
-  .codepanel.open .cmds .more-lines{display:contents}
-  .cmds .more-btn{display:inline-block;margin-top:6px;color:var(--accent-2);cursor:pointer;user-select:none;transition:color .2s}
-  .cmds .more-btn:hover{color:#fff;text-decoration:underline}
-
-  /* 하네스 50 화살표 클릭 가능 표시 */
-  .arrow.a2{cursor:pointer}
-  .arrow.a2 .peek{font-family:var(--mono);font-weight:400;font-size:11px;opacity:.7;margin-left:var(--s1)}
-  .arrow.a2:hover{filter:brightness(1.12)}
-
-  /* 50단계 모달 */
-  .modal{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:var(--s4)}
-  .modal.open{display:flex}
-  .modal-bg{position:absolute;inset:0;background:#06080cd0;backdrop-filter:blur(4px)}
-  .modal-box{position:relative;width:min(720px,92vw);max-height:84vh;background:var(--bg-2);border:1px solid var(--line);
-    border-radius:16px;display:flex;flex-direction:column;box-shadow:0 24px 64px #000a;
-    transform:translateY(16px) scale(.98);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s}
-  .modal.open .modal-box{transform:none;opacity:1}
-  .modal-head{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s4);border-bottom:1px solid var(--line)}
-  .modal-head h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
-  .modal-head .cnt{font-family:var(--mono);font-size:12px;color:var(--accent-2);margin-left:var(--s1)}
-  .modal-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg-3);color:var(--fg);
-    font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
-  .modal-close:hover{background:var(--bg);border-color:var(--accent)}
-  .modal-close:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .modal-list{overflow-y:auto;padding:var(--s2) var(--s4) var(--s4)}
-  .step-item{border-bottom:1px solid #1d232c80}
-  .step-item:last-child{border-bottom:none}
-  .step-row{display:flex;align-items:baseline;gap:var(--s2);padding:9px 0;cursor:pointer;user-select:none}
-  .step-row .no{font-family:var(--mono);font-size:12px;color:var(--accent-2);flex:0 0 42px;text-align:right;font-weight:700}
-  .step-row .ti{flex:1;font-size:14.5px;color:var(--fg-dim);transition:color .2s}
-  .step-row .caret{color:var(--fg-mute);font-size:11px;transition:transform .25s,color .2s;flex:0 0 auto}
-  .step-row:hover .ti{color:var(--fg)}
-  .step-row:hover .caret{color:var(--accent-2)}
-  .step-item.open .step-row .ti{color:var(--accent-2);font-weight:600}
-  .step-item.open .step-row .caret{transform:rotate(90deg);color:var(--accent-2)}
-  .step-item.open .step-row{position:sticky;top:0;background:var(--bg-2);z-index:1}
-  .step-body{display:none;font-size:13px;line-height:1.65;color:var(--fg-dim);
-    word-break:break-word;background:var(--bg);border:1px solid var(--line);border-radius:8px;
-    padding:var(--s2) var(--s3);margin:0 0 var(--s2) 42px;max-height:46vh;overflow-y:auto}
-  .step-item.open .step-body{display:block}
-  .step-raw{font-family:var(--mono);font-size:12.5px;white-space:pre-wrap}
-  /* 마크다운 렌더 스타일 (다크) */
-  .md{font-size:13px}
-  .md h1,.md h2,.md h3{color:var(--fg);font-weight:700;line-height:1.3;margin:var(--s3) 0 var(--s1)}
-  .md h1{font-size:18px}.md h2{font-size:16px}.md h3{font-size:14px;color:var(--accent-2)}
-  .md h1:first-child,.md h2:first-child,.md h3:first-child{margin-top:0}
-  .md p{margin:var(--s1) 0}
-  .md strong{color:var(--fg);font-weight:700}
-  .md a{color:var(--accent-2)}
-  .md ul,.md ol{margin:var(--s1) 0;padding-left:var(--s3)}
-  .md li{margin:3px 0}
-  .md code{font-family:'D2Coding',var(--mono);font-size:12px;background:var(--bg-3);padding:2px 6px;border-radius:4px;color:#79c0ff}
-  .md pre{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:var(--s2);overflow-x:auto;margin:var(--s2) 0}
-  .md pre code{background:none;padding:0;color:var(--fg-dim);font-size:11.5px;line-height:1.6}
-  .md blockquote{border-left:3px solid var(--accent);margin:var(--s2) 0;padding:4px 0 4px var(--s2);color:var(--fg-dim);background:#3b82f60d}
-  .md table{border-collapse:collapse;width:100%;margin:var(--s2) 0;font-size:12px}
-  .md th,.md td{border:1px solid var(--line);padding:6px 10px;text-align:left}
-  .md th{background:var(--bg-3);color:var(--fg);font-weight:600}
-  .md hr{border:none;border-top:1px solid var(--line);margin:var(--s2) 0}
-
-  /* step 상세 모달 (목록 위 2단계) */
-  .detail{z-index:40}
-  .detail .modal-box{width:min(820px,94vw);max-height:88vh}
-  .detail .modal-head{gap:var(--s2)}
-  .detail .nav-btns{display:flex;align-items:center;gap:var(--s1)}
-  .detail .nav-btns button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--bg-3);
-    color:var(--fg);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
-  .detail .nav-btns button:hover:not(:disabled){background:var(--bg);border-color:var(--accent)}
-  .detail .nav-btns button:disabled{opacity:.3;cursor:default}
-  .detail .nav-btns button:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .detail .d-no{font-family:var(--mono);font-size:12px;color:var(--accent-2);font-weight:700}
-  .detail .d-title{font-size:18px;font-weight:800;letter-spacing:-.01em;flex:1;min-width:0}
-  .detail .d-body{overflow-y:auto;padding:var(--s3) var(--s4) var(--s4)}
-  .detail .d-hint{font-family:var(--mono);font-size:11px;color:var(--fg-mute);text-align:center;padding:0 0 var(--s2)}
-
-  /* 하네스 플로우 — 한국어 3단계 화살표 (단일 프롬프트 → 50단계 → 산출물) */
-  .flow{display:flex;flex-direction:column;gap:var(--s3);margin-top:var(--s2)}
-  .arrow{position:relative;height:56px;display:flex;align-items:center;color:#fff;font-weight:700;
-    font-size:clamp(14px,1.5vw,18px);padding-left:var(--s3);
-    clip-path:polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
-    opacity:0;transform:translateX(-24px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
-  .slide.active .arrow{opacity:1;transform:none}
-  .slide.active .arrow:nth-child(1){transition-delay:.15s}
-  .slide.active .arrow:nth-child(2){transition-delay:.35s}
-  .slide.active .arrow:nth-child(3){transition-delay:.55s}
-  .arrow.a1{width:74%;background:linear-gradient(90deg,#2d3a8c,#3949ab)}
-  .arrow.a2{width:88%;background:linear-gradient(90deg,#3949ab,#5c4bbf)}
-  .arrow.a3{width:100%;background:linear-gradient(90deg,#5c4bbf,#7b5fd4)}
-  .arrow .sub{font-family:var(--mono);font-weight:400;font-size:12px;opacity:.78;margin-left:var(--s2)}
-  @media(max-width:760px){.arrow .sub{display:none}.arrow{font-size:14px}}
-
-  /* GitHub 메트릭 */
-  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s2);margin:var(--s3) 0}
-  @media(max-width:760px){.metrics{grid-template-columns:1fr}}
-  .metric{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:var(--s4) var(--s3);
-    transition:border-color .3s,transform .3s}
-  .metric:hover{border-color:var(--accent);transform:translateY(-3px)}
-  .metric .num{font-family:var(--mono);font-size:clamp(38px,5vw,58px);font-weight:800;color:var(--accent-2);line-height:1}
-  .metric .cap{font-size:14px;color:var(--fg-dim);margin-top:var(--s1)}
-  .metric .sfx{color:var(--fg-mute);font-size:.5em}
-
-  /* GitHub 잔디 */
-  .grass-wrap{margin-top:var(--s3)}
-  .grass-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--s2);font-family:var(--mono);font-size:12px;color:var(--fg-dim)}
-  .grass{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px}
-  .cell{width:100%;aspect-ratio:1;border-radius:3px;background:var(--grass-0);transform:scale(0);transition:transform .35s cubic-bezier(.2,.8,.3,1.4)}
-  .slide.active .cell{transform:scale(1)}
-  .legend{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--fg-mute);margin-top:var(--s2);justify-content:flex-end}
-  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
-
-  /* 언어 막대 */
-  .langs{margin-top:var(--s2);display:flex;flex-direction:column;gap:var(--s2)}
-  .lang-row{display:grid;grid-template-columns:90px 1fr 40px;align-items:center;gap:var(--s2);font-family:var(--mono);font-size:13px}
-  .lang-row .nm{color:var(--fg-dim)}
-  .lang-row .ct{color:var(--fg-mute);text-align:right}
-  .bar{height:8px;background:var(--bg-3);border-radius:4px;overflow:hidden}
-  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:4px;transition:width 1s cubic-bezier(.2,.7,.2,1)}
-
-  /* 네비/진행/점 */
-  .nav{position:fixed;bottom:var(--s3);right:var(--s5);display:flex;align-items:center;gap:var(--s2);z-index:10}
-  .nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--bg-2);color:var(--fg);
-    font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s,transform .15s}
-  .nav button:hover{background:var(--bg-3);border-color:var(--accent)}
-  .nav button:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .nav button:active{transform:scale(.92)}
-  .nav .counter{font-family:var(--mono);font-size:14px;color:var(--fg-dim);min-width:54px;text-align:center}
-  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0;z-index:11;transition:width .5s ease}
-  .dots{position:fixed;left:var(--s4);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:var(--s1);z-index:10}
-  .dots button{width:10px;height:10px;border-radius:50%;border:none;background:var(--line);cursor:pointer;padding:0;transition:background .3s,height .3s}
-  .dots button.on{background:var(--accent);height:26px;border-radius:5px}
-  .hint{position:fixed;bottom:var(--s3);left:var(--s5);font-family:var(--mono);font-size:12px;color:var(--fg-mute);z-index:10}
-  .hint .mobile-only{display:none}
-
-  /* 공통 포커스 표시 (키보드 접근성) */
-  .dots button:focus-visible,.chip:focus-visible{outline:none;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
-  .contacts a:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:4px}
-
-  @media(max-width:760px){
-    .dots{display:none}
-    .slide{padding:var(--s6) var(--s4);justify-content:flex-start;padding-top:18vh}
-    .hint .desktop-only{display:none}.hint .mobile-only{display:inline}
-    #s6 .split{grid-template-columns:1fr!important;gap:var(--s4)!important}
-    .grass-wrap{overflow-x:auto}
-    .grass{min-width:480px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .slide,.rise,.cell,.bar i,.info-card,.metric,.chip{transition:none!important}
-    .rise{opacity:1!important;transform:none!important}
-    .cell{transform:scale(1)!important}
-  }
-
-  /* ===== CV 요약 슬라이드 (표지 다음, 한 장에 전모 — 내부 스크롤) ===== */
-  #scv{justify-content:center;padding-top:var(--s5);padding-bottom:var(--s5)}
-  .cv{width:100%;max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:var(--s3)}
-  .cv>*{margin:0!important}
-  .cv-head{display:flex;align-items:baseline;gap:var(--s2);flex-wrap:wrap}
-  .cv-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
-  .cv-head .role{font-family:var(--mono);font-size:13px;color:var(--accent-2)}
-  .cv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2)}
-  @media(max-width:760px){.cv-stats{grid-template-columns:repeat(2,1fr)}}
-  .cv-stat{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:var(--s1) var(--s2);text-align:center}
-  .cv-stat .n{font-family:var(--mono);font-size:clamp(20px,2.6vw,24px);font-weight:800;color:var(--accent-2);line-height:1}
-  .cv-stat .n .u{font-family:var(--sans);font-weight:700;font-size:.72em;margin-left:1px}
-  .cv-stat .l{font-size:11.5px;color:var(--fg-dim);margin-top:4px}
-  /* CV 하단 2열 비대칭 (좌:Career+Projects | 우:부트캠프 3카드) */
-  .cv-lower{display:grid;grid-template-columns:1.05fr 1fr;gap:var(--s3);align-items:start}
-  @media(max-width:760px){.cv-lower{grid-template-columns:1fr}}
-  .cv-lower .cv-block + .cv-block{margin-top:var(--s3)}
-  .cv-block .bt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-2);margin-bottom:var(--s2);display:flex;align-items:center;gap:var(--s1)}
-  .cv-block .bt::after{content:"";flex:1;height:1px;background:var(--line)}
-  .cv-about{font-size:13px;color:var(--fg-dim);line-height:1.5;flex:1 1 360px}
-  .cv-about b{color:var(--fg);font-weight:600}.cv-about .hl{color:var(--accent-2);font-weight:600}
-  /* CV 기본사항 행 */
-  .cv-info{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2)}
-  @media(max-width:760px){.cv-info{grid-template-columns:repeat(2,1fr)}}
-  .cv-info .it{background:var(--bg-2);border:1px solid var(--line);border-radius:9px;padding:8px 12px}
-  .cv-info .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
-  .cv-info .v{font-size:13.5px;font-weight:600;margin-top:3px}
-  .cv-info .s{font-size:11px;color:var(--fg-mute);margin-top:1px}
-  .cv-line{display:flex;gap:var(--s2);padding:6px 0;font-size:13.5px;border-bottom:1px solid #1d232c66}
-  .cv-line:last-child{border-bottom:none}
-  .cv-line .w{font-family:var(--mono);font-size:11.5px;color:var(--accent-2);flex:0 0 132px;white-space:nowrap}
-  .cv-line .org{flex:0 0 118px;color:var(--fg);font-weight:600}
-  .cv-line .d{color:var(--fg-dim)}.cv-line .d b{color:var(--fg);font-weight:600}
-  @media(max-width:760px){.cv-line .org{flex:0 0 96px}}
-  .cv-line a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed var(--line)}
-  .cv-line a:hover{color:var(--accent-2);border-color:var(--accent-2)}
-  .cv-line{align-items:center}
-  .cv-line .lg{flex:0 0 auto;width:46px;height:26px;background:#f4f6f8;border:1px solid var(--line);border-radius:6px;
-    display:flex;align-items:center;justify-content:center;padding:3px;
-    transition:border-color .25s,transform .2s,box-shadow .25s}
-  a.lg:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px #0006}
-  .cv-line .lg img{max-width:100%;max-height:18px;object-fit:contain}
-  .cv-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s2)}
-  .cv-chips a{font-family:var(--mono);font-size:11.5px;background:var(--accent-soft);border:1px solid #3b82f640;color:var(--accent-2);padding:4px 10px;border-radius:7px;text-decoration:none;transition:background .25s,transform .2s}
-  .cv-chips a:hover{background:#3b82f626;transform:translateY(-2px)}
-  /* CV 빌딩 로고 칩 (흰 카드) */
-  .cv-logos{display:flex;flex-wrap:nowrap;gap:5px;margin-top:var(--s1)}
-  .cv-logos a{flex:1;min-width:0;background:#f4f6f8;border:1px solid var(--line);border-radius:8px;height:30px;
-    display:flex;align-items:center;justify-content:center;padding:5px 8px;
-    transition:border-color .25s,transform .2s,box-shadow .25s}
-  .cv-logos a:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 12px #0006}
-  .cv-logos img{max-width:100%;max-height:20px;object-fit:contain}
-  .cv-proj a{display:flex;align-items:center;gap:var(--s2);padding:6px 0;font-size:13.5px;color:var(--fg);
-    text-decoration:none;border-bottom:1px solid #1d232c66}
-  .cv-proj a:last-child{border-bottom:none}
-  .cv-proj a:hover .pn{color:var(--accent-2)}
-  .cv-proj .gh{flex:0 0 auto;width:15px;height:15px;stroke:var(--accent-2);fill:none;stroke-width:1.8}
-  .cv-proj .pn{font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .25s}
-  /* 우측 메타+↗ 부분만 박스 버튼 */
-  .cv-proj .pr{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;
-    width:148px;white-space:nowrap;font-family:var(--mono);font-size:11px;color:var(--fg-mute);
-    background:var(--bg-2);border:1px solid var(--line);border-radius:7px;padding:5px 10px;
-    transition:border-color .25s,color .25s,background .25s}
-  .cv-proj a:hover .pr{border-color:var(--accent);color:var(--accent-2);background:#161b22}
-  .cv-proj .go{flex:0 0 auto;width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8}
-  /* 부트캠프 실증 프로젝트 (CV 우측 컬럼 · 세로 3카드) */
-  .cv-bcp-head{display:flex;align-items:center;gap:var(--s2);margin-top:0;padding-top:0;border-top:none}
-  .cv-bcp-head .bt{margin:0}
-  .cv-bcp-head .tag{font-family:var(--mono);font-size:10.5px;color:var(--accent-2);background:var(--accent-soft);border:1px solid #3b82f640;border-radius:6px;padding:2px 8px}
-  .cv-bcp{display:grid;grid-template-columns:1fr;gap:var(--s2);margin-top:var(--s2)}
-  .cv-bcp .row{display:flex;flex-direction:column;gap:6px;background:var(--bg-2);border:1px solid var(--line);
-    border-radius:12px;padding:var(--s2);transition:border-color .25s,transform .2s,box-shadow .25s}
-  .cv-bcp .row:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 22px #0007}
-  .cv-bcp .pn{font-weight:700;font-size:13.5px;color:var(--fg);line-height:1.25}
-  .cv-bcp .pd{font-size:11.5px;color:var(--fg-dim);line-height:1.4;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .cv-bcp .lk{display:flex;gap:6px;margin-top:4px}
-  .cv-bcp .lk a{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;
-    color:var(--fg-mute);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:5px 10px;
-    text-decoration:none;transition:border-color .25s,color .25s,background .25s}
-  .cv-bcp .lk a:hover{border-color:var(--accent);color:var(--accent-2);background:#161b22}
-  .cv-bcp .lk svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.8}
-  /* 독립 Bootcamp Projects 슬라이드 (스크린샷 카드 3개) */
-  .bcp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s4)}
-  @media(max-width:860px){.bcp-grid{grid-template-columns:1fr}}
-  .bcp-card{display:flex;flex-direction:column;background:var(--bg-2);border:1px solid var(--line);
-    border-radius:16px;overflow:hidden;transition:border-color .25s,transform .2s,box-shadow .25s}
-  .bcp-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 14px 36px #0008}
-  .bcp-card .thumb{aspect-ratio:16/10;background:#0c1015;border-bottom:1px solid var(--line);overflow:hidden}
-  .bcp-card .thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .4s ease}
-  .bcp-card:hover .thumb img{transform:scale(1.04)}
-  .bcp-card .body{display:flex;flex-direction:column;gap:8px;padding:var(--s3);flex:1}
-  .bcp-card .pt{font-size:16px;font-weight:700;line-height:1.25}
-  .bcp-card .pd{font-size:13px;color:var(--fg-dim);line-height:1.45;flex:1}
-  .bcp-card .stk{display:flex;flex-wrap:wrap;gap:5px}
-  .bcp-card .stk span{font-family:var(--mono);font-size:10.5px;color:var(--accent-2);background:var(--accent-soft);
-    border:1px solid #3b82f640;border-radius:6px;padding:2px 8px}
-  .bcp-card .lks{display:flex;gap:8px;margin-top:2px}
-  .bcp-card .lks a{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;
-    color:var(--fg-mute);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 12px;
-    text-decoration:none;transition:border-color .25s,color .25s,background .25s}
-  .bcp-card .lks a:hover{border-color:var(--accent);color:var(--accent-2);background:#161b22}
-  .bcp-card .lks svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8}
-  /* 하네스50 산출 튜토리얼 (5열 컴팩트 카드) */
-  .tut-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}
-  @media(max-width:1100px){.tut-grid{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:680px){.tut-grid{grid-template-columns:1fr}}
-  .tut-card{display:flex;flex-direction:column;background:var(--bg-2);border:1px solid var(--line);
-    border-radius:12px;overflow:hidden;text-decoration:none;color:var(--fg);
-    transition:border-color .25s,transform .2s,box-shadow .25s}
-  .tut-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 10px 28px #0008}
-  .tut-card .thumb{aspect-ratio:16/10;background:#0c1015;border-bottom:1px solid var(--line);overflow:hidden}
-  .tut-card .thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .4s ease}
-  .tut-card:hover .thumb img{transform:scale(1.05)}
-  .tut-card .tb{display:flex;flex-direction:column;gap:5px;padding:var(--s2);flex:1}
-  .tut-card .rank{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--accent-2)}
-  .tut-card .tt{font-size:13.5px;font-weight:700;line-height:1.25}
-  .tut-card .td{font-size:11px;color:var(--fg-dim);line-height:1.4;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .tut-card .go{align-self:flex-start;width:13px;height:13px;stroke:var(--accent-2);fill:none;stroke-width:1.8;margin-top:2px;transition:transform .2s}
-  .tut-card:hover .go{transform:translate(2px,-2px)}
-  .cv-cta{display:inline-flex;align-items:center;gap:8px;margin-top:var(--s3);font-size:13px;color:var(--accent-2);text-decoration:none;background:var(--accent-soft);border:1px solid #3b82f659;border-radius:8px;padding:9px 16px;transition:background .25s,transform .2s}
-  .cv-cta:hover{background:#3b82f626;transform:translateY(-2px)}
-  .cv-cta svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
-
-  /* 인쇄/PDF: 9개 슬라이드를 9페이지로 순차 출력 */
-  @media print{
-    body{overflow:visible!important;background:#fff;color:#111}
-    .bg-layer,.nav,.dots,.hint,.progress{display:none!important}
-    .deck{position:static;height:auto}
-    .slide{position:relative!important;inset:auto!important;visibility:visible!important;opacity:1!important;
-      transform:none!important;page-break-after:always;break-after:page;min-height:90vh;padding:6vh 6vw}
-    .slide .rise{opacity:1!important;transform:none!important}
-    .accent,.bignum,.metric .num,.tl-item .period,.info-card .label,.kicker{color:#1d4ed8!important;-webkit-text-fill-color:#1d4ed8!important}
-    .lead,.lead b,h1,h2,.info-card .value,.tl-item .org{color:#111!important}
-    .info-card,.metric,.codepanel,.flow-node{border-color:#ccc!important;background:#f6f8fa!important}
-  }
-</style>
-<!-- 3D/모션 라이브러리 (CDN, defer). 실패 시 Canvas 2D 폴백 자동 동작 -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<!-- 선택적 배경 효과는 비동기로 로드하며 탐색을 막지 않습니다. -->
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <!-- 하네스 50 step 본문 데이터 (로컬) -->
 <script defer src="steps-data.js"></script>
 <!-- 슬래시 커맨드 본문 데이터 (로컬) -->
 <script defer src="commands-data.js"></script>
 <!-- 마크다운 렌더러 (CDN, defer). 실패 시 원문 텍스트로 폴백 -->
-<script defer src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<link rel="stylesheet" href="assets/portfolio.css">
 </head>
 <body>
+<a class="skip-link" href="#deck">본문으로 이동</a>
+<header class="site-header">
+  <a class="brand" href="#s0" data-slide-target>전문준 <span>AX 엔지니어</span></a>
+  <nav class="section-nav" aria-label="포트폴리오 탐색">
+    <label for="section-select">목차</label>
+    <select id="section-select"><option value="s0">소개</option></select>
+    <a href="cv.html">이력서</a>
+    <a href="#s8" data-slide-target>연락</a>
+  </nav>
+</header>
+<p class="sr-only" id="section-status" role="status" aria-live="polite" aria-atomic="true"></p>
 <div id="loader" style="position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:#0a0c10;font-family:'JetBrains Mono',monospace;color:#828d9c;font-size:13px;letter-spacing:.1em;transition:opacity .5s">불러오는 중…</div>
-<div class="bg-layer">
+<div class="bg-layer" aria-hidden="true">
   <canvas id="three"></canvas>
   <canvas id="net"></canvas>
   <div class="bg-grid"></div>
@@ -540,230 +51,47 @@
   <div class="bg-noise"></div>
 </div>
 
-<div class="progress" id="progress"></div>
-<div class="dots" id="dots"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<nav class="dots" id="dots" aria-label="슬라이드 바로가기"></nav>
 
-<div class="deck" id="deck">
+<main class="deck" id="deck" tabindex="-1">
 
-  <!-- 0 표지 -->
-  <section class="slide active" id="s0">
+  <section class="slide active" id="s0" data-title="소개">
     <div class="kicker rise">Portfolio · 2026</div>
     <h1 class="rise"><span class="accent">전문준</span></h1>
-    <p class="title-role rise">AX 엔지니어</p>
-    <p class="role rise">빌딩을 <b>자동화</b>하던 엔지니어, <b>AI를 자동화</b>하다.</p>
-    <div class="contacts rise" style="margin-top:var(--s6)">
+    <p class="title-role rise">현장 업무를 자동화하는 AX 엔지니어</p>
+    <p class="role rise"><b>빌딩 HMI 10년</b>의 현장 경험을 바탕으로<br>영업·견적 업무와 <b>AI 개발 흐름</b>을 자동화합니다.</p>
+    <div class="hero-actions rise">
+      <a class="action-link primary" href="#s4" data-slide-target>대표 프로젝트 보기 <span aria-hidden="true">↗</span></a>
+      <a class="action-link" href="#sdhis" data-slide-target>실무 AX 사례</a>
+      <a class="action-link" href="cv.html">이력서 보기</a>
+      <a class="action-link" href="jeon-munjun-portfolio.pdf" download>PDF 다운로드</a>
+    </div>
+    <div class="contacts rise" style="margin-top:var(--s4)">
       <a href="mailto:technoetic@hotmail.com"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
       <a href="tel:01076335021"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>010-7633-5021</a>
       <span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>인천광역시 서구 신석로 71</span>
     </div>
   </section>
 
-  <!-- CV 요약 (표지 다음 — 한 장에 전모) -->
-  <section class="slide" id="scv">
-    <div class="cv rise">
-      <div class="cv-head">
-        <h2>전문준</h2>
-        <span class="role">AX 엔지니어 · 빌딩 HMI 10년 → AI 전환</span>
-      </div>
-      <div class="cv-info">
-        <div class="it"><div class="k">생년월일</div><div class="v">1988. 12. 20.</div><div class="s">만 37세</div></div>
-        <div class="it"><div class="k">연락처</div><div class="v">010-7633-5021</div><div class="s">technoetic@hotmail.com</div></div>
-        <div class="it"><div class="k">주소</div><div class="v">인천광역시 서구</div><div class="s">신석로 71</div></div>
-        <div class="it"><div class="k">학력</div><div class="v">인천대인고등학교</div><div class="s">인문계열 · 2004.03 ~ 2007.02</div></div>
-        <div class="it"><div class="k">자격증</div><div class="v">정보처리기능사</div><div class="s">2024.12 취득</div></div>
-      </div>
-      <div class="cv-stats">
-        <div class="cv-stat"><div class="n">10<span class="u">년</span></div><div class="l">빌딩 HMI 경력</div></div>
-        <div class="cv-stat"><div class="n">128</div><div class="l">GitHub 레포</div></div>
-        <div class="cv-stat"><div class="n">2,033</div><div class="l">누적 커밋</div></div>
-        <div class="cv-stat"><div class="n">255</div><div class="l">블로그 글</div></div>
-      </div>
-      <div class="cv-lower">
-        <div class="cv-col-left">
-        <div class="cv-block">
-          <div class="bt">Career</div>
-          <div class="cv-line"><span class="w">2026.07 ~ 2026.08</span><a class="lg" href="https://dh-elec.co.kr/" target="_blank" rel="noopener" aria-label="(주)디에이치아이에스"><img src="assets/logos/dhis.png" alt="디에이치아이에스" loading="lazy"></a><span class="org">(주)디에이치아이에스</span><span class="d">AX 영업혁신 · 4주 업무위탁</span></div>
-          <div class="cv-line"><span class="w">2025.12 ~ 2026.06</span><a class="lg" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스" loading="lazy"></a><span class="org">KDT HDC랩스</span><span class="d">AI 부트캠프 · 전 과제 1등 수료</span></div>
-          <div class="cv-line"><span class="w">2018.07 ~ 2025.10</span><a class="lg" href="http://stnv.co.kr/" target="_blank" rel="noopener" aria-label="(주)에스티엔비"><img src="assets/logos/stnb.png" alt="에스티엔비" loading="lazy"></a><span class="org">(주)에스티엔비</span><span class="d">빌딩 HMI 엔지니어</span></div>
-          <div class="cv-line"><span class="w">2014.10 ~ 2018.07</span><a class="lg" href="https://webcon.co.kr/" target="_blank" rel="noopener" aria-label="(주)웹콘"><img src="assets/logos/webcon.png" alt="웹콘" loading="lazy"></a><span class="org">(주)웹콘</span><span class="d">빌딩 HMI 엔지니어</span></div>
-          <div class="cv-logos">
-            <a href="https://www.coex.co.kr/" target="_blank" rel="noopener" aria-label="코엑스"><img src="assets/logos/coex.png" alt="코엑스" loading="lazy"></a>
-            <a href="https://seoulsquare.com/" target="_blank" rel="noopener" aria-label="서울스퀘어"><img src="assets/logos/seoulsquare.png" alt="서울스퀘어" loading="lazy"></a>
-            <a href="https://www.centropolis.co.kr/" target="_blank" rel="noopener" aria-label="센트로폴리스"><img src="assets/logos/centropolis-dark.svg" alt="센트로폴리스" loading="lazy"></a>
-            <a href="https://www.centerfield.co.kr/" target="_blank" rel="noopener" aria-label="센터필드"><img src="assets/logos/centerfield-dark.svg" alt="센터필드" loading="lazy"></a>
-            <a href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener" aria-label="타워팰리스"><img src="assets/logos/towerpalace.png" alt="타워팰리스" loading="lazy"></a>
-            <a href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener" aria-label="타임스퀘어"><img src="assets/logos/timessquare.png" alt="타임스퀘어" loading="lazy"></a>
-          </div>
-        </div>
-        <div class="cv-block cv-proj">
-          <div class="bt">Projects &amp; Activity</div>
-          <a href="https://github.com/Technoetic/harness50" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">하네스 50</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
-          <a href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">커스텀 슬래시 커맨드 20</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
-          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">GitHub 128 repos</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
-          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg><span class="pn">기술 블로그 255편</span><span class="pr"><span class="pm">블로그에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
-        </div>
-        </div>
-        <div class="cv-col-right">
-        <!-- 부트캠프 실증 프로젝트 (우측 컬럼 · 세로 3카드) -->
-        <div class="cv-bcp-head"><div class="bt">부트캠프 실증 프로젝트</div><span class="tag">KDT HDC랩스</span></div>
-        <div class="cv-bcp">
-        <div class="row">
-          <span class="pn">S-DoT 서울 스마트시티 대시보드</span>
-          <span class="pd">서울시 IoT 센서 1,155건 실시간 수집 · 구별 대기·환경 이상 감지 · 지도 관제</span>
-          <span class="lk">
-            <a href="https://seoul-smartcity-dashboard-production.up.railway.app/" target="_blank" rel="noopener" aria-label="S-DoT 대시보드 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
-            <a href="https://github.com/Technoetic/seoul-smartcity-dashboard" target="_blank" rel="noopener" aria-label="S-DoT 대시보드 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-          </span>
-        </div>
-        <div class="row">
-          <span class="pn">슬라이딩 경기기록 분석</span>
-          <span class="pd">스켈레톤·루지·봅슬레이 기록 예측 모델 · 대관령 실시간 기상 데이터 연동</span>
-          <span class="lk">
-            <a href="https://skeleton-analysis-production-d1bb.up.railway.app/" target="_blank" rel="noopener" aria-label="슬라이딩 분석 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
-            <a href="https://github.com/Technoetic/skeleton-analysis" target="_blank" rel="noopener" aria-label="슬라이딩 분석 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-          </span>
-        </div>
-        <div class="row">
-          <span class="pn">월하몽 — 풀스택 SaaS</span>
-          <span class="pd">회원·인증·결제 흐름을 갖춘 풀스택 웹 서비스 · 기획부터 배포까지 단독 구현</span>
-          <span class="lk">
-            <a href="https://saju-mbti-fusion.fly.dev/" target="_blank" rel="noopener" aria-label="월하몽 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
-            <a href="https://github.com/Technoetic/saju-mbti-fusion" target="_blank" rel="noopener" aria-label="월하몽 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-          </span>
-        </div>
-        </div>
-        </div>
-      </div>
+  <section class="slide" id="sdhis" data-title="실무 AX 사례">
+    <div class="kicker rise">Field Work · 실무 AX</div>
+    <h2 class="rise">영업·견적·수출 업무에<br><span class="accent">AI를 적용하다</span></h2>
+    <p class="case-meta rise">(주)디에이치아이에스 · 2026.07–08 · 4주 업무위탁 프로젝트</p>
+    <p class="lead case-intro rise">변압기 기업의 영업 업무를 대상으로 <b>DB 구축, 견적 생성 자동화, 수출 업무 AI화</b>를 수행했습니다. 현장의 업무를 이해하고 실제 기업에 적용한 AX 프로젝트입니다.</p>
+    <div class="case-grid rise">
+      <article class="case-card"><span class="case-step">01 · 데이터</span><h3>영업 DB 구축</h3><p>변압기 영업 업무에 필요한 데이터베이스를 구축했습니다.</p></article>
+      <article class="case-card"><span class="case-step">02 · 자동화</span><h3>견적 생성</h3><p>영업 과정의 견적 생성 업무를 자동화했습니다.</p></article>
+      <article class="case-card"><span class="case-step">AI 적용</span><h3>수출 업무 지원</h3><p>수출 업무에 AI를 활용하는 작업을 수행했습니다.</p></article>
     </div>
+    <div class="case-outcome rise"><b>담당 범위</b><p>계약 기반의 4주 프로젝트에서 세 영역의 구축·자동화·AI 적용을 담당했습니다.</p></div>
+    <div class="hero-actions rise"><a class="action-link" href="cv.html#dhis">이력서에서 수행 범위 보기</a><a class="action-link" href="#s8" data-slide-target>관련 업무로 연락하기</a></div>
   </section>
 
-  <!-- 1 기본사항 -->
-  <section class="slide" id="s1">
-    <div class="kicker rise">01 · Profile</div>
-    <h2 class="rise">기본사항</h2>
-    <div class="info-grid rise">
-      <div class="info-card"><div class="label">생년월일</div><div class="value">1988. 12. 20.</div><div class="sub">만 37세</div></div>
-      <div class="info-card"><div class="label">연락처</div><div class="value">010-7633-5021</div><div class="sub">technoetic@hotmail.com</div></div>
-      <div class="info-card"><div class="label">주소</div><div class="value">인천광역시 서구</div><div class="sub">신석로 71</div></div>
-      <div class="info-card"><div class="label">학력</div><div class="value">인천대인고등학교</div><div class="sub">인문계열 · 2004.03 ~ 2007.02</div></div>
-      <div class="info-card"><div class="label">자격증</div><div class="value">정보처리기능사</div><div class="sub">2024.12 취득</div></div>
-    </div>
-  </section>
-
-  <!-- 2 경력 -->
-  <section class="slide" id="s2">
-    <div class="kicker rise">02 · Experience</div>
-    <h2 class="rise">경력사항</h2>
-    <div class="career rise">
-      <a class="career-card" href="https://webcon.co.kr/" target="_blank" rel="noopener" aria-label="(주)웹콘 웹사이트를 새 탭에서 보기">
-        <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
-        <div class="logo"><img src="assets/logos/webcon.png" alt="(주)웹콘" loading="lazy"></div>
-        <div class="period">2014.10 ~ 2018.07</div>
-        <div class="org">(주)웹콘</div>
-        <div class="desc">빌딩 HMI 엔지니어</div>
-      </a>
-      <div class="career-arrow" aria-hidden="true">→</div>
-      <a class="career-card" href="http://stnv.co.kr/" target="_blank" rel="noopener" aria-label="(주)에스티엔비 웹사이트를 새 탭에서 보기">
-        <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
-        <div class="logo"><img class="wide" src="assets/logos/stnb.png" alt="(주)에스티엔비 ST&amp;V" loading="lazy"></div>
-        <div class="period">2018.07 ~ 2025.10</div>
-        <div class="org">(주)에스티엔비</div>
-        <div class="desc">빌딩 HMI 엔지니어</div>
-      </a>
-      <div class="career-arrow" aria-hidden="true">→</div>
-      <a class="career-card" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA 부트캠프 사이트를 새 탭에서 보기">
-        <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
-        <div class="logo"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스 NOVA" loading="lazy"></div>
-        <div class="period">2025.12 ~ 2026.06</div>
-        <div class="org">KDT HDC랩스</div>
-        <div class="desc">AI 엔지니어 부트캠프 교육생</div>
-      </a>
-      <div class="career-arrow" aria-hidden="true">→</div>
-      <a class="career-card" href="https://dh-elec.co.kr/" target="_blank" rel="noopener" aria-label="(주)디에이치아이에스 웹사이트를 새 탭에서 보기">
-        <svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
-        <div class="logo"><img src="assets/logos/dhis.png" alt="(주)디에이치아이에스 DHIS" loading="lazy"></div>
-        <div class="period">2026.07 ~ 2026.08</div>
-        <div class="org">(주)디에이치아이에스</div>
-        <div class="desc">AX 영업혁신 · 업무위탁 프로젝트</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- 3 자기소개 -->
-  <section class="slide" id="s3">
-    <div class="kicker rise">03 · About</div>
-    <h2 class="rise">현장을 아는 AX 엔지니어</h2>
-    <p class="lead rise">
-      지난 <b>10년간 빌딩 HMI 엔지니어</b>로서<br>
-      <b>코엑스</b> 등 대한민국을 대표하는 랜드마크 현장을 담당했습니다.<br><br>
-      2023년 LLM이라는 새로운 흐름을 마주하면서<br>
-      <b>(주)에스티엔비 재직 중 회사의 AX 전환에 기여</b>했고,<br><br>
-      2025년에는 바이브 코딩 흐름을 포착해 <b>AI 기반 개발에 뛰어들었습니다</b>.<br><br>
-      본격적인 AI 피벗을 위해 국비지원 AI 엔지니어 양성 과정을 <b>전 과제 1등</b>으로 수료했고,<br>
-      2026년 <b>(주)디에이치아이에스의 AX 프로젝트를 수탁</b>해<br>
-      변압기 영업 DB·견적 자동화·수출 업무 AI화를 <b>실제 기업 현장에 적용</b>했습니다.
-    </p>
-    <div class="sites-label rise">직접 담당한 랜드마크 현장</div>
-    <div class="sites rise">
-      <a class="site" href="https://www.coex.co.kr/" target="_blank" rel="noopener" aria-label="코엑스 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/coex.png" alt="코엑스 (COEX)" loading="lazy"></a>
-      <a class="site" href="https://seoulsquare.com/" target="_blank" rel="noopener" aria-label="서울스퀘어 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/seoulsquare.png" alt="서울스퀘어 (Seoul Square)" loading="lazy"></a>
-      <a class="site" href="https://www.centropolis.co.kr/" target="_blank" rel="noopener" aria-label="센트로폴리스 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/centropolis-dark.svg" alt="센트로폴리스 (Centropolis)" loading="lazy"></a>
-      <a class="site" href="https://www.centerfield.co.kr/" target="_blank" rel="noopener" aria-label="센터필드 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/centerfield-dark.svg" alt="센터필드 (Centerfield)" loading="lazy"></a>
-      <a class="site" href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener" aria-label="타워팰리스 소개(나무위키)를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/towerpalace.png" alt="타워팰리스 (The Tower Palace)" loading="lazy"></a>
-      <a class="site" href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener" aria-label="타임스퀘어 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/timessquare.png" alt="타임스퀘어 (Times Square)" loading="lazy"></a>
-    </div>
-  </section>
-
-  <!-- 부트캠프 프로젝트 (독립 슬라이드 · 스크린샷 카드) -->
-  <section class="slide" id="sbcp">
-    <div class="kicker rise">Bootcamp Projects · KDT HDC랩스</div>
-    <h2 class="rise">부트캠프 실증 프로젝트</h2>
-    <p class="lead rise" style="max-width:760px">AI 부트캠프 과정에서 직접 기획·개발·배포한 프로젝트입니다. 모두 <strong>라이브로 가동 중</strong>이며,<br>실시간 데이터·AI 모델·풀스택 구현 역량을 작동하는 결과물로 보여줍니다.</p>
-    <div class="bcp-grid rise">
-      <div class="bcp-card">
-        <div class="thumb"><img src="assets/shots/sdot.jpg" alt="S-DoT 서울 스마트시티 대시보드 화면" loading="lazy"></div>
-        <div class="body">
-          <div class="pt">S-DoT 서울 스마트시티 대시보드</div>
-          <div class="pd">서울시 IoT 센서 1,155건을 실시간 수집해 구별 대기·환경 이상을 감지하고 지도에 시각화하는 관제 대시보드.</div>
-          <div class="stk"><span>실시간 데이터</span><span>지도 시각화</span><span>관제</span></div>
-          <div class="lks">
-            <a href="https://seoul-smartcity-dashboard-production.up.railway.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
-            <a href="https://github.com/Technoetic/seoul-smartcity-dashboard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-          </div>
-        </div>
-      </div>
-      <div class="bcp-card">
-        <div class="thumb"><img src="assets/shots/skeleton.jpg" alt="슬라이딩 경기기록 분석 화면" loading="lazy"></div>
-        <div class="body">
-          <div class="pt">슬라이딩 경기기록 분석</div>
-          <div class="pd">스켈레톤·루지·봅슬레이 기록을 예측하는 AI 모델. 대관령 실시간 기상 데이터를 연동해 경기 환경을 반영합니다.</div>
-          <div class="stk"><span>AI 예측 모델</span><span>데이터 분석</span><span>실시간 기상</span></div>
-          <div class="lks">
-            <a href="https://skeleton-analysis-production-d1bb.up.railway.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
-            <a href="https://github.com/Technoetic/skeleton-analysis" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-          </div>
-        </div>
-      </div>
-      <div class="bcp-card">
-        <div class="thumb"><img src="assets/shots/wolha.jpg" alt="월하몽 풀스택 SaaS 화면" loading="lazy"></div>
-        <div class="body">
-          <div class="pt">월하몽 — 풀스택 SaaS</div>
-          <div class="pd">회원·인증·결제 흐름을 갖춘 풀스택 웹 서비스. 기획부터 디자인·개발·배포까지 단독으로 완성했습니다.</div>
-          <div class="stk"><span>풀스택</span><span>인증·결제</span><span>단독 배포</span></div>
-          <div class="lks">
-            <a href="https://saju-mbti-fusion.fly.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
-            <a href="https://github.com/Technoetic/saju-mbti-fusion" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 하네스 50 (split: 텍스트 + 훅 플로우) -->
-  <section class="slide" id="s4">
+  <section class="slide" id="s4" data-title="하네스 50">
     <div class="split">
       <div>
-        <div class="kicker rise">04 · Build</div>
+        <div class="kicker rise">Build</div>
         <div class="bignum-row rise">
           <div class="bignum">50</div>
           <span class="vbadge">v2.2.0<i>107 → 50 압축</i></span>
@@ -780,14 +108,39 @@
       </div>
       <div class="flow">
         <div class="arrow a1">단일 프롬프트<span class="sub">Claude Code · Codex CLI</span></div>
-        <div class="arrow a2" id="stepArrow" role="button" tabindex="0" aria-label="50단계 전체 목록 보기">50단계 자동 실행<span class="sub">Stop 훅이 완주까지 재개</span><span class="peek">클릭 ↗</span></div>
+        <div class="arrow a2" id="stepArrow" role="button" tabindex="0" aria-label="50단계 전체 목록 보기">50단계 작업 흐름<span class="sub">단계별 실행과 검증</span><span class="peek">클릭 ↗</span></div>
         <div class="arrow a3">인터랙티브 튜토리얼 1편<span class="sub">단일 HTML 산출물</span></div>
       </div>
     </div>
   </section>
 
-  <!-- 하네스50 산출 튜토리얼 (결과물 · 스크린샷 카드) -->
-  <section class="slide" id="stut">
+  <section class="slide" id="sav" data-title="에이전틱 볼트">
+    <div class="split">
+      <div>
+        <div class="kicker rise">Memory</div>
+        <div class="bignum-row rise">
+          <div class="bignum">2</div>
+          <span class="vbadge">지원 환경</span>
+        </div>
+        <div class="project-heading rise">
+          <h2>에이전틱 볼트</h2>
+          <span class="vbadge">Claude Code · Codex</span>
+        </div>
+        <p class="lead rise">직접 설계한 <b>Claude Code와 Codex를 지원하는 메모리 플러그인</b>입니다.<br>하나의 Markdown 볼트로 <span class="accent">기억과 세션 인계를 공유</span>합니다.<br>세션은 끝나도, 기억은 파일로 남습니다.</p>
+        <a class="linkbtn rise" href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener" aria-label="agentic-vault 레포지토리를 새 탭에서 보기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
+          GitHub에서 보기<span class="url">github.com/Technoetic/agentic-vault</span>
+        </a>
+      </div>
+      <div class="flow">
+        <div class="arrow a1">세션 시작<span class="sub">직전 기억 자동 주입</span></div>
+        <div class="arrow a2">볼트에 기록<span class="sub">원자 노트 + 위키링크</span></div>
+        <div class="arrow a3">세션 종료<span class="sub">다음 세션에 인계</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="stut" data-title="튜토리얼 결과물">
     <div class="kicker rise">Built with Harness</div>
     <h2 class="rise" style="margin-bottom:var(--s2)">하네스로 만든 인터랙티브 튜토리얼</h2>
     <p class="lead rise" style="max-width:820px">하네스가 자동 생성한 학습용 웹 튜토리얼입니다.<br>모두 <b>라이브로 동작</b>하며, 어려운 알고리즘을 직접 조작하며 익히도록 설계했습니다.</p>
@@ -815,38 +168,157 @@
     </div>
   </section>
 
-  <!-- 5 에이전틱 볼트 (split: 텍스트 + 세션 기억 사이클 플로우) -->
-  <section class="slide" id="sav">
-    <div class="split">
-      <div>
-        <div class="kicker rise">05 · Memory</div>
-        <div class="bignum-row rise">
-          <div class="bignum">2</div>
-          <span class="vbadge">지원 환경</span>
+  <section class="slide" id="sbcp" data-title="공개 데모">
+    <div class="kicker rise">Bootcamp Projects · KDT HDC랩스</div>
+    <h2 class="rise">부트캠프 실증 프로젝트</h2>
+    <p class="lead rise" style="max-width:760px">AI 부트캠프 과정에서 직접 기획·개발·배포한 프로젝트입니다. 각 프로젝트의 <strong>데모와 소스 코드</strong>를 함께 공개합니다.<br>데이터 관제·예측 모델·인증과 결제 흐름을 직접 확인할 수 있습니다.</p>
+    <div class="bcp-grid rise">
+      <div class="bcp-card">
+        <div class="thumb"><img src="assets/shots/sdot.jpg" alt="S-DoT 서울 스마트시티 대시보드 화면" loading="lazy"></div>
+        <div class="body">
+          <div class="pt">S-DoT 서울 스마트시티 대시보드</div>
+          <div class="pd">서울시 IoT 센서 1,155건을 실시간 수집해 구별 대기·환경 이상을 감지하고 지도에 시각화하는 관제 대시보드.</div>
+          <div class="stk"><span>실시간 데이터</span><span>지도 시각화</span><span>관제</span></div>
+          <div class="lks">
+            <a href="https://seoul-smartcity-dashboard-production.up.railway.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
+            <a href="https://github.com/Technoetic/seoul-smartcity-dashboard" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
+          </div>
         </div>
-        <div class="project-heading rise">
-          <h2>에이전틱 볼트</h2>
-          <span class="vbadge">Claude Code · Codex</span>
-        </div>
-        <p class="lead rise">직접 설계한 <b>Claude Code와 Codex를 지원하는 메모리 플러그인</b>입니다.<br>하나의 Markdown 볼트로 <span class="accent">기억과 세션 인계를 공유</span>합니다.<br>세션은 끝나도, 기억은 파일로 남습니다.</p>
-        <a class="linkbtn rise" href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener" aria-label="agentic-vault 레포지토리를 새 탭에서 보기">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
-          GitHub에서 보기<span class="url">github.com/Technoetic/agentic-vault</span>
-        </a>
       </div>
-      <div class="flow">
-        <div class="arrow a1">세션 시작<span class="sub">직전 기억 자동 주입</span></div>
-        <div class="arrow a2">볼트에 기록<span class="sub">원자 노트 + 위키링크</span></div>
-        <div class="arrow a3">세션 종료<span class="sub">다음 세션에 인계</span></div>
+      <div class="bcp-card">
+        <div class="thumb"><img src="assets/shots/skeleton.jpg" alt="슬라이딩 경기기록 분석 화면" loading="lazy"></div>
+        <div class="body">
+          <div class="pt">슬라이딩 경기기록 분석</div>
+          <div class="pd">스켈레톤·루지·봅슬레이 기록을 예측하는 AI 모델. 대관령 실시간 기상 데이터를 연동해 경기 환경을 반영합니다.</div>
+          <div class="stk"><span>AI 예측 모델</span><span>데이터 분석</span><span>실시간 기상</span></div>
+          <div class="lks">
+            <a href="https://skeleton-analysis-production-d1bb.up.railway.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
+            <a href="https://github.com/Technoetic/skeleton-analysis" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="bcp-card">
+        <div class="thumb"><img src="assets/shots/sajukyung.jpg" alt="사주경 풀스택 SaaS 화면" loading="lazy"></div>
+        <div class="body">
+          <div class="pt">사주경 — 풀스택 SaaS</div>
+          <div class="pd">회원·인증·결제 흐름을 갖춘 풀스택 웹 서비스. 기획부터 디자인·개발·배포까지 단독으로 완성했습니다.</div>
+          <div class="stk"><span>풀스택</span><span>인증·결제</span><span>단독 배포</span></div>
+          <div class="lks">
+            <a href="https://saju-mbti-fusion.fly.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
+            <a href="https://github.com/Technoetic/saju-mbti-fusion" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 6 슬래시 커맨드 (split: 텍스트 + 코드패널) -->
-  <section class="slide" id="s5">
+  <section class="slide" id="s3" data-title="현장 경험">
+    <div class="kicker rise">About</div>
+    <h2 class="rise">현장을 아는 AX 엔지니어</h2>
+    <p class="lead rise">
+      지난 <b>10년간 빌딩 HMI 엔지니어</b>로서<br>
+      <b>코엑스</b> 등 대한민국을 대표하는 랜드마크 현장을 담당했습니다.<br><br>
+      2023년 LLM이라는 새로운 흐름을 마주하면서<br>
+      <b>(주)에스티엔비 재직 중 회사의 AX 전환에 기여</b>했고,<br><br>
+      2025년에는 바이브 코딩 흐름을 포착해 <b>AI 기반 개발에 뛰어들었습니다</b>.<br><br>
+      본격적인 AI 피벗을 위해 국비지원 AI 엔지니어 양성 과정을 <b>전 과제 1등</b>으로 수료했고,<br>
+      2026년 <b>(주)디에이치아이에스의 AX 프로젝트를 수탁</b>해<br>
+      변압기 영업 DB·견적 자동화·수출 업무 AI화를 <b>실제 기업 현장에 적용</b>했습니다.
+    </p>
+    <div class="sites-label rise">직접 담당한 랜드마크 현장</div>
+    <div class="sites rise">
+      <a class="site" href="https://www.coex.co.kr/" target="_blank" rel="noopener" aria-label="코엑스 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/coex.png" alt="코엑스 (COEX)" loading="lazy"></a>
+      <a class="site" href="https://seoulsquare.com/" target="_blank" rel="noopener" aria-label="서울스퀘어 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/seoulsquare.png" alt="서울스퀘어 (Seoul Square)" loading="lazy"></a>
+      <a class="site" href="https://www.centropolis.co.kr/" target="_blank" rel="noopener" aria-label="센트로폴리스 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/centropolis-dark.svg" alt="센트로폴리스 (Centropolis)" loading="lazy"></a>
+      <a class="site" href="https://www.centerfield.co.kr/" target="_blank" rel="noopener" aria-label="센터필드 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/centerfield-dark.svg" alt="센터필드 (Centerfield)" loading="lazy"></a>
+      <a class="site" href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener" aria-label="타워팰리스 소개(나무위키)를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/towerpalace.png" alt="타워팰리스 (The Tower Palace)" loading="lazy"></a>
+      <a class="site" href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener" aria-label="타임스퀘어 공식 사이트를 새 탭에서 보기"><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><img src="assets/logos/timessquare.png" alt="타임스퀘어 (Times Square)" loading="lazy"></a>
+    </div>
+  </section>
+
+  <section class="slide" id="scv" data-title="이력 요약">
+    <div class="cv rise">
+      <div class="cv-head">
+        <h2>전문준</h2>
+        <span class="role">AX 엔지니어 · 빌딩 HMI 10년 → AI 전환</span>
+      </div>
+      <div class="cv-info">
+        <div class="it"><div class="k">생년월일</div><div class="v">1988. 12. 20.</div><div class="s">만 37세</div></div>
+        <div class="it"><div class="k">연락처</div><div class="v">010-7633-5021</div><div class="s">technoetic@hotmail.com</div></div>
+        <div class="it"><div class="k">주소</div><div class="v">인천광역시 서구</div><div class="s">신석로 71</div></div>
+        <div class="it"><div class="k">학력</div><div class="v">인천대인고등학교</div><div class="s">인문계열 · 2004.03 ~ 2007.02</div></div>
+        <div class="it"><div class="k">자격증</div><div class="v">정보처리기능사</div><div class="s">2024.12 취득</div></div>
+      </div>
+      <div class="cv-stats">
+        <div class="cv-stat"><div class="n">10<span class="u">년</span></div><div class="l">빌딩 HMI 경력</div></div>
+        <div class="cv-stat"><div class="n">136</div><div class="l">GitHub 공개 레포</div></div>
+        <div class="cv-stat"><div class="n">2</div><div class="l">Claude Code · Codex 플러그인</div></div>
+        <div class="cv-stat"><div class="n">255</div><div class="l">블로그 글</div></div>
+      </div>
+      <p class="snapshot-note">GitHub 2026.09.06 · 블로그 2026.08.07 기준 · <a href="cv.html">전체 이력서 보기</a></p>
+      <div class="cv-lower">
+        <div class="cv-col-left">
+        <div class="cv-block">
+          <div class="bt">Career</div>
+          <div class="cv-line"><span class="w">2026.07 ~ 2026.08</span><a class="lg" href="https://dh-elec.co.kr/" target="_blank" rel="noopener" aria-label="(주)디에이치아이에스"><img src="assets/logos/dhis.png" alt="디에이치아이에스" loading="lazy"></a><span class="org">(주)디에이치아이에스</span><span class="d">AX 영업혁신 · 4주 업무위탁</span></div>
+          <div class="cv-line"><span class="w">2025.12 ~ 2026.06</span><a class="lg" href="https://nova.igrowth.kr/" target="_blank" rel="noopener" aria-label="KDT HDC랩스 NOVA"><img src="assets/logos/hdclabs-t.png" alt="HDC랩스" loading="lazy"></a><span class="org">KDT HDC랩스</span><span class="d">AI 부트캠프 · 전 과제 1등 수료</span></div>
+          <div class="cv-line"><span class="w">2018.07 ~ 2025.10</span><a class="lg" href="http://stnv.co.kr/" target="_blank" rel="noopener" aria-label="(주)에스티엔비"><img src="assets/logos/stnb.png" alt="에스티엔비" loading="lazy"></a><span class="org">(주)에스티엔비</span><span class="d">빌딩 HMI 엔지니어</span></div>
+          <div class="cv-line"><span class="w">2014.10 ~ 2018.07</span><a class="lg" href="https://webcon.co.kr/" target="_blank" rel="noopener" aria-label="(주)웹콘"><img src="assets/logos/webcon.png" alt="웹콘" loading="lazy"></a><span class="org">(주)웹콘</span><span class="d">빌딩 HMI 엔지니어</span></div>
+          <div class="cv-logos">
+            <a href="https://www.coex.co.kr/" target="_blank" rel="noopener" aria-label="코엑스"><img src="assets/logos/coex.png" alt="코엑스" loading="lazy"></a>
+            <a href="https://seoulsquare.com/" target="_blank" rel="noopener" aria-label="서울스퀘어"><img src="assets/logos/seoulsquare.png" alt="서울스퀘어" loading="lazy"></a>
+            <a href="https://www.centropolis.co.kr/" target="_blank" rel="noopener" aria-label="센트로폴리스"><img src="assets/logos/centropolis-dark.svg" alt="센트로폴리스" loading="lazy"></a>
+            <a href="https://www.centerfield.co.kr/" target="_blank" rel="noopener" aria-label="센터필드"><img src="assets/logos/centerfield-dark.svg" alt="센터필드" loading="lazy"></a>
+            <a href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener" aria-label="타워팰리스"><img src="assets/logos/towerpalace.png" alt="타워팰리스" loading="lazy"></a>
+            <a href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener" aria-label="타임스퀘어"><img src="assets/logos/timessquare.png" alt="타임스퀘어" loading="lazy"></a>
+          </div>
+        </div>
+        <div class="cv-block cv-proj">
+          <div class="bt">Projects &amp; Activity</div>
+          <a href="https://github.com/Technoetic/harness50" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">하네스 50</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">커스텀 슬래시 커맨드 20</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">GitHub 136 repos</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg><span class="pn">기술 블로그 255편</span><span class="pr"><span class="pm">블로그에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+        </div>
+        </div>
+        <div class="cv-col-right">
+        <!-- 부트캠프 실증 프로젝트 (우측 컬럼 · 세로 3카드) -->
+        <div class="cv-bcp-head"><div class="bt">부트캠프 실증 프로젝트</div><span class="tag">KDT HDC랩스</span></div>
+        <div class="cv-bcp">
+        <div class="row">
+          <span class="pn">S-DoT 서울 스마트시티 대시보드</span>
+          <span class="pd">서울시 IoT 센서 1,155건 실시간 수집 · 구별 대기·환경 이상 감지 · 지도 관제</span>
+          <span class="lk">
+            <a href="https://seoul-smartcity-dashboard-production.up.railway.app/" target="_blank" rel="noopener" aria-label="S-DoT 대시보드 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
+            <a href="https://github.com/Technoetic/seoul-smartcity-dashboard" target="_blank" rel="noopener" aria-label="S-DoT 대시보드 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
+          </span>
+        </div>
+        <div class="row">
+          <span class="pn">슬라이딩 경기기록 분석</span>
+          <span class="pd">스켈레톤·루지·봅슬레이 기록 예측 모델 · 대관령 실시간 기상 데이터 연동</span>
+          <span class="lk">
+            <a href="https://skeleton-analysis-production-d1bb.up.railway.app/" target="_blank" rel="noopener" aria-label="슬라이딩 분석 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
+            <a href="https://github.com/Technoetic/skeleton-analysis" target="_blank" rel="noopener" aria-label="슬라이딩 분석 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
+          </span>
+        </div>
+        <div class="row">
+          <span class="pn">사주경 — 풀스택 SaaS</span>
+          <span class="pd">회원·인증·결제 흐름을 갖춘 풀스택 웹 서비스 · 기획부터 배포까지 단독 구현</span>
+          <span class="lk">
+            <a href="https://saju-mbti-fusion.fly.dev/" target="_blank" rel="noopener" aria-label="사주경 라이브 데모"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>라이브 데모</a>
+            <a href="https://github.com/Technoetic/saju-mbti-fusion" target="_blank" rel="noopener" aria-label="사주경 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
+          </span>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s5" data-title="개발 도구">
     <div class="split">
       <div>
-        <div class="kicker rise">06 · Tooling</div>
+        <div class="kicker rise">Tooling</div>
         <div class="bignum rise">20</div>
         <h2 class="rise" style="margin-bottom:var(--s2)">커스텀 슬래시 커맨드</h2>
         <p class="lead rise">반복 패턴을 캡슐화해 <b>Claude Code를 효율적으로</b> 운용합니다.<br>작업 속도와 일관성을 동시에.</p>
@@ -887,18 +359,18 @@
     </div>
   </section>
 
-  <!-- 7 GitHub 메트릭 + 잔디 + 언어 -->
-  <section class="slide" id="s6">
-    <div class="kicker rise">07 · Proof on GitHub</div>
-    <h2 class="rise" style="margin-bottom:var(--s2)">숫자로 증명하는 실행력</h2>
+  <section class="slide" id="s6" data-title="공개 활동">
+    <div class="kicker rise">Proof on GitHub</div>
+    <h2 class="rise" style="margin-bottom:var(--s2)">공개된 코드와 결과물</h2>
+    <p class="snapshot-note rise">저장소 수: GitHub 공개 API · 2026.09.06 기준. 아래 활동·언어 분포는 2026.08.07 기록입니다.</p>
     <div class="metrics rise">
-      <div class="metric"><div class="num" data-target="128">0</div><div class="cap">공개 레포지토리</div></div>
-      <div class="metric"><div class="num" data-target="2033">0</div><div class="cap">누적 커밋</div></div>
-      <div class="metric"><div class="num" data-target="458">0</div><div class="cap">연간 기여 (잔디)</div></div>
+      <div class="metric"><div class="num" data-target="136">136</div><div class="cap">공개 레포지토리</div></div>
+      <div class="metric"><div class="num" data-target="2">2</div><div class="cap">Claude Code · Codex 플러그인</div></div>
+      <div class="metric"><div class="num" data-target="5">5</div><div class="cap">공개 웹 튜토리얼</div></div>
     </div>
     <div class="split rise" style="grid-template-columns:1.4fr 1fr;gap:var(--s6)">
-      <div class="grass-wrap">
-        <div class="grass-head"><span>최근 7개월 커밋 추이</span><span>2026.02 ~ 2026.08</span></div>
+      <div class="grass-wrap" tabindex="0" role="region" aria-label="GitHub 활동 차트 · 가로 스크롤">
+        <div class="grass-head"><span>GitHub 활동 기록</span><span>2026.02.01–08.07</span></div>
         <div class="grass" id="grass"></div>
         <div class="legend">적음 <i style="background:var(--grass-0)"></i><i style="background:var(--grass-1)"></i><i style="background:var(--grass-2)"></i><i style="background:var(--grass-3)"></i><i style="background:var(--grass-4)"></i> 많음</div>
       </div>
@@ -910,13 +382,13 @@
     </a>
   </section>
 
-  <!-- 8 블로그 (split) -->
-  <section class="slide" id="s7">
+  <section class="slide" id="s7" data-title="기술 글">
     <div class="split">
       <div>
-        <div class="kicker rise">08 · Writing</div>
+        <div class="kicker rise">Writing</div>
         <div class="bignum rise">255</div>
-        <h2 class="rise" style="margin-bottom:var(--s2)">블로그 글 255편</h2>
+        <h2 class="rise" style="margin-bottom:var(--s2)">기술을 글로 설명합니다</h2>
+        <p class="snapshot-note rise">255편 · 2026.08.07 기준</p>
         <p class="lead rise">매일 학습한 내용을 <b>네이버 블로그</b>에 정리합니다.<br>글로 다시 풀어내며 지식을 제 것으로 만듭니다.</p>
         <a class="linkbtn rise" href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener" aria-label="네이버 블로그를 새 탭에서 보기">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
@@ -968,20 +440,20 @@
     </div>
   </section>
 
-  <!-- 9 마무리 (center) -->
-  <section class="slide center" id="s8">
-    <div class="kicker rise" style="justify-content:center">09 · Closing</div>
-    <h2 class="rise" style="max-width:20ch">학습을 즉시 <span class="accent">코드와 글</span>로 옮깁니다</h2>
+  <section class="slide center" id="s8" data-title="연락">
+    <div class="kicker rise" style="justify-content:center">Closing</div>
+    <h2 class="rise" style="max-width:20ch">현장의 다음 업무를<br><span class="accent">함께 자동화합니다</span></h2>
     <p class="lead rise" style="text-align:center;margin:0 auto">
-      <b>빌딩 HMI 10년 경험</b>과 <b>AX 엔지니어링</b>을 결합해,<br>배운 것을 곧바로 <span class="accent">결과물로 만드는 실행 중심 엔지니어</span>입니다.
+      <b>영업·견적 업무 자동화, 현장 데이터 관제,<br>Claude Code·Codex 개발 흐름</b>을 다룹니다.<br>채용과 프로젝트 협업은 아래 연락처로 문의해 주세요.
     </p>
+    <div class="hero-actions rise"><a class="action-link primary" href="mailto:technoetic@hotmail.com">이메일로 연락하기</a><a class="action-link" href="cv.html">이력서 보기</a><a class="action-link" href="jeon-munjun-portfolio.pdf" download>PDF 다운로드</a></div>
     <div class="contacts rise" style="margin-top:var(--s6);justify-content:center">
       <a href="mailto:technoetic@hotmail.com"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
       <a href="tel:01076335021"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>010-7633-5021</a>
     </div>
   </section>
 
-</div>
+</main>
 
 <div class="modal" id="stepModal" role="dialog" aria-modal="true" aria-labelledby="stepModalTitle">
   <div class="modal-bg" data-close></div>
@@ -1007,432 +479,17 @@
       </div>
     </div>
     <div class="d-hint">← → 로 단계 이동 · Esc 닫기</div>
-    <div class="d-body" id="dBody"></div>
+    <div class="d-body" id="dBody" tabindex="0" role="region" aria-label="상세 본문"></div>
   </div>
 </div>
 
 <div class="hint"><span class="desktop-only">← →, Space로 이동</span><span class="mobile-only">스와이프 또는 ‹ ›로 이동</span></div>
 <div class="nav">
-  <span class="counter" id="counter">01 / 09</span>
+  <span class="counter" id="counter">01 / 12</span>
   <button id="prev" aria-label="이전 슬라이드">‹</button>
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script>
-// defer CDN(three/gsap) 로드 완료 후 실행 — THREE/gsap 참조 안전 보장
-window.addEventListener('load',function(){
-  const REDUCED=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches);
-  /* ===== 데이터 (실측, 2026-08-07) ===== */
-  const GRASS = [["2026-02-01",0],["2026-02-02",0],["2026-02-03",0],["2026-02-04",0],["2026-02-05",0],["2026-02-06",0],["2026-02-07",0],["2026-02-08",0],["2026-02-09",0],["2026-02-10",0],["2026-02-11",0],["2026-02-12",0],["2026-02-13",0],["2026-02-14",0],["2026-02-15",0],["2026-02-16",0],["2026-02-17",0],["2026-02-18",0],["2026-02-19",0],["2026-02-20",0],["2026-02-21",0],["2026-02-22",0],["2026-02-23",1],["2026-02-24",1],["2026-02-25",0],["2026-02-26",0],["2026-02-27",0],["2026-02-28",0],["2026-03-01",0],["2026-03-02",0],["2026-03-03",1],["2026-03-04",0],["2026-03-05",1],["2026-03-06",0],["2026-03-07",0],["2026-03-08",1],["2026-03-09",1],["2026-03-10",1],["2026-03-11",1],["2026-03-12",1],["2026-03-13",0],["2026-03-14",1],["2026-03-15",0],["2026-03-16",1],["2026-03-17",1],["2026-03-18",1],["2026-03-19",1],["2026-03-20",0],["2026-03-21",1],["2026-03-22",1],["2026-03-23",1],["2026-03-24",0],["2026-03-25",1],["2026-03-26",1],["2026-03-27",1],["2026-03-28",1],["2026-03-29",1],["2026-03-30",1],["2026-03-31",1],["2026-04-01",1],["2026-04-02",0],["2026-04-03",0],["2026-04-04",0],["2026-04-05",0],["2026-04-06",1],["2026-04-07",0],["2026-04-08",0],["2026-04-09",4],["2026-04-10",0],["2026-04-11",0],["2026-04-12",1],["2026-04-13",1],["2026-04-14",1],["2026-04-15",0],["2026-04-16",0],["2026-04-17",1],["2026-04-18",0],["2026-04-19",1],["2026-04-20",0],["2026-04-21",1],["2026-04-22",0],["2026-04-23",1],["2026-04-24",0],["2026-04-25",0],["2026-04-26",1],["2026-04-27",0],["2026-04-28",0],["2026-04-29",0],["2026-04-30",1],["2026-05-01",0],["2026-05-02",0],["2026-05-03",0],["2026-05-04",0],["2026-05-05",0],["2026-05-06",0],["2026-05-07",0],["2026-05-08",1],["2026-05-09",0],["2026-05-10",0],["2026-05-11",1],["2026-05-12",0],["2026-05-13",2],["2026-05-14",1],["2026-05-15",4],["2026-05-16",3],["2026-05-17",0],["2026-05-18",1],["2026-05-19",1],["2026-05-20",1],["2026-05-21",0],["2026-05-22",0],["2026-05-23",1],["2026-05-24",0],["2026-05-25",0],["2026-05-26",2],["2026-05-27",1],["2026-05-28",1],["2026-05-29",1],["2026-05-30",1],["2026-05-31",1],["2026-06-01",1],["2026-06-02",2],["2026-06-03",2],["2026-06-04",4],["2026-06-05",0],["2026-06-06",0],["2026-06-07",1],["2026-06-08",1],["2026-06-09",1],["2026-06-10",1],["2026-06-11",1],["2026-06-12",0],["2026-06-13",0],["2026-06-14",1],["2026-06-15",1],["2026-06-16",1],["2026-06-17",0],["2026-06-18",1],["2026-06-19",1],["2026-06-20",1],["2026-06-21",0],["2026-06-22",0],["2026-06-23",1],["2026-06-24",0],["2026-06-25",1],["2026-06-26",0],["2026-06-27",0],["2026-06-28",1],["2026-06-29",0],["2026-06-30",1],["2026-07-01",1],["2026-07-02",1],["2026-07-03",1],["2026-07-04",2],["2026-07-05",0],["2026-07-06",0],["2026-07-07",1],["2026-07-08",0],["2026-07-09",0],["2026-07-10",0],["2026-07-11",0],["2026-07-12",0],["2026-07-13",0],["2026-07-14",1],["2026-07-15",0],["2026-07-16",0],["2026-07-17",4],["2026-07-18",0],["2026-07-19",0],["2026-07-20",0],["2026-07-21",0],["2026-07-22",0],["2026-07-23",1],["2026-07-24",0],["2026-07-25",0],["2026-07-26",1],["2026-07-27",2],["2026-07-28",0],["2026-07-29",0],["2026-07-30",1],["2026-07-31",0],["2026-08-01",0],["2026-08-02",2],["2026-08-03",0],["2026-08-04",0],["2026-08-05",1],["2026-08-06",3],["2026-08-07",1]];
-  const LANGS = [["JavaScript",55],["HTML",53],["Python",5],["PowerShell",5],["TypeScript",3],["CSS",3]];
-  const STEPS = [[1,"하네스 프리플라이트 체크"],[2,"프로젝트 분석 및 Context 전략 수립"],[3,"Playwright 환경 테스트"],[4,"@axe-core/playwright 환경 설치"],[5,"c8 코드 커버리지 환경 설치"],[6,"Vitest/Jest 유닛 테스트 러너 환경 설치"],[7,"번들 분석 도구 환경 설치"],[8,"jscpd 코드 중복 탐지 환경 설치"],[9,"Semgrep 정적 분석 환경 설치"],[10,"knip 미사용 코드 탐지 환경 설치"],[11,"tokei 코드 통계 환경 설치"],[12,"Lighthouse CI 웹 성능 감사 환경 설치"],[13,"stylelint CSS 린팅 환경 설치"],[14,"Biome 포매팅/린팅 환경 설치"],[15,"madge 순환 의존성 탐지 환경 설치"],[16,"전체 조사"],[17,"GitHub 조사"],[18,"API 계약 문서 조사"],[19,"참고 레포지토리 클론 및 코드 분석"],[20,"Awwwards 사이트 선정"],[21,"의존성 게이트 검증"],[22,"Awwwards 데이터 수집"],[23,"Awwwards 디자인 패턴 분석"],[24,"Awwwards 조사 충분성 검증"],[25,"기획: 전체 조사결과 기반 (독립 검증 루프)"],[26,"기획 보강: GitHub 조사결과"],[27,"기획 보강: API 계약 문서 조사결과"],[28,"기획 보강: 참고 레포 코드 분석"],[29,"기획 보강: Awwwards UX/UI·레이아웃 조사결과"],[30,"통합 설계 (레이아웃 + 전체)"],[31,"환경 준비"],[32,"구현 파일 인덱싱 (tokei)"],[33,"jscpd 코드 중복 베이스라인 수집"],[34,"knip 미사용 코드 베이스라인 수집"],[35,"컨텍스트 윈도우 제한 방지"],[36,"인코딩 규칙 (모지바케 방지)"],[37,"구현"],[38,"빌드 스모크 테스트 (구현 완료 게이트)"],[39,"레이아웃 스크린샷 검증 (독립 검증 루프)"],[40,"조사 스크린샷 vs 구현 스크린샷 비교 검증 (독립 검증 루프)"],[41,"JavaScript 모듈화"],[42,"CSS 파일 분리 (컨텍스트 최적화)"],[43,"Awwwards 디자인 검증 및 CSS 보강 (독립 검증 루프)"],[44,"HTML 컴포넌트화"],[45,"E2E 테스트"],[46,"Playwright 스크린샷 기반 상세 E2E 테스트"],[47,"키보드 인터랙션 시각 검증"],[48,"마우스 인터랙션 시각 검증"],[49,"Playwright 디자인 시각 검증 (독립 검증 루프)"],[50,"콘솔 에러 수집 및 해결"]];
-
-  /* 잔디 렌더 */
-  (function(){
-    const wrap=document.getElementById('grass');
-    const colors=['var(--grass-0)','var(--grass-1)','var(--grass-2)','var(--grass-3)','var(--grass-4)'];
-    const activeDays=GRASS.filter(([,lv])=>lv>0).length;
-    wrap.setAttribute('role','img');
-    wrap.setAttribute('aria-label','2026년 2월부터 2026년 8월까지 GitHub 커밋 활동 히트맵, 총 '+activeDays+'일 활동');
-    // 잔디 stagger를 마지막 셀 기준 ~600ms 이내로 압축 (212셀 × 4ms=848ms → 너무 길지 않게)
-    const N=GRASS.length, span=600;
-    GRASS.forEach(([date,lv],i)=>{
-      const c=document.createElement('div');
-      c.className='cell';c.setAttribute('aria-hidden','true');
-      c.style.background=colors[lv]||colors[0];
-      c.style.transitionDelay=Math.round(i/N*span)+'ms';
-      c.title=date+' · level '+lv;
-      wrap.appendChild(c);
-    });
-  })();
-
-  /* 언어 막대 */
-  (function(){
-    const wrap=document.getElementById('langs');
-    wrap.setAttribute('role','list');
-    wrap.setAttribute('aria-label','GitHub 레포지토리 언어 분포');
-    const max=Math.max(...LANGS.map(l=>l[1]));
-    LANGS.forEach(([nm,ct])=>{
-      const row=document.createElement('div');row.className='lang-row';
-      row.setAttribute('role','listitem');
-      row.setAttribute('aria-label',nm+' '+ct+'개 레포');
-      row.innerHTML='<span class="nm">'+nm+'</span><span class="bar" role="progressbar" aria-valuenow="'+ct+'" aria-valuemin="0" aria-valuemax="'+max+'"><i data-w="'+(ct/max*100)+'"></i></span><span class="ct">'+ct+'</span>';
-      wrap.appendChild(row);
-    });
-  })();
-
-  const slides=[...document.querySelectorAll('.slide')];
-  const total=slides.length;
-  let cur=0, done=new Set();
-  const counter=document.getElementById('counter');
-  const progress=document.getElementById('progress');
-  const dotsWrap=document.getElementById('dots');
-
-  slides.forEach((_,i)=>{
-    const b=document.createElement('button');
-    b.setAttribute('aria-label',(i+1)+'번 슬라이드로');
-    b.addEventListener('click',()=>go(i));
-    dotsWrap.appendChild(b);
-  });
-  const dots=[...dotsWrap.children];
-
-  function countUp(el){
-    const t=+el.dataset.target;
-    if(REDUCED){el.textContent=t.toLocaleString('en-US');return;}
-    const dur=1100,start=performance.now();
-    (function tick(now){
-      const p=Math.min((now-start)/dur,1),e=1-Math.pow(1-p,3);
-      el.textContent=Math.round(t*e).toLocaleString('en-US');
-      if(p<1)requestAnimationFrame(tick);
-    })(start);
-  }
-
-  function go(i){
-    cur=Math.max(0,Math.min(total-1,i));
-    slides.forEach((s,idx)=>s.classList.toggle('active',idx===cur));
-    dots.forEach((d,idx)=>d.classList.toggle('on',idx===cur));
-    counter.textContent=String(cur+1).padStart(2,'0')+' / '+String(total).padStart(2,'0');
-    progress.style.width=(cur/(total-1)*100)+'%';
-    if(window.__setBgIntensity) window.__setBgIntensity(cur===0);
-    if(slides[cur].id==='s6' && !done.has('s6')){
-      done.add('s6');
-      slides[cur].querySelectorAll('.num[data-target]').forEach(countUp);
-      setTimeout(()=>document.querySelectorAll('#langs .bar i').forEach(b=>b.style.width=b.dataset.w+'%'),300);
-    }
-  }
-
-  document.getElementById('next').addEventListener('click',()=>go(cur+1));
-  document.getElementById('prev').addEventListener('click',()=>go(cur-1));
-  window.addEventListener('keydown',e=>{
-    const m=document.getElementById('stepModal');
-    const dm=document.getElementById('stepDetail');
-    if((m&&m.classList.contains('open'))||(dm&&dm.classList.contains('open')))return; // 모달 열림 시 슬라이드 이동 차단
-    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
-    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
-    else if(e.key==='Home')go(0); else if(e.key==='End')go(total-1);
-  });
-  let tx=0;
-  window.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
-  window.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));},{passive:true});
-
-  /* 마우스 휠 스크롤로 슬라이드 이동 (스로틀 + 모달/내부스크롤 보호) */
-  let wheelLock=false;
-  window.addEventListener('wheel',e=>{
-    const m=document.getElementById('stepModal');
-    const dm=document.getElementById('stepDetail');
-    if((m&&m.classList.contains('open'))||(dm&&dm.classList.contains('open')))return; // 모달 열림 시 차단(모달 내부 스크롤 보호)
-    // 스크롤 가능한 내부 요소(코드패널 등) 위에서는 그 요소가 끝까지 스크롤되기 전까지 슬라이드 이동 보류
-    for(let el=e.target;el&&el!==document.body;el=el.parentElement){
-      if(el.scrollHeight>el.clientHeight+2){
-        const cs=getComputedStyle(el);
-        if(/(auto|scroll)/.test(cs.overflowY)){
-          const atTop=el.scrollTop<=0, atBottom=el.scrollTop+el.clientHeight>=el.scrollHeight-2;
-          if((e.deltaY>0&&!atBottom)||(e.deltaY<0&&!atTop))return; // 내부 스크롤 우선
-        }
-      }
-    }
-    if(Math.abs(e.deltaY)<8)return; // 미세 스크롤 무시
-    if(wheelLock)return;
-    wheelLock=true;
-    go(cur+(e.deltaY>0?1:-1));
-    setTimeout(()=>{wheelLock=false;},700); // 전환 애니메이션(.6s)보다 약간 길게
-  },{passive:true});
-
-  /* 마우스 패럴랙스 (글로우) */
-  const g1=document.getElementById('glow1'),g2=document.getElementById('glow2');
-  const mouse={x:-9999,y:-9999};
-  if(!REDUCED){
-    window.addEventListener('mousemove',e=>{
-      mouse.x=e.clientX;mouse.y=e.clientY;
-      const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
-      g1.style.transform='translate('+(x*40)+'px,'+(y*40)+'px)';
-      g2.style.transform='translate('+(x*-30)+'px,'+(y*-30)+'px)';
-    });
-    window.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
-  }
-
-  /* ===== 3D 뉴럴 구체 (Three.js). 성공 시 2D 폴백 대신 사용 ===== */
-  function initThree(){
-    if(typeof THREE==='undefined'||REDUCED) return false;
-    const canvas=document.getElementById('three');
-    let renderer;
-    try{ renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true}); }
-    catch(e){ return false; }
-    canvas.style.display='block';
-    renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
-    const scene=new THREE.Scene();
-    const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
-    cam.position.z=14;
-
-    // 구 표면에 점 분포 (피보나치 구)
-    const N=2600, R=7, pos=new Float32Array(N*3);
-    for(let i=0;i<N;i++){
-      const y=1-(i/(N-1))*2, r=Math.sqrt(1-y*y);
-      const phi=i*Math.PI*(3-Math.sqrt(5));
-      pos[i*3]=Math.cos(phi)*r*R; pos[i*3+1]=y*R; pos[i*3+2]=Math.sin(phi)*r*R;
-    }
-    const geo=new THREE.BufferGeometry();
-    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-    const mat=new THREE.PointsMaterial({color:0x60a5fa,size:0.06,transparent:true,opacity:0.85,sizeAttenuation:true});
-    const sphere=new THREE.Points(geo,mat);
-    scene.add(sphere);
-
-    // 안쪽 와이어 코어
-    const core=new THREE.Mesh(new THREE.IcosahedronGeometry(4.2,1),
-      new THREE.MeshBasicMaterial({color:0x3b82f6,wireframe:true,transparent:true,opacity:0.12}));
-    scene.add(core);
-
-    // 떠다니는 미세 입자
-    const M=400, p2=new Float32Array(M*3);
-    for(let i=0;i<M*3;i++){const r=Math.sin(i*12.9898)*43758.5453;p2[i]=(r-Math.floor(r))*24-12;}
-    const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.BufferAttribute(p2,3));
-    const dust=new THREE.Points(g2,new THREE.PointsMaterial({color:0x7d8896,size:0.04,transparent:true,opacity:0.5}));
-    scene.add(dust);
-
-    let tx=0,ty=0;
-    function resize(){renderer.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();}
-    window.addEventListener('resize',resize);resize();
-    window.addEventListener('mousemove',e=>{tx=(e.clientX/innerWidth-.5);ty=(e.clientY/innerHeight-.5);});
-
-    let raf,run=true;
-    function loop(){
-      if(!run)return;
-      sphere.rotation.y+=0.0016; sphere.rotation.x+=0.0006;
-      core.rotation.y-=0.0010; core.rotation.x+=0.0008;
-      dust.rotation.y+=0.0004;
-      // 마우스로 카메라 살짝 기울임 (패럴랙스)
-      cam.position.x+=(tx*4-cam.position.x)*0.04;
-      cam.position.y+=(-ty*4-cam.position.y)*0.04;
-      cam.lookAt(0,0,0);
-      renderer.render(scene,cam);
-      raf=requestAnimationFrame(loop);
-    }
-    loop();
-    document.addEventListener('visibilitychange',()=>{run=!document.hidden;if(run)loop();else cancelAnimationFrame(raf);});
-
-    // GSAP: 등장 시 구가 부풀어오름 + 카메라 줌인
-    if(typeof gsap!=='undefined'){
-      sphere.scale.set(0.3,0.3,0.3);
-      gsap.to(sphere.scale,{x:1,y:1,z:1,duration:2.2,ease:'power3.out'});
-      gsap.from(cam.position,{z:26,duration:2.4,ease:'power2.out'});
-    }
-    // 슬라이드별 강도 조절 핸들 노출: 표지=강, 콘텐츠=약
-    window.__setBgIntensity=function(strong){
-      const o1=strong?0.85:0.35, o2=strong?0.12:0.05, od=strong?0.5:0.22;
-      const z =strong?14:17;
-      if(typeof gsap!=='undefined'){
-        gsap.to(mat,{opacity:o1,duration:.8});
-        gsap.to(core.material,{opacity:o2,duration:.8});
-        gsap.to(dust.material,{opacity:od,duration:.8});
-        gsap.to(cam.position,{z:z,duration:.9,ease:'power2.out'});
-      }else{mat.opacity=o1;core.material.opacity=o2;dust.material.opacity=od;}
-    };
-    return true;
-  }
-
-  const usedThree = initThree();
-  if(usedThree){ document.getElementById('net').style.display='none'; }
-  if(typeof gsap!=='undefined' && !REDUCED){
-    // 표지 타이틀 글자 등장을 GSAP로 (rise 위에 덧입힘)
-    gsap.from('#s0 h1',{y:30,opacity:0,duration:1,delay:.2,ease:'power3.out'});
-  }
-
-  /* ===== 뉴럴 네트워크 배경 (Canvas 2D 폴백, Three 실패 시 + 모션 허용 시만) ===== */
-  if(!usedThree && !REDUCED)(function(){
-    const cv=document.getElementById('net'),ctx=cv.getContext('2d');
-    let W,H,DPR,nodes=[],raf;
-    const COUNT=()=>Math.min(100,Math.floor(innerWidth*innerHeight/18000));
-    const LINK=165, PULL=170, MAXV=.35;
-    function resize(){
-      DPR=Math.min(devicePixelRatio||1,2);
-      W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
-      cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-      build();
-    }
-    function build(){
-      const n=COUNT();nodes=[];
-      for(let i=0;i<n;i++){
-        nodes.push({
-          x:Math.random()*innerWidth,y:Math.random()*innerHeight,
-          vx:(Math.random()-.5)*MAXV,vy:(Math.random()-.5)*MAXV,
-          r:1.2+Math.random()*1.8
-        });
-      }
-    }
-    function step(){
-      ctx.clearRect(0,0,innerWidth,innerHeight);
-      for(const p of nodes){
-        // 마우스 인력
-        const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.hypot(dx,dy);
-        if(d<PULL&&d>0){const f=(1-d/PULL)*0.6;p.vx+=dx/d*f*0.08;p.vy+=dy/d*f*0.08;}
-        p.x+=p.vx;p.y+=p.vy;
-        p.vx*=0.99;p.vy*=0.99;
-        // 속도 한계 복원
-        const sp=Math.hypot(p.vx,p.vy);if(sp>MAXV*2){p.vx*=MAXV*2/sp;p.vy*=MAXV*2/sp;}
-        if(p.x<0||p.x>innerWidth)p.vx*=-1;
-        if(p.y<0||p.y>innerHeight)p.vy*=-1;
-        p.x=Math.max(0,Math.min(innerWidth,p.x));p.y=Math.max(0,Math.min(innerHeight,p.y));
-      }
-      // 연결선
-      for(let i=0;i<nodes.length;i++){
-        for(let j=i+1;j<nodes.length;j++){
-          const a=nodes[i],b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
-          if(d<LINK){
-            const o=(1-d/LINK);
-            // 마우스 근처 연결선 강조
-            const mm=Math.min(Math.hypot(mouse.x-a.x,mouse.y-a.y),Math.hypot(mouse.x-b.x,mouse.y-b.y));
-            const boost=mm<PULL?(1-mm/PULL)*0.6:0;
-            ctx.strokeStyle='rgba(96,165,250,'+(o*0.32+boost)+')';
-            ctx.lineWidth=0.7+boost;
-            ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-          }
-        }
-      }
-      // 노드
-      for(const p of nodes){
-        const dm=Math.hypot(mouse.x-p.x,mouse.y-p.y);
-        const near=dm<PULL;
-        ctx.fillStyle=near?'rgba(96,165,250,'+(0.9-dm/PULL*0.6)+')':'rgba(125,136,150,0.55)';
-        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill();
-        if(near){
-          ctx.fillStyle='rgba(59,130,246,'+(1-dm/PULL)*0.15+')';
-          ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,7);ctx.fill();
-        }
-      }
-      raf=requestAnimationFrame(step);
-    }
-    let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(resize,200);});
-    resize();step();
-    // 탭 비활성 시 정지(배터리 절약)
-    document.addEventListener('visibilitychange',()=>{
-      if(document.hidden){cancelAnimationFrame(raf);}else{step();}
-    });
-  })();
-
-  // 슬래시 커맨드 '더보기' 토글
-  (function(){
-    const btn=document.getElementById('moreBtn');
-    if(!btn)return;
-    const panel=btn.closest('.codepanel');
-    const label=btn.querySelector('.more-label');
-    function toggle(){
-      const open=panel.classList.toggle('open');
-      label.textContent=open?'접기':'… + 13 more';
-    }
-    btn.addEventListener('click',toggle);
-    btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
-  })();
-
-  // 50단계 모달 (목록 + 상세 2단계, ←→ 단계 이동)
-  (function(){
-    const arrow=document.getElementById('stepArrow');
-    const modal=document.getElementById('stepModal');
-    const list=document.getElementById('stepList');
-    const detail=document.getElementById('stepDetail');
-    if(!arrow||!modal||!list||!detail)return;
-    const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const md=body=>{
-      if(typeof marked!=='undefined'){try{return '<div class="md">'+marked.parse(body)+'</div>';}catch(e){}}
-      return '<div class="step-raw">'+esc(body)+'</div>';
-    };
-    const DATA=(typeof window!=='undefined'&&window.STEPS_FULL)?window.STEPS_FULL:STEPS.map(([n,t])=>[n,t,'']);
-    const dNo=document.getElementById('dNo'), dTitle=document.getElementById('dTitle'), dBody=document.getElementById('dBody');
-    const dPrev=document.getElementById('dPrev'), dNext=document.getElementById('dNext');
-
-    // 목록 렌더 (1회)
-    let rendered=false;
-    function renderList(){
-      if(rendered)return; rendered=true;
-      list.innerHTML=DATA.map(([n,t])=>
-        '<div class="step-item" data-n="'+n+'">'+
-          '<div class="step-row" role="button" tabindex="0" data-idx="'+(n-1)+'">'+
-            '<span class="no">'+String(n).padStart(3,'0')+'</span>'+
-            '<span class="ti">'+esc(t)+'</span>'+
-            '<span class="caret">▶</span>'+
-          '</div>'+
-        '</div>').join('');
-      list.querySelectorAll('.step-row').forEach(row=>{
-        const open=()=>showDetail(+row.dataset.idx);
-        row.addEventListener('click',open);
-        row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
-      });
-    }
-
-    // 상세 모달
-    let cur=0, mode='step';
-    const dHint=detail.querySelector('.d-hint');
-    function showDetail(idx){
-      mode='step';
-      cur=Math.max(0,Math.min(DATA.length-1,idx));
-      const [n,t,body]=DATA[cur];
-      dNo.textContent=String(n).padStart(3,'0');
-      dTitle.textContent=t;
-      dBody.innerHTML=md(body||'(본문 없음)');
-      dBody.scrollTop=0;
-      dPrev.style.display=''; dNext.style.display='';
-      dPrev.disabled=cur===0; dNext.disabled=cur===DATA.length-1;
-      dHint.textContent='← → 로 단계 이동 · Esc 닫기';
-      detail.classList.add('open');
-    }
-    function closeDetail(){detail.classList.remove('open');}
-
-    // 커맨드 상세 (상세 모달 재사용, ←→ 순회)
-    const CMD_LIST=[...document.querySelectorAll('#s5 .cmd-row.clickable')].map(r=>r.dataset.cmd);
-    let curCmd=0;
-    function showCmd(idx){
-      mode='cmd';
-      curCmd=(idx+CMD_LIST.length)%CMD_LIST.length; // 순환
-      const cmd=CMD_LIST[curCmd];
-      const CMDS=(typeof window!=='undefined'&&window.CMDS_FULL)?window.CMDS_FULL:{};
-      dNo.textContent='/';
-      dTitle.textContent='/'+cmd;
-      dBody.innerHTML=md(CMDS[cmd]||'(본문 없음)'); dBody.scrollTop=0;
-      dPrev.style.display=''; dNext.style.display='';
-      dPrev.disabled=false; dNext.disabled=false; // 순환이라 항상 활성
-      dHint.textContent='← → 로 커맨드 이동 · Esc 닫기';
-      detail.classList.add('open');
-    }
-
-    dPrev.addEventListener('click',()=>{mode==='cmd'?showCmd(curCmd-1):showDetail(cur-1);});
-    dNext.addEventListener('click',()=>{mode==='cmd'?showCmd(curCmd+1):showDetail(cur+1);});
-    detail.querySelectorAll('[data-dclose]').forEach(el=>el.addEventListener('click',closeDetail));
-
-    // 슬래시 커맨드 클릭 → 본문 모달
-    document.querySelectorAll('#s5 .cmd-row.clickable').forEach((row,i)=>{
-      const trg=row.querySelector('.f');
-      const open=()=>showCmd(i);
-      trg.setAttribute('role','button'); trg.setAttribute('tabindex','0');
-      trg.addEventListener('click',open);
-      trg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
-    });
-
-    // 목록 열기/닫기
-    let lastFocus=null;
-    function openList(){renderList();lastFocus=document.activeElement;modal.classList.add('open');list.scrollTop=0;modal.querySelector('.modal-close').focus();}
-    function closeList(){modal.classList.remove('open');if(lastFocus)lastFocus.focus();}
-    arrow.addEventListener('click',openList);
-    arrow.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openList();}});
-    modal.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',closeList));
-
-    // 키보드: 상세 열림 시 ←→ 이동/Esc 닫기 (목록보다 우선), 목록만 열림 시 Esc 닫기
-    window.addEventListener('keydown',e=>{
-      if(detail.classList.contains('open')){
-        if(e.key==='ArrowRight'){e.preventDefault();mode==='cmd'?showCmd(curCmd+1):showDetail(cur+1);}
-        else if(e.key==='ArrowLeft'){e.preventDefault();mode==='cmd'?showCmd(curCmd-1):showDetail(cur-1);}
-        else if(e.key==='Escape'){closeDetail();}
-        return;
-      }
-      if(modal.classList.contains('open')&&e.key==='Escape')closeList();
-    });
-  })();
-
-  go(0);
-
-  // 로딩 인디케이터 제거
-  const loader=document.getElementById('loader');
-  if(loader){loader.style.opacity='0';setTimeout(()=>loader.remove(),550);}
-});
-</script>
+<script src="assets/portfolio.js"></script>
 </body>
 </html>

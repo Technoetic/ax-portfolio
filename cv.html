@@ -1,299 +1,261 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>전문준 · AX 엔지니어 · CV</title>
-<meta name="description" content="전문준 · AX 엔지니어 — 빌딩 HMI 10년에서 AI 엔지니어로. 한 페이지 이력 요약.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="전문준 · AX 엔지니어 · CV">
-<meta property="og:description" content="빌딩 HMI 10년에서 AI 엔지니어로. 공개 레포 128·블로그 255편. 한 페이지로 보는 이력.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Ctext x='16' y='23' font-size='19' fill='%233b82f6' text-anchor='middle' font-family='monospace' font-weight='bold'%3EAX%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<style>
-  :root{
-    --bg:#0a0c10; --bg-2:#12161c; --bg-3:#1d232c; --line:#252c36;
-    --fg:#e9eef5; --fg-dim:#9aa4b2; --fg-mute:#828d9c;
-    --accent:#3b82f6; --accent-2:#60a5fa; --accent-soft:#3b82f61a;
-    --mono:"JetBrains Mono","Courier New",monospace;
-    --sans:"Pretendard Variable","Pretendard","Helvetica Neue","Segoe UI","Malgun Gothic",sans-serif;
-    --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:40px;--s6:48px;--s8:64px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
-
-  /* 배경 미세 그리드 */
-  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:48px 48px;opacity:.13;
-    mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000,transparent 70%);
-    -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000,transparent 70%)}
-
-  .wrap{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:var(--s8) var(--s4) var(--s8)}
-  @media(max-width:600px){.wrap{padding:var(--s6) var(--s3)}}
-
-  /* ===== 헤더 (프로필) ===== */
-  header{display:grid;grid-template-columns:auto 1fr;gap:var(--s5);align-items:center;
-    padding-bottom:var(--s5);border-bottom:1px solid var(--line);margin-bottom:var(--s6)}
-  @media(max-width:600px){header{grid-template-columns:1fr;gap:var(--s3);text-align:center}}
-  .avatar{width:128px;height:128px;border-radius:20px;background:linear-gradient(135deg,#1d232c,#12161c);
-    border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);font-size:40px;font-weight:800;color:var(--accent-2);letter-spacing:-.02em}
-  @media(max-width:600px){.avatar{margin:0 auto}}
-  .htext h1{font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
-  .htext .role{font-size:clamp(15px,2vw,18px);color:var(--accent-2);font-weight:600;margin-top:6px}
-  .htext .tag{color:var(--fg-dim);margin-top:var(--s2);font-size:15px}
-  .htext .tag b{color:var(--fg);font-weight:600}
-  .links{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s2);margin-top:var(--s3)}
-  @media(max-width:600px){.links{justify-content:center}}
-  .links a{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:13px;color:var(--fg-dim);
-    text-decoration:none;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:7px 12px;
-    transition:border-color .25s,color .25s,transform .2s}
-  .links a:hover{border-color:var(--accent);color:var(--accent-2);transform:translateY(-2px)}
-  .links svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
-
-  /* ===== 섹션 공통 ===== */
-  section{margin-bottom:var(--s6);scroll-margin-top:var(--s4)}
-  .sec-title{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);
-    display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4)}
-  .sec-title::after{content:"";flex:1;height:1px;background:var(--line)}
-
-  /* 한 줄 요약 (지표 바) */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s2);margin-bottom:var(--s6)}
-  @media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
-  .stat{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:var(--s3) var(--s2);text-align:center}
-  .stat .n{font-family:var(--mono);font-size:clamp(24px,4vw,34px);font-weight:800;color:var(--accent-2);line-height:1}
-  .stat .n .u{font-family:var(--sans);font-weight:700;font-size:.72em;margin-left:1px}
-  .stat .l{font-size:12.5px;color:var(--fg-dim);margin-top:6px}
-
-  /* About */
-  .about{font-size:16px;color:var(--fg-dim);line-height:1.8}
-  .about b{color:var(--fg);font-weight:600}
-  .about .hl{color:var(--accent-2);font-weight:600}
-
-  /* 타임라인 (경력/학력) */
-  .tl{border-left:2px solid var(--line);padding-left:var(--s4);margin-left:6px}
-  .tl-row{position:relative;padding-bottom:var(--s4)}
-  .tl-row:last-child{padding-bottom:0}
-  .tl-row::before{content:"";position:absolute;left:calc(-1*var(--s4) - 7px);top:5px;width:11px;height:11px;border-radius:50%;
-    background:var(--accent);box-shadow:0 0 0 4px var(--bg),0 0 12px var(--accent)}
-  .tl-row .when{font-family:var(--mono);font-size:13px;color:var(--accent-2)}
-  .tl-row .what{font-size:18px;font-weight:700;margin-top:2px}
-  .tl-row .where{font-size:14.5px;color:var(--fg-dim);margin-top:2px}
-  .tl-row a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dashed var(--line);transition:color .25s,border-color .25s}
-  .tl-row a:hover{color:var(--accent-2);border-color:var(--accent-2)}
-
-  /* 사이트(랜드마크) 칩 */
-  .chips{display:flex;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s2)}
-  .chip{font-family:var(--mono);font-size:12.5px;background:var(--accent-soft);border:1px solid #3b82f640;color:var(--accent-2);
-    padding:5px 12px;border-radius:8px;text-decoration:none;transition:background .25s,transform .2s}
-  .chip:hover{background:#3b82f626;transform:translateY(-2px)}
-
-  /* 프로젝트/활동 카드 */
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2)}
-  @media(max-width:600px){.cards{grid-template-columns:1fr}}
-  .card{display:block;background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:var(--s3);
-    text-decoration:none;color:inherit;transition:border-color .25s,transform .25s,box-shadow .25s}
-  .card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px #0006}
-  .card .ct{display:flex;align-items:center;justify-content:space-between;gap:var(--s1)}
-  .card .nm{font-size:17px;font-weight:700}
-  .card .go{width:14px;height:14px;stroke:var(--fg-mute);fill:none;stroke-width:1.8;flex:0 0 auto}
-  .card:hover .go{stroke:var(--accent-2)}
-  .card .ds{font-size:13.5px;color:var(--fg-dim);margin-top:8px;line-height:1.55}
-  .card .meta{font-family:var(--mono);font-size:11px;color:var(--fg-mute);margin-top:10px;letter-spacing:.03em}
-
-  /* 자격/수상 리스트 */
-  .list{display:flex;flex-direction:column;gap:var(--s2)}
-  .li{display:flex;align-items:baseline;gap:var(--s2);font-size:15px}
-  .li .dot{color:var(--accent);flex:0 0 auto}
-  .li .x{color:var(--fg-dim)}
-  .li .x b{color:var(--fg);font-weight:600}
-  .li .y{font-family:var(--mono);font-size:12.5px;color:var(--fg-mute);margin-left:auto;flex:0 0 auto}
-
-  /* 푸터 / CTA */
-  footer{border-top:1px solid var(--line);padding-top:var(--s5);margin-top:var(--s8);text-align:center}
-  .cta{display:inline-flex;align-items:center;gap:var(--s1);font-size:15px;color:var(--accent-2);text-decoration:none;
-    background:var(--accent-soft);border:1px solid #3b82f659;border-radius:10px;padding:12px 22px;font-weight:600;
-    transition:background .25s,border-color .25s,transform .2s}
-  .cta:hover{background:#3b82f626;border-color:var(--accent);transform:translateY(-2px)}
-  .cta svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
-  footer .foot-contact{margin-top:var(--s3);font-family:var(--mono);font-size:13px;color:var(--fg-mute)}
-  footer .foot-contact a{color:var(--fg-dim);text-decoration:none}
-  footer .foot-contact a:hover{color:var(--accent-2)}
-
-  /* 상단 미니 네비 (앵커) */
-  nav.top{position:sticky;top:0;z-index:5;background:#0a0c10ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  nav.top .nin{max-width:920px;margin:0 auto;padding:12px var(--s4);display:flex;gap:var(--s3);align-items:center;overflow-x:auto}
-  nav.top .brand{font-weight:800;font-size:15px;white-space:nowrap}
-  nav.top a{font-family:var(--mono);font-size:12.5px;color:var(--fg-dim);text-decoration:none;white-space:nowrap;transition:color .2s}
-  nav.top a:hover{color:var(--accent-2)}
-  @media(max-width:600px){nav.top .nin{padding:10px var(--s3)}nav.top a{font-size:11.5px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>전문준 · AX 엔지니어 · 이력서</title>
+  <meta name="description" content="빌딩 HMI 현장 경험을 기업 업무 자동화와 AI 개발 도구로 연결하는 AX 엔지니어 전문준. 실무 프로젝트, 공개 소스, 경력과 연락처.">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="전문준 · AX 엔지니어 · 이력서">
+  <meta property="og:description" content="DHIS 영업 업무 AX 프로젝트 · Claude Code와 Codex를 지원하는 개발 플러그인 · 빌딩 HMI 10년의 현장 경험.">
+  <meta property="og:url" content="https://technoetic.github.io/ax-portfolio/cv.html">
+  <link rel="canonical" href="https://technoetic.github.io/ax-portfolio/cv.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Ctext x='16' y='23' font-size='19' fill='%2360a5fa' text-anchor='middle' font-family='monospace' font-weight='bold'%3EAX%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root{color-scheme:dark;--bg:#0a0c10;--panel:#12161c;--line:#303946;--fg:#e9eef5;--muted:#aab4c2;--accent:#82b6ff;--sans:"Pretendard Variable","Pretendard","Malgun Gothic","Noto Sans CJK KR","Noto Sans KR","Segoe UI",sans-serif;--mono:"Courier New",monospace}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:24px}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-underline-offset:4px;text-decoration-thickness:1px;overflow-wrap:anywhere}
+    a:hover{text-decoration-thickness:2px}
+    a:focus-visible{outline:3px solid #f4c95d;outline-offset:4px;border-radius:4px}
+    h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.35;text-wrap:balance}p{overflow-wrap:anywhere;word-break:keep-all}
+    .skip-link{position:absolute;z-index:10;top:12px;left:16px;transform:translateY(-180%);padding:10px 16px;background:var(--panel);color:var(--fg)}
+    .skip-link:focus{transform:none}
+    nav.top{border-bottom:1px solid var(--line);background:var(--bg)}
+    .nin{max-width:960px;margin:auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:10px 24px}
+    .brand{font-weight:800;margin-right:auto;font-size:15px}
+    nav.top a{display:inline-flex;align-items:center;min-height:44px;padding:6px 8px;font-size:14px;text-decoration:none}
+    main{max-width:960px;padding:52px 32px 64px;margin:auto}
+    header{padding-bottom:32px;border-bottom:1px solid var(--line);margin-bottom:32px}
+    .eyebrow{font:700 12px/1.5 var(--mono);letter-spacing:.12em;color:var(--accent);margin-bottom:14px}
+    h1{font-size:clamp(36px,7vw,52px);letter-spacing:-.04em}
+    h1 span{display:inline-block;font-size:17px;letter-spacing:0;color:var(--muted);margin-left:12px;font-weight:500}
+    .role{font-size:clamp(19px,3vw,24px);font-weight:700;color:var(--accent);margin-top:10px}
+    .intro{max-width:680px;color:var(--muted);margin-top:14px;font-size:17px}
+    .actions,.contact-links,.chips{display:flex;flex-wrap:wrap;gap:10px}
+    .actions{margin-top:24px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 16px;border:1px solid var(--line);border-radius:8px;background:var(--panel);text-decoration:none;font-weight:700;font-size:14px}
+    .button.primary{background:#1d4ed8;border-color:#3b70ef;color:#fff}
+    .contact-links{margin-top:16px;gap:4px 20px}
+    .contact-links a{display:inline-flex;align-items:center;min-height:44px;font-size:14px}
+    section{margin-bottom:36px;scroll-margin-top:24px}
+    .sec-title{font-size:21px;letter-spacing:-.025em;margin-bottom:18px;display:flex;align-items:center;gap:18px}
+    .sec-title:after{content:"";height:1px;flex:1;background:var(--line)}
+    .about{color:var(--muted)}strong{color:var(--fg)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:24px 0 0}
+    .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 14px}
+    .stat b{display:block;font-size:27px;line-height:1.2;color:var(--accent);font-variant-numeric:tabular-nums}
+    .stat span{display:block;font-size:13px;margin-top:8px;word-break:keep-all}
+    .stat small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+    .case{padding:26px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px}
+    .case h3{font-size:22px;letter-spacing:-.02em}
+    .meta{font-size:13px;color:var(--muted);margin-top:8px}
+    .case-summary{font-size:16px;margin-top:16px;color:var(--muted)}
+    .scope{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:22px 0 16px}
+    .scope dt{font-weight:700;color:var(--accent);font-size:15px}
+    .scope dd{margin:6px 0 0;color:var(--muted);font-size:14px;word-break:keep-all;overflow-wrap:anywhere}
+    .case-links{display:flex;flex-wrap:wrap;gap:4px 20px}
+    .case-links a{min-height:44px;display:inline-flex;align-items:center;font-size:14px}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;min-width:0}
+    .card h3{font-size:20px}
+    .card .ds{color:var(--muted);font-size:15px;margin-top:14px}
+    .card .meta{font-size:12px}
+    .card a{display:inline-flex;align-items:center;min-height:44px;margin-top:10px;font-size:14px}
+    .chips{margin-top:12px;gap:8px}
+    .chip{display:inline-flex;align-items:center;min-height:28px;padding:3px 10px;border:1px solid #35547d;border-radius:6px;color:var(--accent);font-size:12px;line-height:1.5}
+    a.chip{min-height:44px;text-decoration:none}
+    .reading{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+    .reading p{color:var(--muted);font-size:15px}
+    .reading a{display:inline-flex;align-items:center;min-height:44px}
+    .snapshot{color:var(--muted);font-size:12px;margin-top:12px}
+    .timeline{border-left:2px solid var(--line);padding-left:24px;margin-left:5px}
+    .entry{position:relative;padding-bottom:22px}
+    .entry:last-child{padding-bottom:0}
+    .entry:before{content:"";position:absolute;left:-30px;top:7px;width:10px;height:10px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 4px var(--bg)}
+    .when{font:700 12px/1.6 var(--mono);color:var(--accent)}
+    .entry h3{font-size:17px;margin-top:4px}
+    .where{font-size:14px;color:var(--muted);margin-top:6px}
+    .entry .company{display:inline-flex;align-items:center;min-height:32px;margin-top:3px;font-size:13px}
+    .sites-label{margin-top:22px;color:var(--muted);font-size:13px}
+    .credentials{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+    .credentials li{display:flex;gap:16px;justify-content:space-between;align-items:baseline;font-size:14px}
+    .credentials time{flex:none;color:var(--muted);font-size:12px}
+    footer{border-top:1px solid var(--line);padding-top:24px;margin-top:32px}
+    footer h2{font-size:20px}
+    footer p{color:var(--muted);margin-top:8px;font-size:14px}
+    footer .contact-links{margin-top:10px}
+    .print-only{display:none}
+    @media(max-width:600px){main{padding:32px 20px 44px}.nin{padding:8px 12px;gap:0 4px}.brand{width:100%;padding:6px 8px}.nin a{font-size:13px;padding:6px 8px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}h1 span{display:block;margin:8px 0 0}.cards,.scope{grid-template-columns:1fr}.case,.card{padding:20px}.scope{gap:14px}.credentials li{align-items:flex-start;flex-wrap:wrap;gap:4px 12px}.contact-links{gap:0 12px}.contact-links a{font-size:13px}.sec-title{font-size:20px}.timeline{padding-left:20px}.entry:before{left:-26px}.actions .button{flex:1 1 auto}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @page{size:A4;margin:15mm 16mm 17mm}
+    @media print{
+      :root{color-scheme:light;--bg:#fff;--panel:#f7f9fc;--line:#cbd5e1;--fg:#111827;--muted:#374151;--accent:#174f93}
+      html{scroll-behavior:auto}body{font-size:10pt;line-height:1.6;background:#fff;color:#111827}
+      nav.top,.skip-link,.actions{display:none!important}.print-only{display:block}
+      main{max-width:none;margin:0;padding:0;color:#111827}
+      .print-page+.print-page{break-before:page}.print-page{break-after:auto}
+      header{margin-bottom:20px;padding-bottom:18px}.eyebrow{font-size:8pt;margin-bottom:8px}h1{font-size:29pt}h1 span{font-size:11pt;margin-left:12px;display:inline-block}
+      .role{font-size:15pt;margin-top:6px}.intro{font-size:10pt;margin-top:8px}
+      .contact-links{gap:0 16px;margin-top:8px}.contact-links a{font-size:9pt;min-height:25px}
+      section{margin-bottom:23px}.sec-title{font-size:15pt;margin-bottom:12px}
+      .about,.case-summary{font-size:10pt}.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}
+      .stat{padding:12px 10px}.stat b{font-size:21pt}.stat span{font-size:8.5pt;margin-top:5px}.stat small{font-size:7pt}
+      .case{padding:18px}.case h3{font-size:15pt}.case-summary{margin-top:12px}.scope{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 10px}.scope dt{font-size:10pt}.scope dd{font-size:9pt}
+      .case-links a{font-size:9pt;min-height:28px}.meta{font-size:9pt}
+      .cards{grid-template-columns:1fr;gap:12px}.card{padding:16px 18px}.card h3{font-size:13pt}.card .ds{font-size:10pt;margin-top:10px}.card .meta{font-size:8.5pt}.card a{font-size:9pt;min-height:25px;margin-top:5px}.chip{font-size:8pt;min-height:22px;padding:2px 8px}.chips{margin-top:8px}
+      .reading{margin-top:14px;padding-top:12px}.reading p{font-size:10pt}.reading a{min-height:26px}.snapshot{font-size:8pt}
+      .timeline{padding-left:20px}.entry{position:static;padding-bottom:14px}.entry:before{display:none}.when{font-size:8pt}.entry h3{font-size:11pt}.where{font-size:9pt;margin-top:3px}.entry .company{font-size:8pt;min-height:21px;margin-top:0}
+      .sites-label{font-size:9pt;margin-top:16px}a.chip{min-height:24px}.credentials{gap:8px}.credentials li{font-size:9pt}.credentials time{font-size:8pt}
+      footer{padding-top:16px;margin-top:20px}footer h2{font-size:13pt}footer p{font-size:9pt}
+      a{color:#174f93}p,h2,h3{orphans:3;widows:3}h2,h3{break-after:avoid}.card,.case,.entry,.stat,.credentials li,footer{break-inside:avoid}
+      *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    }
+  </style>
 </head>
 <body>
-
-<nav class="top">
-  <div class="nin">
-    <span class="brand">전문준</span>
-    <a href="#about">소개</a>
-    <a href="#career">경력</a>
-    <a href="#projects">프로젝트</a>
-    <a href="#activity">활동</a>
-    <a href="#certs">자격</a>
-    <a href="https://technoetic.github.io/ax-portfolio/" style="margin-left:auto;color:var(--accent-2)">인터랙티브 ↗</a>
-  </div>
-</nav>
-
-<div class="wrap">
-
-  <!-- ===== 헤더 ===== -->
-  <header>
-    <div class="avatar">AX</div>
-    <div class="htext">
-      <h1>전문준 <span style="font-size:.5em;color:var(--fg-mute);font-weight:600">Mun Jun Jeon</span></h1>
-      <div class="role">AX 엔지니어 · 빌딩 HMI 10년 → AI 전환</div>
-      <div class="tag">빌딩을 <b>자동화</b>하던 엔지니어, 이제 <b>AI를 자동화</b>합니다. 현장을 아는 AI 적용 인재.</div>
-      <div class="links">
-        <a href="mailto:technoetic@hotmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
-        <a href="tel:01076335021"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>010-7633-5021</a>
-        <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg>GitHub</a>
-        <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg>Blog</a>
-        <a href="https://technoetic.github.io/ax-portfolio/jeon-munjun-portfolio.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg>PDF</a>
-      </div>
+  <a class="skip-link" href="#main">이력서 본문으로 이동</a>
+  <nav class="top" aria-label="이력서 목차">
+    <div class="nin">
+      <span class="brand">전문준 · 이력서</span>
+      <a href="#about">소개</a><a href="#dhis">실무 사례</a><a href="#projects">프로젝트</a><a href="#career">경력</a><a href="#contact">연락처</a>
+      <a href="index.html">포트폴리오 ↗</a>
     </div>
-  </header>
-
-  <!-- ===== 지표 바 ===== -->
-  <div class="stats">
-    <div class="stat"><div class="n">10<span class="u">년</span></div><div class="l">빌딩 HMI 경력</div></div>
-    <div class="stat"><div class="n">128</div><div class="l">GitHub 공개 레포</div></div>
-    <div class="stat"><div class="n">2,033</div><div class="l">누적 커밋</div></div>
-    <div class="stat"><div class="n">255</div><div class="l">블로그 글</div></div>
-  </div>
-
-  <!-- ===== 소개 ===== -->
-  <section id="about">
-    <div class="sec-title">About</div>
-    <p class="about">
-      지난 <b>10년간 빌딩 HMI 엔지니어</b>로서 <span class="hl">코엑스</span>를 비롯한 대한민국 대표 랜드마크 현장의
-      빌딩 자동제어(BAS·BEMS)를 담당했습니다.
-      2023년 LLM이라는 새로운 흐름을 마주하면서 (주)에스티엔비 재직 중 회사의 <b>AX 전환에 기여</b>했고,
-      2025년 바이브 코딩 흐름을 포착해 <b>AI 기반 개발에 뛰어들었습니다</b>.
-      본격적인 AI 피벗을 위해 국비지원 AI 엔지니어 양성 과정을 <span class="hl">전 과제 1등</span>으로 수료했고,
-      2026년 <b>(주)디에이치아이에스의 AX 프로젝트를 수탁</b>해 변압기 영업 DB 구축·견적 생성 자동화·수출 업무
-      AI화를 <span class="hl">실제 기업 현장에 적용</span>했습니다. 지금도 매일 코드를 커밋하고 글을 씁니다.
-      <br><br>
-      <b>빌딩 설비와 제어 현장을 아는 AI 적용 인재</b> — 그것이 제 차별점입니다.
-    </p>
-  </section>
-
-  <!-- ===== 경력 ===== -->
-  <section id="career">
-    <div class="sec-title">Career &amp; Education</div>
-    <div class="tl">
-      <div class="tl-row">
-        <div class="when">2026.07 ~ 2026.08</div>
-        <div class="what">(주)디에이치아이에스 — AX 영업혁신 업무위탁</div>
-        <div class="where">4주 프로젝트 · 영업 DB 구축 · 견적 생성 자동화 · 수출 업무 AI화 · <a href="https://dh-elec.co.kr/" target="_blank" rel="noopener">dh-elec.co.kr ↗</a></div>
-      </div>
-      <div class="tl-row">
-        <div class="when">2025.12 ~ 2026.06</div>
-        <div class="what">KDT HDC랩스 — AI 엔지니어 부트캠프</div>
-        <div class="where">AI 엔지니어 양성 과정 교육생 · <b style="color:var(--accent-2)">전 과제 1등 수료</b> · <a href="https://nova.igrowth.kr/" target="_blank" rel="noopener">nova.igrowth.kr ↗</a></div>
-      </div>
-      <div class="tl-row">
-        <div class="when">2018.07 ~ 2025.10</div>
-        <div class="what">(주)에스티엔비 — 빌딩 HMI 엔지니어</div>
-        <div class="where">빌딩 자동제어 시스템 시공·유지보수 · 재직 중 사내 AX 전환 기여 · <a href="http://stnv.co.kr/" target="_blank" rel="noopener">stnv.co.kr ↗</a></div>
-      </div>
-      <div class="tl-row">
-        <div class="when">2014.10 ~ 2018.07</div>
-        <div class="what">(주)웹콘 — 빌딩 HMI 엔지니어</div>
-        <div class="where">빌딩 자동제어 시스템 엔지니어 · <a href="https://webcon.co.kr/" target="_blank" rel="noopener">webcon.co.kr ↗</a></div>
-      </div>
-      <div class="tl-row">
-        <div class="when">2004.03 ~ 2007.02</div>
-        <div class="what">인천대인고등학교</div>
-        <div class="where">인문계열 · 인천</div>
-      </div>
+  </nav>
+  <main id="main">
+    <div class="print-page">
+      <header>
+        <p class="eyebrow">FIELD EXPERIENCE → APPLIED AI</p>
+        <h1>전문준 <span>Mun Jun Jeon</span></h1>
+        <p class="role">현장 업무를 이해하는 AX 엔지니어</p>
+        <p class="intro">빌딩 HMI 10년의 현장 경험을 기업 업무 자동화와 AI 개발 도구로 연결합니다.</p>
+        <div class="actions" aria-label="이력서와 대표 프로젝트">
+          <a class="button primary" href="jeon-munjun-portfolio.pdf" download>이력서 PDF 다운로드</a>
+          <a class="button" href="index.html#sdhis">대표 실무 사례 보기</a>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:technoetic@hotmail.com">technoetic@hotmail.com</a>
+          <a href="tel:+821076335021">010-7633-5021</a>
+          <a href="https://github.com/Technoetic">GitHub · Technoetic</a>
+          <a href="https://blog.naver.com/hdc-labs-nova">기술 블로그</a>
+        </div>
+      </header>
+      <section id="about" aria-labelledby="about-title">
+        <h2 class="sec-title" id="about-title">현장에서 시작해, 구현으로 연결합니다</h2>
+        <p class="about">코엑스 등 빌딩 현장에서 <strong>BAS·BEMS 자동제어 시스템의 시공과 유지보수</strong>를 담당했습니다. 2023년부터 재직 중 LLM을 업무에 적용했고, AI 엔지니어 양성 과정을 거쳐 2026년 기업 AX 프로젝트를 수탁했습니다. 지금은 <strong>업무 자동화와 Claude Code·Codex용 개발 플러그인</strong>을 직접 만들고 공개합니다.</p>
+        <div class="stats" aria-label="경력과 공개 활동 요약">
+          <div class="stat"><b>10년</b><span>빌딩 HMI 현장 경험</span><small>2014.10–2025.10</small></div>
+          <div class="stat"><b>2개</b><span>Claude Code · Codex 플러그인</span><small>Harness50 · Agentic Vault</small></div>
+          <div class="stat"><b>136개</b><span>GitHub 공개 저장소</span><small>2026-09-06 기준</small></div>
+          <div class="stat"><b>255편</b><span>기술 블로그 기록</span><small>2026-08-07 기준</small></div>
+        </div>
+      </section>
+      <section id="dhis" aria-labelledby="dhis-title">
+        <h2 class="sec-title" id="dhis-title">대표 실무 사례</h2>
+        <article class="case">
+          <h3>DHIS · 변압기 영업 업무 AX</h3>
+          <p class="meta">(주)디에이치아이에스 · 2026.07–2026.08 · 4주 업무위탁 프로젝트</p>
+          <p class="case-summary">변압기 영업 업무를 대상으로 <strong>영업 데이터 정리, 견적 생성 자동화, 수출 업무 AI 적용</strong>을 수행했습니다.</p>
+          <dl class="scope">
+            <div><dt>영업 DB 구축</dt><dd>변압기 영업 정보를 업무 데이터베이스로 구축.</dd></div>
+            <div><dt>견적 생성 자동화</dt><dd>영업 과정에서 필요한 견적 생성 과정을 자동화.</dd></div>
+            <div><dt>수출 업무 AI 적용</dt><dd>수출 업무에 AI를 도입하고 적용.</dd></div>
+          </dl>
+          <div class="case-links"><a href="index.html#sdhis">포트폴리오에서 사례 보기 →</a><a href="https://dh-elec.co.kr/">고객사 홈페이지 ↗</a></div>
+        </article>
+      </section>
+      <p class="print-only snapshot">온라인 포트폴리오: <a href="https://technoetic.github.io/ax-portfolio/">technoetic.github.io/ax-portfolio</a> · 이력서 갱신 2026-09-06</p>
     </div>
-    <div class="chips">
-      <span style="font-family:var(--mono);font-size:12px;color:var(--fg-mute);width:100%;margin-bottom:4px">담당 랜드마크 현장</span>
-      <a class="chip" href="https://www.coex.co.kr/" target="_blank" rel="noopener">코엑스</a>
-      <a class="chip" href="https://seoulsquare.com/" target="_blank" rel="noopener">서울스퀘어</a>
-      <a class="chip" href="https://www.centropolis.co.kr/" target="_blank" rel="noopener">센트로폴리스</a>
-      <a class="chip" href="https://www.centerfield.co.kr/" target="_blank" rel="noopener">센터필드</a>
-      <a class="chip" href="https://namu.wiki/w/타워팰리스" target="_blank" rel="noopener">타워팰리스</a>
-      <a class="chip" href="https://www.timessquare.co.kr/web/www/home" target="_blank" rel="noopener">타임스퀘어</a>
+    <div class="print-page">
+      <section id="projects" aria-labelledby="projects-title">
+        <h2 class="sec-title" id="projects-title">직접 만들고 공개한 개발 도구</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Harness50 · 하네스 50</h3>
+            <div class="chips"><span class="chip">Claude Code · Codex 지원</span><span class="chip">v2.2.0</span></div>
+            <p class="ds">50단계 웹 튜토리얼 제작 플러그인. 훅과 진행 상태를 이용해 작업 순서를 관리하고, 중단한 흐름을 이어 갑니다. 코드 품질 검사와 최종 HTML 브라우저 검증을 제공합니다.</p>
+            <p class="meta">Node.js · Hooks · 단계별 워크플로 · 품질 검사</p>
+            <a href="https://github.com/Technoetic/harness50">소스·설치 안내 보기 →</a>
+          </article>
+          <article class="card">
+            <h3>Agentic Vault · 에이전틱 볼트</h3>
+            <div class="chips"><span class="chip">Claude Code · Codex 지원</span></div>
+            <p class="ds">두 개발 도구가 하나의 Markdown 볼트로 기억과 세션 인계를 공유하는 메모리 플러그인. Obsidian에서 읽고 관리할 수 있는 파일 구조로 맥락을 남깁니다.</p>
+            <p class="meta">Python · Markdown · Obsidian · 세션 인계</p>
+            <a href="https://github.com/Technoetic/agentic-vault">소스·설치 안내 보기 →</a>
+          </article>
+          <article class="card">
+            <h3>Claude Code 커스텀 커맨드 20</h3>
+            <p class="ds">검증·배포·리서치 등 반복 작업을 20개의 슬래시 커맨드로 정리했습니다. 작업 지침과 실행 흐름을 재사용할 수 있도록 공개했습니다.</p>
+            <p class="meta">Claude Code · 반복 작업 자동화 · 20 commands</p>
+            <a href="https://github.com/Technoetic/claude-code-commands">커맨드 저장소 보기 →</a>
+          </article>
+        </div>
+      </section>
+      <section id="activity" aria-labelledby="activity-title">
+        <h2 class="sec-title" id="activity-title">구현과 기록</h2>
+        <div class="reading">
+          <p><strong>GitHub 공개 저장소 136개</strong>에서 알고리즘 시각화, 디자인 패턴, 암호학, 데이터 대시보드와 LLM 파이프라인 구현을 확인할 수 있습니다.</p>
+          <a href="https://github.com/Technoetic?tab=repositories">공개 저장소 둘러보기 →</a>
+          <p class="snapshot">GitHub 수량 확인: 2026-09-06</p>
+        </div>
+        <div class="reading">
+          <p><strong>기술 블로그 255편.</strong> 알고리즘·자료구조·암호학·LLM·Claude Code 활용을 기록합니다. 대표 글 ‘식당으로 이해하는 데이터 아키텍처’에서는 ACID부터 Lakehouse·거버넌스까지 연결합니다.</p>
+          <a href="https://blog.naver.com/hdc-labs-nova/224282219953">데이터 아키텍처 글 읽기 →</a>
+          <p class="snapshot">블로그 수량 기록: 2026-08-07</p>
+        </div>
+      </section>
     </div>
-  </section>
-
-  <!-- ===== 프로젝트 ===== -->
-  <section id="projects">
-    <div class="sec-title">Projects</div>
-    <div class="cards">
-      <a class="card" href="https://github.com/Technoetic/harness50" target="_blank" rel="noopener">
-        <div class="ct"><span class="nm">하네스 50</span><svg class="go" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></div>
-        <div class="chips"><span class="chip">Claude Code · Codex</span></div>
-        <div class="ds">직접 설계한 Claude Code·Codex 겸용 50단계 웹 튜토리얼 제작 플러그인. 훅으로 단계 순서를 통제하는 LLM 워크플로 엔진. 초기 107단계를 v2.0에서 50단계로 압축.</div>
-        <div class="meta">v2.2.0 · Node.js · Hooks · LLM 오케스트레이션</div>
-      </a>
-      <a class="card" href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener">
-        <div class="ct"><span class="nm">에이전틱 볼트</span><svg class="go" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></div>
-        <div class="chips"><span class="chip">Claude Code · Codex</span></div>
-        <div class="ds">Claude Code와 Codex가 하나의 Markdown 볼트로 기억과 세션 인계를 공유하는 메모리 플러그인. 옵시디언에서 관리할 수 있는 파일 기반 영구 기억 계층.</div>
-        <div class="meta">Python · Markdown · Obsidian · 계층형 메모리</div>
-      </a>
-      <a class="card" href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener">
-        <div class="ct"><span class="nm">커스텀 슬래시 커맨드 20</span><svg class="go" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></div>
-        <div class="ds">반복 패턴을 캡슐화한 20개 커스텀 슬래시 커맨드. 검증·배포·리서치 자동화로 작업 속도와 일관성을 동시에.</div>
-        <div class="meta">Claude Code · 자동화 · 20 commands</div>
-      </a>
-      <a class="card" href="https://github.com/Technoetic" target="_blank" rel="noopener">
-        <div class="ct"><span class="nm">GitHub — 95 repos</span><svg class="go" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></div>
-        <div class="ds">알고리즘 시각화·디자인 패턴·암호학·데이터 대시보드·LLM 파이프라인 등 다양한 도메인을 직접 구현. 최근 6개월 집중.</div>
-        <div class="meta">128 repos · 2,033 commits · JS/HTML/Python</div>
-      </a>
-      <a class="card" href="https://blog.naver.com/hdc-labs-nova/224282219953" target="_blank" rel="noopener">
-        <div class="ct"><span class="nm">대표 글 — 데이터 아키텍처</span><svg class="go" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></div>
-        <div class="ds">"식당으로 이해하는 데이터 아키텍처" — ACID부터 Lakehouse·거버넌스까지 비유 하나로 꿴 종합 정리. (블로그 255편 중)</div>
-        <div class="meta">기술 블로그 · 255편 · 매일 학습</div>
-      </a>
+    <div class="print-page">
+      <section id="career" aria-labelledby="career-title">
+        <h2 class="sec-title" id="career-title">경력과 교육</h2>
+        <div class="timeline">
+          <article class="entry">
+            <p class="when">2026.07–2026.08</p><h3>(주)디에이치아이에스 · AX 영업혁신 업무위탁</h3>
+            <p class="where">4주 프로젝트 · 영업 DB 구축 · 견적 생성 자동화 · 수출 업무 AI 적용</p>
+            <a class="company" href="https://dh-elec.co.kr/">dh-elec.co.kr ↗</a>
+          </article>
+          <article class="entry">
+            <p class="when">2025.12–2026.06</p><h3>KDT HDC랩스 · AI 엔지니어 부트캠프</h3>
+            <p class="where">AI 엔지니어 양성 과정 · 전 과제 1등 수료</p>
+            <a class="company" href="https://nova.igrowth.kr/">nova.igrowth.kr ↗</a>
+          </article>
+          <article class="entry">
+            <p class="when">2018.07–2025.10</p><h3>(주)에스티엔비 · 빌딩 HMI 엔지니어</h3>
+            <p class="where">빌딩 자동제어 시스템 시공·유지보수. 2023년부터 재직 중 LLM을 사내 업무에 적용하며 AX 전환에 기여.</p>
+            <a class="company" href="http://stnv.co.kr/">stnv.co.kr ↗</a>
+          </article>
+          <article class="entry">
+            <p class="when">2014.10–2018.07</p><h3>(주)웹콘 · 빌딩 HMI 엔지니어</h3>
+            <p class="where">빌딩 자동제어 시스템 엔지니어</p>
+            <a class="company" href="https://webcon.co.kr/">webcon.co.kr ↗</a>
+          </article>
+          <article class="entry">
+            <p class="when">2004.03–2007.02</p><h3>인천대인고등학교</h3>
+            <p class="where">인문계열 · 인천</p>
+          </article>
+        </div>
+        <p class="sites-label">담당했던 주요 빌딩 현장</p>
+        <div class="chips">
+          <a class="chip" href="https://www.coex.co.kr/">코엑스</a><a class="chip" href="https://seoulsquare.com/">서울스퀘어</a><a class="chip" href="https://www.centropolis.co.kr/">센트로폴리스</a><a class="chip" href="https://www.centerfield.co.kr/">센터필드</a><a class="chip" href="https://namu.wiki/w/타워팰리스">타워팰리스</a><a class="chip" href="https://www.timessquare.co.kr/web/www/home">타임스퀘어</a>
+        </div>
+      </section>
+      <section id="certs" aria-labelledby="certs-title">
+        <h2 class="sec-title" id="certs-title">자격과 교육 성과</h2>
+        <ul class="credentials">
+          <li><span>KDT HDC랩스 AI 엔지니어 과정 <strong>전 과제 1등 수료</strong></span><time datetime="2026">2026</time></li>
+          <li><span><strong>정보처리기능사</strong></span><time datetime="2024-12">2024.12</time></li>
+        </ul>
+      </section>
+      <footer id="contact">
+        <h2>함께 해결할 업무가 있다면</h2>
+        <p>기업 업무 자동화 · AI 개발 도구 · 현장 경험이 필요한 AX 프로젝트</p>
+        <div class="contact-links"><a href="mailto:technoetic@hotmail.com">technoetic@hotmail.com</a><a href="tel:+821076335021">010-7633-5021</a><a href="index.html">온라인 포트폴리오 →</a></div>
+        <p class="snapshot">인천광역시 서구 · 이력서 갱신 2026-09-06</p>
+      </footer>
     </div>
-  </section>
-
-  <!-- ===== 활동 ===== -->
-  <section id="activity">
-    <div class="sec-title">Activity</div>
-    <div class="list">
-      <div class="li"><span class="dot">▹</span><span class="x"><b>GitHub</b> — 공개 레포 128개, 누적 커밋 2,033건. "매일 학습하고 매일 커밋한다"를 숫자로 증명 (최근 6개월 집중)</span><span class="y">상시</span></div>
-      <div class="li"><span class="dot">▹</span><span class="x"><b>기술 블로그</b> — 알고리즘·자료구조·암호학·LLM·Claude Code 활용법까지 255편 발행, 학습 즉시 글로 정리</span><span class="y">상시</span></div>
-      <div class="li"><span class="dot">▹</span><span class="x"><b>바이브 코딩</b> — 2025년 입문 후 매일 학습. AI 보조 개발 워크플로 체득, 하네스·에이전틱 메모리 플러그인 직접 설계</span><span class="y">2025~</span></div>
-      <div class="li"><span class="dot">▹</span><span class="x"><b>AX 전환 기여</b> — (주)에스티엔비 재직 중 LLM을 사내 업무에 적용, 회사의 AI 전환에 기여</span><span class="y">2023~</span></div>
-    </div>
-  </section>
-
-  <!-- ===== 자격 ===== -->
-  <section id="certs">
-    <div class="sec-title">Certifications &amp; Awards</div>
-    <div class="list">
-      <div class="li"><span class="dot">★</span><span class="x"><b>국비지원 AI 엔지니어 과정 전 과제 1등 수료</b> — KDT HDC랩스 AI 부트캠프</span><span class="y">2026</span></div>
-      <div class="li"><span class="dot">✓</span><span class="x"><b>정보처리기능사</b></span><span class="y">2024.12</span></div>
-    </div>
-  </section>
-
-  <!-- ===== 푸터 CTA ===== -->
-  <footer>
-    <a class="cta" href="https://technoetic.github.io/ax-portfolio/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
-      인터랙티브 포트폴리오 보기 (3D · 하네스 50 · 에이전틱 볼트 · 커맨드 본문)
-    </a>
-    <div class="foot-contact">
-      <a href="mailto:technoetic@hotmail.com">technoetic@hotmail.com</a> · 010-7633-5021 · 인천광역시 서구
-    </div>
-  </footer>
-
-</div>
+  </main>
 </body>
 </html>
