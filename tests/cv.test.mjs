@@ -39,7 +39,8 @@ test('CV offers visible keyboard focus and a direct downloadable document', asyn
     }), true);
     const download = page.getByRole('link', { name: /PDF.*다운로드/ }).first();
     assert.equal(await download.isVisible(), true);
-    assert.match(await download.getAttribute('href'), /jeon-munjun-portfolio\.pdf$/);
+    const documentURL = new URL(await download.getAttribute('href'), page.url());
+    assert.match(documentURL.pathname, /jeon-munjun-portfolio\.pdf$/);
     assert.notEqual(await download.getAttribute('download'), null);
   } finally { await page.context().close(); }
 });
