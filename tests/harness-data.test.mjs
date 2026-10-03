@@ -15,7 +15,7 @@ assert.ok(fallbackMatch, 'The no-body step title fallback must remain available'
 const fallback = JSON.parse(fallbackMatch[1]);
 
 test('step browsing identifies the released research-free 36 profile', () => {
-  assert.equal(metadata.repository, 'https://github.com/Technoetic/harness50');
+  assert.equal(metadata.repository, 'https://github.com/Technoetic/harness36');
   assert.equal(metadata.ref, 'v2.13.0');
   assert.equal(metadata.commit, 'aa4c622cf05d88a51f4b5defb68d0251d8f4fde6');
   assert.equal(metadata.version, '2.13.0');
