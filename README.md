@@ -45,6 +45,8 @@ PDF는 로컬 시스템 폰트로 `cv.html`에서 생성합니다. Linux에서�
 
 ## 콘텐츠 갱신과 배포
 
+사이트의 제목·목차·단계 창·이력서는 **하네스 36**으로 표시합니다.
+
 하네스 소개와 단계 본문은 [Harness50 v2.13.0](https://github.com/Technoetic/harness50/releases/tag/v2.13.0), 커밋 `aa4c622cf05d88a51f4b5defb68d0251d8f4fde6` 기준입니다(2026-10-03 갱신). 새 실행은 조사 14단계를 제거한 `research-free-36-v1` 프로필을 사용하며, 기존 50단계 진행 기록은 계속 지원합니다. `assets/harness50-source.json`에 원본 36개 파일과 표시 본문의 SHA256을 기록했습니다. `steps-data.js`는 해당 커밋의 `assets/profiles/research-free-36-v1/steps/step001.md`~`step036.md`에서 YAML frontmatter와 앞뒤 공백만 제외한 본문을 담습니다. 갱신할 때는 같은 원본으로 본문과 `assets/portfolio.js`의 대체 제목 목록을 함께 맞추고, `index.html`·`cv.html`의 버전·설명 및 PDF도 갱신합니다. 데이터·대체 제목·해시의 일치 여부는 `node --test tests/harness-data.test.mjs`로 브라우저 없이 확인할 수 있습니다.
 
 수치를 바꿀 때는 출처를 다시 확인하고 `assets/metrics.json`, `index.html`, `cv.html`의 값과 기준일을 함께 갱신한 뒤 PDF를 재생성합니다. GitHub 저장소 수는 GitHub 사용자 API 기준이며, 블로그·활동·언어 차트는 명시된 날짜의 스냅샷입니다. 확인되지 않은 고객사 효과나 수치는 넣지 않습니다.
