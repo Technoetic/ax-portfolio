@@ -6,49 +6,55 @@
 
 ## 구성
 
-- `index.html` — 실무 사례와 대표 프로젝트부터 탐색하는 12개 섹션
+- `index.html` — 실무 사례와 대표 프로젝트를 소개하는 12개 섹션
 - `assets/portfolio.css`, `assets/portfolio.js` — 반응형 화면과 탐색·모달
-- `cv.html` — 화면과 인쇄에 맞춘 이력서
-- `jeon-munjun-portfolio.pdf` — 검색·복사·링크·목차를 지원하는 이력서 PDF
-- `steps-data.js`, `commands-data.js` — 하네스 단계와 커맨드 본문
-- `assets/metrics.json` — 공개 수치의 출처와 기준일
-- `tests/` — 실제 Chromium에서 실행하는 화면·입력·접근성·PDF 검사
+- `cv.html`, `jeon-munjun-portfolio.pdf` — 웹 이력서와 검색 가능한 A4 PDF
+- `steps-data.js` — 공개 하네스 20의 전체 단계 본문
+- `commands-data.js` — 별도 Claude Code 커스텀 커맨드 저장소의 본문
+- `assets/metrics.json` — 공개 수치·버전의 출처와 기준일
+- `assets/harness50-source.json` — 단계 원본·표시 본문의 SHA256. 기존 파일 이름은 유지합니다.
 
 ## 탐색과 호환성
 
-목차, 프로젝트 바로가기, 이전/다음 버튼, 키보드 ← → / Space / Home / End를 지원합니다. 섹션 URL을 공유하거나 브라우저 뒤로 가기로 돌아올 수 있습니다. 본문은 세로로 스크롤하며, 차트의 가로 스크롤과 모달 내부 조작은 배경 페이지를 넘기지 않습니다. 모달은 Tab으로 탐색하고 Esc로 닫습니다.
+목차, 프로젝트 바로가기, 이전/다음 버튼, 키보드 ← → / Space / Home / End를 지원합니다. 섹션 URL을 공유하고 브라우저 뒤로 가기로 돌아올 수 있습니다. 본문은 세로로 스크롤하며 차트와 모달 안의 조작은 배경 페이지를 넘기지 않습니다. 모달은 Tab으로 탐색하고 Esc로 닫습니다.
 
-Three.js와 GSAP은 배경 효과에만 사용하며 CDN 로딩과 관계없이 탐색을 초기화합니다. marked가 없으면 단계 본문을 원문으로 표시합니다. JavaScript가 비활성화되거나 로드되지 않으면 전체 문서를 세로로 읽고 프로젝트·이력서·연락처 링크를 사용할 수 있습니다. 모션 감소 설정을 존중합니다.
+Three.js와 GSAP은 배경 효과에만 사용하며 CDN 로딩과 관계없이 탐색을 초기화합니다. marked가 없으면 단계 본문을 원문으로 표시합니다. JavaScript가 비활성화되면 전체 문서를 세로로 읽고 프로젝트·이력서·연락처 링크를 사용할 수 있습니다. 모션 감소 설정을 존중합니다.
 
 ## 로컬 실행과 검증
 
-Node.js 22 이상을 사용합니다. 사이트 배포에는 빌드가 필요 없습니다.
+Node.js 22 이상을 사용합니다. 정적 사이트 배포에는 빌드가 필요 없습니다.
 
 ```sh
 npm ci --ignore-scripts
-npx playwright install chromium
-python -m http.server 8000
+npm test
+python -m http.server 8000 --bind 127.0.0.1
 ```
 
-`http://localhost:8000`에서 확인합니다. 별도 터미널에서 검증합니다.
+`http://127.0.0.1:8000`에서 확인합니다. `npm test`와 GitHub Actions는 브라우저 없는 단계 데이터·원본 해시·대체 제목 계약 검사 4개를 실행합니다. Playwright를 설치하거나 실행하지 않습니다. 이전 브라우저 테스트 파일은 보존하지만 현재 기본 검사에서는 실행하지 않습니다.
 
-```sh
-npm test
+화면·키보드·모달·원문/대체 목록·좁은 화면과 PDF는 **Aside CLI**로 별도 확인합니다. 이번 갱신의 실제 범위와 결과는 [검증 기록](docs/verification/2026-10-06-portfolio-refresh.md)에 있습니다. 이전 브라우저 검사 35개의 결과를 이번 실행 결과로 재사용하지 않습니다. 자동 검사만으로 모든 접근성·보조기기 검토가 끝났다고 주장하지 않습니다.
+
+## PDF 재생성
+
+Aside CLI가 설치되고 로그인된 브라우저가 준비되어 있어야 합니다. Windows에서는 검토한 시작 helper를 `ASIDE_BOOTSTRAP`에 지정합니다. 이 helper는 **각 Aside 호출 전에** 실행되며 설정이 없으면 PDF 내보내기를 중단합니다. 별도 CLI 경로가 필요하면 `ASIDE_CLI`를 사용합니다.
+
+```powershell
+$env:ASIDE_BOOTSTRAP = 'C:/tools/aside-up.ps1'
 npm run export:pdf
 ```
 
-테스트는 자체 임시 서버를 사용합니다. 320·390·768·1280·1440px 레이아웃, 터치와 키보드, URL 이동, JavaScript 없는 읽기, WCAG A/AA 자동 검사와 PDF 출력을 확인합니다. 자동 접근성 검사는 수동 보조기기 검토를 전부 대신하지 않습니다.
+첫 줄은 자신의 helper 경로로 바꿉니다. 다른 출력 위치는 `npm run export:pdf -- output.pdf`로 지정합니다. exporter는 로컬 CV의 외부 폰트 스타일시트를 제외하고 시스템 한글 폰트를 사용하며 상대 링크를 공개 주소로 바꿉니다. 브라우저 창을 닫지 않고 자신이 연 탭만 닫습니다.
 
-PDF는 로컬 시스템 폰트로 `cv.html`에서 생성합니다. Linux에서는 먼저 `fonts-noto-cjk`를 설치하세요. 다른 경로로 내보내려면 `npm run export:pdf -- output.pdf`를 사용합니다. 문서의 상대 링크는 공개 주소로 변환됩니다.
-
-2026-10-03 PDF는 Aside CLI로 생성했습니다. 로컬 HTTP 서버에서 `cv.html`을 열고 외부 폰트 스타일시트를 제외한 뒤 상대 링크를 공개 주소로 변환합니다. `page.pdf`에는 CDP 옵션 `paperWidth: 8.2677165354`, `paperHeight: 11.6929133858`, `preferCSSPageSize: true`, `generateTaggedPDF: true`, `generateDocumentOutline: true`를 사용합니다. 출력물의 A4 3쪽, 검색 가능한 한글, 문서 목차·태그·공개 링크를 확인했습니다. 브라우저 도구 사용에 별도 정책이 있는 환경에서는 그 정책을 따르세요.
+Aside의 CDP 옵션 `paperWidth:8.2677165354`, `paperHeight:11.6929133858`, `preferCSSPageSize:true`, `generateTaggedPDF:true`, `generateDocumentOutline:true`를 요청합니다. exporter 출력의 `tagged_requested`는 요청한 옵션이며 실제 A4 크기·태그·목차·한글·링크는 생성된 PDF에서 따로 확인합니다.
 
 ## 콘텐츠 갱신과 배포
 
-사이트의 제목·목차·단계 창·이력서는 **하네스 36**으로 표시합니다.
+2026-10-06 기준 **하네스 20 v4.0.0**, **Agentic Vault v0.18.0**을 표시합니다. 하네스 단계 본문은 [v4.0.0](https://github.com/Technoetic/harness20/releases/tag/v4.0.0), 커밋 `a6966675cb1f8dc90a2eb8d533bcb7f2664ec6e4`의 `planning-first-20-v1` 프로필과 연결했습니다. 기획부터 새 20단계로 시작하고 기존 36·50단계 기록과 재개 경로를 보존합니다.
 
-하네스 소개와 단계 본문은 [Harness50 v2.13.0](https://github.com/Technoetic/harness36/releases/tag/v2.13.0), 커밋 `aa4c622cf05d88a51f4b5defb68d0251d8f4fde6` 기준입니다(2026-10-03 갱신). 새 실행은 조사 14단계를 제거한 `research-free-36-v1` 프로필을 사용하며, 기존 50단계 진행 기록은 계속 지원합니다. `assets/harness50-source.json`에 원본 36개 파일과 표시 본문의 SHA256을 기록했습니다. `steps-data.js`는 해당 커밋의 `assets/profiles/research-free-36-v1/steps/step001.md`~`step036.md`에서 YAML frontmatter와 앞뒤 공백만 제외한 본문을 담습니다. 갱신할 때는 같은 원본으로 본문과 `assets/portfolio.js`의 대체 제목 목록을 함께 맞추고, `index.html`·`cv.html`의 버전·설명 및 PDF도 갱신합니다. 데이터·대체 제목·해시의 일치 여부는 `node --test tests/harness-data.test.mjs`로 브라우저 없이 확인할 수 있습니다.
+`steps-data.js`는 공개 태그의 `assets/profiles/planning-first-20-v1/steps/step001.md`~`step020.md`에서 YAML frontmatter와 앞뒤 공백만 제외한 전체 본문입니다. source metadata에는 canonical index와 원본 20개/표시 본문의 SHA256을 기록합니다. 본문·대체 제목·메타데이터·화면·CV·PDF를 함께 갱신합니다. 별도 커스텀 커맨드 20개와 하네스 작업 20단계는 서로 다른 자료입니다.
 
-수치를 바꿀 때는 출처를 다시 확인하고 `assets/metrics.json`, `index.html`, `cv.html`의 값과 기준일을 함께 갱신한 뒤 PDF를 재생성합니다. GitHub 저장소 수는 GitHub 사용자 API 기준이며, 블로그·활동·언어 차트는 명시된 날짜의 스냅샷입니다. 확인되지 않은 고객사 효과나 수치는 넣지 않습니다.
+두 플러그인은 제공된 OWASP LLM Top 10 문서를 기준으로 호스트 통제를 보강했습니다. 표시는 OWASP 인증·전체 환경 안전성 보증이 아닙니다. 하네스 20의 생성 HTML 네이티브 실행은 호스트 네트워크 격리 지원 전까지 차단하며 변경된 훅은 사용자 신뢰 검토가 필요합니다. 현재 공개 근거와 제약은 [하네스 보안 문서](https://github.com/Technoetic/harness20/blob/main/docs/SECURITY.md), [Agentic Vault 보안 문서](https://github.com/Technoetic/agentic-vault/blob/master/docs/SECURITY.md), 각 릴리스의 `verification.json`을 확인합니다.
 
-GitHub Actions가 PR과 push에서 브라우저 검사를 실행합니다. 검증 후 `main`에 반영하면 GitHub Pages가 저장소 루트의 정적 파일을 배포합니다.
+GitHub 공개 저장소 수 139개는 2026-10-06 공개 사용자 API 관측값입니다. 블로그·활동·언어 차트는 표시된 과거 스냅샷 기준일을 유지합니다. 확인하지 않은 고객사 효과나 내부 회사 자료를 추가하지 않습니다.
+
+GitHub Actions의 정적 검증 후 `main`에 반영하면 GitHub Pages가 저장소 루트의 정적 파일을 배포합니다. 공개 주소에서 내려받은 파일 해시와 화면·단계 탐색까지 확인한 뒤 배포 완료로 기록합니다.

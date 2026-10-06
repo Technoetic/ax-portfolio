@@ -7,12 +7,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test --test-concurrency=1 tests/*.test.mjs",
+    "test": "node --test tests/harness-data.test.mjs",
     "export:pdf": "node scripts/export-pdf.mjs"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.13.0",
-    "gsap": "3.12.5",
-    "playwright": "1.63.0"
+    "gsap": "3.12.5"
   }
 }
