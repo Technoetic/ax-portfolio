@@ -1,4 +1,4 @@
-name: Portfolio verification
+name: Portfolio source verification
 
 on:
   push:
@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  browser-checks:
+  source-checks:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -24,9 +24,5 @@ jobs:
           cache: npm
       - name: Install pinned test dependencies
         run: npm ci --ignore-scripts
-      - name: Install Chromium and Korean fonts
-        run: |
-          npx --no-install playwright install --with-deps chromium
-          sudo apt-get install -y fonts-noto-cjk
-      - name: Verify layout, navigation, accessibility and PDF export
+      - name: Verify released step data, source hashes and fallback titles
         run: npm test
