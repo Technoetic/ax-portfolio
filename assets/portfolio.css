@@ -682,3 +682,6 @@
   .cv-bcp .lk .demo-off{font-size:10.5px;border-radius:7px;padding:5px 10px}
   .cv-line .lg.lg-blank{background:transparent;border-style:dashed}
   #s0 .role.now{margin-top:var(--s2);font-size:clamp(14px,1.5vw,18px)}
+/* 2026-10-07 감사 반영: 재직 줄·경력 행 추가로 하단 바에 덮이던 첫 화면 연락처(낮은 화면)와 이력 요약 로고 줄을 되돌림 */
+@media (max-height:800px){#s0 .kicker{margin-bottom:var(--s2)}#s0 .title-role{margin-top:var(--s1)}#s0 .role{margin-top:var(--s3)}#s0 .role.now{margin-top:var(--s1)}#s0 .hero-actions{margin-top:var(--s3)}#s0 .contacts{margin-top:var(--s3)!important}}
+@media (min-width:761px){#scv .cv-line{padding:5px 0}#scv .cv-line .lg{height:40px}}
