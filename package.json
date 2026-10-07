@@ -7,7 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test tests/harness-data.test.mjs",
+    "test": "node --test tests/harness-data.test.mjs tests/commands-data.test.mjs",
     "export:pdf": "node scripts/export-pdf.mjs"
   },
   "devDependencies": {
