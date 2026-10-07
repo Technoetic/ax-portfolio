@@ -675,3 +675,10 @@
     .site-header,.skip-link{display:none!important}
     .slide,#scv{padding:32px;overflow:visible;min-height:0;justify-content:flex-start}
   }
+
+  /* 2026-10-07: 중지한 데모 표시, 이력 요약의 로고 없는 경력 칸, 첫 화면 현재 역할 */
+  .bcp-card .lks .demo-off,.cv-bcp .lk .demo-off{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11.5px;
+    color:var(--fg-mute);background:transparent;border:1px dashed var(--line);border-radius:8px;padding:7px 12px;cursor:default}
+  .cv-bcp .lk .demo-off{font-size:10.5px;border-radius:7px;padding:5px 10px}
+  .cv-line .lg.lg-blank{background:transparent;border-style:dashed}
+  #s0 .role.now{margin-top:var(--s2);font-size:clamp(14px,1.5vw,18px)}
