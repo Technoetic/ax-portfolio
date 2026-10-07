@@ -8,7 +8,9 @@ const source = await read('commands-data.js');
 const context = { window: {} };
 runInNewContext(source, context, { timeout: 1000 });
 const commands = JSON.parse(JSON.stringify(context.window.CMDS_FULL));
-const slide = (await read('index.html')).match(/<section class="slide" id="s5"[\s\S]*?<\/section>/)?.[0];
+const page = await read('index.html');
+const runtime = await read('assets/portfolio.js');
+const slide = page.match(/<section\b[^>]*\bid="s5"[^>]*>[\s\S]*?<\/section>/)?.[0];
 assert.ok(slide, 'The tooling slide (#s5) must exist');
 const rowNames = text => [...text.matchAll(/<div class="cmd-row clickable" data-cmd="([^"]+)">/g)].map(match => match[1]);
 const listed = rowNames(slide);
@@ -25,9 +27,11 @@ test('the tooling slide lists exactly the commands that have bodies, with matchi
     assert.ok(body.trim().length >= 200, `/${name} needs a real body`);
   }
   assert.ok(slide.includes(`# ${listed.length} custom slash commands`), 'Header count matches the list');
-  const labels = [...slide.matchAll(/… \+ (\d+) more/g)].map(match => Number(match[1]));
-  assert.ok(labels.length > 0, 'The collapsed label exists');
-  assert.ok(labels.every(count => count === hidden.length), 'Collapsed label matches the hidden rows');
+  assert.match(slide, new RegExp(`<div class="bignum[^"]*">${listed.length}</div>`), 'Big number matches the list');
+  // The collapsed label is written in the HTML and restored by the toggle in portfolio.js.
+  const labels = [page, runtime].flatMap(text => [...text.matchAll(/… \+ (\d+) more/g)].map(match => Number(match[1])));
+  assert.ok(labels.length >= 2, 'The collapsed label exists in the page and the toggle');
+  assert.ok(labels.every(count => count === hidden.length), 'Every collapsed label matches the hidden rows');
   assert.ok(hidden.length > 0 && hidden.length < listed.length);
 });
 
@@ -41,7 +45,8 @@ test('command bodies carry no secret printing, piracy advice, local paths or cre
   ];
   for (const [name, body] of Object.entries(commands)) {
     for (const [pattern, label] of banned) {
-      assert.doesNotMatch(body, pattern, `/${name}: ${label}`);
+      // Report only the command and rule, so a failing run never copies a matched value into the public CI log.
+      assert.ok(!pattern.test(body), `/${name}: ${label}`);
     }
   }
 });
