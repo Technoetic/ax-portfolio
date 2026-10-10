@@ -9,7 +9,7 @@
 - `index.html` — 실무 사례와 대표 프로젝트를 소개하는 12개 섹션
 - `assets/portfolio.css`, `assets/portfolio.js` — 반응형 화면과 탐색·모달
 - `cv.html`, `jeon-munjun-portfolio.pdf` — 웹 이력서와 검색 가능한 A4 PDF
-- `steps-data.js` — 공개 하네스 20의 전체 단계 본문
+- `steps-data.js` — 공개 하네스 14의 전체 단계 본문
 - `commands-data.js` — 별도 Claude Code 커스텀 커맨드 저장소의 본문
 - `assets/metrics.json` — 공개 수치·버전의 출처와 기준일
 - `assets/harness50-source.json` — 단계 원본·표시 본문의 SHA256. 기존 파일 이름은 유지합니다.
@@ -32,7 +32,7 @@ python -m http.server 8000 --bind 127.0.0.1
 
 `http://127.0.0.1:8000`에서 확인합니다. `npm test`와 GitHub Actions는 브라우저 없는 검사 7개를 실행합니다. 단계 데이터·원본 해시·대체 제목 계약 검사 4개와, 커맨드 본문의 출처 커밋 표기·목록 일치·알려진 형태의 위험 문구(키 echo, 개인 경로, 토큰 형식) 검사 3개입니다. Playwright를 설치하거나 실행하지 않습니다. 이전 브라우저 테스트 파일은 보존하지만 현재 기본 검사에서는 실행하지 않습니다.
 
-화면·키보드·모달·원문/대체 목록·좁은 화면과 PDF는 **Aside CLI**로 별도 확인합니다. 최근 갱신의 실제 범위와 결과는 [2026-10-07 검증 기록](docs/verification/2026-10-07-review-fixes.md)에, 그 전 갱신은 [2026-10-06 검증 기록](docs/verification/2026-10-06-portfolio-refresh.md)에 있습니다. 이전 브라우저 검사 35개의 결과를 이번 실행 결과로 재사용하지 않습니다. 자동 검사만으로 모든 접근성·보조기기 검토가 끝났다고 주장하지 않습니다.
+화면·키보드·모달·원문/대체 목록·좁은 화면과 PDF는 **Aside CLI**로 별도 확인합니다. 이전 갱신의 실제 범위와 결과는 [2026-10-07 검증 기록](docs/verification/2026-10-07-review-fixes.md)과 [2026-10-06 검증 기록](docs/verification/2026-10-06-portfolio-refresh.md)에 있습니다. 이전 브라우저 검사 35개의 결과를 이번 실행 결과로 재사용하지 않습니다. 자동 검사만으로 모든 접근성·보조기기 검토가 끝났다고 주장하지 않습니다.
 
 ## PDF 재생성
 
@@ -49,11 +49,15 @@ Aside의 CDP 옵션 `paperWidth:8.2677165354`, `paperHeight:11.6929133858`, `pre
 
 ## 콘텐츠 갱신과 배포
 
-2026-10-06 기준 **하네스 20 v4.0.0**, **Agentic Vault v0.18.0**을 표시합니다. 하네스 단계 본문은 [v4.0.0](https://github.com/Technoetic/harness20/releases/tag/v4.0.0), 커밋 `a6966675cb1f8dc90a2eb8d533bcb7f2664ec6e4`의 `planning-first-20-v1` 프로필과 연결했습니다. 기획부터 새 20단계로 시작하고 기존 36·50단계 기록과 재개 경로를 보존합니다.
+2026-10-11 기준 **하네스 14 v4.2.0**, **Agentic Vault v0.20.0**을 표시합니다. 하네스 단계 본문은 [v4.2.0](https://github.com/Technoetic/harness14/releases/tag/v4.2.0), 커밋 `49735c60747ac8d9d64165ec8c1beb3c1cbc082e`의 `planning-first-14-v1` 프로필과 연결했습니다. 기획부터 새 14단계로 시작하고 기존 20·36·50단계 기록과 재개 경로를 보존합니다.
 
-`steps-data.js`는 공개 태그의 `assets/profiles/planning-first-20-v1/steps/step001.md`~`step020.md`에서 YAML frontmatter와 앞뒤 공백만 제외한 전체 본문입니다. source metadata에는 canonical index와 원본 20개/표시 본문의 SHA256을 기록합니다. 본문·대체 제목·메타데이터·화면·CV·PDF를 함께 갱신합니다. 별도 커스텀 커맨드 20개와 하네스 작업 20단계는 서로 다른 자료입니다.
+공개 저장소 이름은 `harness14`로 바뀌었지만 v4.2.0 태그의 플러그인 설치 ID와 명령 네임스페이스는 `harness20`·`/harness20:webapp`을 유지합니다. 설치 ID와 원문 속 식별자는 임의로 바꾸지 않습니다.
 
-두 플러그인은 제공된 OWASP LLM Top 10 문서를 기준으로 호스트 통제를 보강했습니다. 표시는 OWASP 인증·전체 환경 안전성 보증이 아닙니다. 하네스 20의 생성 HTML 네이티브 실행은 호스트 네트워크 격리 지원 전까지 차단하며 변경된 훅은 사용자 신뢰 검토가 필요합니다. 현재 공개 근거와 제약은 [하네스 보안 문서](https://github.com/Technoetic/harness20/blob/main/docs/SECURITY.md), [Agentic Vault 보안 문서](https://github.com/Technoetic/agentic-vault/blob/master/docs/SECURITY.md), 각 릴리스의 `verification.json`을 확인합니다.
+`steps-data.js`는 공개 태그의 `assets/profiles/planning-first-14-v1/steps/step001.md`~`step014.md`에서 YAML frontmatter와 앞뒤 공백만 제외한 전체 본문입니다. source metadata에는 canonical index와 원본 14개/표시 본문의 SHA256을 기록합니다. 본문·대체 제목·메타데이터·화면·CV·PDF를 함께 갱신합니다. 별도 커스텀 커맨드 20개와 하네스 작업 14단계는 서로 다른 자료입니다.
+
+하네스 v4.2.0은 같은 조건의 오프라인 비교와 민감 본문 없는 실행 이력 추출을 추가했습니다. [Agentic Vault v0.20.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.20.0)은 교훈 비교·실행 조건과 영수증 기록·단일 교훈 복구·외부 작업 기록·단계별 연결 진단을 선택형으로 제공합니다. 사용법과 제약은 [공개 안내](https://github.com/Technoetic/agentic-vault/blob/v0.20.0/docs/tower-reliability.md)를 따릅니다.
+
+두 플러그인은 제공된 OWASP LLM Top 10 문서를 기준으로 호스트 통제를 보강했습니다. 표시는 OWASP 인증·전체 환경 안전성 보증이 아닙니다. 하네스 14의 생성 HTML 네이티브 실행은 호스트 네트워크 격리 지원 전까지 차단하며 변경된 훅은 사용자 신뢰 검토가 필요합니다. 현재 공개 근거와 제약은 [하네스 보안 문서](https://github.com/Technoetic/harness14/blob/v4.2.0/docs/SECURITY.md), [Agentic Vault 보안 문서](https://github.com/Technoetic/agentic-vault/blob/master/SECURITY.md), 각 릴리스의 `verification.json`을 확인합니다.
 
 GitHub 공개 저장소 수 139개는 2026-10-06 공개 사용자 API 관측값입니다. 블로그·활동·언어 차트는 표시된 과거 스냅샷 기준일을 유지합니다. 확인하지 않은 고객사 효과나 내부 회사 자료를 추가하지 않습니다.
 
