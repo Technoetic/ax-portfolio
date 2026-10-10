@@ -13,7 +13,7 @@
     "value": 2,
     "asOf": "2026-10-06",
     "projects": [
-      "harness20",
+      "harness14",
       "agentic-vault"
     ]
   },
@@ -26,14 +26,19 @@
     "asOf": "2026-08-07"
   },
   "pluginReleases": {
-    "asOf": "2026-10-06",
-    "harness20": {
-      "version": "4.0.0",
-      "source": "https://github.com/Technoetic/harness20/releases/tag/v4.0.0"
+    "asOf": "2026-10-11",
+    "harness14": {
+      "version": "4.2.0",
+      "source": "https://github.com/Technoetic/harness14/releases/tag/v4.2.0",
+      "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e",
+      "workflowProfile": "planning-first-14-v1",
+      "stepCount": 14,
+      "pluginInstallId": "harness20"
     },
     "agentic-vault": {
-      "version": "0.18.0",
-      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.18.0"
+      "version": "0.20.0",
+      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.20.0",
+      "commit": "c8c56cfd8fdca1a56f75a7639fb482a6e77fdf9f"
     }
   }
 }

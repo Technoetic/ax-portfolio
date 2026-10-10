@@ -1,156 +1,115 @@
 {
-  "repository": "https://github.com/Technoetic/harness20",
-  "ref": "v4.0.0",
-  "commit": "a6966675cb1f8dc90a2eb8d533bcb7f2664ec6e4",
-  "version": "4.0.0",
-  "synced_on": "2026-10-06",
-  "workflow_profile": "planning-first-20-v1",
-  "step_count": 20,
+  "repository": "https://github.com/Technoetic/harness14",
+  "ref": "v4.2.0",
+  "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e",
+  "version": "4.2.0",
+  "synced_on": "2026-10-11",
+  "plugin_install_id": "harness20",
+  "workflow_profile": "planning-first-14-v1",
+  "step_count": 14,
   "body_normalization": "UTF-8, LF line endings; omit YAML frontmatter and surrounding whitespace only",
   "source_index": {
-    "path": "codex/assets/profiles/planning-first-20-v1/steps/index.json",
-    "sha256": "ae0622c00276ea28f261ae81518e25706c52c704b95223e8fb339437ae0e8dab"
+    "path": "codex/assets/profiles/planning-first-14-v1/steps/index.json",
+    "sha256": "e579d89625d4bdcfd501b48fed70be594c6114745fbef823e29314d882a44c5b"
   },
   "steps": [
     {
       "step": 1,
       "title": "기획: 요구사항 기반 (독립 검증 루프)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step001.md",
-      "source_sha256": "77566999ca5f018c613b246248a29bef6a119ac29d97cbbb8a5ce04d3dda3c79",
-      "body_sha256": "b36eaf2f7a200b045c81f3d8906b11b1342ebbf431f892e6171fbe951d088e47"
+      "path": "assets/profiles/planning-first-14-v1/steps/step001.md",
+      "source_sha256": "24f0a774f8c4679086f7c3d7f2456730bb561569b5aa7dcec94693ec8aaff994",
+      "body_sha256": "c109b8a8fa17bc318fed9d80bff3d87973dc2050b18480a883687444374aaad7"
     },
     {
       "step": 2,
-      "title": "통합 설계 (레이아웃 + 전체)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step002.md",
-      "source_sha256": "a36ce17687778a96063ffb362716e7146d8f0e60fee02ec64f2bcff00ccd99aa",
-      "body_sha256": "2cc00323d98acb6d5994d2119f4d6a2a467b1ceb09aa676f3386aafedf1ade49"
+      "title": "통합 설계와 환경 준비 (레이아웃 + 전체)",
+      "path": "assets/profiles/planning-first-14-v1/steps/step002.md",
+      "source_sha256": "fb19aa6c8834771f49169d478255ae783efa05242a21f70040cc9bcce6d634dd",
+      "body_sha256": "af874c88bda328b23cf02ecb90b57b16922da8892cee701d8073f13f9f3f8870"
     },
     {
       "step": 3,
-      "title": "환경 준비",
-      "path": "assets/profiles/planning-first-20-v1/steps/step003.md",
-      "source_sha256": "25263b63854ba4151eb62e6d58d2bd340159c9a946b6ff17cf4fcb55f708d5b4",
-      "body_sha256": "7ec42bc911e788088535a27daea31ab1752a5b4459c4f26bb85ec245be4d4e2e"
+      "title": "구현",
+      "path": "assets/profiles/planning-first-14-v1/steps/step003.md",
+      "source_sha256": "8472d20e52c735c96fa9f347063544f3dc8e559383d4368e9d79c0bfc0477af0",
+      "body_sha256": "98b981ae409c4eabfacc5d75ffdad084fbc84a82349993259bd138718aaa1fd6"
     },
     {
       "step": 4,
-      "title": "구현 파일 인덱싱 (tokei)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step004.md",
-      "source_sha256": "d3228f363f36a07759a99c303a6df868790950a9aabc7b3bb003e6a707ebc6c2",
-      "body_sha256": "500722baacef7a9dbd030fc99a703ffb8b859ffaa737096052a52f8ff57ebe5c"
+      "title": "빌드 스모크 테스트 (구현 완료 게이트)",
+      "path": "assets/profiles/planning-first-14-v1/steps/step004.md",
+      "source_sha256": "69bc6f16450d09cfcab7d62ed402d635073dd85832dca51a15d883fdeb58da2e",
+      "body_sha256": "7f9fac1aa263ccfeb4286cb4887032eff5d8592b02cad7e5426ed8618277a058"
     },
     {
       "step": 5,
-      "title": "jscpd 코드 중복 베이스라인 수집",
-      "path": "assets/profiles/planning-first-20-v1/steps/step005.md",
-      "source_sha256": "f0139f323d64d61e37a4a5adc29c302f9e739497358db26a33fd5e650742c600",
-      "body_sha256": "1c68b46e91efc106173d49e3a8f455ed3faf65d54beae9622e8ed30c7acb342a"
+      "title": "레이아웃 스크린샷 검증 (독립 검증 루프)",
+      "path": "assets/profiles/planning-first-14-v1/steps/step005.md",
+      "source_sha256": "49f864b46ad0282ed042a484d05be329e07926362c244b04ec8a48ceb8eb9435",
+      "body_sha256": "a809dff1cc7d81352f1801dd04b5ea4e8f39e2876b001c73daa48653fe07ab6c"
     },
     {
       "step": 6,
-      "title": "knip 미사용 코드 베이스라인 수집",
-      "path": "assets/profiles/planning-first-20-v1/steps/step006.md",
-      "source_sha256": "2baac1e09d3c651218e76888f9a2c261f84975e06bbb57c181623b00fa9abbd8",
-      "body_sha256": "d826d78d9b19ffaa84187d65766c87e7d8fd8074c9f42d4bb3133cb0a4ab519b"
+      "title": "JavaScript 모듈화",
+      "path": "assets/profiles/planning-first-14-v1/steps/step006.md",
+      "source_sha256": "2a30f3ff4a06d6c019a6b91419bfca691a24e39e964e42305533dc6d68116c3d",
+      "body_sha256": "40dec7fb4da872d7058575d8a8d99a3b2e44c7471d2106150a105e346452d3f0"
     },
     {
       "step": 7,
-      "title": "컨텍스트 윈도우 제한 방지",
-      "path": "assets/profiles/planning-first-20-v1/steps/step007.md",
-      "source_sha256": "25a4d436924ffa3e6154eebb3249a00374d6468232872ebe5c1555ac766dc930",
-      "body_sha256": "e467f06e0c006ea24813df9b17f7593ecdce2fffbbe151d6cadbd061ac8df6ef"
+      "title": "CSS 파일 분리 (컨텍스트 최적화)",
+      "path": "assets/profiles/planning-first-14-v1/steps/step007.md",
+      "source_sha256": "9e5a89b6bc5eb925b5259aaba19a89e11259516d73ca74f79ce46882940ea179",
+      "body_sha256": "d683394baeb3771c34f9039ac2114f1967ee94c6146e9547b5e982908a821093"
     },
     {
       "step": 8,
-      "title": "인코딩 규칙 (모지바케 방지)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step008.md",
-      "source_sha256": "bbfe71d007e04ba48364877b14ce2986c9b3f409dadba11ab72d55c62779b29a",
-      "body_sha256": "c0068161c3a52dd9037d7861dbb20cc705bcb57a9e7eb1b35413c5dc50a9e0e9"
+      "title": "클라이언트 사이드 라우팅",
+      "path": "assets/profiles/planning-first-14-v1/steps/step008.md",
+      "source_sha256": "e3c4d260dc22310587aa726826b4e15dd74ed9985465e84b24a0cc20af5c75b3",
+      "body_sha256": "813eaca43930815aa0baa13aa241d545bd50ea88df91c7fd1e061e9816e6344f"
     },
     {
       "step": 9,
-      "title": "구현",
-      "path": "assets/profiles/planning-first-20-v1/steps/step009.md",
-      "source_sha256": "e427b15e90d14852e4d912a751deb7949956ad7b3d291fa83b884532113e1178",
-      "body_sha256": "e1182abbf5d0b4637f35b94dc6e77a9def5be22d5f0f3426b45d4bb20e5cb8c0"
+      "title": "E2E 테스트",
+      "path": "assets/profiles/planning-first-14-v1/steps/step009.md",
+      "source_sha256": "d784b9cc4f56235673427e05fecd634802e2bae1637ff19bfb71ee25547a9560",
+      "body_sha256": "bf7c237120aab6dd72f14bfbcba60e93858fc8974c12ebab817b4c6f29fc7ff2"
     },
     {
       "step": 10,
-      "title": "빌드 스모크 테스트 (구현 완료 게이트)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step010.md",
-      "source_sha256": "10aebfb912d9db028197e89a83bae3fef600326690e82ac69be8ec8453e1077a",
-      "body_sha256": "3522a7ca9661dbf1b659fe06cb545a5bb39e1eb6ae015045bd7ffbdd9bf2ee6b"
+      "title": "스크린샷 기반 상세 E2E 테스트",
+      "path": "assets/profiles/planning-first-14-v1/steps/step010.md",
+      "source_sha256": "2f66405f5e8d9312e7cf10b81b2011231d70d36076d8fd6f20b9fe5429864aaa",
+      "body_sha256": "a60b4c6837b6d83dcebedf131b057b5ffce08b7ab0a29bf802335c72b064ff85"
     },
     {
       "step": 11,
-      "title": "레이아웃 스크린샷 검증 (독립 검증 루프)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step011.md",
-      "source_sha256": "62388dc93484e3459adc109982044ffda861366fd5d4f365b353e9ec6e77b82a",
-      "body_sha256": "c25c89cc88efa373b6aaab749a40ebe94823772d2bb4a0280a628e3f7d593da1"
+      "title": "키보드 인터랙션 시각 검증",
+      "path": "assets/profiles/planning-first-14-v1/steps/step011.md",
+      "source_sha256": "e053e7f532ffc3f0923f6144d4f7e0259fabc5808c6d9cfbb927b31eaa12aaa2",
+      "body_sha256": "76b95fadbc59ee1357c868cab6ae07948dddedceece619ce8bf641299f2417f0"
     },
     {
       "step": 12,
-      "title": "JavaScript 모듈화",
-      "path": "assets/profiles/planning-first-20-v1/steps/step012.md",
-      "source_sha256": "7636d2e3e591d98217b31da7e28e915b705626ba70568a40850567c8e26372b6",
-      "body_sha256": "26fd27eff38f5821def49385c6cd9caab2b9f1b82c0d1179f82c49dddb9d0d7a"
+      "title": "마우스 인터랙션 시각 검증",
+      "path": "assets/profiles/planning-first-14-v1/steps/step012.md",
+      "source_sha256": "0140c9efe5eac4e88be69ead86d8aedb310dd4c5bacce2e0d7b91c43a6226b36",
+      "body_sha256": "a4b907ecc6129c1ba15f1ba31db5fdf387899dd46fbb15dd9f5dce74bd2403df"
     },
     {
       "step": 13,
-      "title": "CSS 파일 분리 (컨텍스트 최적화)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step013.md",
-      "source_sha256": "f1b3eae64ec975c7de31721b423a6662d5b9eb2a546c4fe455e0fe077b7e2b03",
-      "body_sha256": "55ba0f23caf0e5993067bff7df8bdad521a006aa394c4e2cdbdbd1f72494558c"
+      "title": "디자인 시각 검증 (독립 검증 루프)",
+      "path": "assets/profiles/planning-first-14-v1/steps/step013.md",
+      "source_sha256": "6d277f3267866eb4b75a8d6c52a70e956b82c7ba13b98cc170e958f12d10db9f",
+      "body_sha256": "51d37b3e95a93c3a1d252c7f631f4eaa0e238a5781df6ca1d772ef07d62050f6"
     },
     {
       "step": 14,
-      "title": "클라이언트 사이드 라우팅",
-      "path": "assets/profiles/planning-first-20-v1/steps/step014.md",
-      "source_sha256": "5dd8f2ee58606ae2d528a077f1e39b771efe83092d2ec3e3d67491fb5339e91f",
-      "body_sha256": "35f2b53c6dafa0229d796714a3009db3b5e5ecf3e6a3c302dafdbe86e852471f"
-    },
-    {
-      "step": 15,
-      "title": "E2E 테스트",
-      "path": "assets/profiles/planning-first-20-v1/steps/step015.md",
-      "source_sha256": "a4388a645844d1cfc39c876b82ecc516655bb4df20576477934c5648d21964c8",
-      "body_sha256": "2af1f8d6a325840a3fae3482f403c8391aa1c68898d1cdb72c6e8f5a1971062e"
-    },
-    {
-      "step": 16,
-      "title": "스크린샷 기반 상세 E2E 테스트",
-      "path": "assets/profiles/planning-first-20-v1/steps/step016.md",
-      "source_sha256": "3b25692359cf09033996eb4b794b3b5f2f6d32e46cdc7b902506f184f89197a8",
-      "body_sha256": "74d27e3272e450b3c3f93392fa03affcdb9742b6c7364f298e3e2e2c4a166415"
-    },
-    {
-      "step": 17,
-      "title": "키보드 인터랙션 시각 검증",
-      "path": "assets/profiles/planning-first-20-v1/steps/step017.md",
-      "source_sha256": "b3876fe24c549529d073984de86d8b4d351c7a3d1246aebaff169f2fc2e5ca1f",
-      "body_sha256": "01f3d2d566406a95f023897d9b6dc014ed8346485a5c4435e4ed3b2a05bf62e5"
-    },
-    {
-      "step": 18,
-      "title": "마우스 인터랙션 시각 검증",
-      "path": "assets/profiles/planning-first-20-v1/steps/step018.md",
-      "source_sha256": "9e43af9a1f0164f80bf198eb41c5f9de342b355186701d1c7489e800d3b73b18",
-      "body_sha256": "b81018c34d653346aa8660fe07f2e0a0c7bcbab7d82ae8355022324255999ca8"
-    },
-    {
-      "step": 19,
-      "title": "디자인 시각 검증 (독립 검증 루프)",
-      "path": "assets/profiles/planning-first-20-v1/steps/step019.md",
-      "source_sha256": "35e078f7bb2457275bbebd17ee62d4daacd4adb02cc361a4e8fdf2b7eb726dc3",
-      "body_sha256": "4e0647a622f36842835c3696b8180b1853294f318b50e17cf335cb682cccac34"
-    },
-    {
-      "step": 20,
       "title": "콘솔 에러 수집 및 해결",
-      "path": "assets/profiles/planning-first-20-v1/steps/step020.md",
-      "source_sha256": "2542641168ca7cb2fa2e265efb55dc612299dca685616ee63e81eccd76367dea",
-      "body_sha256": "3c4f426d5c37b636d2558ff6ebe3799a0d22d5534eb924573136dfc84f78fe71"
+      "path": "assets/profiles/planning-first-14-v1/steps/step014.md",
+      "source_sha256": "a94fce42feea526b3d80a2b94283cf9f87d2fdbf448bc248708a65a14d060713",
+      "body_sha256": "1d8156a117fdeada8fcbc008a801960dbce89c4a33a295936087e6a56b8ad0d0"
     }
   ]
 }
