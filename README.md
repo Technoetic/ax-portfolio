@@ -49,7 +49,7 @@ Aside의 CDP 옵션 `paperWidth:8.2677165354`, `paperHeight:11.6929133858`, `pre
 
 ## 콘텐츠 갱신과 배포
 
-2026-10-11 기준 **하네스 14 v4.2.0**, **Agentic Vault v0.20.0**을 표시합니다. 하네스 단계 본문은 [v4.2.0](https://github.com/Technoetic/harness14/releases/tag/v4.2.0), 커밋 `49735c60747ac8d9d64165ec8c1beb3c1cbc082e`의 `planning-first-14-v1` 프로필과 연결했습니다. 기획부터 새 14단계로 시작하고 기존 20·36·50단계 기록과 재개 경로를 보존합니다.
+2026-10-11 기준 **하네스 14 v4.2.0**, **Agentic Vault v0.20.0**을 표시합니다. 하네스 단계 본문은 [v4.2.0](https://github.com/Technoetic/harness14/releases/tag/v4.2.0), 커밋 `49735c60747ac8d9d64165ec8c1beb3c1cbc082e`의 `planning-first-14-v1` 프로필과 연결했습니다. 기획부터 새 14단계로 시작합니다.
 
 공개 저장소 이름은 `harness14`로 바뀌었지만 v4.2.0 태그의 플러그인 설치 ID와 명령 네임스페이스는 `harness20`·`/harness20:webapp`을 유지합니다. 설치 ID와 원문 속 식별자는 임의로 바꾸지 않습니다.
 
