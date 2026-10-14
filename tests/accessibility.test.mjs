@@ -37,7 +37,7 @@ for (const width of [320, 390, 1440]) {
       // Attach error listeners before this load so initialization is checked too.
       await page.reload({ waitUntil: 'networkidle' });
       const ids = await page.locator('#deck > .slide').evaluateAll(slides => slides.map(slide => slide.id));
-      assert.equal(ids.length, 12, 'The audited portfolio contains twelve sections');
+      assert.equal(ids.length, 13, 'The audited portfolio contains thirteen sections');
       for (const id of ids) {
         await showSlide(page, id);
         await auditAccessible(page, `${width}px section ${id}`, findings);

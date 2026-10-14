@@ -7,7 +7,7 @@ function initPortfolio(){
   if(sxcDiagram&&sxcToggle){
     // The button keeps one name; aria-pressed and the icon carry the state.
     const sxcStillAlt=sxcDiagram.alt;
-    const sxcMotionAlt='데모 실행 7단계(demo·doctor·build·reason·cube·verify·report)를 차례로 보여 주는 동작 설명 애니메이션. 실제 실행 기록이 아니다.';
+    const sxcMotionAlt='데모 실행 7단계(demo·doctor·build·reason·cube·verify·report)를 차례로 보여 주는 동작 설명 애니메이션(실제 실행 기록 아님).';
     sxcToggle.hidden=false;
     sxcToggle.addEventListener('click',()=>{
       const playing=sxcToggle.getAttribute('aria-pressed')!=='true';

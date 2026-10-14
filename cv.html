@@ -50,6 +50,7 @@
     .stat span{display:block;font-size:13px;margin-top:8px;word-break:keep-all}
     .stat small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
     .stat small .nw{display:inline;font-size:inherit;margin-top:0;white-space:nowrap}
+    @media(max-width:360px){.stat small .nw{white-space:normal}}
     .case{padding:26px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px}
     .case h3{font-size:22px;letter-spacing:-.02em}
     .meta{font-size:13px;color:var(--muted);margin-top:8px}
@@ -195,7 +196,7 @@
             <div class="chips"><span class="chip">Claude Code · Codex 지원</span><span class="chip">v0.1.1 · MIT</span></div>
             <p class="ds">설정 하나에서 PostgreSQL·온톨로지·시맨틱 레이어 모델을 만들고, 같은 질문에 같은 답을 내는지 서로의 결과와 따로 작성한 기준 SQL로 대조하는 교차 검증 플러그인입니다.</p>
             <p class="meta">PostgreSQL 17+ · RDF/OWL · SHACL · HermiT · Cube Core</p>
-            <p class="snapshot">PASS는 수행한 검사에서 불일치를 찾지 못했다는 뜻이며, 검증하지 못한 범위(not_proven)를 함께 보고합니다. 데모는 가상 부품·BOM 데이터로 동작합니다.</p>
+            <p class="snapshot">PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻이며, 검증하지 못한 범위(not_proven)를 함께 보고합니다. 데모는 가상 부품·BOM 데이터로 동작합니다.</p>
             <a href="https://github.com/Technoetic/semantic-crosscheck">소스·설치 안내 보기 →</a>
           </article>
           <article class="card">
