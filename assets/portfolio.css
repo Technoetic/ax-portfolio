@@ -179,18 +179,26 @@
 
   /* semantic-crosscheck: public project diagram, opt-in animation. */
   #sxc h2{font-size:clamp(26px,3.5vw,44px);overflow-wrap:anywhere}
-  #sxc .lead{word-break:keep-all}
+  #sxc .lead{word-break:keep-all;text-wrap:pretty}
+  #sxc .sxc-checks span,#sxc .snapshot-note,.sxc-figure figcaption{word-break:keep-all}
   #sxc .split>div{min-width:0}
-  .sxc-tags{display:flex;flex-wrap:wrap;gap:var(--s1);margin-bottom:var(--s2)}
+  .sxc-question{font-size:clamp(22px,2.2vw,30px);font-weight:800;letter-spacing:-.02em;line-height:1.25;color:var(--accent-2);word-break:keep-all;margin:0}
   .sxc-checks{list-style:none;display:grid;gap:var(--s2);margin-top:var(--s3)}
   .sxc-checks li{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:15px}
   .sxc-checks b{color:var(--fg);min-width:96px}
   .sxc-checks span{color:var(--fg-dim)}
   .sxc-figure{min-width:0;padding:var(--s2);border:1px solid var(--line);border-radius:12px;background:var(--bg-2)}
-  .sxc-figure img{display:block;max-width:100%;width:100%;height:auto;border-radius:8px}
+  .sxc-figure img{display:block;max-width:100%;width:100%;height:auto;aspect-ratio:1200/560;object-fit:contain;border-radius:8px}
   .sxc-figure figcaption{color:var(--fg-dim);font-size:13px;margin:var(--s2) 0}
   #sxc-animation-toggle{cursor:pointer;font-family:inherit}
   #sxc-animation-toggle[hidden]{display:none}
+  #sxc-animation-toggle[aria-pressed="true"]{border-color:var(--accent-2);background:#1d293b}
+  .sxc-toggle-icon::before{content:"\25B6";display:inline-block;min-width:1.2em;font-size:11px}
+  #sxc-animation-toggle[aria-pressed="true"] .sxc-toggle-icon::before{content:"\275A\275A"}
+  .sxc-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:var(--s2);font-size:13px;line-height:1.5;word-break:keep-all}
+  #sxc .linkbtn{margin-top:var(--s3)}
+  .sxc-links a{color:var(--accent-2);text-decoration:underline;text-decoration-color:#60a5fa66;text-underline-offset:3px}
+  .sxc-links a:hover{text-decoration-color:currentColor}
   @media(max-width:900px){#sxc{justify-content:flex-start}}
 
   /* 거대 숫자 + 코드 패널 */

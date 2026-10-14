@@ -5,14 +5,15 @@ function initPortfolio(){
   const sxcDiagram=document.getElementById('sxc-diagram');
   const sxcToggle=document.getElementById('sxc-animation-toggle');
   if(sxcDiagram&&sxcToggle){
+    // The button keeps one name; aria-pressed and the icon carry the state.
+    const sxcStillAlt=sxcDiagram.alt;
+    const sxcMotionAlt='데모 실행 7단계(demo·doctor·build·reason·cube·verify·report)를 차례로 보여 주는 동작 설명 애니메이션. 실제 실행 기록이 아니다.';
     sxcToggle.hidden=false;
     sxcToggle.addEventListener('click',()=>{
       const playing=sxcToggle.getAttribute('aria-pressed')!=='true';
-      sxcDiagram.src='assets/semantic-crosscheck/semantic-crosscheck-'+(playing?'flow.gif':'hero.svg');
-      sxcDiagram.width=playing?1080:1200;
-      sxcDiagram.height=playing?480:560;
+      sxcDiagram.src='assets/semantic-crosscheck/semantic-crosscheck-'+(playing?'flow.gif?v=20261014-sxcfix':'hero.svg');
+      sxcDiagram.alt=playing?sxcMotionAlt:sxcStillAlt;
       sxcToggle.setAttribute('aria-pressed',String(playing));
-      sxcToggle.textContent=playing?'애니메이션 정지':'애니메이션 재생';
     });
   }
   /* ===== 데이터 (실측, 2026-08-07) ===== */
