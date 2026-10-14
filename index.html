@@ -27,7 +27,7 @@
 <script defer src="commands-data.js?v=20261007"></script>
 <!-- 마크다운 렌더러 (CDN, defer). 실패 시 원문 텍스트로 폴백 -->
 <script async src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<link rel="stylesheet" href="assets/portfolio.css?v=20261014-sxc">
+<link rel="stylesheet" href="assets/portfolio.css?v=20261014-sxcfix">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -36,7 +36,7 @@
   <nav class="section-nav" aria-label="포트폴리오 탐색">
     <label for="section-select">목차</label>
     <select id="section-select"><option value="s0">소개</option></select>
-    <a href="cv.html?v=20261014-sxc">이력서</a>
+    <a href="cv.html?v=20261014-sxcfix">이력서</a>
     <a href="#s8" data-slide-target>연락</a>
   </nav>
 </header>
@@ -65,8 +65,8 @@
     <div class="hero-actions rise">
       <a class="action-link primary" href="#s4" data-slide-target>대표 프로젝트 보기 <span aria-hidden="true">↗</span></a>
       <a class="action-link" href="#sdhis" data-slide-target>실무 AX 사례</a>
-      <a class="action-link" href="cv.html?v=20261014-sxc">이력서 보기</a>
-      <a class="action-link" href="jeon-munjun-portfolio.pdf?v=20261014-sxc" download>PDF 다운로드</a>
+      <a class="action-link" href="cv.html?v=20261014-sxcfix">이력서 보기</a>
+      <a class="action-link" href="jeon-munjun-portfolio.pdf?v=20261014-sxcfix" download>PDF 다운로드</a>
     </div>
     <div class="contacts rise" style="margin-top:var(--s4)">
       <a href="mailto:technoetic@hotmail.com"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
@@ -85,7 +85,7 @@
       <article class="case-card"><span class="case-step">02 · 수출</span><h3>수출 업무 지원</h3><p>수출 업무에 AI를 도입하고, 실무를 지원하도록 적용했습니다.</p></article>
       <article class="case-card"><span class="case-step">03 · 문서·지식</span><h3>문서 처리와 지식관리</h3><p>업무 자동화·문서 처리·지식관리 서비스를 만들었습니다.</p></article>
     </div>
-    <div class="hero-actions rise"><a class="action-link" href="cv.html?v=20261014-sxc#dhis">이력서에서 수행 범위 보기</a><a class="action-link" href="#s8" data-slide-target>이 사례 문의하기</a></div>
+    <div class="hero-actions rise"><a class="action-link" href="cv.html?v=20261014-sxcfix#dhis">이력서에서 수행 범위 보기</a><a class="action-link" href="#s8" data-slide-target>이 사례 문의하기</a></div>
   </section>
 
   <section class="slide" id="s4" data-title="하네스 14">
@@ -144,26 +144,36 @@
   <section class="slide" id="sxc" data-title="semantic-crosscheck">
     <div class="split">
       <div>
-        <div class="kicker rise">Cross-layer Verification</div>
-        <div class="project-heading rise"><h2>semantic-<wbr>crosscheck</h2></div>
-        <div class="sxc-tags rise"><span class="vbadge">v0.1.1 · MIT</span><span class="vbadge">Claude Code · Codex</span></div>
-        <p class="lead rise">PostgreSQL의 계층 관계와 <b>온톨로지·시맨틱 레이어의 결과를 대조</b>하는 플러그인입니다.<br>하나의 설정에서 모델을 만들고, 계층 간 결과와 <b>독립적인 기준 SQL</b>을 비교합니다.</p>
+        <div class="kicker rise">Verify</div>
+        <div class="bignum-row sxc-question-row rise">
+          <p class="sxc-question">같은 질문에, 같은 답을 내는가?</p>
+          <span class="vbadge">v0.1.1<i>MIT</i></span>
+        </div>
+        <div class="project-heading rise">
+          <h2>semantic-<wbr>crosscheck</h2>
+          <span class="vbadge">Claude Code · Codex</span>
+        </div>
+        <p class="lead rise">직접 설계한 <b>Claude Code와 Codex를 지원하는 교차&nbsp;검증&nbsp;플러그인</b>입니다.<br>설정 하나에서 PostgreSQL·온톨로지·시맨틱 레이어 모델을 만들고, 서로의 결과와 <span class="accent">따로 작성한 기준 SQL</span>로 대조합니다.</p>
         <ul class="sxc-checks rise">
           <li><b>관계와 규칙</b><span>재귀 CTE · RDF/OWL · SHACL</span></li>
-          <li><b>추론과 지표</b><span>HermiT · Cube Core · 기준 SQL</span></li>
-          <li><b>결과 확인</b><span>V1–V5 교차 검사 · 변이 검사 · 리포트</span></li>
+          <li><b>추론과 지표</b><span>HermiT · Cube Core</span></li>
+          <li><b>결과 확인</b><span>V1–V5 교차 검사(V4 변이 검사 포함) · SHACL↔SQL 위반 대조 · 리포트</span></li>
         </ul>
-        <p class="snapshot-note rise">판정과 함께 실제 검사 범위와 <code>not_proven</code> 항목을 확인합니다.</p>
-        <div class="hero-actions rise">
-          <a class="action-link primary" href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener">GitHub에서 보기 <span aria-hidden="true">↗</span></a>
-          <a class="action-link" href="https://github.com/Technoetic/semantic-crosscheck#quick-start-with-the-demo" target="_blank" rel="noopener">빠른 시작</a>
-          <a class="action-link" href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.1.1" target="_blank" rel="noopener">릴리스</a>
-        </div>
+        <p class="snapshot-note rise">PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다. 검사를 건너뛰면 통과로 치지 않고, 검증하지 못한 범위(<code>not_proven</code>)를 함께 보여 줍니다.<br>v0.1.1 릴리스 기준 태그 CI 8개 작업 통과(PostgreSQL&nbsp;17·HermiT·Cube 통합 포함).</p>
+        <a class="linkbtn rise" href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener" aria-label="GitHub에서 보기 — semantic-crosscheck 저장소(새 탭)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
+          GitHub에서 보기<span class="url">github.com/Technoetic/semantic-crosscheck</span>
+        </a>
+        <p class="sxc-links rise">
+          <a href="https://github.com/Technoetic/semantic-crosscheck#quick-start-with-the-demo" target="_blank" rel="noopener">빠른 시작<span aria-hidden="true"> ↗</span><span class="sr-only">(새 탭)</span></a>
+          <a href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.1.1" target="_blank" rel="noopener">릴리스·검증 근거<span aria-hidden="true"> ↗</span><span class="sr-only">(새 탭)</span></a>
+          <a href="https://technoetic.github.io/library-ontology-tutorial/" target="_blank" rel="noopener">같은 기술을 도서관 예제로 배우는 튜토리얼<span aria-hidden="true"> ↗</span><span class="sr-only">(새 탭)</span></a>
+        </p>
       </div>
       <figure class="sxc-figure rise">
-        <img id="sxc-diagram" src="assets/semantic-crosscheck/semantic-crosscheck-hero.svg" width="1200" height="560" alt="하나의 설정에서 PostgreSQL·SHACL·OWL·HermiT·Cube 모델을 생성하고 기준 SQL과 대조하는 흐름" loading="lazy">
-        <figcaption>모델 생성부터 교차 검증까지의 흐름</figcaption>
-        <button class="action-link" id="sxc-animation-toggle" type="button" aria-controls="sxc-diagram" aria-pressed="false" hidden>애니메이션 재생</button>
+        <img id="sxc-diagram" src="assets/semantic-crosscheck/semantic-crosscheck-hero.svg" width="1200" height="560" alt="설정 파일 crosscheck.toml 하나에서 PostgreSQL 17+(계층 폐포·SQL 위반 뷰), SHACL(데이터 규칙·위반 키 대조), OWL 온톨로지(HermiT로 일관성·관계·분류 추론), Cube Core(지표·조인·집계) 모델을 만들고, 별도로 작성한 기준 SQL(gold SQL)과 대조하는 구조도. 아래 터미널은 가상 BOM 데모의 report 기대 출력(PASS, 6 pass·0 fail·0 error·0 not_run)." loading="lazy">
+        <figcaption>가상 BOM 데모를 설명하는 그림과 애니메이션입니다. 실제 실행 기록이 아니며, 검증의 실제 범위와 결과는 릴리스 근거에서 확인합니다.</figcaption>
+        <button class="action-link" id="sxc-animation-toggle" type="button" aria-controls="sxc-diagram" aria-pressed="false" hidden><span class="sxc-toggle-icon" aria-hidden="true"></span>7단계 동작 애니메이션</button>
       </figure>
     </div>
   </section>
@@ -283,7 +293,7 @@
         <div class="cv-stat"><div class="n">3</div><div class="l">Claude Code · Codex 플러그인</div></div>
         <div class="cv-stat"><div class="n">255</div><div class="l">블로그 글</div></div>
       </div>
-      <p class="snapshot-note">GitHub 2026.10.06 · 블로그 2026.08.07 기준 · <a href="cv.html?v=20261014-sxc">전체 이력서 보기</a></p>
+      <p class="snapshot-note">GitHub 2026.10.06 · 블로그 2026.08.07 기준 · <a href="cv.html?v=20261014-sxcfix">전체 이력서 보기</a></p>
       <div class="cv-lower">
         <div class="cv-col-left">
         <div class="cv-block">
@@ -305,6 +315,8 @@
         <div class="cv-block cv-proj">
           <div class="bt">Projects &amp; Activity</div>
           <a href="https://github.com/Technoetic/harness14" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">하네스 14</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">에이전틱 볼트</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
+          <a href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">semantic-crosscheck</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
           <a href="https://github.com/Technoetic/claude-code-commands" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">커스텀 슬래시 커맨드 20</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
           <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">GitHub 139 repos</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
           <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg><span class="pn">기술 블로그 255편</span><span class="pr"><span class="pm">블로그에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span></a>
@@ -475,7 +487,7 @@
     <p class="lead rise" style="text-align:center;margin:0 auto">
       <b>영업·견적 업무 자동화, 현장 데이터 관제,<br>Claude Code·Codex 개발 흐름</b>을 다룹니다.<br>공개한 사례와 도구에 관한 질문이나 기술 교류 제안은 아래 연락처로 보내 주세요.
     </p>
-    <div class="hero-actions rise"><a class="action-link primary" href="mailto:technoetic@hotmail.com">이메일로 연락하기</a><a class="action-link" href="cv.html?v=20261014-sxc">이력서 보기</a><a class="action-link" href="jeon-munjun-portfolio.pdf?v=20261014-sxc" download>PDF 다운로드</a></div>
+    <div class="hero-actions rise"><a class="action-link primary" href="mailto:technoetic@hotmail.com">이메일로 연락하기</a><a class="action-link" href="cv.html?v=20261014-sxcfix">이력서 보기</a><a class="action-link" href="jeon-munjun-portfolio.pdf?v=20261014-sxcfix" download>PDF 다운로드</a></div>
     <div class="contacts rise" style="margin-top:var(--s6);justify-content:center">
       <a href="mailto:technoetic@hotmail.com"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
       <a href="tel:01076335021"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>010-7633-5021</a>
@@ -519,6 +531,6 @@
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script src="assets/portfolio.js?v=20261014-sxc"></script>
+<script src="assets/portfolio.js?v=20261014-sxcfix"></script>
 </body>
 </html>
