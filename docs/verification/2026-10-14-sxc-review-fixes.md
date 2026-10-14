@@ -13,7 +13,7 @@
 3. **3행과 안내문을 정리했습니다.**
    - '결과 확인'은 V4(변이 검사)를 두 번 세지 않도록 "V1–V5 교차 검사(V4 변이 검사 포함) · SHACL↔SQL 위반 대조 · 리포트"로 바꿨습니다.
    - '추론과 지표'에서 기준 SQL을 빼서 "HermiT · Cube Core"만 남겼습니다. 기준 SQL은 본문에서 '따로 작성한 기준 SQL'로 설명합니다.
-   - 안내문은 README의 데이터 범위 한정을 살려 "PASS는 그 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다"로 시작합니다. 건너뛴 검사는 통과로 치지 않고, 검증하지 못한 범위(`not_proven`)를 함께 보여 준다는 점도 풀어 썼습니다.
+   - 안내문은 README의 데이터 범위 한정을 살려 "PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다"로 시작합니다. 건너뛴 검사는 통과로 치지 않고, 검증하지 못한 범위(`not_proven`)를 함께 보여 준다는 점도 풀어 썼습니다.
 4. **행동 유도를 형제 장 양식으로 바꿨습니다.**
    - 주소가 보이는 단일 'GitHub에서 보기' 버튼으로 바꿨습니다. 접근 가능한 이름이 화면 문구로 시작합니다(WCAG 2.5.3).
    - '빠른 시작', '릴리스·검증 근거', '같은 기술을 도서관 예제로 배우는 튜토리얼'은 텍스트 링크로 둡니다. 세 링크 모두 새 탭 표시(↗)와 화면 낭독기용 '(새 탭)'을 붙였습니다.
@@ -69,7 +69,7 @@
 - 같은 측정에서 토글 전후 이미지·캡션·버튼의 위치 차이는 0px입니다. 모바일 390px은 가로 넘침이 없습니다.
 - GIF: 1080×480, 49프레임, 10,640 ms, 무한 반복으로 기존과 같습니다.
   - 같은 재생 시점끼리 비교하면 진행선 띠(y 228–250) 밖의 픽셀 차이는 0입니다.
-  - 재현 조건은 Pillow 12.3.0과 다음 명령입니다. `python tools/render_readme_animation.py --font C:/Windows/Fonts/malgun.ttf --font-bold C:/Windows/Fonts/malgunbd.ttf --font-mono C:/Windows/Fonts/consola.ttf`
+  - 재현 조건은 Pillow 12.3.0과 다음 명령입니다. 플러그인 저장소(semantic-crosscheck)에서 실행하며, 수정 후 생성기는 그 저장소의 수정 브랜치 커밋 `2b1704e`입니다(병합 전에는 공개되지 않음). `python tools/render_readme_animation.py --font C:/Windows/Fonts/malgun.ttf --font-bold C:/Windows/Fonts/malgunbd.ttf --font-mono C:/Windows/Fonts/consola.ttf`
   - 같은 조건에서 수정 전 생성기는 게시본(`b222d5cc…979e`)과, 수정 후 생성기는 새 GIF(`bc8ab37d…f2ff58`)와 바이트까지 같습니다.
 - 이 저장소의 Playwright 브라우저 테스트(`browser.mjs`를 쓰는 테스트)는 로컬에서 실행하지 않았습니다. 화면 확인은 위의 브라우저 실측으로 대신했습니다. CI는 `npm test`만 실행합니다.
 
