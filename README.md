@@ -6,13 +6,15 @@
 
 ## 구성
 
-- `index.html` — 실무 사례와 대표 프로젝트를 소개하는 12개 섹션
+- `index.html` — 실무 사례와 대표 프로젝트를 소개하는 13개 섹션
 - `assets/portfolio.css`, `assets/portfolio.js` — 반응형 화면과 탐색·모달
 - `cv.html`, `jeon-munjun-portfolio.pdf` — 웹 이력서와 검색 가능한 A4 PDF
 - `steps-data.js` — 공개 하네스 14의 전체 단계 본문
 - `commands-data.js` — 별도 Claude Code 커스텀 커맨드 저장소의 본문
 - `assets/metrics.json` — 공개 수치·버전의 출처와 기준일
 - `assets/harness50-source.json` — 단계 원본·표시 본문의 SHA256. 기존 파일 이름은 유지합니다.
+
+2026-10-14에 [semantic-crosscheck](https://github.com/Technoetic/semantic-crosscheck) v0.1.1 소개를 추가했습니다. [프로젝트 바로가기](https://technoetic.github.io/ax-portfolio/#sxc)에서 PostgreSQL·온톨로지·시맨틱 레이어의 교차 검증 흐름과 설치 안내를 확인합니다. 원본 SVG와 GIF는 `assets/semantic-crosscheck/`에 두었으며 애니메이션은 사용자가 재생하고 정지합니다. 플러그인 수 3개는 이력서·PDF·출처 메타데이터에도 반영합니다.
 
 ## 탐색과 호환성
 

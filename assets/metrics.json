@@ -10,11 +10,12 @@
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
   "dualHostPlugins": {
-    "value": 2,
-    "asOf": "2026-10-06",
+    "value": 3,
+    "asOf": "2026-10-14",
     "projects": [
       "harness14",
-      "agentic-vault"
+      "agentic-vault",
+      "semantic-crosscheck"
     ]
   },
   "publishedTutorials": {
@@ -26,8 +27,9 @@
     "asOf": "2026-08-07"
   },
   "pluginReleases": {
-    "asOf": "2026-10-11",
+    "asOf": "2026-10-14",
     "harness14": {
+      "asOf": "2026-10-11",
       "version": "4.2.0",
       "source": "https://github.com/Technoetic/harness14/releases/tag/v4.2.0",
       "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e",
@@ -36,9 +38,17 @@
       "pluginInstallId": "harness20"
     },
     "agentic-vault": {
+      "asOf": "2026-10-11",
       "version": "0.20.0",
       "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.20.0",
       "commit": "c8c56cfd8fdca1a56f75a7639fb482a6e77fdf9f"
+    },
+    "semantic-crosscheck": {
+      "version": "0.1.1",
+      "asOf": "2026-10-14",
+      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.1.1",
+      "commit": "3028a4077ef6ecc6e6b2bcff98a7fbd0b93b45b0",
+      "diagramSource": "https://github.com/Technoetic/semantic-crosscheck/tree/9eac5f5a03691db188978a9ecd11dc160a9b6b05/docs/images"
     }
   }
 }
