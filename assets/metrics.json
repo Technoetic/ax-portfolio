@@ -10,13 +10,13 @@
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
   "dualHostPlugins": {
-    "value": 3,
-    "asOf": "2026-10-14",
+    "value": 2,
+    "asOf": "2026-10-31",
     "projects": [
-      "harness14",
       "agentic-vault",
       "semantic-crosscheck"
-    ]
+    ],
+    "scope": "featured_in_portfolio"
   },
   "publishedTutorials": {
     "value": 5,
@@ -27,21 +27,12 @@
     "asOf": "2026-08-07"
   },
   "pluginReleases": {
-    "asOf": "2026-10-14",
-    "harness14": {
-      "asOf": "2026-10-11",
-      "version": "4.2.0",
-      "source": "https://github.com/Technoetic/harness14/releases/tag/v4.2.0",
-      "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e",
-      "workflowProfile": "planning-first-14-v1",
-      "stepCount": 14,
-      "pluginInstallId": "harness20"
-    },
+    "asOf": "2026-10-31",
     "agentic-vault": {
-      "asOf": "2026-10-11",
-      "version": "0.20.0",
-      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.20.0",
-      "commit": "c8c56cfd8fdca1a56f75a7639fb482a6e77fdf9f"
+      "asOf": "2026-10-31",
+      "version": "0.35.1",
+      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.35.1",
+      "commit": "046365ad1ce53ff5648862036eb6f4a1c6410aff"
     },
     "semantic-crosscheck": {
       "version": "0.1.1",
@@ -49,6 +40,22 @@
       "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.1.1",
       "commit": "3028a4077ef6ecc6e6b2bcff98a7fbd0b93b45b0",
       "diagramSource": "https://github.com/Technoetic/semantic-crosscheck/tree/9eac5f5a03691db188978a9ecd11dc160a9b6b05/docs/images"
+    }
+  },
+  "retiredShowcases": {
+    "harness14": {
+      "removedAt": "2026-10-31",
+      "reason": "웹앱 제작 원칙의 공통 참조는 agentic-vault로 안내",
+      "previousDisplayedRelease": {
+        "asOf": "2026-10-11",
+        "version": "4.2.0",
+        "source": "https://github.com/Technoetic/harness14/releases/tag/v4.2.0",
+        "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e",
+        "workflowProfile": "planning-first-14-v1",
+        "stepCount": 14,
+        "pluginInstallId": "harness20"
+      },
+      "legacyData": "assets/harness50-source.json"
     }
   }
 }

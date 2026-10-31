@@ -47,7 +47,7 @@ try {
       await page.evaluate(() => document.fonts.ready);
       await page.pdf({path:'./artifacts/portfolio-cv.pdf',paperWidth:8.2677165354,paperHeight:11.6929133858,preferCSSPageSize:true,printBackground:true,generateTaggedPDF:true,generateDocumentOutline:true,displayHeaderFooter:true,headerTemplate:'<span></span>',footerTemplate:${JSON.stringify(footer)}});
       console.log(JSON.stringify({portfolioPdf:true,artifact:pwd+'/artifacts/portfolio-cv.pdf'}));
-    } finally { await page.close().catch(() => {}); }
+    } finally { await closeTab(page).catch(() => {}); }
   })();`;
   const { stdout } = await exec(process.env.ASIDE_CLI || 'aside', ['repl', script], { windowsHide: true, timeout: 120000, maxBuffer: 1024 * 1024 });
   const receipt = stdout.split(/\r?\n/).map(line => { try { return JSON.parse(line); } catch { return null; } })
