@@ -19,7 +19,6 @@ function initPortfolio(){
   /* ===== 데이터 (실측, 2026-08-07) ===== */
   const GRASS = [["2026-02-01",0],["2026-02-02",0],["2026-02-03",0],["2026-02-04",0],["2026-02-05",0],["2026-02-06",0],["2026-02-07",0],["2026-02-08",0],["2026-02-09",0],["2026-02-10",0],["2026-02-11",0],["2026-02-12",0],["2026-02-13",0],["2026-02-14",0],["2026-02-15",0],["2026-02-16",0],["2026-02-17",0],["2026-02-18",0],["2026-02-19",0],["2026-02-20",0],["2026-02-21",0],["2026-02-22",0],["2026-02-23",1],["2026-02-24",1],["2026-02-25",0],["2026-02-26",0],["2026-02-27",0],["2026-02-28",0],["2026-03-01",0],["2026-03-02",0],["2026-03-03",1],["2026-03-04",0],["2026-03-05",1],["2026-03-06",0],["2026-03-07",0],["2026-03-08",1],["2026-03-09",1],["2026-03-10",1],["2026-03-11",1],["2026-03-12",1],["2026-03-13",0],["2026-03-14",1],["2026-03-15",0],["2026-03-16",1],["2026-03-17",1],["2026-03-18",1],["2026-03-19",1],["2026-03-20",0],["2026-03-21",1],["2026-03-22",1],["2026-03-23",1],["2026-03-24",0],["2026-03-25",1],["2026-03-26",1],["2026-03-27",1],["2026-03-28",1],["2026-03-29",1],["2026-03-30",1],["2026-03-31",1],["2026-04-01",1],["2026-04-02",0],["2026-04-03",0],["2026-04-04",0],["2026-04-05",0],["2026-04-06",1],["2026-04-07",0],["2026-04-08",0],["2026-04-09",4],["2026-04-10",0],["2026-04-11",0],["2026-04-12",1],["2026-04-13",1],["2026-04-14",1],["2026-04-15",0],["2026-04-16",0],["2026-04-17",1],["2026-04-18",0],["2026-04-19",1],["2026-04-20",0],["2026-04-21",1],["2026-04-22",0],["2026-04-23",1],["2026-04-24",0],["2026-04-25",0],["2026-04-26",1],["2026-04-27",0],["2026-04-28",0],["2026-04-29",0],["2026-04-30",1],["2026-05-01",0],["2026-05-02",0],["2026-05-03",0],["2026-05-04",0],["2026-05-05",0],["2026-05-06",0],["2026-05-07",0],["2026-05-08",1],["2026-05-09",0],["2026-05-10",0],["2026-05-11",1],["2026-05-12",0],["2026-05-13",2],["2026-05-14",1],["2026-05-15",4],["2026-05-16",3],["2026-05-17",0],["2026-05-18",1],["2026-05-19",1],["2026-05-20",1],["2026-05-21",0],["2026-05-22",0],["2026-05-23",1],["2026-05-24",0],["2026-05-25",0],["2026-05-26",2],["2026-05-27",1],["2026-05-28",1],["2026-05-29",1],["2026-05-30",1],["2026-05-31",1],["2026-06-01",1],["2026-06-02",2],["2026-06-03",2],["2026-06-04",4],["2026-06-05",0],["2026-06-06",0],["2026-06-07",1],["2026-06-08",1],["2026-06-09",1],["2026-06-10",1],["2026-06-11",1],["2026-06-12",0],["2026-06-13",0],["2026-06-14",1],["2026-06-15",1],["2026-06-16",1],["2026-06-17",0],["2026-06-18",1],["2026-06-19",1],["2026-06-20",1],["2026-06-21",0],["2026-06-22",0],["2026-06-23",1],["2026-06-24",0],["2026-06-25",1],["2026-06-26",0],["2026-06-27",0],["2026-06-28",1],["2026-06-29",0],["2026-06-30",1],["2026-07-01",1],["2026-07-02",1],["2026-07-03",1],["2026-07-04",2],["2026-07-05",0],["2026-07-06",0],["2026-07-07",1],["2026-07-08",0],["2026-07-09",0],["2026-07-10",0],["2026-07-11",0],["2026-07-12",0],["2026-07-13",0],["2026-07-14",1],["2026-07-15",0],["2026-07-16",0],["2026-07-17",4],["2026-07-18",0],["2026-07-19",0],["2026-07-20",0],["2026-07-21",0],["2026-07-22",0],["2026-07-23",1],["2026-07-24",0],["2026-07-25",0],["2026-07-26",1],["2026-07-27",2],["2026-07-28",0],["2026-07-29",0],["2026-07-30",1],["2026-07-31",0],["2026-08-01",0],["2026-08-02",2],["2026-08-03",0],["2026-08-04",0],["2026-08-05",1],["2026-08-06",3],["2026-08-07",1]];
   const LANGS = [["JavaScript",55],["HTML",53],["Python",5],["PowerShell",5],["TypeScript",3],["CSS",3]];
-  const STEPS = [[1,"기획: 요구사항 기반 (독립 검증 루프)"],[2,"통합 설계와 환경 준비 (레이아웃 + 전체)"],[3,"구현"],[4,"빌드 스모크 테스트 (구현 완료 게이트)"],[5,"레이아웃 스크린샷 검증 (독립 검증 루프)"],[6,"JavaScript 모듈화"],[7,"CSS 파일 분리 (컨텍스트 최적화)"],[8,"클라이언트 사이드 라우팅"],[9,"E2E 테스트"],[10,"스크린샷 기반 상세 E2E 테스트"],[11,"키보드 인터랙션 시각 검증"],[12,"마우스 인터랙션 시각 검증"],[13,"디자인 시각 검증 (독립 검증 루프)"],[14,"콘솔 에러 수집 및 해결"]];
 
   /* 잔디 렌더 */
   (function(){
@@ -66,7 +65,7 @@ function initPortfolio(){
   const prev=document.getElementById('prev'), next=document.getElementById('next');
   const sectionTitle=slide=>slide.dataset.title||slide.querySelector('h1,h2')?.textContent.trim()||slide.id;
   let closeAllDialogs=()=>{};
-  const activeDialog=()=>document.querySelector('#stepDetail.open')||document.querySelector('#stepModal.open');
+  const activeDialog=()=>document.querySelector('#stepDetail.open');
   const interactive=target=>target instanceof Element&&!!target.closest('a,button,input,textarea,select,summary,[role="button"],[contenteditable=""],[contenteditable="true"]');
 
   slides.forEach((slide,i)=>{
@@ -134,8 +133,10 @@ function initPortfolio(){
   prev.addEventListener('click',()=>go(cur-1));
   function fromHash(){
     let id='';try{id=decodeURIComponent(location.hash.slice(1));}catch{}
+    const alias=id==='s4';
+    if(alias)id='sav';
     const index=slides.findIndex(slide=>slide.id===id);
-    go(index<0?0:index,{historyMode:index<0?'replace':'none'});
+    go(index<0?0:index,{historyMode:alias||index<0?'replace':'none'});
   }
   window.addEventListener('popstate',fromHash);
   window.addEventListener('hashchange',fromHash);
@@ -392,38 +393,31 @@ function initPortfolio(){
     btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
   })();
 
-  // 14단계 모달 (목록 + 상세 2단계, ←→ 단계 이동)
+  // 커맨드 상세 모달 (←→ 커맨드 이동)
   (function(){
-    const arrow=document.getElementById('stepArrow');
-    const modal=document.getElementById('stepModal');
-    const list=document.getElementById('stepList');
     const detail=document.getElementById('stepDetail');
-    if(!arrow||!modal||!list||!detail)return;
+    if(!detail)return;
     const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const md=body=>{
       if(typeof marked!=='undefined'){try{return '<div class="md">'+marked.parse(body)+'</div>';}catch{}}
       return '<div class="step-raw">'+esc(body)+'</div>';
     };
-    const data=()=>window.STEPS_FULL||STEPS.map(([n,t])=>[n,t,'']);
     const dNo=document.getElementById('dNo'),dTitle=document.getElementById('dTitle'),dBody=document.getElementById('dBody');
     const dPrev=document.getElementById('dPrev'),dNext=document.getElementById('dNext');
     const dClose=detail.querySelector('button[data-dclose]');
     const background=[...document.querySelectorAll('#deck,.site-header,#dots,.nav,.hint,.skip-link')];
-    let lastFocus=null,detailFocus=null,current=0,mode='step',curCmd=0;
+    let detailFocus=null,curCmd=0;
     const dHint=detail.querySelector('.d-hint');
     const CMD_LIST=[...document.querySelectorAll('#s5 .cmd-row.clickable')].map(row=>row.dataset.cmd);
     const focusables=dialog=>[...dialog.querySelectorAll('a[href],button,input,select,textarea,[tabindex]:not([tabindex="-1"])')]
       .filter(el=>!el.disabled&&!el.closest('[inert]')&&el.getClientRects().length);
     function syncDialogs(){
       const detailOpen=detail.classList.contains('open');
-      const listOpen=modal.classList.contains('open');
-      modal.inert=detailOpen||!listOpen;
-      modal.setAttribute('aria-hidden',String(detailOpen||!listOpen));
       detail.inert=!detailOpen;
       detail.setAttribute('aria-hidden',String(!detailOpen));
-      background.forEach(el=>{el.inert=listOpen||detailOpen;});
+      background.forEach(el=>{el.inert=detailOpen;});
     }
-    modal.tabIndex=-1;detail.tabIndex=-1;
+    detail.tabIndex=-1;
     syncDialogs();
     function enterDetail(){
       const wasOpen=detail.classList.contains('open');
@@ -438,22 +432,9 @@ function initPortfolio(){
       syncDialogs();
       if(detailFocus?.isConnected&&!detailFocus.closest('[inert]'))detailFocus.focus({preventScroll:true});
     }
-    function showDetail(idx){
-      mode='step';
-      const steps=data();
-      current=Math.max(0,Math.min(steps.length-1,idx));
-      const [n,title,body]=steps[current];
-      dNo.textContent=String(n).padStart(3,'0');
-      dTitle.textContent=title;
-      dBody.innerHTML=md(body||'(본문 없음)');dBody.scrollTop=0;
-      dPrev.disabled=current===0;dNext.disabled=current===steps.length-1;
-      dPrev.setAttribute('aria-label','이전 단계');dNext.setAttribute('aria-label','다음 단계');
-      dHint.textContent='← → 로 단계 이동 · Esc 닫기';
-      enterDetail();
-    }
     function showCmd(idx){
       if(!CMD_LIST.length)return;
-      mode='cmd';curCmd=(idx+CMD_LIST.length)%CMD_LIST.length;
+      curCmd=(idx+CMD_LIST.length)%CMD_LIST.length;
       const cmd=CMD_LIST[curCmd];
       dNo.textContent='/';dTitle.textContent='/'+cmd;
       dBody.innerHTML=md(window.CMDS_FULL?.[cmd]||'(본문 없음)');dBody.scrollTop=0;
@@ -462,7 +443,7 @@ function initPortfolio(){
       dHint.textContent='← → 로 커맨드 이동 · Esc 닫기';
       enterDetail();
     }
-    function navigateDetail(delta){mode==='cmd'?showCmd(curCmd+delta):showDetail(current+delta);}
+    function navigateDetail(delta){showCmd(curCmd+delta);}
     dPrev.addEventListener('click',()=>navigateDetail(-1));
     dNext.addEventListener('click',()=>navigateDetail(1));
     detail.querySelectorAll('[data-dclose]').forEach(el=>el.addEventListener('click',closeDetail));
@@ -472,34 +453,7 @@ function initPortfolio(){
       trigger.addEventListener('click',()=>showCmd(i));
       trigger.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showCmd(i);}});
     });
-    let renderedData=null;
-    function renderList(){
-      const steps=data();
-      if(renderedData===steps)return;
-      renderedData=steps;
-      list.innerHTML=steps.map(([n,title],index)=>
-        '<div class="step-item" data-n="'+n+'"><div class="step-row" role="button" tabindex="0" data-idx="'+index+'">'+
-        '<span class="no">'+String(n).padStart(3,'0')+'</span><span class="ti">'+esc(title)+'</span><span class="caret" aria-hidden="true">›</span></div></div>').join('');
-      list.querySelectorAll('.step-row').forEach(row=>{
-        const open=()=>showDetail(+row.dataset.idx);
-        row.addEventListener('click',open);
-        row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
-      });
-    }
-    function openList(){
-      renderList();lastFocus=document.activeElement;
-      modal.classList.add('open');list.scrollTop=0;syncDialogs();
-      modal.querySelector('.modal-close').focus();
-    }
-    function closeList(){
-      if(!modal.classList.contains('open'))return;
-      closeDetail();modal.classList.remove('open');syncDialogs();
-      if(lastFocus?.isConnected&&!lastFocus.closest('[inert]'))lastFocus.focus({preventScroll:true});
-    }
-    closeAllDialogs=()=>{closeDetail();closeList();};
-    arrow.addEventListener('click',openList);
-    arrow.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openList();}});
-    modal.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',closeList));
+    closeAllDialogs=closeDetail;
     window.addEventListener('keydown',e=>{
       const dialog=activeDialog();
       if(!dialog)return;
@@ -509,8 +463,8 @@ function initPortfolio(){
         else if(e.shiftKey&&(document.activeElement===first||!dialog.contains(document.activeElement))){e.preventDefault();last.focus();}
         else if(!e.shiftKey&&(document.activeElement===last||!dialog.contains(document.activeElement))){e.preventDefault();first.focus();}
       }else if(e.key==='Escape'){
-        e.preventDefault();dialog===detail?closeDetail():closeList();
-      }else if(dialog===detail&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.target.matches('input,textarea,select,[contenteditable="true"]')){
+        e.preventDefault();closeDetail();
+      }else if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.target.matches('input,textarea,select,[contenteditable="true"]')){
         if(e.key==='ArrowRight'){e.preventDefault();navigateDetail(1);}
         if(e.key==='ArrowLeft'){e.preventDefault();navigateDetail(-1);}
       }
