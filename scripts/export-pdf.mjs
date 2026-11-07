@@ -1,7 +1,6 @@
 import { createServer } from 'node:http';
-import { readFile, writeFile, realpath, mkdir } from 'node:fs/promises';
-import { dirname, resolve, relative, extname, join, sep } from 'node:path';
-import { homedir } from 'node:os';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { dirname, resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -21,7 +20,7 @@ const output = args[0] ? resolve(args[0]) : resolve(root, 'jeon-munjun-portfolio
 const publicUrl = 'https://technoetic.github.io/ax-portfolio/cv.html';
 // The CV uses inline styles; remove the external font stylesheet for export.
 const html = (await readFile(resolve(root, 'cv.html'), 'utf8'))
-  .replace(/<link\b[^>]*href=["']https:\/\/fonts\.googleapis\.com[^>]*>/gi, '');
+  .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["']https?:\/\/[^>]*>/gi, '');
 const server = createServer((request, response) => {
   if (request.url !== '/cv.html') { response.writeHead(404).end(); return; }
   response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }).end(html);
@@ -46,26 +45,20 @@ try {
       }, ${JSON.stringify(publicUrl)});
       await page.evaluate(() => document.fonts.ready);
       await page.pdf({path:'./artifacts/portfolio-cv.pdf',paperWidth:8.2677165354,paperHeight:11.6929133858,preferCSSPageSize:true,printBackground:true,generateTaggedPDF:true,generateDocumentOutline:true,displayHeaderFooter:true,headerTemplate:'<span></span>',footerTemplate:${JSON.stringify(footer)}});
-      console.log(JSON.stringify({portfolioPdf:true,artifact:pwd+'/artifacts/portfolio-cv.pdf'}));
+      // Aside session files disappear when the CLI session exits. Read the
+      // artifact while this session still owns it and transfer its bytes.
+      const pdf=await fs.readFile('./artifacts/portfolio-cv.pdf');
+      console.log(JSON.stringify({portfolioPdf:true,data:pdf.toString('base64')}));
     } finally { await closeTab(page).catch(() => {}); }
   })();`;
-  const { stdout } = await exec(process.env.ASIDE_CLI || 'aside', ['repl', script], { windowsHide: true, timeout: 120000, maxBuffer: 1024 * 1024 });
+  const { stdout } = await exec(process.env.ASIDE_CLI || 'aside', ['repl', script], { windowsHide: true, timeout: 120000, maxBuffer: 8 * 1024 * 1024 });
   const receipt = stdout.split(/\r?\n/).map(line => { try { return JSON.parse(line); } catch { return null; } })
     .find(value => value?.portfolioPdf === true);
-  if (!receipt || typeof receipt.artifact !== 'string') throw new Error('Aside did not report a PDF artifact');
-  const artifact = resolve(receipt.artifact);
-  const artifactRelative = relative(join(homedir(), '.aside', 'u'), artifact);
-  const parts = artifactRelative.split(sep);
-  if (!artifactRelative || artifactRelative.startsWith('..' + sep) || artifactRelative === '..'
-      || resolve(join(homedir(), '.aside', 'u'), artifactRelative) !== artifact
-      || parts.length !== 5 || !/^\d+$/.test(parts[0]) || parts[1] !== 'sessions'
-      || !/^[A-Za-z0-9_-]+$/.test(parts[2]) || parts[3] !== 'artifacts' || parts[4] !== 'portfolio-cv.pdf') {
-    throw new Error('Aside reported a PDF outside its session artifact directory');
-  }
-  const resolvedArtifact = await realpath(artifact);
-  if (resolvedArtifact.toLowerCase() !== artifact.toLowerCase()) throw new Error('Aside PDF must not be a redirected artifact');
-  const pdf = await readFile(artifact);
-  if (pdf.length < 5 || pdf.subarray(0, 5).toString('ascii') !== '%PDF-') throw new Error('Aside artifact is not a PDF');
+  if (!receipt || typeof receipt.data !== 'string' || receipt.data.length > 7 * 1024 * 1024
+      || !/^[A-Za-z0-9+/]+={0,2}$/.test(receipt.data)) throw new Error('Aside did not report valid PDF bytes');
+  const pdf = Buffer.from(receipt.data, 'base64');
+  if (pdf.length < 5 || pdf.length > 5 * 1024 * 1024 || pdf.toString('base64') !== receipt.data
+      || pdf.subarray(0, 5).toString('ascii') !== '%PDF-') throw new Error('Aside artifact is not a valid bounded PDF');
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, pdf);
   process.stdout.write(JSON.stringify({ output, bytes: pdf.length, source: 'cv.html', backend: 'aside', tagged_requested: true }) + '\n');
