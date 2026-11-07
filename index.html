@@ -26,7 +26,7 @@
 <!-- 마크다운 렌더러 (CDN, defer). 실패 시 원문 텍스트로 폴백 -->
 <script async src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <link rel="stylesheet" href="assets/portfolio.css?v=20261107-hmi11">
-<link rel="stylesheet" href="assets/reference-atlas-slide.css?v=20261107-sref2">
+<link rel="stylesheet" href="assets/reference-atlas-slide.css?v=20261107-sref3">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -165,17 +165,16 @@
       </div>
       <div class="ref-visuals rise">
         <figure class="ref-diagram">
-          <img src="assets/reference-atlas/reference-map.svg" width="960" height="660" alt="논문·오픈소스·규격과 공식 글의 출처를 Reference Atlas에서 검색·분류하고, agentic-vault와 semantic-crosscheck의 공개 문서에 기록된 인용 맥락으로 연결하는 개념도." loading="lazy" decoding="async">
+          <img src="assets/reference-atlas/reference-map.svg?v=20261107-clarity" width="960" height="600" alt="어떤 자료를 어디에 참고했는지 보여 주는 관계도. 논문·오픈소스·규격과 공식 글이 Reference Atlas 및 agentic-vault와 semantic-crosscheck의 참고 기록에 연결됩니다." loading="lazy" decoding="async">
           <div class="ref-small-diagram">
+            <p class="ref-map-title">어떤 자료를, 어디에 참고했는지 한눈에.</p>
             <div class="ref-source-types"><span>논문</span><span>오픈소스</span><span>규격·공식 글</span></div>
-            <div class="ref-map-arrow" aria-hidden="true">↓</div>
-            <div class="ref-catalog-node"><b>Reference Atlas</b><span>검색·분류 · 공개 인용 근거</span></div>
-            <div class="ref-map-arrow" aria-hidden="true">↓</div>
-            <p class="ref-context-label">플러그인별 참고 기록</p>
-            <div class="ref-plugin-nodes"><div><b>agentic-vault</b><span>기억·인계의 참고 출처</span></div><div><b>semantic-<wbr>crosscheck</b><span>의미 검증의 참고 출처</span></div></div>
-            <p class="ref-public-evidence">원문과 공개 문서의 인용 근거로 연결</p>
+            <div class="ref-map-connector" aria-hidden="true"></div>
+            <div class="ref-catalog-node"><b>Reference Atlas</b><span>자료 검색 · 분류 · 참고 위치 확인</span></div>
+            <div class="ref-map-connector" aria-hidden="true"></div>
+            <div class="ref-plugin-nodes"><div><b>agentic-vault의<br>참고 기록</b><span>기억·인계</span></div><div><b>semantic-<br>crosscheck의<br>참고 기록</b><span>의미 검증</span></div></div>
           </div>
-          <figcaption>공개 출처와 플러그인의 인용 맥락을 연결한 개념도입니다.</figcaption>
+          <figcaption>Atlas에서 원문과 참고 문서를 확인합니다.</figcaption>
         </figure>
       </div>
     </div>
