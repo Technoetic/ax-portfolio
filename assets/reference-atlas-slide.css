@@ -29,20 +29,19 @@
   #sref .hero-actions .action-link{flex:1 1 120px;padding-inline:10px;font-size:13px}
   #sref .ref-diagram>img{display:none}
   #sref .ref-small-diagram{display:block;padding:14px 8px;background:linear-gradient(135deg,#101c35,#141326);border:1px solid #334155;border-radius:8px;text-align:center}
+  #sref .ref-map-title{margin-bottom:16px;font-size:16px;font-weight:650;line-height:1.5;color:#e9eef5;text-align:left;word-break:keep-all}
   #sref .ref-source-types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
   #sref .ref-source-types span{padding:10px 2px;font-size:12px;color:#dbeafe;background:#16253e;border:1px solid #3c5578;border-radius:6px}
-  #sref .ref-map-arrow{font-size:22px;line-height:1.5;color:#7ea9e8}
+  #sref .ref-map-connector{width:2px;height:22px;margin:8px auto;background:#7ea9e8}
   #sref .ref-catalog-node{display:grid;gap:6px;padding:16px 6px;border:1px solid #60a5fa;border-radius:8px;background:#162c4b}
   #sref .ref-catalog-node b{font-size:20px;color:#e9eef5}
   #sref .ref-catalog-node span{font-size:12px;color:#a8c9f6}
-  #sref .ref-context-label{margin-bottom:8px;font-size:12px;color:#a8b9d0}
   #sref .ref-plugin-nodes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  #sref .ref-plugin-nodes>div{display:grid;align-content:start;gap:8px;padding:12px 6px;border:1px solid #42658c;border-radius:6px;background:#152840}
+  #sref .ref-plugin-nodes>div{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:8px;padding:12px 6px;border:1px solid #42658c;border-radius:6px;background:#152840}
   #sref .ref-plugin-nodes>div:last-child{background:#20253e;border-color:#67648d}
   #sref .ref-plugin-nodes b{font-size:12px;color:#93c5fd;overflow-wrap:anywhere}
   #sref .ref-plugin-nodes>div:last-child b{color:#c4b5fd}
   #sref .ref-plugin-nodes span{font-size:12px;color:#c2cfdf;word-break:keep-all}
-  #sref .ref-public-evidence{margin-top:14px;font-size:12px;color:#b8c9df;word-break:keep-all}
 }
 @media(max-height:800px) and (min-width:1051px){
   #sref .kicker{margin-bottom:16px}
