@@ -26,6 +26,7 @@
 <!-- 마크다운 렌더러 (CDN, defer). 실패 시 원문 텍스트로 폴백 -->
 <script async src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <link rel="stylesheet" href="assets/portfolio.css?v=20261107-hmi11">
+<link rel="stylesheet" href="assets/reference-atlas-slide.css?v=20261107-sref1">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -63,7 +64,7 @@
     <div class="hero-actions rise">
       <a class="action-link primary" href="#sav" data-slide-target>대표 프로젝트 보기 <span aria-hidden="true">↗</span></a>
       <a class="action-link" href="#sdhis" data-slide-target>실무 AX 사례</a>
-      <a class="action-link" href="reference-atlas.html">Reference Atlas · 연구 출처 <span aria-hidden="true">↗</span></a>
+      <a class="action-link" href="#sref" data-slide-target>Reference Atlas · 연구 출처 <span aria-hidden="true">↗</span></a>
       <a class="action-link" href="cv.html?v=20261107-hmi11">이력서 보기</a>
       <a class="action-link" href="jeon-munjun-portfolio.pdf?v=20261107-hmi11" download>PDF 다운로드</a>
     </div>
@@ -78,7 +79,7 @@
     <div class="kicker rise">Field Work · 실무 AX</div>
     <h2 class="rise">현장에 상주하며<br><span class="accent">1인으로 서비스 10여 종을 만들다</span></h2>
     <p class="case-meta rise">(주)디에이치아이에스 · 2026.07–08 · 4주 업무위탁 프로젝트 · 고객사 수치·화면은 보안상 비공개</p>
-    <p class="lead case-intro rise">변압기 제조기업의 AI 전환(AX)을 맡은 프로젝트입니다. <b>현업과 밀착한 과제</b>를 중심으로, AI 도구를 체계화해 구축했습니다.</p>
+    <p class="lead case-intro rise">변압기 제조기업의 AI 전환(AX)을 맡은 프로젝트입니다.<br><b>현업과 밀착한 과제</b>를 중심으로, AI 도구를 체계화해 구축했습니다.</p>
     <div class="case-grid rise">
       <article class="case-card"><span class="case-step">01 · 영업·견적</span><h3>영업 DB와 견적 자동화</h3><p>변압기 영업 데이터를 정리해 데이터베이스를 구축하고, 견적 생성을 자동화했습니다. 견적·수주 업무를 AI가 보조하는 체계도 만들었습니다.</p></article>
       <article class="case-card"><span class="case-step">02 · 수출</span><h3>수출 업무 지원</h3><p>수출 업무에 AI를 도입하고, 실무를 지원하도록 적용했습니다.</p></article>
@@ -147,6 +148,39 @@
         <figcaption>가상 BOM 데모를 설명하는 그림과 애니메이션입니다. 실제 실행 기록이 아니며, 검증의 실제 범위와 결과는 릴리스 근거에서 확인합니다.</figcaption>
         <button class="action-link" id="sxc-animation-toggle" type="button" aria-controls="sxc-diagram" aria-pressed="false" hidden><span class="sxc-toggle-icon" aria-hidden="true"></span>7단계 동작 애니메이션</button>
       </figure>
+    </div>
+  </section>
+
+  <section class="slide" id="sref" data-title="Reference Atlas">
+    <div class="ref-layout">
+      <div class="ref-copy">
+        <div class="kicker rise">Research · 공개 연구 출처</div>
+        <h2 class="rise">Reference <span class="accent">Atlas</span></h2>
+        <p class="lead rise">플러그인 개발에 참고한 <b>논문·오픈소스와 공개 자료를 연결한 연구 출처 지도</b>입니다.<br>흩어진 근거를 다시 찾고, 같은 출처를 반복해서 추천하는 일을 줄이기 위해 만들었습니다.</p>
+        <ul class="ref-features rise">
+          <li><b>검색·분류</b><span>자료 이름·유형·플러그인별로 탐색</span></li>
+          <li><b>인용 맥락</b><span>어느 문서에서 어떻게 참고했는지 확인</span></li>
+          <li><b>기존 참조 확인</b><span>논문·저장소 주소와 식별자를 대조</span></li>
+        </ul>
+        <p class="ref-context rise"><b>agentic-vault</b>의 기억·인계와 <b>semantic-crosscheck</b>의 의미 검증에 참고한 출처를 함께 살펴봅니다.</p>
+        <div class="hero-actions rise">
+          <a class="action-link primary" href="https://technoetic.github.io/reference-atlas/" target="_blank" rel="noopener">실제 Atlas 열기 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭)</span></a>
+          <a class="action-link" href="https://technoetic.github.io/reference-atlas/?view=check" target="_blank" rel="noopener">기존 참조 확인 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭)</span></a>
+        </div>
+        <p class="snapshot-note ref-boundary rise">출처 등재는 모든 기능의 구현이나 논문 성능의 재현을 뜻하지 않습니다.<br>미등재 역시 새로운 연구라는 증거는 아닙니다.</p>
+      </div>
+      <div class="ref-visuals rise">
+        <figure class="ref-main-figure">
+          <a href="https://technoetic.github.io/reference-atlas/" target="_blank" rel="noopener" aria-label="연구 지도 실제 서비스 열기 (새 탭)"><img src="assets/reference-atlas/overview.png" width="1440" height="900" alt="agentic-vault와 semantic-crosscheck에 연결된 연구 출처를 보여 주는 Reference Atlas 실제 화면" loading="lazy" decoding="async"></a>
+          <figcaption>실제 공개 서비스 화면 · 2026.11.07</figcaption>
+        </figure>
+        <div class="ref-artwork-grid" aria-label="자료별 개념 이미지 예시">
+          <figure><img src="assets/reference-atlas/card-001.webp" width="960" height="640" alt="지식 조각을 담은 캡슐로 표현한 Open Knowledge Format 개념 이미지" loading="lazy" decoding="async"><figcaption>Open Knowledge Format</figcaption></figure>
+          <figure><img src="assets/reference-atlas/card-002.webp" width="960" height="640" alt="노드의 모양을 대조하는 SHACL 검증 개념 이미지" loading="lazy" decoding="async"><figcaption>SHACL</figcaption></figure>
+          <figure><img src="assets/reference-atlas/card-003.webp" width="960" height="640" alt="연결되는 기억 구조로 표현한 A-MEM 논문 개념 이미지" loading="lazy" decoding="async"><figcaption>A-MEM</figcaption></figure>
+        </div>
+        <p class="ref-artwork-note">카드 이미지는 AI 개념 일러스트이며, 원 논문의 그림이나 실험 결과가 아닙니다.</p>
+      </div>
     </div>
   </section>
 
@@ -486,7 +520,7 @@
 
 <div class="hint"><span class="desktop-only">← →, Space로 이동</span><span class="mobile-only">스와이프 또는 ‹ ›로 이동</span></div>
 <div class="nav">
-  <span class="counter" id="counter">01 / 12</span>
+  <span class="counter" id="counter">01 / 13</span>
   <button id="prev" aria-label="이전 슬라이드">‹</button>
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
