@@ -26,7 +26,7 @@
 <!-- 마크다운 렌더러 (CDN, defer). 실패 시 원문 텍스트로 폴백 -->
 <script async src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <link rel="stylesheet" href="assets/portfolio.css?v=20261107-hmi11">
-<link rel="stylesheet" href="assets/reference-atlas-slide.css?v=20261107-sref1">
+<link rel="stylesheet" href="assets/reference-atlas-slide.css?v=20261107-sref2">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -137,11 +137,6 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           GitHub에서 보기<span class="url">github.com/Technoetic/semantic-crosscheck</span>
         </a>
-        <p class="sxc-links rise">
-          <a href="https://github.com/Technoetic/semantic-crosscheck#quick-start-with-the-demo" target="_blank" rel="noopener">빠른 시작<span aria-hidden="true"> ↗</span><span class="sr-only">(새 탭)</span></a>
-          <a href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.1.1" target="_blank" rel="noopener">릴리스·검증 근거<span aria-hidden="true"> ↗</span><span class="sr-only">(새 탭)</span></a>
-          <a href="https://technoetic.github.io/library-ontology-tutorial/" target="_blank" rel="noopener">같은 기술을 도서관 예제로 배우는 튜토리얼<span aria-hidden="true"> ↗</span><span class="sr-only">(새 탭)</span></a>
-        </p>
       </div>
       <figure class="sxc-figure rise">
         <img id="sxc-diagram" src="assets/semantic-crosscheck/semantic-crosscheck-hero.svg" width="1200" height="560" alt="설정 파일 crosscheck.toml 하나에서 PostgreSQL 17+(계층 폐포·SQL 위반 뷰), SHACL(데이터 규칙·위반 키 대조), OWL 온톨로지(HermiT로 일관성·관계·분류 추론), Cube Core(지표·조인·집계) 모델을 만들고, 별도로 작성한 기준 SQL(gold SQL)과 대조하는 구조도. 아래 터미널은 가상 BOM 데모의 report 기대 출력(PASS, 6 pass·0 fail·0 error·0 not_run)." loading="lazy">
@@ -159,27 +154,29 @@
         <p class="lead rise">플러그인 개발에 참고한 <b>논문·오픈소스와 공개 자료를 연결한 연구 출처 지도</b>입니다.<br>흩어진 근거를 다시 찾고, 같은 출처를 반복해서 추천하는 일을 줄이기 위해 만들었습니다.</p>
         <ul class="ref-features rise">
           <li><b>검색·분류</b><span>자료 이름·유형·플러그인별로 탐색</span></li>
-          <li><b>인용 맥락</b><span>어느 문서에서 어떻게 참고했는지 확인</span></li>
-          <li><b>기존 참조 확인</b><span>논문·저장소 주소와 식별자를 대조</span></li>
+          <li><b>연결 관계</b><span>출처와 두 플러그인의 관계를 한눈에</span></li>
+          <li><b>공개 근거</b><span>커밋·파일·행으로 인용 맥락 확인</span></li>
         </ul>
         <p class="ref-context rise"><b>agentic-vault</b>의 기억·인계와 <b>semantic-crosscheck</b>의 의미 검증에 참고한 출처를 함께 살펴봅니다.</p>
         <div class="hero-actions rise">
           <a class="action-link primary" href="https://technoetic.github.io/reference-atlas/" target="_blank" rel="noopener">실제 Atlas 열기 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭)</span></a>
-          <a class="action-link" href="https://technoetic.github.io/reference-atlas/?view=check" target="_blank" rel="noopener">기존 참조 확인 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭)</span></a>
         </div>
-        <p class="snapshot-note ref-boundary rise">출처 등재는 모든 기능의 구현이나 논문 성능의 재현을 뜻하지 않습니다.<br>미등재 역시 새로운 연구라는 증거는 아닙니다.</p>
+        <p class="snapshot-note ref-boundary rise">출처 등재는 모든 기능의 구현이나 논문 성능의 재현을 뜻하지 않습니다.<br>각 플러그인의 공개 문서에 남은 참고 기록을 연결합니다.</p>
       </div>
       <div class="ref-visuals rise">
-        <figure class="ref-main-figure">
-          <a href="https://technoetic.github.io/reference-atlas/" target="_blank" rel="noopener" aria-label="연구 지도 실제 서비스 열기 (새 탭)"><img src="assets/reference-atlas/overview.png" width="1440" height="900" alt="agentic-vault와 semantic-crosscheck에 연결된 연구 출처를 보여 주는 Reference Atlas 실제 화면" loading="lazy" decoding="async"></a>
-          <figcaption>실제 공개 서비스 화면 · 2026.11.07</figcaption>
+        <figure class="ref-diagram">
+          <img src="assets/reference-atlas/reference-map.svg" width="960" height="660" alt="논문·오픈소스·규격과 공식 글의 출처를 Reference Atlas에서 검색·분류하고, agentic-vault와 semantic-crosscheck의 공개 문서에 기록된 인용 맥락으로 연결하는 개념도." loading="lazy" decoding="async">
+          <div class="ref-small-diagram">
+            <div class="ref-source-types"><span>논문</span><span>오픈소스</span><span>규격·공식 글</span></div>
+            <div class="ref-map-arrow" aria-hidden="true">↓</div>
+            <div class="ref-catalog-node"><b>Reference Atlas</b><span>검색·분류 · 공개 인용 근거</span></div>
+            <div class="ref-map-arrow" aria-hidden="true">↓</div>
+            <p class="ref-context-label">플러그인별 참고 기록</p>
+            <div class="ref-plugin-nodes"><div><b>agentic-vault</b><span>기억·인계의 참고 출처</span></div><div><b>semantic-<wbr>crosscheck</b><span>의미 검증의 참고 출처</span></div></div>
+            <p class="ref-public-evidence">원문과 공개 문서의 인용 근거로 연결</p>
+          </div>
+          <figcaption>공개 출처와 플러그인의 인용 맥락을 연결한 개념도입니다.</figcaption>
         </figure>
-        <div class="ref-artwork-grid" aria-label="자료별 개념 이미지 예시">
-          <figure><img src="assets/reference-atlas/card-001.webp" width="960" height="640" alt="지식 조각을 담은 캡슐로 표현한 Open Knowledge Format 개념 이미지" loading="lazy" decoding="async"><figcaption>Open Knowledge Format</figcaption></figure>
-          <figure><img src="assets/reference-atlas/card-002.webp" width="960" height="640" alt="노드의 모양을 대조하는 SHACL 검증 개념 이미지" loading="lazy" decoding="async"><figcaption>SHACL</figcaption></figure>
-          <figure><img src="assets/reference-atlas/card-003.webp" width="960" height="640" alt="연결되는 기억 구조로 표현한 A-MEM 논문 개념 이미지" loading="lazy" decoding="async"><figcaption>A-MEM</figcaption></figure>
-        </div>
-        <p class="ref-artwork-note">카드 이미지는 AI 개념 일러스트이며, 원 논문의 그림이나 실험 결과가 아닙니다.</p>
       </div>
     </div>
   </section>

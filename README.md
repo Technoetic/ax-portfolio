@@ -51,7 +51,7 @@ Aside의 CDP 옵션 `paperWidth:8.2677165354`, `paperHeight:11.6929133858`, `pre
 
 ## 콘텐츠 갱신과 배포
 
-2026-11-07에 첫 화면의 Reference Atlas 버튼을 포트폴리오 안의 [전용 소개 장 `#sref`](https://technoetic.github.io/ax-portfolio/index.html#sref)으로 연결했습니다. 에이전틱 볼트·semantic-crosscheck와 같은 슬라이드 탐색으로 실제 연구 지도·자료별 개념 이미지, 검색·분류·기존 참조 점검과 두 플러그인의 인용 맥락을 소개합니다. 실제 기능은 기존 [Reference Atlas](https://technoetic.github.io/reference-atlas/)에서 이용합니다. 소개는 참고 기록과 구현·실험 결과를 구분합니다. 앞서 만든 `reference-atlas.html` 주소는 같은 소개 장으로 이동하며, 그 문서의 이전 자산은 캐시 호환을 위해 유지합니다.
+2026-11-07에 첫 화면의 Reference Atlas 버튼을 포트폴리오 안의 [전용 소개 장 `#sref`](https://technoetic.github.io/ax-portfolio/index.html#sref)으로 연결했습니다. 에이전틱 볼트·semantic-crosscheck와 같은 슬라이드 탐색으로 검색·분류와 두 플러그인의 인용 맥락을 소개합니다. 우측은 화면 캡처 대신 기존 프로젝트 장과 같은 남색·파란색 계열의 SVG 개념도로 출처→카탈로그→플러그인별 참고 기록을 표현합니다. 실제 기능은 기존 [Reference Atlas](https://technoetic.github.io/reference-atlas/)에서 이용합니다. 소개는 참고 기록과 구현·실험 결과를 구분합니다. 앞서 만든 `reference-atlas.html` 주소는 같은 소개 장으로 이동하며, 그 문서의 이전 자산은 캐시 호환을 위해 유지합니다.
 
 같은 날 빌딩 HMI 경력의 요약 숫자를 2014.10–2025.10의 월 단위 기간에 맞춰 11년으로 정정했습니다. 경력 기간은 유지하며 본문·메타 정보·이력서·PDF를 함께 맞췄습니다. PDF exporter는 Aside 세션이 끝나기 전에 파일을 읽어 바이트를 전달하므로 임시 세션 파일의 수명에 의존하지 않습니다.
 
