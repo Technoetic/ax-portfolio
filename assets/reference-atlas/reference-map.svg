@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="660" viewBox="0 0 960 660" role="img" aria-labelledby="title desc">
+  <title id="title">Reference Atlas — 공개 출처와 두 플러그인의 인용 맥락</title>
+  <desc id="desc">논문, 오픈소스, 규격과 공식 글의 출처를 검색·분류하는 공개 카탈로그가 agentic-vault와 semantic-crosscheck의 공개 문서에 남은 참고 기록으로 연결된다. 연구 기능의 구현이나 성능 재현을 나타내는 그림은 아니다.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101c35"/>
+      <stop offset="1" stop-color="#141326"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#dbeafe" stroke-opacity="0.04"/>
+    </pattern>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8" fill="#7ea9e8"/>
+    </marker>
+  </defs>
+  <rect width="960" height="660" rx="20" fill="url(#background)"/>
+  <rect width="960" height="660" rx="20" fill="url(#grid)"/>
+  <rect x="1" y="1" width="958" height="658" rx="19" fill="none" stroke="#334155"/>
+  <g font-family="Pretendard, Malgun Gothic, Noto Sans KR, sans-serif">
+    <rect x="44" y="33" width="58" height="5" rx="2.5" fill="url(#accent)"/>
+    <text x="44" y="74" font-size="19" letter-spacing="2" fill="#93c5fd">PUBLIC REFERENCES</text>
+    <text x="44" y="111" font-size="30" font-weight="700" fill="#e9eef5">출처와 인용을 연결합니다.</text>
+
+    <g fill="#16253e" stroke="#3c5578">
+      <rect x="44" y="144" width="272" height="64" rx="10"/>
+      <rect x="344" y="144" width="272" height="64" rx="10"/>
+      <rect x="644" y="144" width="272" height="64" rx="10"/>
+    </g>
+    <g font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">
+      <text x="180" y="184">논문</text>
+      <text x="480" y="184">오픈소스</text>
+      <text x="780" y="184">규격·공식 글</text>
+    </g>
+    <g fill="none" stroke="#7ea9e8" stroke-width="2.5">
+      <path d="M180 208V232H480"/>
+      <path d="M780 208V232H480"/>
+      <path d="M480 208V260" marker-end="url(#arrow)"/>
+    </g>
+    <rect x="170" y="262" width="620" height="128" rx="14" fill="#162c4b" stroke="#60a5fa" stroke-width="2"/>
+    <rect x="170" y="262" width="6" height="128" rx="3" fill="url(#accent)"/>
+    <text x="480" y="314" text-anchor="middle" font-size="34" font-weight="750" fill="#e9eef5">Reference Atlas</text>
+    <text x="480" y="353" text-anchor="middle" font-size="23" fill="#a8c9f6">검색·분류 · 공개 인용 근거</text>
+
+    <g fill="none" stroke="#7ea9e8" stroke-width="2.5">
+      <path d="M480 390V416H250V463" marker-end="url(#arrow)"/>
+      <path d="M480 416H710V463" marker-end="url(#arrow)"/>
+    </g>
+    <text x="480" y="444" text-anchor="middle" font-size="19" fill="#a8b9d0">플러그인별 참고 기록</text>
+    <rect x="44" y="465" width="412" height="100" rx="12" fill="#152840" stroke="#42658c"/>
+    <rect x="504" y="465" width="412" height="100" rx="12" fill="#20253e" stroke="#67648d"/>
+    <g text-anchor="middle">
+      <text x="250" y="504" font-size="25" font-weight="700" fill="#93c5fd">agentic-vault</text>
+      <text x="250" y="538" font-size="21" fill="#c2cfdf">기억·인계의 참고 출처</text>
+      <text x="710" y="504" font-size="25" font-weight="700" fill="#c4b5fd">semantic-crosscheck</text>
+      <text x="710" y="538" font-size="21" fill="#c2cfdf">의미 검증의 참고 출처</text>
+    </g>
+    <rect x="44" y="592" width="872" height="42" rx="9" fill="#101b30" stroke="#304559"/>
+    <text x="480" y="619" text-anchor="middle" font-size="21" fill="#b8c9df">원문과 공개 문서의 인용 근거로 연결</text>
+  </g>
+</svg>
