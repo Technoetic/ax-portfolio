@@ -1,0 +1,11 @@
+:root {
+  color-scheme: dark;
+  --bg: #0a0c10;
+  --panel: #12161c;
+  --line: #303946;
+  --fg: #e9eef5;
+  --muted: #aab4c2;
+  --accent: #82b6ff;
+  --sans: "Pretendard Variable", "Pretendard", "Malgun Gothic", "Noto Sans CJK KR", "Noto Sans KR", "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Courier New", monospace;
+}

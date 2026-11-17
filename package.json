@@ -1,16 +1,16 @@
 {
   "name": "ax-portfolio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test tests/harness-data.test.mjs tests/commands-data.test.mjs",
+    "build": "node scripts/build.mjs",
+    "retain:assets": "node scripts/retain-assets.mjs",
+    "test": "node --test tests/*.test.mjs",
     "export:pdf": "node scripts/export-pdf.mjs"
-  },
-  "devDependencies": {
-    "gsap": "3.12.5"
   }
 }

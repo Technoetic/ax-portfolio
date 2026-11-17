@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname, resolve, extname } from 'node:path';
+import { dirname, resolve, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -18,17 +18,50 @@ if (process.platform === 'win32' && !process.env.ASIDE_BOOTSTRAP) {
 }
 const output = args[0] ? resolve(args[0]) : resolve(root, 'jeon-munjun-portfolio.pdf');
 const publicUrl = 'https://technoetic.github.io/ax-portfolio/cv.html';
-// The CV uses inline styles; remove the external font stylesheet for export.
-const html = (await readFile(resolve(root, 'cv.html'), 'utf8'))
+
+// The CV uses inline styles; remove external font stylesheet for deterministic local PDF export.
+const cvHtml = (await readFile(resolve(root, 'cv.html'), 'utf8'))
   .replace(/<link\b[^>]*rel=["']stylesheet["'][^>]*href=["']https?:\/\/[^>]*>/gi, '');
-const server = createServer((request, response) => {
-  if (request.url !== '/cv.html') { response.writeHead(404).end(); return; }
-  response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }).end(html);
+
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+};
+
+const server = createServer(async (request, response) => {
+  const pathname = new URL(request.url || '/', 'http://127.0.0.1').pathname;
+  if (pathname === '/cv.html') {
+    response.writeHead(200, { 'Content-Type': MIME['.html'], 'Cache-Control': 'no-store' }).end(cvHtml);
+    return;
+  }
+  if (pathname === '/version.json' || pathname.startsWith('/assets/dist/')) {
+    const candidate = resolve(root, `.${pathname}`);
+    if (!candidate.startsWith(resolve(root) + sep)) {
+      response.writeHead(403).end();
+      return;
+    }
+    try {
+      const body = await readFile(candidate);
+      const ext = extname(candidate).toLowerCase();
+      response.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream', 'Cache-Control': 'no-store' }).end(body);
+      return;
+    } catch {
+      response.writeHead(404).end();
+      return;
+    }
+  }
+  response.writeHead(404).end();
 });
+
 await new Promise((accept, reject) => {
   server.once('error', reject);
   server.listen(0, '127.0.0.1', accept);
 });
+
 try {
   if (process.env.ASIDE_BOOTSTRAP) {
     await exec('powershell.exe', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', process.env.ASIDE_BOOTSTRAP], { windowsHide: true });
@@ -45,8 +78,6 @@ try {
       }, ${JSON.stringify(publicUrl)});
       await page.evaluate(() => document.fonts.ready);
       await page.pdf({path:'./artifacts/portfolio-cv.pdf',paperWidth:8.2677165354,paperHeight:11.6929133858,preferCSSPageSize:true,printBackground:true,generateTaggedPDF:true,generateDocumentOutline:true,displayHeaderFooter:true,headerTemplate:'<span></span>',footerTemplate:${JSON.stringify(footer)}});
-      // Aside session files disappear when the CLI session exits. Read the
-      // artifact while this session still owns it and transfer its bytes.
       const pdf=await fs.readFile('./artifacts/portfolio-cv.pdf');
       console.log(JSON.stringify({portfolioPdf:true,data:pdf.toString('base64')}));
     } finally { await closeTab(page).catch(() => {}); }

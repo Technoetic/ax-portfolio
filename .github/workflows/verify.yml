@@ -24,5 +24,5 @@ jobs:
           cache: npm
       - name: Install pinned test dependencies
         run: npm ci --ignore-scripts
-      - name: Verify released step data, source hashes and fallback titles
+      - name: Verify build parity, routes, deployment updates, assets, and PDF
         run: npm test

@@ -1,0 +1,37 @@
+/* Design Tokens — 8px spatial scale, single blue accent, WCAG AA contrast */
+:root {
+  color-scheme: dark;
+  --bg: #0a0c10;
+  --bg-2: #12161c;
+  --bg-3: #1d232c;
+  --line: #252c36;
+  --fg: #e9eef5;
+  --fg-dim: #9aa4b2;
+  --fg-mute: #828d9c;
+  --accent: #3b82f6;
+  --accent-2: #60a5fa;
+  --accent-soft: #3b82f61a;
+  --grass-0: #161b22;
+  --grass-1: #0e4429;
+  --grass-2: #006d32;
+  --grass-3: #26a641;
+  --grass-4: #39d353;
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: "Pretendard Variable", "Pretendard", "Malgun Gothic", "Noto Sans KR", "Segoe UI", sans-serif;
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 40px;
+  --s6: 48px;
+  --s8: 64px;
+  --header-height: 76px;
+  --footer-height: 78px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --header-height: 116px;
+    --footer-height: 76px;
+  }
+}
