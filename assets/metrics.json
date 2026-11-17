@@ -1,61 +1,79 @@
 {
   "publicRepos": {
-    "value": 139,
-    "asOf": "2026-10-06",
+    "value": 155,
+    "asOf": "2026-11-17",
     "source": "https://api.github.com/users/Technoetic"
+  },
+  "githubPagesRepos": {
+    "value": 139,
+    "asOf": "2026-11-17",
+    "source": "https://api.github.com/users/Technoetic/repos"
   },
   "blogPosts": {
     "value": 255,
     "asOf": "2026-08-07",
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
-  "dualHostPlugins": {
+  "featuredPlugins": {
     "value": 2,
-    "asOf": "2026-10-31",
+    "asOf": "2026-11-17",
     "projects": [
       "agentic-vault",
       "semantic-crosscheck"
     ],
     "scope": "featured_in_portfolio"
   },
-  "publishedTutorials": {
-    "value": 5,
-    "asOf": "2026-09-06"
+  "referenceAtlas": {
+    "sources": 190,
+    "citations": 350,
+    "asOf": "2026-11-17",
+    "source": "https://technoetic.github.io/reference-atlas/data/catalog.json"
   },
   "activityChart": {
     "from": "2026-02-01",
     "asOf": "2026-08-07"
   },
   "pluginReleases": {
-    "asOf": "2026-10-31",
+    "asOf": "2026-11-17",
     "agentic-vault": {
-      "asOf": "2026-10-31",
-      "version": "0.35.1",
-      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.35.1",
-      "commit": "046365ad1ce53ff5648862036eb6f4a1c6410aff"
+      "asOf": "2026-11-17",
+      "version": "0.51.0",
+      "hosts": [
+        "Claude Code",
+        "Codex",
+        "Antigravity"
+      ],
+      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.51.0",
+      "commit": "22168b7ddd10796e8ad0a894fe2c79a704bd7da2"
     },
     "semantic-crosscheck": {
-      "version": "0.1.1",
-      "asOf": "2026-10-14",
-      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.1.1",
-      "commit": "3028a4077ef6ecc6e6b2bcff98a7fbd0b93b45b0",
+      "version": "0.28.0",
+      "asOf": "2026-11-17",
+      "hosts": [
+        "Claude Code",
+        "Codex"
+      ],
+      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.28.0",
+      "commit": "9a42f68cbd04165762c937ac4b326c8e0f51624e",
       "diagramSource": "https://github.com/Technoetic/semantic-crosscheck/tree/9eac5f5a03691db188978a9ecd11dc160a9b6b05/docs/images"
     }
   },
   "retiredShowcases": {
     "harness14": {
       "removedAt": "2026-10-31",
+      "redirectHash": "#sav",
       "reason": "웹앱 제작 원칙의 공통 참조는 agentic-vault로 안내",
       "previousDisplayedRelease": {
         "asOf": "2026-10-11",
         "version": "4.2.0",
         "source": "https://github.com/Technoetic/harness14/releases/tag/v4.2.0",
-        "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e",
-        "workflowProfile": "planning-first-14-v1",
-        "stepCount": 14,
-        "pluginInstallId": "harness20"
-      },
-      "legacyData": "assets/harness50-source.json"
+        "commit": "49735c60747ac8d9d64165ec8c1beb3c1cbc082e"
+      }
+    },
+    "claude-code-commands": {
+      "removedAt": "2026-11-17",
+      "redirectHash": "#sav",
+      "reason": "개별 슬래시 커맨드 목록(#s5) 대신 대표 플러그인(agentic-vault · semantic-crosscheck)과 Reference Atlas 중심으로 구성 집중"
     }
   }
 }
