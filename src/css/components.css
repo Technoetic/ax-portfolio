@@ -997,20 +997,6 @@ html.js .slide.is-leaving {
   stroke-width: 1.8;
 }
 
-.bcp-card .lks .demo-off,
-.cv-bcp .lk .demo-off {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--fg-mute);
-  background: transparent;
-  border: 1px dashed var(--line);
-  border-radius: 8px;
-  padding: 7px 12px;
-  cursor: default;
-}
-
 /* Field Experience (#s3) — tuned for zero desktop 1440x900 overflow */
 #s3 h2 {
   margin-bottom: 18px;
@@ -1528,12 +1514,6 @@ a.lg:hover {
   stroke: currentColor;
   fill: none;
   stroke-width: 1.8;
-}
-
-.cv-bcp .lk .demo-off {
-  font-size: 10.5px;
-  border-radius: 7px;
-  padding: 5px 10px;
 }
 
 /* Proof on GitHub (#s6) — tuned for zero desktop 1440x900 overflow */
