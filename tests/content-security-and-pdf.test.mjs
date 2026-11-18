@@ -43,7 +43,7 @@ test('index.html, cv.html, and metrics.json stay synchronized on 2026-11-17 fact
   }
 });
 
-test('the cover leads with the quoting case and describes its illustration in text', async () => {
+test('the cover links to the quoting case and AI tools without a quote preview', async () => {
   const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
   const cover = html.match(/<section\b[^>]*\bid="s0"[^>]*>([\s\S]*?)<\/section>/)?.[1];
   assert.ok(cover, 'missing cover slide');
@@ -52,11 +52,7 @@ test('the cover leads with the quoting case and describes its illustration in te
     ['#sdhis', '변압기 제조사 견적 자동화 보기'],
     ['#sav', '직접 만든 AI 개발 도구 보기'],
   ]);
-  const illustration = cover.match(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/);
-  assert.ok(illustration, 'missing explanatory quote illustration');
-  assert.doesNotMatch(illustration[1], /aria-hidden="true"/);
-  assert.match(illustration[2], /<figcaption\b[^>]*>[\s\S]*?영업 데이터[\s\S]*?견적 생성[\s\S]*?<\/figcaption>/);
-  assert.match(illustration[2], /예시/);
+  assert.doesNotMatch(cover, /\bquote-preview\b/);
 });
 
 test('the field case shows a worked quote with a before, automated step, and human review', async () => {
