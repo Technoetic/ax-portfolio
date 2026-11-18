@@ -43,6 +43,38 @@ test('index.html, cv.html, and metrics.json stay synchronized on 2026-11-17 fact
   }
 });
 
+test('the cover leads with the quoting case and describes its illustration in text', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const cover = html.match(/<section\b[^>]*\bid="s0"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(cover, 'missing cover slide');
+  const links = [...cover.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+  assert.deepEqual(links.slice(0, 2).map(([, href, label]) => [href, label.trim()]), [
+    ['#sdhis', '변압기 제조사 견적 자동화 보기'],
+    ['#sav', '직접 만든 AI 개발 도구 보기'],
+  ]);
+  const illustration = cover.match(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/);
+  assert.ok(illustration, 'missing explanatory quote illustration');
+  assert.doesNotMatch(illustration[1], /aria-hidden="true"/);
+  assert.match(illustration[2], /<figcaption\b[^>]*>[\s\S]*?영업 데이터[\s\S]*?견적 생성[\s\S]*?<\/figcaption>/);
+  assert.match(illustration[2], /예시/);
+});
+
+test('the field case shows a worked quote with a before, automated step, and human review', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const field = html.match(/<section\b[^>]*\bid="sdhis"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(field, 'missing field case slide');
+  const example = field.match(/<figure\b[^>]*>([\s\S]*?)<\/figure>/)?.[1];
+  assert.ok(example, 'missing worked quote');
+  assert.match(example, /<figcaption\b[^>]*>[\s\S]*?견적[\s\S]*?<\/figcaption>/);
+  const steps = [...example.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map(([, step]) => step);
+  assert.equal(steps.length, 3);
+  assert.match(steps[0], /도입 전[\s\S]*?가정/);
+  assert.match(steps[1], /도입 후/);
+  assert.match(steps[2], /담당자[\s\S]*?(검토|확인)/);
+  assert.match(example, /가상 문의/);
+  assert.match(example, /href="https:\/\/github\.com\/Technoetic\/dh-instantquote\/blob\/[a-f0-9]{40}\/README\.md"/i);
+});
+
 test('computeInternationalAge updates dynamically on birthday in KST (1988-12-20)', () => {
   assert.equal(computeInternationalAge('1988-12-20', new Date('2026-11-17T09:00:00+09:00')), 37);
   assert.equal(computeInternationalAge('1988-12-20', new Date('2026-12-19T23:59:59+09:00')), 37);

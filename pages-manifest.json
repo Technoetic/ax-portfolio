@@ -1,20 +1,20 @@
 {
   "schema": 1,
-  "buildId": "axp-8c17f7180319",
+  "buildId": "axp-bbc14cd39779",
   "files": {
-    "index.html": "d6a4ac5f4b93676de29244d8a50872d4eec108d952f38fc0a80a59bd6ff42c4b",
-    "cv.html": "a16c3ac989a0445ecc5c80eb0854e113e27ba767cb0ae5dd8ca02c3ac99a43d7",
-    "version.json": "76f93e0e38620fe52c5491d72a1b9ce27eb3eec8d4bff2cb0b614344d15c7ba3",
-    "assets/dist/cv-main.axp-8c17f7180319.js": "fc9d486d564dd37ffa8a12c946aae255e17265f4a1f02b576c423b52e4f46e73",
-    "assets/dist/main.axp-8c17f7180319.js": "b9a6c54389311b1ed06052a7e969d0a4001a92d1c922e400a72ced86f6252c0a",
-    "assets/dist/portfolio.axp-8c17f7180319.css": "b7f0b020f84dfd09c56da616a5c8ad725b33f74cf9a055df9e42042bbdd9e7bc",
-    "assets/dist/screens/cv-screen.axp-8c17f7180319.js": "0fbee56a1b2d023fab022e34440b7297155ed71f4a98f0b8dea4ab0418f3c5cd",
-    "assets/dist/screens/deck-screen.axp-8c17f7180319.js": "5ce0cdd9b706d26bc53a754375f336d017f5a7a64c2d111092bed162dbdf4c5f",
-    "assets/dist/services/entry-service.axp-8c17f7180319.js": "18863488af7636eb5fa4e6ff82acf26d88b679eac544162cbd44fc6dad446e1f",
-    "assets/dist/services/version-service.axp-8c17f7180319.js": "9d4287fdc99e8b31fcd540e9d6459f72730d8fcf9ec3caeabad26a26e7bf69fd",
-    "assets/dist/shared/korean-age.axp-8c17f7180319.js": "8316e0c46b2b8e628f416e6b90e75de579381a475bb4368b52ff636fe84616ea",
-    "assets/dist/shared/routes.axp-8c17f7180319.js": "b8967bbaf3c2006da2b8d933cb1b0cfea61506c24812f6d76def4a036229daa4",
-    "assets/dist/visuals/activity-charts.axp-8c17f7180319.js": "6c0d50a31e55e58a695354868877114e2fb6ec097f9e1abb26309ebc9d4f61cc",
-    "assets/dist/visuals/ambient-visuals.axp-8c17f7180319.js": "bd6b369d4bec8b31c50d6f1bd0f93a5a3684a73a047ad1c628a36453af41c67b"
+    "index.html": "d2d55fc87fd8854ee004c5c3202b7f6b23ffdd207192085f42ec0484a2641a1c",
+    "cv.html": "77f948f06a6962a60ddf2e1c7903610abdda8990bf198d30b4bb182e8c97160b",
+    "version.json": "1d950dda00c987030bfe5142a99f6998b3f196694f07b06f18fd7e20f54659ad",
+    "assets/dist/cv-main.axp-bbc14cd39779.js": "caac9ac05689b4fa1f1612516151fec6e5a661c4210226bb1385d85fe64eb3e6",
+    "assets/dist/main.axp-bbc14cd39779.js": "14b65186b3d21c5e4b17130d289f88f8d2d483feeae400083eed703f806c9db0",
+    "assets/dist/portfolio.axp-bbc14cd39779.css": "9630d35b226f39d527ca9531973682dacdea286a0b164e82378f67535e9e59a4",
+    "assets/dist/screens/cv-screen.axp-bbc14cd39779.js": "ca87ff1ec14b82a1db392408332e86c6a3c7e746c80761b8f25b82f4e8128739",
+    "assets/dist/screens/deck-screen.axp-bbc14cd39779.js": "f1d78c3375bdd89f4658cc69ddd480fbd3af7b8ed26895ff42d7b46c0a1c123f",
+    "assets/dist/services/entry-service.axp-bbc14cd39779.js": "9ab5c03c6d2e319cdd2e5c9fedc8b228186b6402bda55078b70929554c5ca781",
+    "assets/dist/services/version-service.axp-bbc14cd39779.js": "9d4287fdc99e8b31fcd540e9d6459f72730d8fcf9ec3caeabad26a26e7bf69fd",
+    "assets/dist/shared/korean-age.axp-bbc14cd39779.js": "8316e0c46b2b8e628f416e6b90e75de579381a475bb4368b52ff636fe84616ea",
+    "assets/dist/shared/routes.axp-bbc14cd39779.js": "b8967bbaf3c2006da2b8d933cb1b0cfea61506c24812f6d76def4a036229daa4",
+    "assets/dist/visuals/activity-charts.axp-bbc14cd39779.js": "6c0d50a31e55e58a695354868877114e2fb6ec097f9e1abb26309ebc9d4f61cc",
+    "assets/dist/visuals/ambient-visuals.axp-bbc14cd39779.js": "bd6b369d4bec8b31c50d6f1bd0f93a5a3684a73a047ad1c628a36453af41c67b"
   }
 }

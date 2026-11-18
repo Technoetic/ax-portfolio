@@ -75,17 +75,36 @@
 <main class="deck" id="deck" tabindex="-1">
 
   <section class="slide active" id="s0" data-title="소개">
-    <div class="kicker rise">Portfolio · 2026</div>
-    <h1 class="rise"><span class="accent">전문준</span></h1>
-    <p class="title-role rise">현장 업무를 자동화하는 AX 엔지니어</p>
-    <p class="role rise"><b>빌딩 HMI 11년</b>의 현장 경험을 바탕으로<br>영업·견적 업무와 <b>AI 개발 흐름</b>을 자동화합니다.</p>
-    <p class="role now rise">현재 · <b>제조기업 전산·AX팀 리드</b> (2026.08 ~ 재직 중)</p>
-    <div class="hero-actions rise">
-      <a class="action-link primary" href="#sav" data-slide-target>대표 프로젝트 보기</a>
-      <a class="action-link" href="#sdhis" data-slide-target>실무 AX 사례</a>
-      <a class="action-link" href="#sref" data-slide-target>Reference Atlas · 연구 출처</a>
-      <a class="action-link" href="cv.html">이력서 보기</a>
-      <a class="action-link" href="jeon-munjun-portfolio.pdf" download>PDF 다운로드</a>
+    <div class="cover-layout">
+      <div class="cover-copy">
+        <div class="kicker rise">Portfolio · 2026</div>
+        <h1 class="rise"><span class="accent">전문준</span></h1>
+        <p class="title-role rise">현장 업무를 자동화하는 AX 엔지니어</p>
+        <p class="role rise"><b>빌딩 HMI 11년</b>의 현장 경험을 바탕으로<br>영업·견적 업무와 <b>AI 개발 흐름</b>을 자동화합니다.</p>
+        <p class="role now rise">현재 · <b>제조기업 전산·AX팀 리드</b> (2026.08 ~ 재직 중)</p>
+        <div class="hero-actions rise">
+          <a class="action-link primary" href="#sdhis" data-slide-target>변압기 제조사 견적 자동화 보기</a>
+          <a class="action-link" href="#sav" data-slide-target>직접 만든 AI 개발 도구 보기</a>
+        </div>
+        <div class="cover-resources rise">
+          <a class="action-link" href="#sref" data-slide-target>Reference Atlas · 연구 출처</a>
+          <a class="action-link" href="cv.html">이력서 보기</a>
+          <a class="action-link" href="jeon-munjun-portfolio.pdf" download>PDF 다운로드</a>
+        </div>
+      </div>
+      <figure class="quote-preview rise" aria-label="변압기 제조사 견적 자동화 사례">
+        <div class="quote-paper">
+          <div class="quote-paper-head"><strong>변압기 견적서</strong><span>설명용 예시</span></div>
+          <div class="quote-drawing" aria-hidden="true">
+            <div class="quote-transformer"><i></i><i></i><i></i></div>
+            <div class="quote-rules"></div>
+          </div>
+        </div>
+        <figcaption>
+          <strong>영업 데이터 <span aria-hidden="true">→</span> 견적 생성</strong>
+          <span>디에이치아이에스 · 4주 현장 프로젝트</span>
+        </figcaption>
+      </figure>
     </div>
     <div class="contacts rise" style="margin-top:var(--s4)">
       <a href="mailto:technoetic@hotmail.com"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>technoetic@hotmail.com</a>
@@ -96,9 +115,18 @@
 
   <section class="slide" id="sdhis" data-title="실무 AX 사례">
     <div class="kicker rise">Field Work · 실무 AX</div>
-    <h2 class="rise">현장에 상주하며<br><span class="accent">1인으로 서비스 10여 종을 만들다</span></h2>
-    <p class="case-meta rise">(주)디에이치아이에스 · 2026.07–08 · 4주 업무위탁 프로젝트 · 고객사 수치·화면은 보안상 비공개</p>
-    <p class="lead case-intro rise">변압기 제조기업의 AI 전환(AX)을 맡은 프로젝트입니다.<br><b>현업과 밀착한 과제</b>를 중심으로, AI 도구를 체계화해 구축했습니다.</p>
+    <h2 class="rise">변압기 <span class="accent">견적 작성</span>을 자동화했습니다</h2>
+    <p class="case-meta rise">(주)디에이치아이에스 · 2026.07–08 · 4주 상주 업무위탁 · 서비스 10여 종을 1인 개발</p>
+    <figure class="quote-example rise">
+      <figcaption>견적 요청 한 건의 전후 비교</figcaption>
+      <p class="quote-inquiry">가상 문의 <q>몰드 변압기를 주문하면 비용은 어느 정도이고, 언제 받을 수 있나요?</q></p>
+      <ol class="quote-example-steps">
+        <li><strong>도입 전 · 수작업 가정</strong><p>영업 담당자가 요청 사양에 맞는 자재와 가격을 찾고, 납기와 함께 견적서에 옮깁니다.</p></li>
+        <li><strong>도입 후 · 견적 초안 생성</strong><p>공개 데모에 요청 사양을 입력하면 자재 구성과 예상 견적 범위, 가능한 납기 일정이 한 화면에 나옵니다.</p></li>
+        <li><strong>담당자 · 발송 전 검토</strong><p>요청 사양이 맞는지, 사내 원가표와 생산 일정으로 제시할 수 있는 가격과 납기인지 확인합니다.</p></li>
+      </ol>
+      <p class="quote-source">공개 데모로 재구성한 예시입니다. 고객사의 실제 견적 금액과 화면은 비공개입니다. <a href="https://github.com/Technoetic/dh-instantquote/blob/552005e024b96f1f3e5a233ed98b3667f094923e/README.md" target="_blank" rel="noopener">견적 데모의 기능·범위 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭)</span></a></p>
+    </figure>
     <div class="case-grid rise">
       <article class="case-card"><span class="case-step">01 · 영업·견적</span><h3>영업 DB와 견적 자동화</h3><p>변압기 영업 데이터를 정리해 데이터베이스를 구축하고, 견적 생성을 자동화했습니다. 견적·수주 업무를 AI가 보조하는 체계도 만들었습니다.</p></article>
       <article class="case-card"><span class="case-step">02 · 수출</span><h3>수출 업무 지원</h3><p>해외 문의 대응과 영문 기술·통관 문서의 초안 작성·검토를 보조하는 수출 실무 지원 도구를 구축했습니다.</p></article>
