@@ -11,7 +11,7 @@
 - `src/js/` — 책임별 ES 모듈(`main.js`, `cv-main.js`, `DeckScreen`, `CvScreen`, `VersionService`, `EntryService`, `AmbientVisuals`, `ActivityCharts`, 공통 유틸리티)
 - `scripts/build.mjs` — 외부 빌드 의존성 없이 내용 해시 정적 자산(`assets/dist/*`), `index.html`, `cv.html`, `version.json`, `pages-manifest.json` 생성
 - `cv.html`, `jeon-munjun-portfolio.pdf` — 웹 이력서와 검색·북마크·태그를 갖춘 A4 3쪽 PDF
-- `assets/metrics.json` — 공개 수치·릴리스 버전의 출처와 기준일(`2026-11-17`)
+- `assets/metrics.json` — 공개 수치·릴리스 버전의 출처와 기준일(`2026-11-21`)
 
 ## 탐색과 배포 갱신 (웹앱 제작 6원칙)
 
@@ -31,7 +31,7 @@ npm test
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-`npm test`와 GitHub Actions(`verify.yml`)는 빌드 산출물 동기화, `#s5` 제거 및 구 해시(`#s4`·`#s5`) 치환, `VersionService`·`EntryService` 배포 전환 상태 기계(A→B 전환·시작 경합·B→A 롤백·루프 방지·입력 보호), 외부 CDN SRI 해시, 내부 자산 참조 무결성, `index.html`↔`cv.html`↔`metrics.json` 수치 정합성, 비밀·로컬 경로 미포함, PDF 구조 무결성을 검증합니다.
+`npm test`와 GitHub Actions(`verify.yml`)는 빌드 산출물 동기화, `assets/dist/` 보유 빌드 세대 상한(`<= 2`), `#s5` 제거 및 구 해시(`#s4`·`#s5`) 치환, `VersionService`·`EntryService` 배포 전환 상태 기계(A→B 전환·시작 경합·B→A 롤백·루프 방지·입력 보호), 외부 CDN SRI 해시, 내부 자산 참조 무결성, `index.html`↔`cv.html`↔`metrics.json` 동적 수치 정합성, 비밀·로컬 경로 미포함, PDF 구조 무결성을 검증합니다.
 
 ## PDF 재생성
 
@@ -46,6 +46,8 @@ exporter는 로컬 `127.0.0.1` 루프백 서버에서 `cv.html`을 열어 상대
 
 ## 주요 갱신 기록
 
+- **2026-11-21:** `agentic-vault` [v0.54.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.0), `semantic-crosscheck` [v0.30.0](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.30.0), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(197개 출처·367건 인용), GitHub 공개 저장소(158개·Pages 142개)·활동 차트(`2026.02.01–11.21`)·언어 분포 및 네이버 기술 블로그(343편)를 `2026-11-21` 기준으로 `index.html`·`cv.html`·`jeon-munjun-portfolio.pdf`·Release `v1.0`에 일괄 동기화했습니다. `cv.html`/PDF에도 `dh-instantquote` 견적 데모 링크를 연결하고, `#sbcp`·`#scv` 사주경 문구를 소스 공개 기준으로 정렬했으며, `#sdhis` `1440×900` 세로 오버플로 해소와 `assets/dist/` 보유 세대 상한(`<= 2`) 및 `metrics.json` 동적 정합성 테스트를 추가했습니다.
+- **2026-11-18:** 표지 CTA와 `#sdhis`를 변압기 제조사 견적 자동화 3단계 사례(`dh-instantquote` 공개 데모 연계) 중심으로 개편하고, 표지 일러스트(`quote-preview`)와 부트캠프 데모 배지·사주경 라이브 링크를 정리했습니다.
 - **2026-11-17:** 웹앱 제작 6원칙에 맞춰 JS·CSS 소스를 모듈·레이어로 분리하고 내용 해시 자산과 `version.json` 기반 열린 탭 자동 문서 전환을 적용했습니다. 커스텀 슬래시 커맨드 섹션(`#s5`)과 전용 모달·폰트(`D2Coding`)를 제거하고 `#s5` 주소를 `#sav`로 연결했습니다. `agentic-vault` [v0.51.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.51.0)(Claude Code · Codex · Antigravity 3호스트), `semantic-crosscheck` [v0.28.0](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.28.0), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(190개 출처·350건 인용), 공개 저장소 수(155개·GitHub Pages 배포 139개)를 `index.html`·`cv.html`·`jeon-munjun-portfolio.pdf`·GitHub Release `v1.0`에 일괄 동기화했습니다.
 - **2026-11-07:** Reference Atlas 전용 소개 장(`#sref`) 연결 및 빌딩 HMI 경력 요약 연수(11년, 2014.10–2025.10) 정합화.
 - **2026-10-31:** 하네스 14 소개 섹션(`#s4`) 정리 및 `#sav` 치환.
