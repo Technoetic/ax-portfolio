@@ -16,31 +16,47 @@ async function walkFiles(dir) {
   return out;
 }
 
-test('index.html, cv.html, and metrics.json stay synchronized on 2026-11-17 facts', async () => {
-  const [indexHtml, cvHtml, metricsRaw] = await Promise.all([
+test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically synchronized', async () => {
+  const [indexHtml, cvHtml, metricsRaw, chartsJs] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'assets', 'metrics.json'), 'utf8'),
+    readFile(path.join(APP_ROOT, 'src', 'js', 'visuals', 'activity-charts.js'), 'utf8'),
   ]);
   const metrics = JSON.parse(metricsRaw);
 
-  assert.equal(metrics.publicRepos.value, 155);
-  assert.equal(metrics.githubPagesRepos.value, 139);
-  assert.equal(metrics.pluginReleases['agentic-vault'].version, '0.51.0');
-  assert.deepEqual(metrics.pluginReleases['agentic-vault'].hosts, ['Claude Code', 'Codex', 'Antigravity']);
-  assert.equal(metrics.pluginReleases['semantic-crosscheck'].version, '0.28.0');
-  assert.equal(metrics.referenceAtlas.sources, 190);
-  assert.equal(metrics.referenceAtlas.citations, 350);
+  const av = metrics.pluginReleases['agentic-vault'];
+  const sxc = metrics.pluginReleases['semantic-crosscheck'];
+  const atlas = metrics.referenceAtlas;
+  const esc = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  assert.ok(Number.isInteger(metrics.publicRepos.value) && metrics.publicRepos.value > 0);
+  assert.ok(Number.isInteger(metrics.githubPagesRepos.value) && metrics.githubPagesRepos.value > 0);
+  assert.ok(Number.isInteger(metrics.blogPosts.value) && metrics.blogPosts.value > 0);
+  assert.deepEqual(av.hosts, ['Claude Code', 'Codex', 'Antigravity']);
+  assert.ok(atlas.sources > 0 && atlas.citations > 0);
 
   for (const doc of [indexHtml, cvHtml]) {
-    assert.match(doc, /v0\.51\.0/);
+    assert.match(doc, new RegExp(`v${esc(av.version)}`));
     assert.match(doc, /Antigravity/);
-    assert.match(doc, /v0\.28\.0/);
+    assert.match(doc, new RegExp(`v${esc(sxc.version)}`));
     assert.match(doc, /Reference[\s\S]{0,40}Atlas/);
-    assert.match(doc, /155/);
+    assert.match(doc, new RegExp(esc(atlas.sources)));
+    assert.match(doc, new RegExp(esc(atlas.citations)));
+    assert.match(doc, new RegExp(esc(metrics.publicRepos.value)));
+    assert.match(doc, new RegExp(esc(metrics.githubPagesRepos.value)));
+    assert.match(doc, new RegExp(esc(metrics.blogPosts.value)));
     assert.match(doc, /빌딩 HMI 11년/);
     assert.match(doc, /tel:\+821076335021/);
+    assert.match(doc, /github\.com\/Technoetic\/dh-instantquote\/blob\/[a-f0-9]{40}\/README\.md/i);
   }
+
+  assert.match(chartsJs, new RegExp(esc(metrics.activityChart.asOf)));
+
+  const sbcp = indexHtml.match(/<section\b[^>]*\bid="sbcp"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
+  assert.ok(sbcp, 'missing #sbcp slide');
+  assert.doesNotMatch(sbcp, /운영 중입니다/, '#sbcp must not claim live operation without a live demo link');
+  assert.doesNotMatch(sbcp, /Fly\.io 배포/, '#sbcp must not show Fly.io deploy badge without a live demo link');
 });
 
 test('the cover links to the quoting case and AI tools without a quote preview', async () => {
@@ -155,6 +171,7 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   const pageMatches = latin.match(/\/Type\s*\/Page\b/g) || [];
   assert.equal(pageMatches.length, 3, `Expected 3 A4 pages, found ${pageMatches.length}`);
 
+  assert.match(latin, /https:\/\/github\.com\/Technoetic\/dh-instantquote\/blob\/[a-f0-9]{40}\/README\.md/i);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/agentic-vault/);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/semantic-crosscheck/);
   assert.match(latin, /https:\/\/technoetic\.github\.io\/reference-atlas\//);

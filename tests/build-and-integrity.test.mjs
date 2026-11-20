@@ -50,6 +50,24 @@ test('committed build artifacts match deterministic source build byte-for-byte',
   }
 });
 
+test('assets/dist retains at most two build generations (current plus one previous)', async () => {
+  const expected = await computeBuildArtifacts({ rootDir: APP_ROOT });
+  const actualDist = await listDistFiles(path.join(APP_ROOT, 'assets', 'dist'));
+  const buildIds = new Set();
+
+  for (const relPath of actualDist) {
+    const match = relPath.match(/\.(axp-[a-f0-9]+(?:-[a-z0-9-]+)?)\.(?:js|css)$/i);
+    assert.ok(match, `Unexpected non-hashed file in assets/dist: ${relPath}`);
+    buildIds.add(match[1]);
+  }
+
+  assert.ok(buildIds.has(expected.buildId), `Current build ${expected.buildId} missing from assets/dist`);
+  assert.ok(
+    buildIds.size <= 2,
+    `assets/dist accumulated ${buildIds.size} builds (${[...buildIds].join(', ')}); keep at most 2 (current + 1 previous)`,
+  );
+});
+
 test('package.json has zero external dependencies and MIT LICENSE exists', async () => {
   const pkg = JSON.parse(await readFile(path.join(APP_ROOT, 'package.json'), 'utf8'));
   assert.equal(pkg.dependencies, undefined);

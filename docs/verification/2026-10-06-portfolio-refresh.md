@@ -9,7 +9,7 @@
 - [하네스 20 v4.0.0](https://github.com/Technoetic/harness20/releases/tag/v4.0.0): 태그 커밋 `a6966675cb1f8dc90a2eb8d533bcb7f2664ec6e4`의 `planning-first-20-v1` 프로필
 - [Agentic Vault v0.18.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.18.0)
 - [공개 사용자 API](https://api.github.com/users/Technoetic): 2026-10-06 11:10 KST 관측 `public_repos:139`
-- [하네스 보안 계약](https://github.com/Technoetic/harness20/blob/main/docs/SECURITY.md), [Agentic Vault 보안 계약](https://github.com/Technoetic/agentic-vault/blob/master/docs/SECURITY.md)
+- [하네스 보안 계약](https://github.com/Technoetic/harness14/blob/main/docs/SECURITY.md)(구 주소 `harness20`에서 이동), [Agentic Vault 보안 계약](https://github.com/Technoetic/agentic-vault/blob/master/SECURITY.md)(구 경로 `docs/SECURITY.md`에서 루트로 이동)
 
 OWASP LLM Top 10 제공본에 따른 호스트 통제 보강을 설명합니다. OWASP 인증을 주장하지 않습니다. 생성 HTML의 네이티브 실행은 호스트 격리 지원 전까지 차단하며 변경된 훅은 직접 신뢰 검토해야 합니다. 기존 36·50단계 기록 보존과 새 20단계 실행을 구분했습니다. 별도 커스텀 커맨드 20개는 변경하지 않았습니다.
 
