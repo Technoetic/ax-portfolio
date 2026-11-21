@@ -181,7 +181,7 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.ok(!latin.includes('harness20'), 'PDF must not contain retired harness20 URI');
 });
 
-test('#sav, #sxc, and #sref use unified lightweight 960x640 WebP diagrams and preserve sxc motion toggle', async () => {
+test('#sav, #sxc, and #sref use unified lightweight 960x640 WebP diagrams without the removed sxc animation toggle', async () => {
   const [indexHtml, deckJs] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'src', 'js', 'screens', 'deck-screen.js'), 'utf8'),
@@ -205,6 +205,6 @@ test('#sav, #sxc, and #sref use unified lightweight 960x640 WebP diagrams and pr
     assert.ok(bytes.length < 100 * 1024, `${relPath} should stay under 100 KB, got ${bytes.length}`);
   }
 
-  assert.match(deckJs, /semantic-crosscheck-\$\{playing \? 'flow\.gif' : 'hero\.webp'\}/);
-  assert.match(deckJs, /diagram\.dataset\.mode\s*=\s*playing \? 'motion' : 'still'/);
+  assert.doesNotMatch(indexHtml, /sxc-animation-toggle/);
+  assert.doesNotMatch(deckJs, /sxc-animation-toggle|_initSxcMotionToggle/);
 });

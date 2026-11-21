@@ -856,52 +856,58 @@ html.js .slide.is-leaving {
   stroke-width: 1.8;
 }
 
-/* Agentic Vault flow (#sav) */
+/* Unified 3-slide flagship visual showcase (#sav, #sxc, #sref) — exact pixel-locked right frame on desktop */
+#sav .split,
+#sxc .split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Agentic Vault diagram (#sav) */
 #sav .lead + .lead {
   margin-top: 12px;
 }
 
-.flow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
-  margin-top: var(--s2);
+.av-figure {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-2);
 }
 
-.arrow {
-  position: relative;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: clamp(14px, 1.5vw, 18px);
-  padding-left: var(--s3);
-  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
-  opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+.av-figure img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
-.slide.active .arrow {
-  opacity: 1;
-  transform: none;
+.av-figure figcaption {
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 12px;
+  word-break: keep-all;
 }
 
-.slide.active .arrow:nth-child(1) { transition-delay: 0.15s; }
-.slide.active .arrow:nth-child(2) { transition-delay: 0.35s; }
-.slide.active .arrow:nth-child(3) { transition-delay: 0.55s; }
+@media (min-width: 1051px) {
+  .av-figure.rise,
+  .sxc-figure.rise,
+  #sref .ref-visuals.rise {
+    transform: none;
+  }
 
-.arrow.a1 { width: 74%; background: linear-gradient(90deg, #2d3a8c, #3949ab); }
-.arrow.a2 { width: 88%; background: linear-gradient(90deg, #3949ab, #5c4bbf); }
-.arrow.a3 { width: 100%; background: linear-gradient(90deg, #5c4bbf, #7b5fd4); }
-
-.arrow .sub {
-  font-family: var(--mono);
-  font-weight: 400;
-  font-size: 12px;
-  opacity: 0.78;
-  margin-left: var(--s2);
+  .av-figure figcaption,
+  .sxc-figure figcaption,
+  #sref .ref-diagram figcaption {
+    min-height: 42px;
+  }
 }
 
 /* semantic-crosscheck (#sxc) */
@@ -944,7 +950,7 @@ html.js .slide.is-leaving {
 
 .sxc-figure {
   min-width: 0;
-  padding: var(--s2);
+  padding: 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--bg-2);
@@ -955,7 +961,7 @@ html.js .slide.is-leaving {
   max-width: 100%;
   width: 100%;
   height: auto;
-  aspect-ratio: 1200 / 560;
+  aspect-ratio: 3 / 2;
   object-fit: contain;
   border-radius: 8px;
 }
@@ -964,39 +970,13 @@ html.js .slide.is-leaving {
   color: var(--fg-dim);
   font-size: 13px;
   line-height: 1.6;
-  margin: var(--s2) 0;
+  margin-top: 12px;
+  word-break: keep-all;
 }
 
 .sxc-figure figcaption a {
   color: var(--accent-2);
   text-underline-offset: 3px;
-}
-
-#sxc-animation-toggle {
-  cursor: pointer;
-  font-family: inherit;
-}
-
-#sxc-animation-toggle[hidden] {
-  display: none;
-}
-
-#sxc-animation-toggle[aria-pressed="true"] {
-  border-color: var(--accent-2);
-  background: #1e3a5f;
-  color: #fff;
-  box-shadow: inset 0 0 0 1px var(--accent-2);
-}
-
-.sxc-toggle-icon::before {
-  content: "\25B6\FE0E";
-  display: inline-block;
-  min-width: 1.3em;
-  font-size: 13px;
-}
-
-#sxc-animation-toggle[aria-pressed="true"] .sxc-toggle-icon::before {
-  content: "\275A\275A";
 }
 
 #sxc .linkbtn {
@@ -2178,8 +2158,6 @@ a.lg:hover {
 
 @media (max-width: 760px) {
   .linkbtn .url { display: none; }
-  .arrow .sub { display: none; }
-  .arrow { font-size: 14px; }
   .metrics { grid-template-columns: 1fr; }
   .cv-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cv-info { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2229,8 +2207,8 @@ a.lg:hover {
 }
 
 /* Reference Atlas slide (#sref) */
-#sref { justify-content: flex-start; }
-#sref .ref-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; margin-block: auto; }
+#sref { justify-content: safe center; }
+#sref .ref-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 48px; align-items: center; width: 100%; }
 #sref .ref-copy, #sref .ref-visuals { min-width: 0; }
 #sref h2 { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.2; margin-bottom: 20px; word-break: keep-all; }
 #sref .lead { font-size: clamp(16px, 1.45vw, 19px); line-height: 1.75; word-break: keep-all; }
@@ -2242,13 +2220,16 @@ a.lg:hover {
 #sref .ref-context b { color: var(--accent-2); font-weight: 600; }
 #sref .hero-actions { margin-top: 22px; gap: 10px; }
 #sref .ref-boundary { margin-top: 16px; font-size: 12px; line-height: 1.7; word-break: keep-all; }
-#sref .ref-diagram { padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
-#sref .ref-diagram img { display: block; width: 100%; height: auto; border-radius: 6px; }
+#sref .ref-diagram { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
+#sref .ref-diagram img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; border-radius: 8px; }
 #sref .ref-diagram figcaption { margin-top: 12px; color: var(--fg-dim); font-size: 13px; line-height: 1.6; word-break: keep-all; }
 #sref .ref-small-diagram { display: none; }
 
 @media (max-width: 1050px) {
-  #sref .ref-layout { grid-template-columns: 1fr; gap: 32px; width: 100%; }
+  #sref { justify-content: flex-start; }
+  #sav .split,
+  #sxc .split,
+  #sref .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; width: 100%; }
   #sref .ref-copy { max-width: 760px; }
   #sref .ref-visuals { width: 100%; max-width: 760px; }
 }

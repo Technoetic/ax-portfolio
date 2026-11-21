@@ -1,6 +1,6 @@
 /* Reference Atlas slide (#sref) */
-#sref { justify-content: flex-start; }
-#sref .ref-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; margin-block: auto; }
+#sref { justify-content: safe center; }
+#sref .ref-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 48px; align-items: center; width: 100%; }
 #sref .ref-copy, #sref .ref-visuals { min-width: 0; }
 #sref h2 { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.2; margin-bottom: 20px; word-break: keep-all; }
 #sref .lead { font-size: clamp(16px, 1.45vw, 19px); line-height: 1.75; word-break: keep-all; }
@@ -12,13 +12,16 @@
 #sref .ref-context b { color: var(--accent-2); font-weight: 600; }
 #sref .hero-actions { margin-top: 22px; gap: 10px; }
 #sref .ref-boundary { margin-top: 16px; font-size: 12px; line-height: 1.7; word-break: keep-all; }
-#sref .ref-diagram { padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
-#sref .ref-diagram img { display: block; width: 100%; height: auto; border-radius: 6px; }
+#sref .ref-diagram { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
+#sref .ref-diagram img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; border-radius: 8px; }
 #sref .ref-diagram figcaption { margin-top: 12px; color: var(--fg-dim); font-size: 13px; line-height: 1.6; word-break: keep-all; }
 #sref .ref-small-diagram { display: none; }
 
 @media (max-width: 1050px) {
-  #sref .ref-layout { grid-template-columns: 1fr; gap: 32px; width: 100%; }
+  #sref { justify-content: flex-start; }
+  #sav .split,
+  #sxc .split,
+  #sref .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; width: 100%; }
   #sref .ref-copy { max-width: 760px; }
   #sref .ref-visuals { width: 100%; max-width: 760px; }
 }
