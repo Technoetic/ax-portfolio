@@ -649,25 +649,25 @@ html.js .slide.is-leaving {
   flex: 0 0 auto;
 }
 
-/* Field Work (#sdhis) */
+/* Field Work (#sdhis) — tuned for zero desktop 1440x900 overflow */
 .case-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 20px;
   font-size: 13px;
   color: var(--accent-2);
-  margin-block: 12px 18px;
+  margin-block: 8px 14px;
 }
 
 .case-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-block: 20px;
+  gap: 16px;
+  margin-block: 14px;
 }
 
 .case-card {
-  padding: 20px 22px;
+  padding: 16px 20px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--bg-2);
@@ -676,14 +676,14 @@ html.js .slide.is-leaving {
 
 .case-step {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   color: var(--accent-2);
   font-family: var(--mono);
   font-size: 12px;
 }
 
 .case-card h3 {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 18px;
   line-height: 1.35;
 }
@@ -691,27 +691,27 @@ html.js .slide.is-leaving {
 .case-card p {
   font-size: 14.5px;
   color: var(--fg-dim);
-  line-height: 1.68;
+  line-height: 1.62;
 }
 
 #sdhis .hero-actions {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .quote-example {
-  padding: clamp(16px, 2vw, 26px);
+  padding: clamp(14px, 1.6vw, 20px);
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--bg-2);
 }
 
 .quote-example figcaption {
-  font-size: clamp(19px, 2vw, 24px);
+  font-size: clamp(18px, 1.9vw, 22px);
   font-weight: 700;
 }
 
 .quote-inquiry {
-  margin: 3px 0 16px;
+  margin: 2px 0 12px;
   color: var(--fg-dim);
   font-size: 14px;
 }
@@ -726,7 +726,7 @@ html.js .slide.is-leaving {
 
 .quote-example-steps li {
   border-top: 2px solid var(--line);
-  padding-top: 9px;
+  padding-top: 8px;
 }
 
 .quote-example-steps li:nth-child(2) { border-color: var(--accent-2); }
@@ -738,7 +738,7 @@ html.js .slide.is-leaving {
 }
 
 .quote-example-steps p { margin-top: 4px; }
-.quote-source { margin-top: 16px; font-size: 13px; }
+.quote-source { margin-top: 12px; font-size: 13px; }
 .quote-source a { color: var(--accent-2); text-underline-offset: 3px; }
 
 @media (max-width: 700px) {
@@ -856,52 +856,35 @@ html.js .slide.is-leaving {
   stroke-width: 1.8;
 }
 
-/* Agentic Vault flow (#sav) */
+/* Agentic Vault diagram (#sav) */
 #sav .lead + .lead {
   margin-top: 12px;
 }
 
-.flow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
+.av-figure {
+  min-width: 0;
+  padding: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-2);
+}
+
+.av-figure img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.av-figure figcaption {
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.6;
   margin-top: var(--s2);
-}
-
-.arrow {
-  position: relative;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: clamp(14px, 1.5vw, 18px);
-  padding-left: var(--s3);
-  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
-  opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.slide.active .arrow {
-  opacity: 1;
-  transform: none;
-}
-
-.slide.active .arrow:nth-child(1) { transition-delay: 0.15s; }
-.slide.active .arrow:nth-child(2) { transition-delay: 0.35s; }
-.slide.active .arrow:nth-child(3) { transition-delay: 0.55s; }
-
-.arrow.a1 { width: 74%; background: linear-gradient(90deg, #2d3a8c, #3949ab); }
-.arrow.a2 { width: 88%; background: linear-gradient(90deg, #3949ab, #5c4bbf); }
-.arrow.a3 { width: 100%; background: linear-gradient(90deg, #5c4bbf, #7b5fd4); }
-
-.arrow .sub {
-  font-family: var(--mono);
-  font-weight: 400;
-  font-size: 12px;
-  opacity: 0.78;
-  margin-left: var(--s2);
+  word-break: keep-all;
 }
 
 /* semantic-crosscheck (#sxc) */
@@ -955,9 +938,14 @@ html.js .slide.is-leaving {
   max-width: 100%;
   width: 100%;
   height: auto;
-  aspect-ratio: 1200 / 560;
+  aspect-ratio: 3 / 2;
   object-fit: contain;
   border-radius: 8px;
+}
+
+.sxc-figure img[data-mode="motion"] {
+  aspect-ratio: 1080 / 480;
+  background: #0c1322;
 }
 
 .sxc-figure figcaption {
@@ -1852,7 +1840,7 @@ a.lg:hover {
   grid-auto-flow: column;
   grid-template-rows: repeat(7, 1fr);
   gap: 3px;
-  min-width: 480px;
+  min-width: 520px;
 }
 
 .cell {
@@ -2178,8 +2166,6 @@ a.lg:hover {
 
 @media (max-width: 760px) {
   .linkbtn .url { display: none; }
-  .arrow .sub { display: none; }
-  .arrow { font-size: 14px; }
   .metrics { grid-template-columns: 1fr; }
   .cv-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cv-info { grid-template-columns: repeat(2, minmax(0, 1fr)); }

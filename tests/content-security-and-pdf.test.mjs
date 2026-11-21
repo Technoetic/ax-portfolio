@@ -180,3 +180,31 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.ok(!latin.includes('claude-code-commands'), 'PDF must not contain retired claude-code-commands URI');
   assert.ok(!latin.includes('harness20'), 'PDF must not contain retired harness20 URI');
 });
+
+test('#sav, #sxc, and #sref use unified lightweight 960x640 WebP diagrams and preserve sxc motion toggle', async () => {
+  const [indexHtml, deckJs] = await Promise.all([
+    readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
+    readFile(path.join(APP_ROOT, 'src', 'js', 'screens', 'deck-screen.js'), 'utf8'),
+  ]);
+
+  const expectedDiagrams = [
+    ['sav', 'assets/agentic-vault/agentic-vault-map.webp'],
+    ['sxc', 'assets/semantic-crosscheck/semantic-crosscheck-hero.webp'],
+    ['sref', 'assets/reference-atlas/reference-map.webp'],
+  ];
+
+  for (const [id, relPath] of expectedDiagrams) {
+    const slide = indexHtml.match(new RegExp(`<section\\b[^>]*\\bid="${id}"[^>]*>([\\s\\S]*?)<\\/section>`))?.[1];
+    assert.ok(slide, `missing #${id} slide`);
+    assert.ok(slide.includes(`src="${relPath}"`), `#${id} must reference ${relPath}`);
+    assert.ok(slide.includes('width="960" height="640"'), `#${id} diagram must declare 960x640 dimensions`);
+
+    const bytes = await readFile(path.join(APP_ROOT, relPath));
+    assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', `${relPath} missing RIFF header`);
+    assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', `${relPath} missing WEBP signature`);
+    assert.ok(bytes.length < 100 * 1024, `${relPath} should stay under 100 KB, got ${bytes.length}`);
+  }
+
+  assert.match(deckJs, /semantic-crosscheck-\$\{playing \? 'flow\.gif' : 'hero\.webp'\}/);
+  assert.match(deckJs, /diagram\.dataset\.mode\s*=\s*playing \? 'motion' : 'still'/);
+});

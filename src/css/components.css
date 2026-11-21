@@ -592,52 +592,35 @@ html.js .slide.is-leaving {
   stroke-width: 1.8;
 }
 
-/* Agentic Vault flow (#sav) */
+/* Agentic Vault diagram (#sav) */
 #sav .lead + .lead {
   margin-top: 12px;
 }
 
-.flow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s3);
+.av-figure {
+  min-width: 0;
+  padding: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-2);
+}
+
+.av-figure img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.av-figure figcaption {
+  color: var(--fg-dim);
+  font-size: 13px;
+  line-height: 1.6;
   margin-top: var(--s2);
-}
-
-.arrow {
-  position: relative;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: clamp(14px, 1.5vw, 18px);
-  padding-left: var(--s3);
-  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
-  opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.slide.active .arrow {
-  opacity: 1;
-  transform: none;
-}
-
-.slide.active .arrow:nth-child(1) { transition-delay: 0.15s; }
-.slide.active .arrow:nth-child(2) { transition-delay: 0.35s; }
-.slide.active .arrow:nth-child(3) { transition-delay: 0.55s; }
-
-.arrow.a1 { width: 74%; background: linear-gradient(90deg, #2d3a8c, #3949ab); }
-.arrow.a2 { width: 88%; background: linear-gradient(90deg, #3949ab, #5c4bbf); }
-.arrow.a3 { width: 100%; background: linear-gradient(90deg, #5c4bbf, #7b5fd4); }
-
-.arrow .sub {
-  font-family: var(--mono);
-  font-weight: 400;
-  font-size: 12px;
-  opacity: 0.78;
-  margin-left: var(--s2);
+  word-break: keep-all;
 }
 
 /* semantic-crosscheck (#sxc) */
@@ -691,9 +674,14 @@ html.js .slide.is-leaving {
   max-width: 100%;
   width: 100%;
   height: auto;
-  aspect-ratio: 1200 / 560;
+  aspect-ratio: 3 / 2;
   object-fit: contain;
   border-radius: 8px;
+}
+
+.sxc-figure img[data-mode="motion"] {
+  aspect-ratio: 1080 / 480;
+  background: #0c1322;
 }
 
 .sxc-figure figcaption {
@@ -1914,8 +1902,6 @@ a.lg:hover {
 
 @media (max-width: 760px) {
   .linkbtn .url { display: none; }
-  .arrow .sub { display: none; }
-  .arrow { font-size: 14px; }
   .metrics { grid-template-columns: 1fr; }
   .cv-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cv-info { grid-template-columns: repeat(2, minmax(0, 1fr)); }
