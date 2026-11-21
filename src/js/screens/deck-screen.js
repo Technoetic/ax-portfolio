@@ -73,7 +73,8 @@ export class DeckScreen {
     toggle.addEventListener('click', () => {
       this.hasUserInteracted = true;
       const playing = toggle.getAttribute('aria-pressed') !== 'true';
-      diagram.src = `assets/semantic-crosscheck/semantic-crosscheck-${playing ? 'flow.gif' : 'hero.svg'}`;
+      diagram.src = `assets/semantic-crosscheck/semantic-crosscheck-${playing ? 'flow.gif' : 'hero.webp'}`;
+      diagram.dataset.mode = playing ? 'motion' : 'still';
       diagram.alt = playing ? motionAlt : stillAlt;
       toggle.setAttribute('aria-pressed', String(playing));
     }, { signal: this.abort.signal });
