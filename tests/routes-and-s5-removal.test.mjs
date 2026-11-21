@@ -12,7 +12,7 @@ import {
   SLIDE_IDS,
 } from '../src/js/shared/routes.js';
 
-test('index.html has 12 slides with #s5 completely removed and retired artifacts absent', async () => {
+test('index.html has 14 slides with #smv and #sctt added and #s5/#s4 retired', async () => {
   const [indexHtml, cvHtml] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
@@ -22,10 +22,12 @@ test('index.html has 12 slides with #s5 completely removed and retired artifacts
     m => m[1],
   );
   assert.deepEqual(sectionIds, [...SLIDE_IDS]);
-  assert.equal(sectionIds.length, 12);
+  assert.equal(sectionIds.length, 14);
+  assert.ok(sectionIds.includes('smv'), '#smv slide must exist');
+  assert.ok(sectionIds.includes('sctt'), '#sctt slide must exist');
   assert.ok(!sectionIds.includes('s5'), '#s5 slide must not exist');
   assert.ok(!sectionIds.includes('s4'), '#s4 slide must not exist');
-  assert.match(indexHtml, /<span class="counter" id="counter">01 \/ 12<\/span>/);
+  assert.match(indexHtml, /<span class="counter" id="counter">01 \/ 14<\/span>/);
 
   const forbiddenTokens = [
     'id="s5"',
@@ -65,6 +67,18 @@ test('parseSlideHash redirects #s5 and #s4 to #sav and handles deep links & unkn
   });
   assert.deepEqual(parseSlideHash('#sref'), {
     id: 'sref',
+    aliased: false,
+    unknown: false,
+    hadHash: true,
+  });
+  assert.deepEqual(parseSlideHash('#smv'), {
+    id: 'smv',
+    aliased: false,
+    unknown: false,
+    hadHash: true,
+  });
+  assert.deepEqual(parseSlideHash('#sctt'), {
+    id: 'sctt',
     aliased: false,
     unknown: false,
     hadHash: true,

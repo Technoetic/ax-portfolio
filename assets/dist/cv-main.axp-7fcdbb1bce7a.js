@@ -1,6 +1,6 @@
-import { EntryService } from './services/entry-service.axp-33282817c0cd.js';
-import { VersionService } from './services/version-service.axp-33282817c0cd.js';
-import { CvScreen } from './screens/cv-screen.axp-33282817c0cd.js';
+import { EntryService } from './services/entry-service.axp-7fcdbb1bce7a.js';
+import { VersionService } from './services/version-service.axp-7fcdbb1bce7a.js';
+import { CvScreen } from './screens/cv-screen.axp-7fcdbb1bce7a.js';
 
 function bootCv() {
   const loadedBuild = document.querySelector('meta[name="app-build-id"]')?.content || '';

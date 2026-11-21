@@ -1,4 +1,4 @@
-import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-33282817c0cd.js';
+import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-7fcdbb1bce7a.js';
 
 export class DeckScreen {
   constructor({
@@ -50,7 +50,6 @@ export class DeckScreen {
     this.prevBtn = this.root.getElementById('prev');
     this.nextBtn = this.root.getElementById('next');
 
-    this._initSxcMotionToggle();
     this._buildNavigationControls();
     this._bindEvents();
 
@@ -61,23 +60,6 @@ export class DeckScreen {
 
   _sectionTitle(slide) {
     return slide.dataset.title || slide.querySelector('h1, h2')?.textContent.trim() || slide.id;
-  }
-
-  _initSxcMotionToggle() {
-    const diagram = this.root.getElementById('sxc-diagram');
-    const toggle = this.root.getElementById('sxc-animation-toggle');
-    if (!diagram || !toggle) return;
-    const stillAlt = diagram.alt;
-    const motionAlt = '데모 실행 7단계(demo·doctor·build·reason·cube·verify·report)를 차례로 보여 주는 동작 설명 애니메이션(실제 실행 기록 아님).';
-    toggle.hidden = false;
-    toggle.addEventListener('click', () => {
-      this.hasUserInteracted = true;
-      const playing = toggle.getAttribute('aria-pressed') !== 'true';
-      diagram.src = `assets/semantic-crosscheck/semantic-crosscheck-${playing ? 'flow.gif' : 'hero.webp'}`;
-      diagram.dataset.mode = playing ? 'motion' : 'still';
-      diagram.alt = playing ? motionAlt : stillAlt;
-      toggle.setAttribute('aria-pressed', String(playing));
-    }, { signal: this.abort.signal });
   }
 
   _buildNavigationControls() {

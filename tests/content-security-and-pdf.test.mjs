@@ -27,6 +27,8 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
 
   const av = metrics.pluginReleases['agentic-vault'];
   const sxc = metrics.pluginReleases['semantic-crosscheck'];
+  const mv = metrics.pluginReleases['md-viz'];
+  const ctt = metrics.utilityReleases['close-to-tray-helper'];
   const atlas = metrics.referenceAtlas;
   const esc = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -34,12 +36,18 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
   assert.ok(Number.isInteger(metrics.githubPagesRepos.value) && metrics.githubPagesRepos.value > 0);
   assert.ok(Number.isInteger(metrics.blogPosts.value) && metrics.blogPosts.value > 0);
   assert.deepEqual(av.hosts, ['Claude Code', 'Codex', 'Antigravity']);
+  assert.deepEqual(mv.hosts, ['Claude Code', 'Codex', 'Antigravity']);
+  assert.deepEqual(ctt.hosts, ['Claude Code', 'Codex', 'Antigravity']);
   assert.ok(atlas.sources > 0 && atlas.citations > 0);
 
   for (const doc of [indexHtml, cvHtml]) {
     assert.match(doc, new RegExp(`v${esc(av.version)}`));
     assert.match(doc, /Antigravity/);
     assert.match(doc, new RegExp(`v${esc(sxc.version)}`));
+    assert.match(doc, new RegExp(`v${esc(mv.version)}`));
+    assert.match(doc, /github\.com\/Technoetic\/md-viz/);
+    assert.match(doc, new RegExp(`v${esc(ctt.version)}`));
+    assert.match(doc, /github\.com\/Technoetic\/close-to-tray-helper/);
     assert.match(doc, /Reference[\s\S]{0,40}Atlas/);
     assert.match(doc, new RegExp(esc(atlas.sources)));
     assert.match(doc, new RegExp(esc(atlas.citations)));
@@ -174,6 +182,8 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/dh-instantquote\/blob\/[a-f0-9]{40}\/README\.md/i);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/agentic-vault/);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/semantic-crosscheck/);
+  assert.match(latin, /https:\/\/github\.com\/Technoetic\/md-viz/);
+  assert.match(latin, /https:\/\/github\.com\/Technoetic\/close-to-tray-helper/);
   assert.match(latin, /https:\/\/technoetic\.github\.io\/reference-atlas\//);
 
   assert.ok(!latin.includes('nova.igrowth.kr'), 'PDF must not contain dead nova.igrowth.kr URI');
@@ -181,7 +191,7 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.ok(!latin.includes('harness20'), 'PDF must not contain retired harness20 URI');
 });
 
-test('#sav, #sxc, and #sref use unified lightweight 960x640 WebP diagrams without the removed sxc animation toggle', async () => {
+test('#sav, #sxc, #sref, #smv, and #sctt use unified lightweight 960x640 WebP diagrams without the removed sxc animation toggle', async () => {
   const [indexHtml, deckJs] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'src', 'js', 'screens', 'deck-screen.js'), 'utf8'),
@@ -191,6 +201,8 @@ test('#sav, #sxc, and #sref use unified lightweight 960x640 WebP diagrams withou
     ['sav', 'assets/agentic-vault/agentic-vault-map.webp'],
     ['sxc', 'assets/semantic-crosscheck/semantic-crosscheck-hero.webp'],
     ['sref', 'assets/reference-atlas/reference-map.webp'],
+    ['smv', 'assets/md-viz/md-viz-hero.webp'],
+    ['sctt', 'assets/close-to-tray-helper/close-to-tray-hero.webp'],
   ];
 
   for (const [id, relPath] of expectedDiagrams) {
