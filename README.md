@@ -6,12 +6,12 @@
 
 ## 구성
 
-- `src/templates/` — `index.html`(12개 섹션 덱)과 `cv.html`(웹 이력서) 원본 템플릿
+- `src/templates/` — `index.html`(14개 섹션 덱)과 `cv.html`(웹 이력서) 원본 템플릿
 - `src/css/` — 디자인 토큰(`tokens.css`), 기본 스타일(`base.css`), 컴포넌트(`components.css`, `reference-atlas-slide.css`), 이력서 레이어(`cv-*.css`)
 - `src/js/` — 책임별 ES 모듈(`main.js`, `cv-main.js`, `DeckScreen`, `CvScreen`, `VersionService`, `EntryService`, `AmbientVisuals`, `ActivityCharts`, 공통 유틸리티)
 - `scripts/build.mjs` — 외부 빌드 의존성 없이 내용 해시 정적 자산(`assets/dist/*`), `index.html`, `cv.html`, `version.json`, `pages-manifest.json` 생성
 - `cv.html`, `jeon-munjun-portfolio.pdf` — 웹 이력서와 검색·북마크·태그를 갖춘 A4 3쪽 PDF
-- `assets/metrics.json` — 공개 수치·릴리스 버전의 출처와 기준일(`2026-11-21`)
+- `assets/metrics.json` — 공개 수치·릴리스 버전의 출처와 기준일(`2026-11-22`)
 
 ## 탐색과 배포 갱신 (웹앱 제작 6원칙)
 
@@ -46,6 +46,7 @@ exporter는 로컬 `127.0.0.1` 루프백 서버에서 `cv.html`을 열어 상대
 
 ## 주요 갱신 기록
 
+- **2026-11-22:** Markdown 시각화 3호스트 플러그인 `md-viz`([v0.3.0](https://github.com/Technoetic/md-viz/releases/tag/v0.3.0), `#smv`)와 Windows 무DLL 트레이 격납·`aside-repl` 번들 도우미 `close-to-tray-helper`([v0.2.1](https://github.com/Technoetic/close-to-tray-helper/releases/tag/v0.2.1), `#sctt`) 전용 슬라이드 및 통합 `960×640` WebP 구조도를 추가해 `#sav`·`#sxc`·`#sref`·`#smv`·`#sctt` 5개 슬라이드의 데스크톱 우측 이미지 좌표를 동일하게 고정했습니다. `agentic-vault`([v0.54.1](https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.1)), `semantic-crosscheck`([v0.31.1](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.31.1)), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(220개 출처·428건 인용), GitHub 공개 저장소(162개·Pages 144개)·활동 차트(`2026.02.01–11.22`)·언어 분포 및 네이버 기술 블로그(344편)를 `index.html`·`cv.html`·A4 3쪽 태그드 `jeon-munjun-portfolio.pdf`·Release `v1.0`에 일괄 동기화했습니다.
 - **2026-11-21:** `agentic-vault` [v0.54.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.0), `semantic-crosscheck` [v0.30.0](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.30.0), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(197개 출처·367건 인용), GitHub 공개 저장소(158개·Pages 142개)·활동 차트(`2026.02.01–11.21`)·언어 분포 및 네이버 기술 블로그(343편)를 `2026-11-21` 기준으로 `index.html`·`cv.html`·`jeon-munjun-portfolio.pdf`·Release `v1.0`에 일괄 동기화했습니다. `cv.html`/PDF에도 `dh-instantquote` 견적 데모 링크를 연결하고, `#sbcp`·`#scv` 사주경 문구를 소스 공개 기준으로 정렬했으며, `#sdhis` `1440×900` 세로 오버플로 해소와 `assets/dist/` 보유 세대 상한(`<= 2`) 및 `metrics.json` 동적 정합성 테스트를 추가했습니다.
 - **2026-11-18:** 표지 CTA와 `#sdhis`를 변압기 제조사 견적 자동화 3단계 사례(`dh-instantquote` 공개 데모 연계) 중심으로 개편하고, 표지 일러스트(`quote-preview`)와 부트캠프 데모 배지·사주경 라이브 링크를 정리했습니다.
 - **2026-11-17:** 웹앱 제작 6원칙에 맞춰 JS·CSS 소스를 모듈·레이어로 분리하고 내용 해시 자산과 `version.json` 기반 열린 탭 자동 문서 전환을 적용했습니다. 커스텀 슬래시 커맨드 섹션(`#s5`)과 전용 모달·폰트(`D2Coding`)를 제거하고 `#s5` 주소를 `#sav`로 연결했습니다. `agentic-vault` [v0.51.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.51.0)(Claude Code · Codex · Antigravity 3호스트), `semantic-crosscheck` [v0.28.0](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.28.0), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(190개 출처·350건 인용), 공개 저장소 수(155개·GitHub Pages 배포 139개)를 `index.html`·`cv.html`·`jeon-munjun-portfolio.pdf`·GitHub Release `v1.0`에 일괄 동기화했습니다.

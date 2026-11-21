@@ -1,61 +1,100 @@
 {
   "publicRepos": {
-    "value": 158,
-    "asOf": "2026-11-21",
+    "value": 162,
+    "asOf": "2026-11-22",
     "source": "https://api.github.com/users/Technoetic"
   },
   "githubPagesRepos": {
-    "value": 142,
-    "asOf": "2026-11-21",
+    "value": 144,
+    "asOf": "2026-11-22",
     "source": "https://api.github.com/users/Technoetic/repos"
   },
   "blogPosts": {
-    "value": 343,
-    "asOf": "2026-11-21",
+    "value": 344,
+    "asOf": "2026-11-22",
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
   "featuredPlugins": {
-    "value": 2,
-    "asOf": "2026-11-21",
+    "value": 3,
+    "asOf": "2026-11-22",
     "projects": [
       "agentic-vault",
-      "semantic-crosscheck"
+      "semantic-crosscheck",
+      "md-viz"
+    ],
+    "scope": "featured_in_portfolio"
+  },
+  "featuredTools": {
+    "value": 4,
+    "asOf": "2026-11-22",
+    "projects": [
+      "agentic-vault",
+      "semantic-crosscheck",
+      "md-viz",
+      "close-to-tray-helper"
     ],
     "scope": "featured_in_portfolio"
   },
   "referenceAtlas": {
-    "sources": 197,
-    "citations": 367,
-    "asOf": "2026-11-21",
+    "sources": 220,
+    "citations": 428,
+    "shared": 10,
+    "asOf": "2026-11-22",
     "source": "https://technoetic.github.io/reference-atlas/data/catalog.json"
   },
   "activityChart": {
     "from": "2026-02-01",
-    "asOf": "2026-11-21"
+    "asOf": "2026-11-22"
   },
   "pluginReleases": {
-    "asOf": "2026-11-21",
+    "asOf": "2026-11-22",
     "agentic-vault": {
-      "asOf": "2026-11-21",
-      "version": "0.54.0",
+      "asOf": "2026-11-22",
+      "version": "0.54.1",
       "hosts": [
         "Claude Code",
         "Codex",
         "Antigravity"
       ],
-      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.0",
-      "commit": "2b35dc0635edb453077aecebac5717e05afe25c8"
+      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.1",
+      "commit": "74a2776cec936cd2cce7274cc9f3cb29bacf0159"
     },
     "semantic-crosscheck": {
-      "version": "0.30.0",
-      "asOf": "2026-11-21",
+      "version": "0.31.1",
+      "asOf": "2026-11-22",
       "hosts": [
         "Claude Code",
         "Codex"
       ],
-      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.30.0",
-      "commit": "b51688e57e2a208e17f8408eae0d2076a7e87dd5",
+      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.31.1",
+      "commit": "0d741b3287d30d323268b607c06a22d6d68a74b3",
       "diagramSource": "https://github.com/Technoetic/semantic-crosscheck/tree/9eac5f5a03691db188978a9ecd11dc160a9b6b05/docs/images"
+    },
+    "md-viz": {
+      "version": "0.3.0",
+      "asOf": "2026-11-22",
+      "hosts": [
+        "Claude Code",
+        "Codex",
+        "Antigravity"
+      ],
+      "source": "https://github.com/Technoetic/md-viz/releases/tag/v0.3.0",
+      "commit": "e82d36be5fb389a2712f03707325e920c57d48df"
+    }
+  },
+  "utilityReleases": {
+    "asOf": "2026-11-22",
+    "close-to-tray-helper": {
+      "version": "0.2.1",
+      "asOf": "2026-11-22",
+      "platform": "Windows",
+      "hosts": [
+        "Claude Code",
+        "Codex",
+        "Antigravity"
+      ],
+      "source": "https://github.com/Technoetic/close-to-tray-helper/releases/tag/v0.2.1",
+      "commit": "4672a7f698d4f05e9e003495bb752968bea08ea1"
     }
   },
   "retiredShowcases": {
@@ -73,7 +112,7 @@
     "claude-code-commands": {
       "removedAt": "2026-11-17",
       "redirectHash": "#sav",
-      "reason": "개별 슬래시 커맨드 목록(#s5) 대신 대표 플러그인(agentic-vault · semantic-crosscheck)과 Reference Atlas 중심으로 구성 집중"
+      "reason": "개별 슬래시 커맨드 목록(#s5) 대신 대표 플러그인(agentic-vault · semantic-crosscheck · md-viz)과 close-to-tray-helper · Reference Atlas 중심으로 구성 집중"
     }
   }
 }

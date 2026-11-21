@@ -40,6 +40,7 @@ strong { color: var(--fg); }
 .case-links a { min-height: 44px; display: inline-flex; align-items: center; font-size: 14px; }
 .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 22px; min-width: 0; }
+.card.card-wide { grid-column: 1 / -1; }
 .card h3 { font-size: 20px; }
 .card .ds { color: var(--muted); font-size: 15px; margin-top: 14px; }
 .card .meta { font-size: 12px; }
@@ -123,20 +124,24 @@ footer .contact-links { margin-top: 10px; }
   .scope dd { font-size: 9pt; }
   .case-links a { font-size: 9pt; min-height: 28px; }
   .meta { font-size: 9pt; }
-  .cards { grid-template-columns: 1fr; gap: 12px; }
-  .card { padding: 15px 17px; }
-  .card h3 { font-size: 13pt; }
-  .card .ds { font-size: 9.8pt; margin-top: 9px; }
-  .card .meta { font-size: 8.5pt; }
-  .card .card-links { margin-top: 5px; gap: 2px 14px; }
-  .card a { font-size: 9pt; min-height: 24px; }
-  .chip { font-size: 8pt; min-height: 22px; padding: 2px 8px; }
-  .chips { margin-top: 8px; }
-  .reading { margin-top: 13px; padding-top: 11px; }
-  .reading p { font-size: 10pt; }
-  .reading a { min-height: 25px; }
+  .cards { grid-template-columns: 1fr; gap: 9px; }
+  .card { padding: 11px 14px; }
+  .card h3 { font-size: 12pt; }
+  .card .ds { font-size: 8.9pt; line-height: 1.48; margin-top: 6px; }
+  .card .meta { font-size: 8pt; margin-top: 5px; }
+  .card .snapshot { font-size: 7.6pt; margin-top: 5px; line-height: 1.4; }
+  .card .card-links { margin-top: 4px; gap: 2px 14px; }
+  .card a { font-size: 8.5pt; min-height: 20px; }
+  .chip { font-size: 7.5pt; min-height: 19px; padding: 1px 7px; }
+  .chips { margin-top: 6px; gap: 6px; }
+  .reading { margin-top: 9px; padding-top: 8px; }
+  .reading p { font-size: 9.2pt; line-height: 1.48; }
+  .reading a { font-size: 8.8pt; min-height: 20px; }
+  .reading .snapshot { margin-top: 4px; }
   .snapshot { font-size: 8pt; }
+  #projects { margin-bottom: 14px; }
   #projects .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #projects .card.card-wide { grid-column: 1 / -1; }
   .timeline { padding-left: 20px; }
   .entry { position: static; padding-bottom: 14px; }
   .entry:before { display: none; }
