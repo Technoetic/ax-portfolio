@@ -5,6 +5,7 @@ export const SLIDE_IDS = Object.freeze([
   'sxc',
   'sref',
   'smv',
+  'sw6',
   'sctt',
   'stut',
   'sbcp',

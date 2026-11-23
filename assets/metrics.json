@@ -1,92 +1,105 @@
 {
   "publicRepos": {
-    "value": 162,
-    "asOf": "2026-11-22",
+    "value": 165,
+    "asOf": "2026-11-23",
     "source": "https://api.github.com/users/Technoetic"
   },
   "githubPagesRepos": {
-    "value": 144,
-    "asOf": "2026-11-22",
+    "value": 146,
+    "asOf": "2026-11-23",
     "source": "https://api.github.com/users/Technoetic/repos"
   },
   "blogPosts": {
-    "value": 344,
-    "asOf": "2026-11-22",
+    "value": 348,
+    "asOf": "2026-11-23",
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
   "featuredPlugins": {
-    "value": 3,
-    "asOf": "2026-11-22",
-    "projects": [
-      "agentic-vault",
-      "semantic-crosscheck",
-      "md-viz"
-    ],
-    "scope": "featured_in_portfolio"
-  },
-  "featuredTools": {
     "value": 4,
-    "asOf": "2026-11-22",
+    "asOf": "2026-11-23",
     "projects": [
       "agentic-vault",
       "semantic-crosscheck",
       "md-viz",
+      "webapp6"
+    ],
+    "scope": "featured_in_portfolio"
+  },
+  "featuredTools": {
+    "value": 5,
+    "asOf": "2026-11-23",
+    "projects": [
+      "agentic-vault",
+      "semantic-crosscheck",
+      "md-viz",
+      "webapp6",
       "close-to-tray-helper"
     ],
     "scope": "featured_in_portfolio"
   },
   "referenceAtlas": {
-    "sources": 220,
-    "citations": 428,
-    "shared": 10,
-    "asOf": "2026-11-22",
+    "sources": 229,
+    "citations": 453,
+    "shared": 11,
+    "asOf": "2026-11-23",
     "source": "https://technoetic.github.io/reference-atlas/data/catalog.json"
   },
   "activityChart": {
     "from": "2026-02-01",
-    "asOf": "2026-11-22"
+    "asOf": "2026-11-23"
   },
   "pluginReleases": {
-    "asOf": "2026-11-22",
+    "asOf": "2026-11-23",
     "agentic-vault": {
-      "asOf": "2026-11-22",
-      "version": "0.54.1",
+      "asOf": "2026-11-23",
+      "version": "0.56.0",
       "hosts": [
         "Claude Code",
         "Codex",
         "Antigravity"
       ],
-      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.1",
-      "commit": "74a2776cec936cd2cce7274cc9f3cb29bacf0159"
+      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.56.0",
+      "commit": "de80d0bf7cd80ab73238ec17539909b44d52c2b3"
     },
     "semantic-crosscheck": {
-      "version": "0.31.1",
-      "asOf": "2026-11-22",
+      "version": "0.33.0",
+      "asOf": "2026-11-23",
       "hosts": [
         "Claude Code",
         "Codex"
       ],
-      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.31.1",
-      "commit": "0d741b3287d30d323268b607c06a22d6d68a74b3",
+      "source": "https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.33.0",
+      "commit": "ad335c06b27abf8608a209a4f3b967805b7a8888",
       "diagramSource": "https://github.com/Technoetic/semantic-crosscheck/tree/9eac5f5a03691db188978a9ecd11dc160a9b6b05/docs/images"
     },
     "md-viz": {
-      "version": "0.3.0",
-      "asOf": "2026-11-22",
+      "version": "0.4.0",
+      "asOf": "2026-11-23",
       "hosts": [
         "Claude Code",
         "Codex",
         "Antigravity"
       ],
-      "source": "https://github.com/Technoetic/md-viz/releases/tag/v0.3.0",
-      "commit": "e82d36be5fb389a2712f03707325e920c57d48df"
+      "source": "https://github.com/Technoetic/md-viz/releases/tag/v0.4.0",
+      "commit": "b05c1c87f416f0b921f06aa071d68052f1053347"
+    },
+    "webapp6": {
+      "version": "0.2.0",
+      "asOf": "2026-11-23",
+      "hosts": [
+        "Claude Code",
+        "Codex",
+        "Antigravity"
+      ],
+      "source": "https://github.com/Technoetic/webapp6/releases/tag/v0.2.0",
+      "commit": "05a6c35e7b64218f048b57dbc83f2a98d6bb11d5"
     }
   },
   "utilityReleases": {
-    "asOf": "2026-11-22",
+    "asOf": "2026-11-23",
     "close-to-tray-helper": {
       "version": "0.2.1",
-      "asOf": "2026-11-22",
+      "asOf": "2026-11-23",
       "platform": "Windows",
       "hosts": [
         "Claude Code",
@@ -101,7 +114,7 @@
     "harness14": {
       "removedAt": "2026-10-31",
       "redirectHash": "#sav",
-      "reason": "웹앱 제작 원칙의 공통 참조는 agentic-vault로 안내",
+      "reason": "웹앱 제작 원칙의 공통 참조는 agentic-vault 및 webapp6로 안내",
       "previousDisplayedRelease": {
         "asOf": "2026-10-11",
         "version": "4.2.0",
@@ -112,7 +125,7 @@
     "claude-code-commands": {
       "removedAt": "2026-11-17",
       "redirectHash": "#sav",
-      "reason": "개별 슬래시 커맨드 목록(#s5) 대신 대표 플러그인(agentic-vault · semantic-crosscheck · md-viz)과 close-to-tray-helper · Reference Atlas 중심으로 구성 집중"
+      "reason": "개별 슬래시 커맨드 목록(#s5) 대신 대표 플러그인(agentic-vault · semantic-crosscheck · md-viz · webapp6)과 close-to-tray-helper · Reference Atlas 중심으로 구성 집중"
     }
   }
 }
