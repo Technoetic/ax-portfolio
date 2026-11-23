@@ -22,6 +22,7 @@
   #sav .split,
   #sxc .split,
   #smv .split,
+  #sw6 .split,
   #sctt .split,
   #sref .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; width: 100%; }
   #sref .ref-copy { max-width: 760px; }

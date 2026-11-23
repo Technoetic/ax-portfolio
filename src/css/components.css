@@ -592,10 +592,11 @@ html.js .slide.is-leaving {
   stroke-width: 1.8;
 }
 
-/* Unified 5-slide flagship visual showcase (#sav, #sxc, #sref, #smv, #sctt) — exact pixel-locked right frame on desktop */
+/* Unified 6-slide flagship visual showcase (#sav, #sxc, #sref, #smv, #sw6, #sctt) — exact pixel-locked right frame on desktop */
 #sav .split,
 #sxc .split,
 #smv .split,
+#sw6 .split,
 #sctt .split {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
   gap: 48px;
@@ -603,7 +604,7 @@ html.js .slide.is-leaving {
   width: 100%;
 }
 
-/* Agentic Vault & Tool diagrams (#sav, #smv, #sctt) */
+/* Agentic Vault & Tool diagrams (#sav, #smv, #sw6, #sctt) */
 #sav .lead + .lead {
   margin-top: 12px;
 }
@@ -658,9 +659,10 @@ html.js .slide.is-leaving {
   }
 }
 
-/* semantic-crosscheck (#sxc), md-viz (#smv), close-to-tray-helper (#sctt) */
+/* semantic-crosscheck (#sxc), md-viz (#smv), webapp6 (#sw6), close-to-tray-helper (#sctt) */
 #sxc h2,
 #smv h2,
+#sw6 h2,
 #sctt h2 {
   font-size: clamp(26px, 3.2vw, 42px);
   overflow-wrap: anywhere;
@@ -731,15 +733,18 @@ html.js .slide.is-leaving {
 
 #sxc .linkbtn,
 #smv .linkbtn,
+#sw6 .linkbtn,
 #sctt .linkbtn {
   margin-top: 20px;
 }
 
-#smv .bignum-row {
+#smv .bignum-row,
+#sw6 .bignum-row {
   margin-bottom: var(--s2);
 }
 
-#smv .bignum {
+#smv .bignum,
+#sw6 .bignum {
   font-size: clamp(56px, 8.5vw, 108px);
 }
 
@@ -1357,7 +1362,7 @@ a.lg:hover {
 
 .cv-tools-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.38fr) minmax(0, 0.72fr) minmax(0, 0.77fr) minmax(0, 1.38fr);
   gap: 8px;
   margin-bottom: 8px;
 }
@@ -1371,12 +1376,12 @@ a.lg:hover {
 .cv-proj .cv-tools-grid a,
 .cv-proj .cv-activity-grid a {
   min-height: 44px;
-  padding: 6px 10px;
-  gap: 7px;
+  padding: 6px 8px;
+  gap: 6px;
   background: var(--bg-2);
   border: 1px solid var(--line);
   border-radius: 8px;
-  font-size: 12.5px;
+  font-size: 12px;
   transition: border-color 0.25s, background 0.25s;
 }
 
@@ -1922,22 +1927,29 @@ a.lg:hover {
   #sctt .sxc-question { font-size: 24px; }
   #sxc .sxc-question-row,
   #smv .bignum-row,
+  #sw6 .bignum-row,
   #sctt .sxc-question-row { margin-bottom: var(--s2); }
-  #smv .bignum { font-size: clamp(52px, 6.5vw, 84px); }
+  #smv .bignum,
+  #sw6 .bignum { font-size: clamp(52px, 6.5vw, 84px); }
   #sxc .lead,
   #smv .lead,
+  #sw6 .lead,
   #sctt .lead { font-size: 17px; }
   #sxc .sxc-checks,
   #smv .sxc-checks,
+  #sw6 .sxc-checks,
   #sctt .sxc-checks { gap: 8px; margin-top: var(--s2); }
   #sxc .sxc-checks li,
   #smv .sxc-checks li,
+  #sw6 .sxc-checks li,
   #sctt .sxc-checks li { font-size: 14px; }
   #sxc .snapshot-note,
   #smv .snapshot-note,
+  #sw6 .snapshot-note,
   #sctt .snapshot-note { margin-top: 10px; }
   #sxc .linkbtn,
   #smv .linkbtn,
+  #sw6 .linkbtn,
   #sctt .linkbtn { margin-top: 14px; }
 }
 

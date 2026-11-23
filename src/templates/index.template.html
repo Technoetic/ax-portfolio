@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="app-build-id" content="__BUILD_ID__">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
-<meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
+<meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://technoetic.github.io/ax-portfolio/">
 <meta property="og:title" content="전문준 · AX 엔지니어 포트폴리오">
-<meta property="og:description" content="현장 업무를 자동화하는 AX 엔지니어. 실무 AX 사례와 직접 배포한 에이전틱 볼트(v0.54.1)·semantic-crosscheck(v0.31.1)·md-viz(v0.3.0)·close-to-tray-helper(v0.2.1)·Reference Atlas를 확인하세요.">
+<meta property="og:description" content="현장 업무를 자동화하는 AX 엔지니어. 실무 AX 사례와 직접 배포한 에이전틱 볼트(v0.56.0)·semantic-crosscheck(v0.33.0)·md-viz(v0.4.0)·webapp6(v0.2.0)·close-to-tray-helper(v0.2.1)·Reference Atlas를 확인하세요.">
 <meta property="og:image" content="https://technoetic.github.io/ax-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -126,7 +126,7 @@
         <div class="kicker rise">Memory</div>
         <div class="bignum-row rise">
           <div class="bignum">3</div>
-          <span class="vbadge">v0.54.1<i>3개 호스트 지원</i></span>
+          <span class="vbadge">v0.56.0<i>3개 호스트 지원</i></span>
         </div>
         <div class="project-heading rise">
           <h2>에이전틱 볼트</h2>
@@ -152,7 +152,7 @@
         <div class="kicker rise">Verify</div>
         <div class="bignum-row sxc-question-row rise">
           <p class="sxc-question">같은 질문에, 같은 답을 내는가?</p>
-          <span class="vbadge">v0.31.1<i>MIT</i></span>
+          <span class="vbadge">v0.33.0<i>MIT</i></span>
         </div>
         <div class="project-heading rise">
           <h2>semantic-<wbr>crosscheck</h2>
@@ -164,7 +164,7 @@
           <li><b>추론과 지표</b><span>HermiT · Cube Core</span></li>
           <li><b>결과 확인</b><span>V1–V5 교차 검사(V4 변이 검사 포함) · SHACL↔SQL 위반 대조 · 리포트</span></li>
         </ul>
-        <p class="snapshot-note rise">PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다. 검사를 건너뛰면 통과로 치지 않고, 검증하지 못한 범위(<code>not_proven</code>)를 함께 보여 줍니다.<br>v0.31.1 릴리스 기준 태그 CI 11개 작업 통과(PostgreSQL&nbsp;17·HermiT·Cube·Jena 통합·공급망 검증 포함).</p>
+        <p class="snapshot-note rise">PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다. 검사를 건너뛰면 통과로 치지 않고, 검증하지 못한 범위(<code>not_proven</code>)를 함께 보여 줍니다.<br>v0.33.0 릴리스 기준 태그 CI 11개 작업 통과(PostgreSQL&nbsp;17·HermiT·Cube·Jena 통합·공급망 검증 포함).</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           GitHub에서 보기<span class="url">github.com/Technoetic/semantic-crosscheck</span><span class="sr-only"> (새 탭)</span>
@@ -172,7 +172,7 @@
       </div>
       <figure class="sxc-figure rise">
         <img id="sxc-diagram" src="assets/semantic-crosscheck/semantic-crosscheck-hero.webp" width="960" height="640" alt="단일 모델·규칙 설정 파일 crosscheck.toml에서 PostgreSQL 17+(계층·SQL 뷰), SHACL(데이터 규칙), OWL·HermiT(논리 추론), Cube Core(지표·집계) 네 모델을 만들고, 별도 작성한 기준 SQL(정답지)과 함께 교차 검증 리포트(V1–V5 대조·불일치 탐지·미검증 범위 not_proven 표시)로 합류하는 구조도." loading="lazy" decoding="async">
-        <figcaption>단일 설정에서 4개 모델을 생성해 기준 SQL과 교차 대조하는 구조도입니다. 실제 검증 범위와 결과는 <a href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.31.1" target="_blank" rel="noopener">v0.31.1 릴리스 근거<span class="sr-only"> (새 탭)</span></a>에서 확인합니다.</figcaption>
+        <figcaption>단일 설정에서 4개 모델을 생성해 기준 SQL과 교차 대조하는 구조도입니다. 실제 검증 범위와 결과는 <a href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.33.0" target="_blank" rel="noopener">v0.33.0 릴리스 근거<span class="sr-only"> (새 탭)</span></a>에서 확인합니다.</figcaption>
       </figure>
     </div>
   </section>
@@ -188,7 +188,7 @@
           <li><b>연결 관계</b><span>출처와 두 플러그인의 관계를 한눈에</span></li>
           <li><b>공개 근거</b><span>커밋·파일·행으로 인용 맥락 확인</span></li>
         </ul>
-        <p class="ref-context rise"><b>agentic-vault</b>의 기억·인계와 <b>semantic-crosscheck</b>의 의미 검증에 참고한 <b>220개 출처·428건 인용</b>(2026.11.22 기준)을 함께 살펴봅니다.</p>
+        <p class="ref-context rise"><b>agentic-vault</b>의 기억·인계와 <b>semantic-crosscheck</b>의 의미 검증에 참고한 <b>229개 출처·453건 인용</b>(2026.11.23 기준)을 함께 살펴봅니다.</p>
         <div class="hero-actions rise">
           <a class="action-link primary" href="https://technoetic.github.io/reference-atlas/" target="_blank" rel="noopener">실제 Atlas 열기 <span aria-hidden="true">↗</span><span class="sr-only"> (새 탭)</span></a>
           <a class="action-link" href="https://github.com/Technoetic/reference-atlas" target="_blank" rel="noopener">GitHub 저장소 <span aria-hidden="true">↗</span><span class="sr-only"> (새 탭)</span></a>
@@ -215,30 +215,61 @@
   <section class="slide" id="smv" data-title="md-viz">
     <div class="split">
       <div>
-        <div class="kicker rise">Visualize · Markdown 시각화</div>
+        <div class="kicker rise">Visualize · 무설치 GitHub README 시각화</div>
         <div class="bignum-row rise">
-          <div class="bignum">25</div>
-          <span class="vbadge">v0.3.0<i>MIT · 3개 호스트 지원</i></span>
+          <div class="bignum">10</div>
+          <span class="vbadge">v0.4.0<i>MIT · 외부 설치 0 · 3호스트</i></span>
         </div>
         <div class="project-heading rise">
           <h2>md-viz</h2>
           <span class="vbadge">Claude Code · Codex · Antigravity</span>
         </div>
-        <p class="lead rise">직접 설계한 <b>3개 호스트 공통 Markdown 시각화 플러그인</b>입니다.<br>평문 기술 문서를 <span class="accent">25종 렌더링 엔진과 GitHub 6+4 표현</span>으로 재구성해 직관적인 다이어그램·차트·지도 문서로 바꿉니다.</p>
+        <p class="lead rise">직접 설계한 <b>외부 패키지 설치 0개의 3호스트 Markdown 시각화 플러그인</b>입니다.<br>Python 표준 라이브러리와 <span class="accent">GitHub 네이티브 문법·순수 SVG 10종·GIF89a</span>만으로 어느 PC에서나 즉시 동작합니다.</p>
         <ul class="sxc-checks rise">
-          <li><b>구조·흐름 9종</b><span>Mermaid · D2 · Graphviz · Excalidraw · PlantUML 등</span></li>
-          <li><b>데이터·차트 12종</b><span>ECharts · Plotly · Vega-Lite · Matplotlib · Cytoscape 등</span></li>
-          <li><b>코드·GitHub 6+4</b><span>GeoJSON · LaTeX · 애니메이션 GIF · 네온 배지 · 알림 5종</span></li>
+          <li><b>GitHub 네이티브</b><span>Mermaid · MathJax · GeoJSON · 알림 5종 · 정렬 트리</span></li>
+          <li><b>순수 SVG 10종</b><span>외부 설치 없이 stdlib로 바·도넛·스파크라인·히트맵 생성</span></li>
+          <li><b>배지 · GIF89a</b><span>WCAG 대비 네온 배지 · 루프 GIF89a+PNG · 환경 점검기</span></li>
         </ul>
-        <p class="snapshot-note rise">v0.3.0 릴리스 기준 Ubuntu·Windows CI 검증과 공식 플러그인 디렉터리 규격 점검(0 오류·0 경고)을 통과했습니다.</p>
+        <p class="snapshot-note rise">v0.4.0 릴리스 기준 Ubuntu·Windows CI(25개 시험), 공식 플러그인 디렉터리 규격 점검(0 오류·0 경고) 및 불변 릴리스를 통과했습니다.</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/md-viz" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           GitHub에서 보기<span class="url">github.com/Technoetic/md-viz</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
       <figure class="tool-figure rise">
-        <img src="assets/md-viz/md-viz-hero.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 md-viz(25종 시각화 엔진 · GitHub 6+4 표현)를 거쳐 구조·흐름 9종(Mermaid·D2·Graphviz), 데이터·차트 12종(ECharts·Plotly·Vega-Lite), 코드·GitHub 표현(LaTeX·GeoJSON·GIF)으로 문서를 시각화하는 구조도." loading="lazy" decoding="async">
-        <figcaption>25종 엔진과 GitHub 6+4 표현으로 문서를 시각화합니다. 전체 갤러리와 설치는 <a href="https://github.com/Technoetic/md-viz/releases/tag/v0.3.0" target="_blank" rel="noopener">v0.3.0 릴리스<span class="sr-only"> (새 탭)</span></a>에서 확인합니다.</figcaption>
+        <img src="assets/md-viz/md-viz-hero.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 md-viz(무설치 GitHub README 시각화 · stdlib)를 거쳐 GitHub 네이티브(Mermaid·MathJax·GeoJSON), 순수 SVG 차트 10종(외부 설치 0 · stdlib 생성), 배지·GIF·트리(GIF89a·네온 배지·알림 5종)로 문서를 시각화하는 구조도." loading="lazy" decoding="async">
+        <figcaption>외부 패키지 설치 없이 GitHub 네이티브와 순수 SVG·GIF로 문서를 시각화합니다. <a href="https://github.com/Technoetic/md-viz/releases/tag/v0.4.0" target="_blank" rel="noopener">v0.4.0 릴리스<span class="sr-only"> (새 탭)</span></a>에서 설치합니다.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="slide" id="sw6" data-title="webapp6">
+    <div class="split">
+      <div>
+        <div class="kicker rise">Webapp Principles · 웹앱 개발 기준</div>
+        <div class="bignum-row rise">
+          <div class="bignum">6</div>
+          <span class="vbadge">v0.2.0<i>MIT · 3개 호스트 지원</i></span>
+        </div>
+        <div class="project-heading rise">
+          <h2>webapp6</h2>
+          <span class="vbadge">Claude Code · Codex · Antigravity</span>
+        </div>
+        <p class="lead rise">직접 패키지화한 <b>3개 호스트 단일 설치 웹앱 개발 원칙 플러그인</b>입니다.<br>모듈·CSS 분리부터 <span class="accent">열린 탭 무중단 배포 자동 전환</span>과 선택 모션 규칙까지 한 스킬(~37&nbsp;KB)로 제공합니다.</p>
+        <ul class="sxc-checks rise">
+          <li><b>구조·상태 1–5원칙</b><span>책임 모듈 · CSS 계층 · 비동기 경합 차단 · 단일 URL·실제 404</span></li>
+          <li><b>무중단 배포 6원칙</b><span>내장 빌드 ID 비교 · 안전한 다음 이동 자동 전환 · 초안·저장 보호</span></li>
+          <li><b>합격·모션 기준</b><span>실제 앱 15항목 검증 · 카운트업·스크롤 선택 규칙 · 16개 패키징 시험</span></li>
+        </ul>
+        <p class="snapshot-note rise">v0.2.0 릴리스 기준 Ubuntu·Windows CI(16개 시험), 공식 Claude·Antigravity 검증기(0 경고) 및 불변 릴리스·SHA-256 증명을 통과했습니다.</p>
+        <a class="linkbtn rise" href="https://github.com/Technoetic/webapp6" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
+          GitHub에서 보기<span class="url">github.com/Technoetic/webapp6</span><span class="sr-only"> (새 탭)</span>
+        </a>
+      </div>
+      <figure class="tool-figure rise">
+        <img src="assets/webapp6/webapp6-hero.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 webapp6(웹앱 제작 6원칙 · 선택 모션 규칙)을 거쳐 구조·상태 1–5원칙(모듈·CSS·비동기·URL), 무중단 배포 6원칙(빌드ID·자동전환·초안보호), 합격 기준 15항(실앱 검증·모션·CI 16시험)으로 연결되는 구조도." loading="lazy" decoding="async">
+        <figcaption>3개 호스트에서 웹앱 제작 6원칙과 15개 합격 기준을 바로 적용합니다. <a href="https://github.com/Technoetic/webapp6/releases/tag/v0.2.0" target="_blank" rel="noopener">v0.2.0 릴리스<span class="sr-only"> (새 탭)</span></a>에서 설치합니다.</figcaption>
       </figure>
     </div>
   </section>
@@ -384,12 +415,12 @@
       </div>
       <div class="cv-stats">
         <div class="cv-stat"><div class="n">11<span class="u">년</span></div><div class="l">빌딩 HMI 경력</div></div>
-        <div class="cv-stat"><div class="n">162</div><div class="l">GitHub 공개 레포</div></div>
-        <div class="cv-stat"><div class="n">4</div><div class="l">공개 개발 도구</div></div>
-        <div class="cv-stat"><div class="n">344</div><div class="l">블로그 글</div></div>
+        <div class="cv-stat"><div class="n">165</div><div class="l">GitHub 공개 레포</div></div>
+        <div class="cv-stat"><div class="n">5</div><div class="l">공개 개발 도구</div></div>
+        <div class="cv-stat"><div class="n">348</div><div class="l">블로그 글</div></div>
       </div>
       <div class="cv-meta-bar">
-        <p class="snapshot-note">GitHub · 블로그 2026.11.22 기준</p>
+        <p class="snapshot-note">GitHub · 블로그 2026.11.23 기준</p>
         <a class="cv-inline-btn" href="cv.html">전체 이력서 보기 →</a>
       </div>
       <div class="cv-lower">
@@ -441,15 +472,16 @@
       <div class="cv-block cv-proj">
         <div class="bt">Projects &amp; Activity</div>
         <div class="cv-tools-grid">
-          <a href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">에이전틱 볼트</span><span class="ver">v0.54.1</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
-          <a href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">semantic-crosscheck</span><span class="ver">v0.31.1</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
-          <a href="https://github.com/Technoetic/md-viz" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">md-viz</span><span class="ver">v0.3.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
+          <a href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">에이전틱 볼트</span><span class="ver">v0.56.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
+          <a href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">semantic-crosscheck</span><span class="ver">v0.33.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
+          <a href="https://github.com/Technoetic/md-viz" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">md-viz</span><span class="ver">v0.4.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
+          <a href="https://github.com/Technoetic/webapp6" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">webapp6</span><span class="ver">v0.2.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
           <a href="https://github.com/Technoetic/close-to-tray-helper" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">close-to-tray-helper</span><span class="ver">v0.2.1</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
         </div>
         <div class="cv-activity-grid">
           <a href="https://technoetic.github.io/reference-atlas/" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg><span class="pn">Reference Atlas · 연구 출처 지도</span><span class="pr"><span class="pm">Atlas 열기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span><span class="sr-only"> (새 탭)</span></a>
-          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">GitHub 162 repos</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span><span class="sr-only"> (새 탭)</span></a>
-          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg><span class="pn">기술 블로그 344편</span><span class="pr"><span class="pm">블로그에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span><span class="sr-only"> (새 탭)</span></a>
+          <a href="https://github.com/Technoetic" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">GitHub 165 repos</span><span class="pr"><span class="pm">GitHub에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span><span class="sr-only"> (새 탭)</span></a>
+          <a href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M9 16V8l6 8V8"/></svg><span class="pn">기술 블로그 348편</span><span class="pr"><span class="pm">블로그에서 보기</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg></span><span class="sr-only"> (새 탭)</span></a>
         </div>
       </div>
     </div>
@@ -458,15 +490,15 @@
   <section class="slide" id="s6" data-title="공개 활동">
     <div class="kicker rise">Proof on GitHub</div>
     <h2 class="rise">공개된 코드와 결과물</h2>
-    <p class="snapshot-note rise">저장소·웹 배포·활동·언어 분포: GitHub 공개 API · 2026.11.22 기준.</p>
+    <p class="snapshot-note rise">저장소·웹 배포·활동·언어 분포: GitHub 공개 API · 2026.11.23 기준.</p>
     <div class="metrics rise">
-      <div class="metric"><div class="num" data-target="162">162</div><div class="cap">공개 레포지토리</div></div>
-      <div class="metric"><div class="num" data-target="4">4</div><div class="cap">공개 개발 도구</div></div>
-      <div class="metric"><div class="num" data-target="144">144</div><div class="cap">GitHub Pages 웹 배포</div></div>
+      <div class="metric"><div class="num" data-target="165">165</div><div class="cap">공개 레포지토리</div></div>
+      <div class="metric"><div class="num" data-target="5">5</div><div class="cap">공개 개발 도구</div></div>
+      <div class="metric"><div class="num" data-target="146">146</div><div class="cap">GitHub Pages 웹 배포</div></div>
     </div>
     <div class="split rise" style="grid-template-columns:1.4fr 1fr;gap:var(--s6)">
       <div class="grass-wrap" tabindex="0" role="region" aria-label="GitHub 활동 차트 · 가로 스크롤">
-        <div class="grass-head"><span>GitHub 활동 기록</span><span>2026.02.01–11.22</span></div>
+        <div class="grass-head"><span>GitHub 활동 기록</span><span>2026.02.01–11.23</span></div>
         <div class="grass" id="grass"></div>
         <div class="legend">적음 <i style="background:var(--grass-0)"></i><i style="background:var(--grass-1)"></i><i style="background:var(--grass-2)"></i><i style="background:var(--grass-3)"></i><i style="background:var(--grass-4)"></i> 많음</div>
       </div>
@@ -482,9 +514,9 @@
     <div class="split">
       <div>
         <div class="kicker rise">Writing</div>
-        <div class="bignum rise">344</div>
+        <div class="bignum rise">348</div>
         <h2 class="rise" style="margin-bottom:var(--s2)">기술을 글로 설명합니다</h2>
-        <p class="snapshot-note rise">344편 · 2026.11.22 기준</p>
+        <p class="snapshot-note rise">348편 · 2026.11.23 기준</p>
         <p class="lead rise">매일 학습한 내용을 <b>네이버 블로그</b>에 정리합니다.<br>글로 다시 풀어내며 지식을 제 것으로 만듭니다.</p>
         <a class="linkbtn rise" href="https://blog.naver.com/hdc-labs-nova" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
@@ -558,7 +590,7 @@
 
 <div class="hint"><span class="desktop-only">← →, Space로 이동</span><span class="mobile-only">스와이프 또는 ‹ ›로 이동</span></div>
 <div class="nav">
-  <span class="counter" id="counter">01 / 14</span>
+  <span class="counter" id="counter">01 / 15</span>
   <button id="prev" aria-label="이전 슬라이드">‹</button>
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
