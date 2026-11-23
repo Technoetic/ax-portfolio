@@ -27,6 +27,13 @@
   --s8: 64px;
   --header-height: 76px;
   --footer-height: 78px;
+  --motion-countup-duration: 1400ms;
+  --motion-reveal-duration: 520ms;
+  --motion-reveal-stagger: 55ms;
+  --motion-reveal-distance: 18px;
+  --motion-slide-duration: 450ms;
+  --motion-bar-duration: 950ms;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (max-width: 600px) {

@@ -1,9 +1,11 @@
-import { syncKoreanAgeElements } from './shared/korean-age.axp-7fcdbb1bce7a.js';
-import { EntryService } from './services/entry-service.axp-7fcdbb1bce7a.js';
-import { VersionService } from './services/version-service.axp-7fcdbb1bce7a.js';
-import { ActivityCharts } from './visuals/activity-charts.axp-7fcdbb1bce7a.js';
-import { AmbientVisuals } from './visuals/ambient-visuals.axp-7fcdbb1bce7a.js';
-import { DeckScreen } from './screens/deck-screen.axp-7fcdbb1bce7a.js';
+import { syncKoreanAgeElements } from './shared/korean-age.axp-80c8e1b86089.js';
+import { EntryService } from './services/entry-service.axp-80c8e1b86089.js';
+import { VersionService } from './services/version-service.axp-80c8e1b86089.js';
+import { ActivityCharts } from './visuals/activity-charts.axp-80c8e1b86089.js';
+import { AmbientVisuals } from './visuals/ambient-visuals.axp-80c8e1b86089.js';
+import { CountUp } from './visuals/count-up.axp-80c8e1b86089.js';
+import { ScrollReveal } from './visuals/scroll-reveal.axp-80c8e1b86089.js';
+import { DeckScreen } from './screens/deck-screen.axp-80c8e1b86089.js';
 
 function bootPortfolio() {
   const loadedBuild = document.querySelector('meta[name="app-build-id"]')?.content || '';
@@ -20,7 +22,9 @@ function bootPortfolio() {
   const version = new VersionService({ baseUrl, loadedBuild });
   const charts = new ActivityCharts({ root: document, reducedMotion });
   const visuals = new AmbientVisuals({ root: document, reducedMotion });
-  const deck = new DeckScreen({ root: document, version, charts, visuals, reducedMotion });
+  const countUp = new CountUp({ root: document, reducedMotion, mode: 'slide' });
+  const reveal = new ScrollReveal({ root: document, reducedMotion, mode: 'slide' });
+  const deck = new DeckScreen({ root: document, version, charts, visuals, countUp, reveal, reducedMotion });
 
   document.body.dataset.buildId = loadedBuild;
   charts.mount();

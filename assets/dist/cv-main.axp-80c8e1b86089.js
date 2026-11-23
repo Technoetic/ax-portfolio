@@ -1,6 +1,8 @@
-import { EntryService } from './services/entry-service.axp-7fcdbb1bce7a.js';
-import { VersionService } from './services/version-service.axp-7fcdbb1bce7a.js';
-import { CvScreen } from './screens/cv-screen.axp-7fcdbb1bce7a.js';
+import { EntryService } from './services/entry-service.axp-80c8e1b86089.js';
+import { VersionService } from './services/version-service.axp-80c8e1b86089.js';
+import { CountUp } from './visuals/count-up.axp-80c8e1b86089.js';
+import { ScrollReveal } from './visuals/scroll-reveal.axp-80c8e1b86089.js';
+import { CvScreen } from './screens/cv-screen.axp-80c8e1b86089.js';
 
 function bootCv() {
   const loadedBuild = document.querySelector('meta[name="app-build-id"]')?.content || '';
@@ -8,8 +10,14 @@ function bootCv() {
   baseUrl.search = '';
   baseUrl.hash = '';
 
+  const reducedMotion = Boolean(
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+
   const version = new VersionService({ baseUrl, loadedBuild });
-  const screen = new CvScreen({ root: document, version });
+  const countUp = new CountUp({ root: document, reducedMotion, mode: 'viewport' });
+  const reveal = new ScrollReveal({ root: document, reducedMotion, mode: 'viewport' });
+  const screen = new CvScreen({ root: document, version, countUp, reveal });
   document.body.dataset.buildId = loadedBuild;
   screen.mount();
 
