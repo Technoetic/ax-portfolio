@@ -3,6 +3,8 @@ import { EntryService } from './services/entry-service.js';
 import { VersionService } from './services/version-service.js';
 import { ActivityCharts } from './visuals/activity-charts.js';
 import { AmbientVisuals } from './visuals/ambient-visuals.js';
+import { CountUp } from './visuals/count-up.js';
+import { ScrollReveal } from './visuals/scroll-reveal.js';
 import { DeckScreen } from './screens/deck-screen.js';
 
 function bootPortfolio() {
@@ -20,7 +22,9 @@ function bootPortfolio() {
   const version = new VersionService({ baseUrl, loadedBuild });
   const charts = new ActivityCharts({ root: document, reducedMotion });
   const visuals = new AmbientVisuals({ root: document, reducedMotion });
-  const deck = new DeckScreen({ root: document, version, charts, visuals, reducedMotion });
+  const countUp = new CountUp({ root: document, reducedMotion, mode: 'slide' });
+  const reveal = new ScrollReveal({ root: document, reducedMotion, mode: 'slide' });
+  const deck = new DeckScreen({ root: document, version, charts, visuals, countUp, reveal, reducedMotion });
 
   document.body.dataset.buildId = loadedBuild;
   charts.mount();

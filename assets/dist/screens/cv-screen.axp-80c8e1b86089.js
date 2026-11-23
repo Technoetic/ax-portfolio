@@ -1,14 +1,18 @@
-import { buildReloadUrl } from '../shared/routes.axp-7fcdbb1bce7a.js';
+import { buildReloadUrl } from '../shared/routes.axp-80c8e1b86089.js';
 
 export class CvScreen {
   constructor({
     root = document,
     version,
+    countUp = null,
+    reveal = null,
     assign = url => location.assign(url),
     replace = url => location.replace(url),
   }) {
     this.root = root;
     this.version = version;
+    this.countUp = countUp;
+    this.reveal = reveal;
     this.assign = assign;
     this.replace = replace;
     this.abort = new AbortController();
@@ -56,6 +60,23 @@ export class CvScreen {
       event.preventDefault();
       this._handleInternalNavigation(resolved);
     }, { signal });
+    window.addEventListener('hashchange', () => {
+      this.reveal?.syncScope(null, { immediate: true });
+      this.countUp?.syncScope(null, { settleAbove: true });
+    }, { signal });
+
+    if (location.hash && location.hash.length > 1) {
+      let hashId = '';
+      try {
+        hashId = decodeURIComponent(location.hash.slice(1));
+      } catch {
+        hashId = '';
+      }
+      const targetEl = hashId ? this.root.getElementById(hashId) : null;
+      targetEl?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      this.reveal?.syncScope(null, { immediate: true });
+      this.countUp?.syncScope(null, { settleAbove: true });
+    }
   }
 
   async _handleInternalNavigation(targetUrl) {
@@ -74,8 +95,17 @@ export class CvScreen {
       if (location.hash !== targetUrl.hash) {
         history.pushState(history.state, '', targetUrl.hash);
       }
-      const targetEl = this.root.getElementById(decodeURIComponent(targetUrl.hash.slice(1)));
-      targetEl?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      let hashId = '';
+      try {
+        hashId = decodeURIComponent(targetUrl.hash.slice(1));
+      } catch {
+        hashId = '';
+      }
+      const targetEl = hashId ? this.root.getElementById(hashId) : null;
+      const reduced = Boolean(globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
+      targetEl?.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'start' });
+      this.reveal?.syncScope(null);
+      this.countUp?.syncScope(null);
       return;
     }
     this.assign(targetUrl.href);
@@ -94,6 +124,8 @@ export class CvScreen {
 
   dispose() {
     this.disposed = true;
+    this.countUp?.dispose();
+    this.reveal?.dispose();
     this.abort.abort();
   }
 }

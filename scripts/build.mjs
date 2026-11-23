@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url';
 
 export const APP_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-const DECK_STYLES = ['tokens.css', 'base.css', 'components.css', 'reference-atlas-slide.css'];
-const CV_STYLES = ['cv-tokens.css', 'cv-base.css', 'cv-components.css'];
+const DECK_STYLES = ['tokens.css', 'base.css', 'components.css', 'reference-atlas-slide.css', 'motion.css'];
+const CV_STYLES = ['cv-tokens.css', 'cv-base.css', 'cv-components.css', 'cv-motion.css'];
 
 const toLf = text => String(text).replace(/\r\n/g, '\n');
 const sha256 = value => createHash('sha256').update(value).digest('hex');

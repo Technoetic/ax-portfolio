@@ -6,6 +6,8 @@ export class DeckScreen {
     version,
     charts = null,
     visuals = null,
+    countUp = null,
+    reveal = null,
     reducedMotion = false,
     assign = url => location.assign(url),
     replace = url => location.replace(url),
@@ -14,6 +16,8 @@ export class DeckScreen {
     this.version = version;
     this.charts = charts;
     this.visuals = visuals;
+    this.countUp = countUp;
+    this.reveal = reveal;
     this.reducedMotion = reducedMotion;
     this.assign = assign;
     this.replace = replace;
@@ -217,7 +221,8 @@ export class DeckScreen {
       this.counter.textContent = `${String(nextIndex + 1).padStart(2, '0')} / ${String(this.total).padStart(2, '0')}`;
     }
     if (this.progress) {
-      this.progress.style.width = `${this.total > 1 ? (nextIndex / (this.total - 1)) * 100 : 100}%`;
+      const ratio = this.total > 1 ? nextIndex / (this.total - 1) : 1;
+      this.progress.style.transform = `scaleX(${ratio})`;
     }
 
     const hash = `#${encodeURIComponent(nextSlide.id)}`;
@@ -227,6 +232,8 @@ export class DeckScreen {
 
     if (moveFocus) nextSlide.focus({ preventScroll: true });
     this.visuals?.setIntensity(nextIndex === 0);
+    this.reveal?.activateSlide(nextSlide);
+    this.countUp?.activateScope(nextSlide);
     if (nextSlide.id === 's6') {
       this.charts?.revealMetrics(nextSlide);
     }
@@ -441,6 +448,9 @@ export class DeckScreen {
     this.disposed = true;
     this.navSeq++;
     this.abort.abort();
+    this.countUp?.dispose();
+    this.reveal?.dispose();
+    this.charts?.dispose();
     for (const timer of this.leaveTimers.values()) clearTimeout(timer);
     this.leaveTimers.clear();
     if (this.wheelTimer !== null) clearTimeout(this.wheelTimer);

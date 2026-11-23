@@ -26,6 +26,7 @@ __CV_CSS__
 </head>
 <body>
   <a class="skip-link" href="#main">이력서 본문으로 이동</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <nav class="top" aria-label="이력서 목차">
     <div class="nin">
       <span class="brand">전문준 · 이력서</span>
@@ -56,15 +57,16 @@ __CV_CSS__
         <h2 class="sec-title" id="about-title">현장에서 시작해, 구현으로 연결합니다</h2>
         <p class="about">코엑스 등 빌딩 현장에서 <strong>BAS·BEMS 자동제어 시스템의 시공과 유지보수</strong>를 담당했습니다. 2023년부터 재직 중 LLM을 업무에 적용했고, AI 엔지니어 양성 과정을 거쳐 2026년 기업 AX 프로젝트를 수탁했습니다. 지금은 <strong>업무 자동화와 Claude Code · Codex · Antigravity용 개발 도구</strong>를 직접 만들고 공개합니다.</p>
         <div class="stats" aria-label="경력과 공개 활동 요약">
-          <div class="stat"><b>11년</b><span>빌딩 HMI 현장 경험</span><small>2014.10–2025.10</small></div>
-          <div class="stat"><b>5종</b><span>공개 개발 도구</span><small>플러그인 4종 · <span class="nw">Windows 도우미</span></small></div>
-          <div class="stat"><b>165개</b><span>GitHub 공개 저장소</span><small>2026-11-23 기준</small></div>
-          <div class="stat"><b>348편</b><span>기술 블로그 기록</span><small>2026-11-23 기준</small></div>
+          <div class="stat" data-reveal><b><span class="countup-value cu-d2" data-countup-target="11" aria-hidden="true">11</span><span class="sr-only countup-sr">11</span>년</b><span>빌딩 HMI 현장 경험</span><small>2014.10–2025.10</small></div>
+          <div class="stat" data-reveal data-reveal-stagger="1"><b><span class="countup-value cu-d1" data-countup-target="5" aria-hidden="true">5</span><span class="sr-only countup-sr">5</span>종</b><span>공개 개발 도구</span><small>플러그인 4종 · <span class="nw">Windows 도우미</span></small></div>
+          <div class="stat" data-reveal data-reveal-stagger="2"><b><span class="countup-value cu-d3" data-countup-target="165" aria-hidden="true">165</span><span class="sr-only countup-sr">165</span>개</b><span>GitHub 공개 저장소</span><small>2026-11-23 기준</small></div>
+          <div class="stat" data-reveal data-reveal-stagger="3"><b><span class="countup-value cu-d3" data-countup-target="348" aria-hidden="true">348</span><span class="sr-only countup-sr">348</span>편</b><span>기술 블로그 기록</span><small>2026-11-23 기준</small></div>
         </div>
+        <script>if(!location.hash&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)){var _cu=document.querySelectorAll('#about .stats .countup-value');for(var _i=0;_i<_cu.length;_i++)_cu[_i].textContent='0';setTimeout(function(){if(document.documentElement.dataset.countupActive)return;for(var _j=0;_j<_cu.length;_j++)_cu[_j].textContent=_cu[_j].dataset.countupTarget||'';},1500);}</script>
       </section>
       <section id="dhis" aria-labelledby="dhis-title">
-        <h2 class="sec-title" id="dhis-title">대표 실무 사례</h2>
-        <article class="case">
+        <h2 class="sec-title" id="dhis-title" data-reveal>대표 실무 사례</h2>
+        <article class="case" data-reveal>
           <h3>DHIS · 변압기 제조기업 AX</h3>
           <p class="meta">(주)디에이치아이에스 · 2026.07–2026.08 · 4주 업무위탁 프로젝트</p>
           <p class="case-summary">변압기 제조기업에 상주하며 AI 전환(AX)을 혼자 수행했습니다. 현업과 밀착한 과제를 중심으로, AI 도구를 체계화해 <strong>서비스 10여 종</strong>을 만들었습니다.</p>
@@ -81,44 +83,44 @@ __CV_CSS__
     </div>
     <div class="print-page">
       <section id="projects" aria-labelledby="projects-title">
-        <h2 class="sec-title" id="projects-title">직접 만들고 공개한 개발 도구</h2>
+        <h2 class="sec-title" id="projects-title" data-reveal>직접 만들고 공개한 개발 도구</h2>
         <div class="cards">
-          <article class="card">
+          <article class="card" data-reveal>
             <h3>Agentic Vault · 에이전틱 볼트</h3>
             <div class="chips"><span class="chip">Claude Code · Codex · Antigravity</span><span class="chip">v0.56.0 · MIT</span></div>
             <p class="ds">세 개발 환경이 하나의 Markdown 볼트로 영구 기억과 세션 인계를 공유하는 메모리 플러그인입니다. 교훈 비교·복구·연결 진단과 실행 권한 경계를 호스트에서 통제합니다.</p>
             <p class="meta">Python · Markdown · Obsidian · 세션 인계 · 멀티호스트</p>
             <div class="card-links"><a href="https://github.com/Technoetic/agentic-vault">소스·설치 안내 보기 →</a></div>
           </article>
-          <article class="card">
+          <article class="card" data-reveal data-reveal-stagger="1">
             <h3>semantic-crosscheck</h3>
             <div class="chips"><span class="chip">Claude Code · Codex</span><span class="chip">v0.33.0 · MIT</span></div>
             <p class="ds">설정 하나에서 PostgreSQL·온톨로지·시맨틱 레이어 모델을 만들고, 서로의 결과와 기준 SQL로 교차 대조하며 미검증 범위(not_proven)를 함께 보고합니다.</p>
             <p class="meta">PostgreSQL 17+ · RDF/OWL · SHACL · HermiT · Cube Core</p>
             <div class="card-links"><a href="https://github.com/Technoetic/semantic-crosscheck">소스·설치 안내 보기 →</a></div>
           </article>
-          <article class="card">
+          <article class="card" data-reveal>
             <h3>md-viz · GitHub README 시각화</h3>
             <div class="chips"><span class="chip">Claude Code · Codex · Antigravity</span><span class="chip">v0.4.0 · MIT</span></div>
             <p class="ds">외부 패키지 설치 없이 Python 표준 라이브러리와 GitHub 네이티브 문법(Mermaid·MathJax·GeoJSON), 순수 SVG 10종·GIF89a·네온 배지로 README를 시각화합니다.</p>
             <p class="meta">Python stdlib · SVG 10종 · GIF89a · 멀티OS CI</p>
             <div class="card-links"><a href="https://github.com/Technoetic/md-viz">소스·설치 안내 보기 →</a></div>
           </article>
-          <article class="card">
+          <article class="card" data-reveal data-reveal-stagger="1">
             <h3>webapp6 · 웹앱 제작 6원칙</h3>
             <div class="chips"><span class="chip">Claude Code · Codex · Antigravity</span><span class="chip">v0.2.0 · MIT</span></div>
             <p class="ds">모듈·CSS 분리, 비동기 경합 차단, 열린 탭 무중단 배포 자동 전환, 선택 모션 규칙과 실제 앱 15항목 검증 기준을 단일 스킬(~37 KB)로 패키징한 3호스트 플러그인입니다.</p>
             <p class="meta">6원칙 · 15항목 검증 · 선택 모션 · 16시험 · 불변 릴리스</p>
             <div class="card-links"><a href="https://github.com/Technoetic/webapp6">소스·설치 안내 보기 →</a></div>
           </article>
-          <article class="card">
+          <article class="card" data-reveal>
             <h3>close-to-tray-helper</h3>
             <div class="chips"><span class="chip">Windows · aside-repl 3호스트 번들</span><span class="chip">v0.2.1 · MIT</span></div>
             <p class="ds">DLL 주입 없이 순수 Win32·UIA로 브라우저 창 닫기(×)를 시스템 트레이로 격납해, 브라우저 데몬과 <code>aside-repl</code> 자동화 세션을 유지하는 Windows 도우미입니다.</p>
             <p class="meta">Win32 · UIA · PowerShell · 슬림 ZIP(~45 KB) · SHA-256</p>
             <div class="card-links"><a href="https://github.com/Technoetic/close-to-tray-helper">소스·설치 안내 보기 →</a></div>
           </article>
-          <article class="card">
+          <article class="card" data-reveal data-reveal-stagger="1">
             <h3>Reference Atlas · 연구 출처 지도</h3>
             <div class="chips"><span class="chip">공개 연구 카탈로그</span><span class="chip">229 출처 · 453 인용 · MIT</span></div>
             <p class="ds">에이전틱 볼트와 semantic-crosscheck 개발에 참고한 논문·오픈소스·공식 자료를 연결하고 중복 추천을 점검하는 공개 연구 출처 지도입니다.</p>
@@ -128,13 +130,13 @@ __CV_CSS__
         </div>
       </section>
       <section id="activity" aria-labelledby="activity-title">
-        <h2 class="sec-title" id="activity-title">구현과 기록</h2>
-        <div class="reading">
+        <h2 class="sec-title" id="activity-title" data-reveal>구현과 기록</h2>
+        <div class="reading" data-reveal>
           <p><strong>GitHub 공개 저장소 165개(라이브 웹 배포 146개)</strong>에서 알고리즘·리팩터링 인터랙티브 튜토리얼, 도서관 온톨로지 실습, 데이터 대시보드와 LLM 파이프라인 구현을 확인할 수 있습니다.</p>
           <a href="https://github.com/Technoetic?tab=repositories">공개 저장소 둘러보기 →</a>
           <p class="snapshot">GitHub 수량 확인: 2026-11-23</p>
         </div>
-        <div class="reading">
+        <div class="reading" data-reveal data-reveal-stagger="1">
           <p><strong>기술 블로그 348편.</strong> 알고리즘·자료구조·암호학·LLM·Claude Code 활용을 기록합니다. 대표 글 ‘식당으로 이해하는 데이터 아키텍처’에서는 ACID부터 Lakehouse·거버넌스까지 연결합니다.</p>
           <a href="https://blog.naver.com/hdc-labs-nova/224282219953">데이터 아키텍처 글 읽기 →</a>
           <p class="snapshot">블로그 수량 확인: 2026-11-23</p>
@@ -143,49 +145,49 @@ __CV_CSS__
     </div>
     <div class="print-page">
       <section id="career" aria-labelledby="career-title">
-        <h2 class="sec-title" id="career-title">경력과 교육</h2>
+        <h2 class="sec-title" id="career-title" data-reveal>경력과 교육</h2>
         <div class="timeline">
-          <article class="entry">
+          <article class="entry" data-reveal>
             <p class="when">2026.08–현재</p><h3>제조기업 · 전산·AX팀 리드</h3>
             <p class="where">재직 중 · 사내 전산 운영과 AI 전환(AX) 업무</p>
           </article>
-          <article class="entry">
+          <article class="entry" data-reveal data-reveal-stagger="1">
             <p class="when">2026.07–2026.08</p><h3>(주)디에이치아이에스 · AX 영업혁신 업무위탁</h3>
             <p class="where">변압기 제조기업 4주 상주 · 1인 수행 · 영업·견적·수출 업무 지원과 문서 처리·지식관리 등 서비스 10여 종 구축</p>
             <a class="company" href="https://dh-elec.co.kr/">dh-elec.co.kr ↗</a>
           </article>
-          <article class="entry">
+          <article class="entry" data-reveal data-reveal-stagger="2">
             <p class="when">2025.12–2026.06</p><h3>KDT HDC랩스 · AI 엔지니어 부트캠프</h3>
             <p class="where">AI 엔지니어 양성 과정 · 전 과제 1등 수료</p>
           </article>
-          <article class="entry">
+          <article class="entry" data-reveal>
             <p class="when">2018.07–2025.10</p><h3>(주)에스티엔비 · 빌딩 HMI 엔지니어</h3>
             <p class="where">빌딩 자동제어 시스템 시공·유지보수. 2023년부터 재직 중 LLM을 사내 업무에 적용하며 AX 전환에 기여.</p>
             <a class="company" href="http://stnv.co.kr/">stnv.co.kr ↗</a>
           </article>
-          <article class="entry">
+          <article class="entry" data-reveal data-reveal-stagger="1">
             <p class="when">2014.10–2018.07</p><h3>(주)웹콘 · 빌딩 HMI 엔지니어</h3>
             <p class="where">빌딩 자동제어 시스템 엔지니어</p>
             <a class="company" href="https://webcon.co.kr/">webcon.co.kr ↗</a>
           </article>
-          <article class="entry">
+          <article class="entry" data-reveal data-reveal-stagger="2">
             <p class="when">2004.03–2007.02</p><h3>인천대인고등학교</h3>
             <p class="where">인문계열 · 인천</p>
           </article>
         </div>
-        <p class="sites-label">담당했던 주요 빌딩 현장</p>
-        <div class="chips">
+        <p class="sites-label" data-reveal>담당했던 주요 빌딩 현장</p>
+        <div class="chips" data-reveal>
           <a class="chip" href="https://www.coex.co.kr/">코엑스</a><a class="chip" href="https://seoulsquare.com/">서울스퀘어</a><a class="chip" href="https://www.centropolis.co.kr/">센트로폴리스</a><a class="chip" href="https://www.centerfield.co.kr/">센터필드</a><a class="chip" href="https://namu.wiki/w/타워팰리스">타워팰리스</a><a class="chip" href="https://www.timessquare.co.kr/web/www/home">타임스퀘어</a>
         </div>
       </section>
-      <section id="certs" aria-labelledby="certs-title">
+      <section id="certs" aria-labelledby="certs-title" data-reveal>
         <h2 class="sec-title" id="certs-title">자격과 교육 성과</h2>
         <ul class="credentials">
           <li><span>KDT HDC랩스 AI 엔지니어 과정 <strong>전 과제 1등 수료</strong></span><time datetime="2026">2026</time></li>
           <li><span><strong>정보처리기능사</strong></span><time datetime="2024-12">2024.12</time></li>
         </ul>
       </section>
-      <footer id="contact">
+      <footer id="contact" data-reveal>
         <h2>연락처</h2>
         <p>공개한 사례와 도구에 관한 질문과 기술 교류를 환영합니다</p>
         <div class="contact-links"><a href="mailto:technoetic@hotmail.com">technoetic@hotmail.com</a><a href="tel:+821076335021">010-7633-5021</a><a href="index.html">온라인 포트폴리오 →</a></div>

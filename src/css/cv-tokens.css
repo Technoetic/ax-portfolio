@@ -8,4 +8,9 @@
   --accent: #82b6ff;
   --sans: "Pretendard Variable", "Pretendard", "Malgun Gothic", "Noto Sans CJK KR", "Noto Sans KR", "Segoe UI", sans-serif;
   --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Courier New", monospace;
+  --motion-countup-duration: 1400ms;
+  --motion-reveal-duration: 520ms;
+  --motion-reveal-stagger: 60ms;
+  --motion-reveal-distance: 18px;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }

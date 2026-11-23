@@ -1,5 +1,7 @@
 import { EntryService } from './services/entry-service.js';
 import { VersionService } from './services/version-service.js';
+import { CountUp } from './visuals/count-up.js';
+import { ScrollReveal } from './visuals/scroll-reveal.js';
 import { CvScreen } from './screens/cv-screen.js';
 
 function bootCv() {
@@ -8,8 +10,14 @@ function bootCv() {
   baseUrl.search = '';
   baseUrl.hash = '';
 
+  const reducedMotion = Boolean(
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+
   const version = new VersionService({ baseUrl, loadedBuild });
-  const screen = new CvScreen({ root: document, version });
+  const countUp = new CountUp({ root: document, reducedMotion, mode: 'viewport' });
+  const reveal = new ScrollReveal({ root: document, reducedMotion, mode: 'viewport' });
+  const screen = new CvScreen({ root: document, version, countUp, reveal });
   document.body.dataset.buildId = loadedBuild;
   screen.mount();
 
