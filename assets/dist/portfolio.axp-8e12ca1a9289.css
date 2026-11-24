@@ -176,13 +176,13 @@ select:focus-visible,
 }
 
 /* Progressive enhancement: document reading works if scripts fail or are disabled */
-html:not(.js),
-html:not(.js) body {
+html:not(.js, [data-entry-slide]),
+html:not(.js, [data-entry-slide]) body {
   height: auto;
   overflow: visible;
 }
 
-html:not(.js) .site-header {
+html:not(.js, [data-entry-slide]) .site-header {
   position: relative;
 }
 
@@ -198,11 +198,11 @@ html:not(.js) .progress {
   display: none;
 }
 
-html:not(.js) .deck {
+html:not(.js, [data-entry-slide]) .deck {
   height: auto;
 }
 
-html:not(.js) .slide {
+html:not(.js, [data-entry-slide]) .slide {
   display: flex;
   position: relative;
   inset: auto;
@@ -455,13 +455,41 @@ html.js .slide.is-leaving {
   display: flex;
 }
 
+/* Before navigation mounts, show the bookmarked slide or the cover at its final size. */
+@media screen {
+  html[data-entry-slide]:not(.js) .slide {
+    display: none;
+  }
+  html[data-entry-slide="s0"]:not(.js) #s0,
+html[data-entry-slide="sdhis"]:not(.js) #sdhis,
+html[data-entry-slide="sav"]:not(.js) #sav,
+html[data-entry-slide="sxc"]:not(.js) #sxc,
+html[data-entry-slide="sref"]:not(.js) #sref,
+html[data-entry-slide="smv"]:not(.js) #smv,
+html[data-entry-slide="sw6"]:not(.js) #sw6,
+html[data-entry-slide="sctt"]:not(.js) #sctt,
+html[data-entry-slide="stut"]:not(.js) #stut,
+html[data-entry-slide="sbcp"]:not(.js) #sbcp,
+html[data-entry-slide="s3"]:not(.js) #s3,
+html[data-entry-slide="scv"]:not(.js) #scv,
+html[data-entry-slide="s6"]:not(.js) #s6,
+html[data-entry-slide="s7"]:not(.js) #s7,
+html[data-entry-slide="s8"]:not(.js) #s8 {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
 .slide.active {
   opacity: 1;
   visibility: visible;
   transform: none;
 }
 
-.slide.active:not(#s0) {
+.slide.active:not(#s0),
+html[data-entry-slide]:not(.js) .slide:not(#s0) {
   background: linear-gradient(90deg, #0a0c10bd, #0a0c1066);
 }
 
@@ -845,6 +873,13 @@ html.js .slide.is-leaving {
   background: #3b82f626;
   border-color: var(--accent);
   transform: translateY(-2px);
+}
+
+.linkbtn-label {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .linkbtn .url {
