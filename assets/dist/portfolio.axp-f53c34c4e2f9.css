@@ -16,7 +16,6 @@
   --grass-2: #006d32;
   --grass-3: #26a641;
   --grass-4: #39d353;
-  --mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", "Courier New", monospace;
   --sans: "Pretendard Variable", "Pretendard", "Malgun Gothic", "Noto Sans KR", "Segoe UI", sans-serif;
   --s1: 8px;
   --s2: 16px;
@@ -101,7 +100,7 @@ h2 {
 }
 
 code {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.92em;
   color: var(--accent-2);
 }
@@ -521,11 +520,10 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 .slide.active .rise:nth-child(5) { transition-delay: 0.32s; }
 
 .kicker {
-  font-family: var(--mono);
   font-size: 13px;
-  letter-spacing: 0.1em;
+  font-weight: 650;
+  letter-spacing: 0.01em;
   color: var(--accent-2);
-  text-transform: uppercase;
   margin-bottom: 18px;
   display: flex;
   align-items: center;
@@ -713,7 +711,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   display: block;
   margin-bottom: 8px;
   color: var(--accent-2);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 12px;
 }
 
@@ -793,7 +791,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .bignum {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: clamp(68px, 12vw, 148px);
   font-weight: 800;
   line-height: 0.85;
@@ -822,7 +820,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   gap: 7px;
   margin-bottom: 10px;
   padding: 4px 11px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -858,7 +856,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   min-height: 44px;
   max-width: 100%;
   margin-top: var(--s4);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 14px;
   color: var(--accent-2);
   text-decoration: none;
@@ -1042,7 +1040,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .tut-card .rank {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10px;
   letter-spacing: 0.08em;
   color: var(--accent-2);
@@ -1087,7 +1085,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .tut-series .series-label {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   color: var(--fg-mute);
 }
@@ -1187,7 +1185,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .bcp-card .stk span {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10.5px;
   color: var(--accent-2);
   background: var(--accent-soft);
@@ -1208,7 +1206,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   align-items: center;
   min-height: 44px;
   gap: 6px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11.5px;
   color: var(--fg-mute);
   background: var(--bg);
@@ -1256,7 +1254,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .sites-label {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--fg-mute);
@@ -1343,7 +1341,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .cv-head .role {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 13px;
   color: var(--accent-2);
 }
@@ -1362,7 +1360,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .cv-info .k {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1398,7 +1396,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .cv-stat .n {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: clamp(20px, 2.4vw, 24px);
   font-weight: 800;
   color: var(--accent-2);
@@ -1463,7 +1461,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 .cv-block .bt {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1498,7 +1496,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 .cv-line .w {
   grid-column: 1;
   grid-row: 1 / 3;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11.5px;
   color: var(--accent-2);
   min-width: 0;
@@ -1628,7 +1626,7 @@ a.lg:hover {
 
 .cv-proj .cv-tools-grid .ver {
   flex: 0 0 auto;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10.5px;
   color: var(--accent-2);
 }
@@ -1668,7 +1666,7 @@ a.lg:hover {
   gap: 7px;
   min-height: 32px;
   white-space: nowrap;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10.5px;
   color: var(--fg-mute);
   background: var(--bg-2);
@@ -1704,7 +1702,7 @@ a.lg:hover {
 }
 
 .cv-bcp-head .tag {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10.5px;
   color: var(--accent-2);
   background: var(--accent-soft);
@@ -1763,7 +1761,7 @@ a.lg:hover {
   align-items: center;
   min-height: 30px;
   gap: 5px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10.5px;
   color: var(--fg-mute);
   background: var(--bg);
@@ -1818,7 +1816,7 @@ a.lg:hover {
 }
 
 .metric .num {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: clamp(36px, 4.6vw, 52px);
   font-weight: 800;
   color: var(--accent-2);
@@ -1850,7 +1848,7 @@ a.lg:hover {
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 12px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 12px;
   color: var(--fg-dim);
 }
@@ -1880,7 +1878,7 @@ a.lg:hover {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   color: var(--fg-mute);
   margin-top: 12px;
@@ -1906,7 +1904,7 @@ a.lg:hover {
   grid-template-columns: 90px minmax(0, 1fr) 32px;
   align-items: center;
   gap: 12px;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 13px;
 }
 
@@ -1969,7 +1967,7 @@ a.lg:hover {
 }
 
 .post .rank {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 13px;
   color: var(--accent-2);
   flex: 0 0 auto;
@@ -2001,7 +1999,7 @@ a.lg:hover {
 }
 
 .post .tag {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 10px;
   letter-spacing: 0.04em;
   color: var(--fg-mute);
@@ -2076,7 +2074,7 @@ a.lg:hover {
 }
 
 .nav .counter {
-  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
   font-size: 14px;
   color: var(--fg-dim);
   min-width: 56px;
@@ -2142,7 +2140,7 @@ a.lg:hover {
   left: clamp(24px, 4vw, 64px);
   bottom: 29px;
   max-width: calc(100% - 240px);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 11px;
   color: var(--fg-mute);
   z-index: 11;
@@ -2236,7 +2234,7 @@ a.lg:hover {
   .section-nav label { font-size: 11px; }
   #section-select { flex: 1; min-width: 0; width: auto; height: 44px; }
   .slide { padding: calc(var(--header-height) + 22px) 20px calc(var(--footer-height) + 22px); }
-  .kicker { font-size: 11px; letter-spacing: 0.06em; gap: 8px; margin-bottom: 16px; }
+  .kicker { font-size: 12px; gap: 8px; margin-bottom: 16px; }
   .hero-actions { gap: 10px; margin-top: 22px; }
   .hero-actions .action-link { flex: 1 1 120px; padding-inline: 12px; }
   .case-card { padding: 18px 20px; }
@@ -2626,7 +2624,6 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 
 @media (max-width: 600px) {
   #sref h2 { font-size: 30px; }
-  #sref .kicker { font-size: 10px; letter-spacing: 0.04em; }
   #sref .ref-features li { grid-template-columns: 96px minmax(0, 1fr); font-size: 13px; gap: 8px; }
   #sref .ref-context { font-size: 13px; }
   #sref .hero-actions .action-link { flex: 1 1 120px; padding-inline: 10px; font-size: 13px; }
