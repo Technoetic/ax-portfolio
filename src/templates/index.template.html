@@ -287,34 +287,61 @@
               <linearGradient id="sxc-rail" x2="1" y2=".75"><stop stop-color="#b9fff1"/><stop offset=".48" stop-color="#4be6cb"/><stop offset="1" stop-color="#6c94ff"/></linearGradient>
               <linearGradient id="sxc-surface" x2=".9" y2="1"><stop stop-color="#214657"/><stop offset="1" stop-color="#091725"/></linearGradient>
               <pattern id="sxc-grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0v16" stroke="#84d7d7" stroke-opacity=".16" stroke-width=".8"/></pattern>
+              <g id="sxc-network">
+                <path id="sxc-feed" pathLength="1" d="M123 111h48"/>
+                <path id="sxc-lane-a" pathLength="1" d="M171 111c34 0 30-69 69-69h27"/>
+                <path id="sxc-lane-b" pathLength="1" d="M171 111c33 0 35-23 69-23h27"/>
+                <path id="sxc-lane-c" pathLength="1" d="M171 111c33 0 35 23 69 23h27"/>
+                <path id="sxc-lane-d" pathLength="1" d="M171 111c34 0 30 69 69 69h27"/>
+              </g>
+              <path id="sxc-model-wave" pathLength="1" d="M112 123h29l14-22h29l12-22h23l14 24h39l9-12h25"/>
+              <path id="sxc-sql-wave" pathLength="1" d="M112 128h30l14-22h30l12-5h19l13 7h43l9-12h24"/>
+              <linearGradient id="sxc-scan" x2="1" y2="0"><stop stop-color="#9affed" stop-opacity="0"/><stop offset="1" stop-color="#9affed" stop-opacity=".5"/></linearGradient>
             </defs>
             <ellipse cx="198" cy="112" rx="175" ry="106" fill="url(#sxc-field)"/>
             <g stroke="#64adaf" opacity=".4"><path d="M24 57V36h21m310 0h21v21M24 162v21h21m310 0h21v-21"/><path d="M66 36h268M66 183h268" stroke-dasharray="2 13"/></g>
             <g data-view="1">
-              <path d="M123 111h48m0 0c34 0 30-69 69-69h27m-96 69c33 0 35-23 69-23h27m-96 23c33 0 35 23 69 23h27m-96-23c34 0 30 69 69 69h27" stroke="#163c4a" stroke-width="8"/>
-              <path class="demo-trace" pathLength="1" d="M123 111h48m0 0c34 0 30-69 69-69h27m-96 69c33 0 35-23 69-23h27m-96 23c33 0 35 23 69 23h27m-96-23c34 0 30 69 69 69h27" stroke="url(#sxc-rail)" stroke-width="2.4"/>
+              <use href="#sxc-network" stroke="#163c4a" stroke-width="8"/>
+              <use href="#sxc-network" stroke="url(#sxc-rail)" stroke-width="2.4"/>
+              <g class="sxc-stream" stroke="#ddfff7" stroke-width="4.2">
+                <use href="#sxc-feed" class="optical-packet"/>
+                <use href="#sxc-lane-a" class="optical-packet"/>
+                <use href="#sxc-lane-b" class="optical-packet"/>
+                <use href="#sxc-lane-c" class="optical-packet"/>
+                <use href="#sxc-lane-d" class="optical-packet"/>
+              </g>
               <path d="m57 68 44-5 24 19v70l-68 8z" fill="url(#sxc-surface)" stroke="#7ddbcf" stroke-width="1.6"/><path d="m101 63 1 22 23-3" stroke="#96eddf"/>
               <path d="m68 102 7-1m5-1 13-1m-25 15 22-3m6-1 14-2m-42 17 10-1m6-1 18-3" stroke="#8bf6e1" stroke-width="2.5"/>
               <circle cx="171" cy="111" r="7" fill="#b1fff0" stroke="#447c87" stroke-width="3"/>
-              <g fill="url(#sxc-surface)" stroke="url(#sxc-rail)" stroke-width="1.5"><rect x="267" y="25" width="58" height="34" rx="9"/><rect x="267" y="71" width="58" height="34" rx="9"/><rect x="267" y="117" width="58" height="34" rx="9"/><rect x="267" y="163" width="58" height="34" rx="9"/></g>
+              <circle class="optical-halo sxc-relay" cx="171" cy="111" r="12" stroke="#b9fff0" stroke-width="2"/>
+              <g class="sxc-models" fill="url(#sxc-surface)" stroke="url(#sxc-rail)" stroke-width="1.5"><rect x="267" y="25" width="58" height="34" rx="9"/><rect x="267" y="71" width="58" height="34" rx="9"/><rect x="267" y="117" width="58" height="34" rx="9"/><rect x="267" y="163" width="58" height="34" rx="9"/></g>
               <g stroke="#c4fff2" stroke-width="1.7"><ellipse cx="296" cy="36" rx="8" ry="3"/><path d="M288 36v10c0 4 16 4 16 0V36m-16 5c0 4 16 4 16 0m-12 38-6 9 6 9m8-18 6 9-6 9m-9 30 10 7-10 7Z"/><circle cx="291" cy="127" r="2.3"/><circle cx="301" cy="134" r="2.3"/><circle cx="291" cy="141" r="2.3"/><path d="m287 176 9-5 9 5v9l-9 5-9-5zm0 0 9 5 9-5m-9 5v9"/></g>
             </g>
             <g data-view="2">
               <rect x="99" y="47" width="222" height="127" rx="13" fill="url(#sxc-surface)" stroke="#5baaa7"/>
               <rect x="111" y="59" width="198" height="103" rx="6" fill="url(#sxc-grid)"/>
+              <g class="sxc-sweep"><rect x="111" y="60" width="17" height="101" fill="url(#sxc-scan)"/><path d="M128 60v101" stroke="#d8fff0"/></g>
               <path d="M42 89h57m-57 48h57" stroke="#68e6cb" stroke-width="2"/><path d="M42 137h57" stroke="#bca1ff" stroke-width="2"/>
               <circle cx="42" cy="89" r="5" fill="#81efce"/><path d="m42 131 6 6-6 6-6-6z" fill="#c5a9ff"/>
-              <path class="demo-trace" pathLength="1" d="M112 123h29l14-22h29l12-22h23l14 24h39l9-12h25" stroke="#6af3c9" stroke-width="3.5"/>
-              <path class="demo-trace" pathLength="1" d="M112 128h30l14-22h30l12-5h19l13 7h43l9-12h24" stroke="#c4acf9" stroke-width="2.2" stroke-dasharray="5 4"/>
+              <use href="#sxc-model-wave" stroke="#6af3c9" stroke-width="3.5"/>
+              <use href="#sxc-sql-wave" stroke="#c4acf9" stroke-width="2.2" stroke-dasharray=".022 .016"/>
+              <g class="sxc-compare-stream" stroke-width="4.5">
+                <use href="#sxc-model-wave" class="optical-packet" stroke="#caffdd"/>
+                <use href="#sxc-sql-wave" class="optical-packet" stroke="#ead1ff"/>
+              </g>
               <g stroke="#f9d7a4"><path d="M208 76v59" stroke-dasharray="2 4"/><circle cx="208" cy="79" r="4" fill="#16373f"/><circle cx="208" cy="101" r="4" fill="#28303b"/></g>
+              <ellipse class="optical-halo sxc-difference" cx="208" cy="90" rx="13" ry="19" stroke="#ffcc91" stroke-width="2"/>
               <path d="M321 112h34m-8-7 8 7-8 7" stroke="#9cf8d5" stroke-width="2"/>
             </g>
             <g data-view="3">
               <path d="M112 56h148l20 21v100H112z" fill="#0d202d" stroke="#40717e"/><path d="M123 42h140l27 26v98H123z" fill="url(#sxc-surface)" stroke="#86cfc5" stroke-width="1.6"/><path d="M263 42v26h27" stroke="#86cfc5"/>
               <path d="M140 61h51" stroke="#a7efdf" stroke-width="3"/>
-              <g class="demo-appear"><circle cx="149" cy="86" r="8" fill="#173c3a" stroke="#69e8c4"/><path d="m145 86 3 3 5-6m12 3h77" stroke="#7df3ce" stroke-width="2.2"/>
-                <path d="m149 105 8 8-8 8-8-8z" fill="#422f32" stroke="#ffb493"/><path d="M149 110v5m16-2h56" stroke="#ffb493" stroke-width="2.2"/>
-                <circle cx="149" cy="140" r="8" stroke="#bca9ee" stroke-dasharray="2 3"/><path d="M146 140h6m13 0h69" stroke="#c2abf4" stroke-width="2.2"/></g>
+              <g class="sxc-rows">
+                <g><circle cx="149" cy="86" r="8" fill="#173c3a" stroke="#69e8c4"/><path d="m145 86 3 3 5-6m12 3h77" stroke="#7df3ce" stroke-width="2.2"/></g>
+                <g><path d="m149 105 8 8-8 8-8-8z" fill="#422f32" stroke="#ffb493"/><path d="M149 110v5m16-2h56" stroke="#ffb493" stroke-width="2.2"/></g>
+                <g><circle cx="149" cy="140" r="8" stroke="#bca9ee" stroke-dasharray="2 3"/><path d="M146 140h6m13 0h69" stroke="#c2abf4" stroke-width="2.2"/></g>
+              </g>
+              <g class="sxc-reader"><path d="M136 86h121" stroke="#c0fff1" stroke-width="2"/><path d="m257 83 5 3-5 3" fill="#c0fff1"/></g>
               <path d="M56 111h48m-16-5 7 5-7 5m208-5h34" stroke="#82b3bd" stroke-width="1.5" stroke-dasharray="3 5"/>
             </g>
           </svg>
@@ -365,6 +392,11 @@
               <path id="atlas-vault-mark" d="m-10-4 10-5 10 5-10 5zm0 0v9l10 5 10-5v-9M0 1v9"/>
               <path id="atlas-check-mark" d="M-9-6h18m-18 6h13m-13 6h7m4 1 3 3 7-8"/>
               <g id="atlas-in-stars"><circle r="14" stroke-width="1.1"/><circle r="19" stroke-dasharray="1 6" opacity=".55"/></g>
+              <path id="atlas-paper-route" pathLength="1" d="m76 54 32 10 36 30 46 17"/>
+              <path id="atlas-code-route" pathLength="1" d="m76 111 39 4 38-13 37 9"/>
+              <path id="atlas-spec-route" pathLength="1" d="m76 168 35-7 38-35 41-15"/>
+              <path id="atlas-to-vault" pathLength="1" d="m190 111 39-22 38 3 40-32"/>
+              <path id="atlas-to-check" pathLength="1" d="m190 111 55 14 29 27 30 9"/>
             </defs>
             <ellipse cx="187" cy="110" rx="156" ry="107" fill="url(#atlas-sky)"/>
             <g fill="#d4d9ff" opacity=".65"><circle cx="29" cy="76" r="1.4"/><circle cx="91" cy="17" r="1.3"/><circle cx="117" cy="46" r="1.4"/><circle cx="145" cy="28" r="1"/><circle cx="251" cy="32" r="1.5"/><circle cx="284" cy="74" r="1.1"/><circle cx="350" cy="26" r="1.5"/><circle cx="373" cy="111" r="1.3"/><circle cx="256" cy="199" r="1.3"/><circle cx="122" cy="181" r="1.4"/><circle cx="22" cy="187" r="1.5"/><circle cx="166" cy="198" r="1"/></g>
@@ -377,25 +409,39 @@
             <g fill="#151c31" stroke="#8f9cb5"><circle cx="320" cy="50" r="16"/><circle cx="320" cy="165" r="16"/></g>
             <g stroke="#d4def1" stroke-width="1.6"><use href="#atlas-vault-mark" x="320" y="50"/><use href="#atlas-check-mark" x="320" y="165"/></g>
             <g data-view="1" stroke="url(#atlas-ribbon)" stroke-width="2">
-              <path class="demo-trace" pathLength="1" d="m76 54 32 10 36 30 46 17 39-22 38 3 40-32"/>
-              <g fill="#ede4ff"><circle cx="108" cy="64" r="3"/><circle cx="144" cy="94" r="2"/><circle cx="229" cy="89" r="2"/><circle cx="267" cy="92" r="3"/></g>
+              <use href="#atlas-paper-route"/><use href="#atlas-to-vault"/>
+              <g class="atlas-beacons" fill="#ede4ff"><circle cx="108" cy="64" r="3"/><circle cx="144" cy="94" r="2"/><circle cx="229" cy="89" r="2"/><circle cx="267" cy="92" r="3"/></g>
               <use href="#atlas-in-stars" x="61" y="49" stroke="#e8c8ff"/><circle cx="320" cy="50" r="19" stroke="#8ce7ff"/>
+              <g class="atlas-stream" stroke="#f4ebff" stroke-width="4.5">
+                <use class="optical-packet" href="#atlas-paper-route"/><use class="optical-packet" href="#atlas-to-vault"/>
+              </g>
+              <circle class="optical-halo atlas-arrival" cx="320" cy="50" r="21" stroke="#a2f4ff"/>
             </g>
             <g data-view="2" stroke="url(#atlas-ribbon)" stroke-width="2">
-              <path class="demo-trace" pathLength="1" d="m76 111 39 4 38-13 37 9 55 14 29 27 30 9"/>
-              <g fill="#ede4ff"><circle cx="115" cy="115" r="3"/><circle cx="153" cy="102" r="2"/><circle cx="245" cy="125" r="3"/><circle cx="274" cy="152" r="2"/></g>
+              <use href="#atlas-code-route"/><use href="#atlas-to-check"/>
+              <g class="atlas-beacons" fill="#ede4ff"><circle cx="115" cy="115" r="3"/><circle cx="153" cy="102" r="2"/><circle cx="245" cy="125" r="3"/><circle cx="274" cy="152" r="2"/></g>
               <use href="#atlas-in-stars" x="61" y="110" stroke="#e8c8ff"/><circle cx="320" cy="165" r="19" stroke="#8ce7ff"/>
+              <g class="atlas-stream" stroke="#f4ebff" stroke-width="4.5">
+                <use class="optical-packet" href="#atlas-code-route"/><use class="optical-packet" href="#atlas-to-check"/>
+              </g>
+              <circle class="optical-halo atlas-arrival" cx="320" cy="165" r="21" stroke="#a2f4ff"/>
             </g>
             <g data-view="3" stroke="url(#atlas-ribbon)" stroke-width="2">
-              <path class="demo-trace" pathLength="1" d="m76 168 35-7 38-35 41-15 39-22 38 3 40-32m-117 51 55 14 29 27 30 9"/>
-              <g fill="#ede4ff"><circle cx="111" cy="161" r="3"/><circle cx="149" cy="126" r="2"/><circle cx="267" cy="92" r="3"/><circle cx="274" cy="152" r="3"/></g>
+              <use href="#atlas-spec-route"/><use href="#atlas-to-vault"/><use href="#atlas-to-check"/>
+              <g class="atlas-beacons" fill="#ede4ff"><circle cx="111" cy="161" r="3"/><circle cx="149" cy="126" r="2"/><circle cx="267" cy="92" r="3"/><circle cx="274" cy="152" r="3"/></g>
               <use href="#atlas-in-stars" x="61" y="171" stroke="#e8c8ff"/><g stroke="#8ce7ff"><circle cx="320" cy="50" r="19"/><circle cx="320" cy="165" r="19"/></g>
+              <g class="atlas-stream" stroke="#f4ebff" stroke-width="4.5">
+                <use class="optical-packet" href="#atlas-spec-route"/><use class="optical-packet" href="#atlas-to-vault"/><use class="optical-packet" href="#atlas-to-check"/>
+              </g>
+              <circle class="optical-halo atlas-arrival" cx="320" cy="50" r="21" stroke="#a2f4ff"/>
+              <circle class="optical-halo atlas-arrival atlas-second" cx="320" cy="165" r="21" stroke="#cdb9ff"/>
             </g>
             <g transform="rotate(-18 190 110)">
               <circle cx="190" cy="110" r="34" fill="url(#atlas-sphere)" stroke="#d0bfff"/>
-              <g stroke="#c8c0ff" stroke-width=".9" opacity=".58"><ellipse cx="190" cy="110" rx="15" ry="34"/><ellipse cx="190" cy="110" rx="34" ry="12"/><path d="M156 110h68m-34-34v68"/></g>
-              <path d="M223 100c21-1 23 6 6 14-13 7-49 15-68 14-20 0-20-7-4-15" stroke="#cab2ff" stroke-width="2.2"/>
-              <path d="M156 124c12 2 30 0 43-4" stroke="#f4ebff" stroke-width="2.5"/>
+              <g class="atlas-meridian" stroke="#c8c0ff" stroke-width=".9" opacity=".58"><ellipse cx="190" cy="110" rx="15" ry="34"/><ellipse cx="190" cy="110" rx="34" ry="12"/><path d="M156 110h68m-34-34v68"/></g>
+              <g class="atlas-armillary"><path d="M223 100c21-1 23 6 6 14-13 7-49 15-68 14-20 0-20-7-4-15" stroke="#cab2ff" stroke-width="2.2"/>
+                <path d="M156 124c12 2 30 0 43-4" stroke="#f4ebff" stroke-width="2.5"/></g>
+              <circle class="optical-halo atlas-relay" cx="190" cy="110" r="36" stroke="#e2ccff" stroke-width="1.6"/>
             </g>
             <g fill="#d1d7ed" font-family="system-ui,sans-serif" font-size="13" font-weight="550" text-anchor="middle"><text x="320" y="84">agentic-vault</text><text x="320" y="200">semantic-crosscheck</text></g>
           </svg>
@@ -455,23 +501,26 @@
               <path d="M105 42v24h24" fill="#386078" stroke="#a4dbe7"/>
               <path d="M53 64h29M53 71h15" stroke="#6d94ad" stroke-width="3"/>
               <path d="M54 109V85l10 14 11-14v24m16-23v22m-7-7 7 7 7-7" stroke="#b2ffec" stroke-width="3.2"/>
-              <path d="M53 127h55m-55 9h31m7 0h10m-48 9h39" stroke="#70a6be" stroke-width="3"/>
+              <path class="mk-write" pathLength="1" d="M53 127h55m-55 9h31m7 0h10m-48 9h39" stroke="#70a6be" stroke-width="3"/>
             </g>
             <path d="M139 108h42m-8-6 8 6-8 6" stroke="url(#smv-ink)" stroke-width="2"/>
+            <path class="mk-signal mk-compile" pathLength="1" d="M133 108h54" stroke="#c2fff4"/>
             <g data-view="1">
               <g stroke="#7389a8" stroke-width="2"><path d="M211 110h24q7 0 13-8l21-30q5-7 15-7h24M211 110h24q7 0 13 8l21 30q5 7 15 7h24"/></g>
               <path class="demo-trace" pathLength="1" d="M211 110h24q7 0 13-8l21-30q5-7 15-7h24" stroke="#91f7dd" stroke-width="3"/>
               <path d="m204 92 18 18-18 18-18-18Z" fill="#205961" stroke="#9affdd" stroke-width="2"/>
               <path d="m198 109 4 4 8-9" stroke="#d5fff1" stroke-width="2"/>
-              <g fill="#244659" stroke="#7de4de"><rect x="296" y="47" width="69" height="36" rx="11"/><path d="M306 61h36m-36 8h25" stroke-width="2.8"/></g>
-              <g fill="#302d54" stroke="#b8a7fa"><rect x="296" y="137" width="69" height="36" rx="11"/><path d="M306 151h36m-36 8h25" stroke-width="2.8"/></g>
+              <path class="mk-signal" pathLength="1" d="M211 110h24q7 0 13-8l21-30q5-7 15-7h13" stroke="#9dffdf"/>
+              <path class="mk-signal mk-later" pathLength="1" d="M211 110h24q7 0 13 8l21 30q5 7 15 7h13" stroke="#c7aaff"/>
+              <g class="mk-arrival" fill="#244659" stroke="#7de4de"><rect x="296" y="47" width="69" height="36" rx="11"/><path d="M306 61h36m-36 8h25" stroke-width="2.8"/></g>
+              <g class="mk-arrival mk-later" fill="#302d54" stroke="#b8a7fa"><rect x="296" y="137" width="69" height="36" rx="11"/><path d="M306 151h36m-36 8h25" stroke-width="2.8"/></g>
               <circle cx="236" cy="110" r="3" fill="#dcfaff"/>
             </g>
             <g data-view="2">
               <g stroke="#526a86" opacity=".55" stroke-dasharray="2 5"><path d="M193 95h74m-74 28h74m-74 28h74"/></g>
               <g class="demo-bars" fill="url(#smv-ink)"><rect x="197" y="119" width="13" height="39" rx="3"/><rect x="220" y="90" width="13" height="68" rx="3"/><rect x="243" y="66" width="13" height="92" rx="3"/></g>
               <circle cx="322" cy="109" r="35" stroke="#253347" stroke-width="16"/>
-              <g transform="rotate(-90 322 109)" stroke-width="16" stroke-linecap="butt" fill="none">
+              <g class="mk-donut" transform="rotate(-90 322 109)" stroke-width="16" stroke-linecap="butt" fill="none">
                 <circle cx="322" cy="109" r="35" pathLength="100" stroke="#81edcf" stroke-dasharray="48 52"/>
                 <circle cx="322" cy="109" r="35" pathLength="100" stroke="#83baf1" stroke-dasharray="28 72" stroke-dashoffset="-50"/>
                 <circle cx="322" cy="109" r="35" pathLength="100" stroke="#b499f2" stroke-dasharray="18 82" stroke-dashoffset="-80"/>
@@ -479,11 +528,11 @@
               <path class="demo-trace" pathLength="1" d="m307 113 8-7 6 5 11-13" stroke="#c2e6fa" stroke-width="2"/>
             </g>
             <g data-view="3">
-              <g transform="rotate(-9 262 110)">
+              <g class="mk-frame-back" transform="rotate(-9 262 110)">
                 <rect x="197" y="60" width="112" height="99" rx="9" fill="#172a42" stroke="#638998"/>
                 <rect x="204" y="67" width="98" height="13" rx="3" fill="#283f56"/>
               </g>
-              <g transform="rotate(-3 274 112)">
+              <g class="mk-frame-mid" transform="rotate(-3 274 112)">
                 <rect x="216" y="65" width="111" height="101" rx="9" fill="#1b3448" stroke="#6fabb3"/>
                 <rect x="223" y="72" width="97" height="11" rx="3" fill="#31495f"/>
               </g>
@@ -560,33 +609,47 @@
             <g data-view="1">
               <g stroke="#6b87a5" stroke-width="1.7"><path d="M147 122 108 141l-33-15m122 6v32m53-42 38 17 30-14M200 73V54"/></g>
               <path class="demo-trace" pathLength="1" d="M74 126l34 15 92-44 89 42 29-14" stroke="#7cdcec" stroke-width="2"/>
-              <use href="#sw6-slab" transform="translate(200 49) scale(.4)"/><use href="#sw6-slab" transform="translate(75 124) scale(.49)"/><use href="#sw6-slab" transform="translate(324 122) scale(.49)"/><use href="#sw6-slab" transform="translate(198 169) scale(.45)"/>
+              <g class="mk-module mk-north"><use href="#sw6-slab" transform="translate(200 49) scale(.4)"/><circle cx="200" cy="49" r="3" fill="#baafff"/></g>
+              <g class="mk-module mk-west"><use href="#sw6-slab" transform="translate(75 124) scale(.49)"/><circle cx="75" cy="124" r="3" fill="#baafff"/></g>
+              <g class="mk-module mk-east"><use href="#sw6-slab" transform="translate(324 122) scale(.49)"/><circle cx="324" cy="122" r="3" fill="#baafff"/></g>
+              <g class="mk-module mk-south"><use href="#sw6-slab" transform="translate(198 169) scale(.45)"/><circle cx="198" cy="169" r="3" fill="#baafff"/></g>
               <use href="#sw6-slab" transform="translate(200 111)"/><use href="#sw6-slab" transform="translate(200 97)"/>
               <g stroke="#b7efff" stroke-width="2.4"><path d="m187 94-10 5 10 5m25-14 10 5-10 5m-10-9-5 12"/></g>
-              <g fill="#baafff"><circle cx="75" cy="124" r="3"/><circle cx="324" cy="122" r="3"/><circle cx="198" cy="169" r="3"/><circle cx="200" cy="49" r="3"/></g>
+              <path class="mk-signal mk-later" pathLength="1" d="M147 122 108 141l-33-15M250 122l38 17 35-17" stroke="#bdfff8"/>
             </g>
             <g data-view="2">
               <g stroke="#72879c" stroke-dasharray="2 5"><path d="M104 68v79M296 68v79M200 106v81"/></g>
-              <use href="#sw6-slab" transform="translate(200 148) scale(1.48 1)"/>
-              <g fill="#7fd9eb"><circle cx="147" cy="150" r="3.8"/><circle cx="160" cy="156" r="3.8" fill="#baa2ee"/><circle cx="173" cy="162" r="3.8" fill="#efa987"/></g>
-              <use href="#sw6-slab" transform="translate(200 106) scale(1.48 1)"/>
-              <path d="m137 108 53 16m-42-24 64 20m-44-28 63 20" stroke="#83acc8" stroke-width="2"/>
-              <use href="#sw6-slab" transform="translate(200 64) scale(1.48 1)"/>
-              <path d="m142 65 28-9 20 6-28 9Z" fill="#7fe0e9" fill-opacity=".75"/><path d="m178 53 21-7 50 15-21 7Z" fill="#b39af7" fill-opacity=".75"/>
-              <path class="demo-trace" pathLength="1" d="m176 77 22 7 46-15" stroke="#c6f5ff" stroke-width="2"/>
+              <g class="mk-sheet mk-tokens">
+                <use href="#sw6-slab" transform="translate(200 148) scale(1.48 1)"/>
+                <g fill="#7fd9eb"><circle cx="147" cy="150" r="3.8"/><circle cx="160" cy="156" r="3.8" fill="#baa2ee"/><circle cx="173" cy="162" r="3.8" fill="#efa987"/></g>
+              </g>
+              <g class="mk-sheet mk-base">
+                <use href="#sw6-slab" transform="translate(200 106) scale(1.48 1)"/>
+                <path d="m137 108 53 16m-42-24 64 20m-44-28 63 20" stroke="#83acc8" stroke-width="2"/>
+              </g>
+              <g class="mk-sheet mk-component">
+                <use href="#sw6-slab" transform="translate(200 64) scale(1.48 1)"/>
+                <path d="m142 65 28-9 20 6-28 9Z" fill="#7fe0e9" fill-opacity=".75"/><path d="m178 53 21-7 50 15-21 7Z" fill="#b39af7" fill-opacity=".75"/>
+                <path class="demo-trace" pathLength="1" d="m176 77 22 7 46-15" stroke="#c6f5ff" stroke-width="2"/>
+              </g>
             </g>
             <g data-view="3">
               <use href="#sw6-browser" transform="translate(108 111) scale(1.18)"/>
-              <rect x="59" y="104" width="26" height="33" rx="3" fill="#77bacf" fill-opacity=".54"/><path d="M95 106h48m-48 11h34m-34 12h42" stroke="#91b7d2" stroke-width="3"/>
-              <g fill="url(#sw6-glass)" stroke="#b29feb"><path d="M255 89v51c0 10 71 10 71 0V89"/><ellipse cx="290.5" cy="89" rx="35.5" ry="11"/><path d="M255 104c0 12 71 12 71 0m-71 18c0 12 71 12 71 0"/></g>
+              <rect x="59" y="104" width="26" height="33" rx="3" fill="#77bacf" fill-opacity=".54"/><path class="mk-write mk-response" pathLength="1" d="M95 106h48m-48 11h34m-34 12h42" stroke="#91b7d2" stroke-width="3"/>
+              <g class="mk-arrival" fill="url(#sw6-glass)" stroke="#b29feb"><path d="M255 89v51c0 10 71 10 71 0V89"/><ellipse cx="290.5" cy="89" rx="35.5" ry="11"/><path d="M255 104c0 12 71 12 71 0m-71 18c0 12 71 12 71 0"/></g>
               <path class="demo-trace" pathLength="1" d="M183 97h54m-8-6 8 6-8 6" stroke="#a0e9ed" stroke-width="2.3"/><path d="M238 122h-54m8-6-8 6 8 6" stroke="#b4a8ef" stroke-width="2.3"/>
+              <path class="mk-signal" pathLength="1" d="M175 97h77" stroke="#a5fff1"/>
+              <path class="mk-signal mk-later" pathLength="1" d="M251 122h-78" stroke="#cdbaff"/>
             </g>
             <g data-view="4">
               <g stroke="#55708a" stroke-dasharray="2 6"><path d="M76 74h247M76 141h247M128 48v116m75-116v116m75-116v116"/></g>
               <path d="M75 73h65c23 0 34 37 57 37h91" stroke="#8fa3b7" stroke-width="3"/>
-              <circle cx="75" cy="73" r="7" fill="#1b3144" stroke="#a6b8c6" stroke-width="2"/><path d="m294 103 12 14m0-14-12 14" stroke="#efa38f" stroke-width="3"/>
+              <circle cx="75" cy="73" r="7" fill="#1b3144" stroke="#a6b8c6" stroke-width="2"/><path class="mk-arrival mk-rejected" d="m294 103 12 14m0-14-12 14" stroke="#efa38f" stroke-width="3"/>
               <path class="demo-trace" pathLength="1" d="M125 141h46c20 0 36-55 59-55h77" stroke="url(#sw6-edge)" stroke-width="4"/>
-              <circle cx="125" cy="141" r="7" fill="#263d53" stroke="#92ddeb" stroke-width="2"/><circle cx="316" cy="86" r="15" fill="#24444f" stroke="#8de5cf"/><path d="m309 86 5 5 9-10" stroke="#b1ffe7" stroke-width="2.6"/>
+              <circle cx="125" cy="141" r="7" fill="#263d53" stroke="#92ddeb" stroke-width="2"/>
+              <g class="mk-arrival"><circle cx="316" cy="86" r="15" fill="#24444f" stroke="#8de5cf"/><path d="m309 86 5 5 9-10" stroke="#b1ffe7" stroke-width="2.6"/></g>
+              <path class="mk-signal mk-stale" pathLength="1" d="M75 73h65c23 0 34 37 57 37h91" stroke="#ffb89c"/>
+              <path class="mk-signal" pathLength="1" d="M125 141h46c20 0 36-55 59-55h77" stroke="#a6ffee"/>
               <path d="M76 168h251m-7-5 7 5-7 5" stroke="#67879d"/>
             </g>
             <g data-view="5">
@@ -594,17 +657,22 @@
               <path d="m81 116 17-13 17 13m-29-3v15h23v-15" stroke="#9ed8ea" stroke-width="2.6"/>
               <path d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42m-123 40h32q10 0 17 9l15 21q5 8 17 8h42" stroke="#617f9e" stroke-width="2"/>
               <path class="demo-trace" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42" stroke="#92e3ee" stroke-width="2.8"/>
-              <rect x="266" y="53" width="80" height="39" rx="8" fill="url(#sw6-glass)" stroke="#88c5dd"/><path d="m289 79 10-16m5 16 10-16" stroke="#b8ecf4" stroke-width="2.5"/>
-              <rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/>
-              <text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-family="monospace" font-size="18">404</text>
+              <path class="mk-signal" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h34" stroke="#a9ffec"/>
+              <path class="mk-signal mk-later" pathLength="1" d="M151 112h32q10 0 17 9l15 21q5 8 17 8h34" stroke="#ffc0ad"/>
+              <g class="mk-arrival"><rect x="266" y="53" width="80" height="39" rx="8" fill="url(#sw6-glass)" stroke="#88c5dd"/><path d="m289 79 10-16m5 16 10-16" stroke="#b8ecf4" stroke-width="2.5"/></g>
+              <g class="mk-arrival mk-later"><rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/><text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-family="monospace" font-size="18">404</text></g>
             </g>
             <g data-view="6">
               <use href="#sw6-browser" transform="translate(99 108) scale(.92)"/><use href="#sw6-browser" transform="translate(302 108) scale(.92)"/>
               <g font-family="monospace" font-weight="bold" font-size="27" text-anchor="middle"><text x="99" y="124" fill="#9fc9e8">A</text><text x="302" y="124" fill="#a0f1dd">B</text></g>
               <path class="demo-trace" pathLength="1" d="M149 97q15-25 50-25t51 25m-10-2 10 2 1-10" stroke="url(#sw6-edge)" stroke-width="2.6"/>
               <path d="M147 120c15 17 27 25 42 26m24 0c17-1 31-11 43-26" stroke="#728fa3" stroke-dasharray="3 5"/>
-              <path d="M201 109c6 6 13 8 21 10v15c0 13-10 23-21 28-12-5-21-15-21-28v-15c9-2 15-4 21-10Z" fill="#234653" stroke="#8fd7cf"/>
-              <rect x="193" y="129" width="16" height="13" rx="2.5" stroke="#bcfbea" stroke-width="2"/><path d="M196 129v-4a5 5 0 0 1 10 0v4" stroke="#bcfbea" stroke-width="2"/>
+              <g class="mk-arrival mk-shield"><path d="M201 109c6 6 13 8 21 10v15c0 13-10 23-21 28-12-5-21-15-21-28v-15c9-2 15-4 21-10Z" fill="#234653" stroke="#8fd7cf"/>
+                <rect x="193" y="129" width="16" height="13" rx="2.5" stroke="#bcfbea" stroke-width="2"/><path d="M196 129v-4a5 5 0 0 1 10 0v4" stroke="#bcfbea" stroke-width="2"/>
+              </g>
+              <g class="mk-draft" opacity="0" fill="#233b52" stroke="#cefff1" stroke-width="1.5">
+                <path d="M-9-12H4l6 6v18H-9Zm13 0v6h6"/><path d="M-5 1H5m-10 4h8"/>
+              </g>
             </g>
           </svg>
         </div>
@@ -659,6 +727,10 @@
               </linearGradient>
               <linearGradient id="tray-trail"><stop stop-color="#78cce2" stop-opacity=".2"/><stop offset=".65" stop-color="#80ffe1"/><stop offset="1" stop-color="#e3fff3"/></linearGradient>
               <radialGradient id="tray-glow"><stop stop-color="#60ffd1" stop-opacity=".56"/><stop offset="1" stop-color="#28d2b5" stop-opacity="0"/></radialGradient>
+              <path id="tray-heart" pathLength="1" d="M119 117h14l6-8 7 11 9-22 10 18h13l7-6 7 5h43"/>
+              <path id="tray-descent" pathLength="1" d="M157 90C215 94 222 139 251 159s37 17 33 25"/>
+              <path id="tray-ascent" pathLength="1" d="M284 179c36-54-5-94-41-93"/>
+              <g id="tray-wave" stroke="currentColor"><circle r="14" stroke-width="1.5"/><circle r="18" stroke-width=".6" stroke-dasharray="3 4"/></g>
               <g id="tray-window">
                 <rect x="55" y="33" width="207" height="110" rx="9" fill="#0c1723" opacity=".6" transform="translate(5 6)"/>
                 <rect x="55" y="33" width="207" height="110" rx="9" fill="url(#tray-surface)" stroke="#90c8d6" stroke-opacity=".8"/>
@@ -668,7 +740,7 @@
                 <rect x="69" y="68" width="35" height="58" rx="5" fill="#8dbac6" fill-opacity=".09"/>
                 <path d="M77 79h18m-18 8h12m-12 8h17m-17 8h9" stroke="#89a8ba" stroke-width="2"/>
                 <path d="M118 78h57m7 0h18M118 87h41" stroke="#a5c9d0" stroke-width="2.4"/>
-                <path d="M119 117h14l6-8 7 11 9-22 10 18h13l7-6 7 5h43" stroke="#83fad6" stroke-width="2.5"/>
+                <use href="#tray-heart" stroke="#83fad6" stroke-width="2.5"/>
               </g>
               <g id="tray-pointer" stroke="#102b34" stroke-width="1.2">
                 <path d="m0 0 3 20 5-6 5 8 4-2-5-8 8-2Z" fill="#ecfff8"/>
@@ -683,26 +755,33 @@
             <g data-view="1">
               <use href="#tray-window"/>
               <circle cx="250" cy="45" r="16" stroke="#ffb397" stroke-opacity=".5" stroke-dasharray="2 4"/>
-              <rect x="239" y="36" width="21" height="17" rx="4" fill="#874b49"/>
+              <rect class="tray-close-key" x="239" y="36" width="21" height="17" rx="4" fill="#874b49"/>
               <path d="m246 41 8 8m0-8-8 8" stroke="#fff2dc" stroke-width="1.7"/>
-              <use href="#tray-pointer" x="252" y="48"/>
+              <g transform="translate(250 45)" color="#ffc2a3"><use class="tray-wave" href="#tray-wave" opacity="0"/></g>
+              <use href="#tray-heart" class="tray-telemetry" opacity="0"/>
+              <use class="tray-pointer-close" href="#tray-pointer" x="252" y="48"/>
             </g>
             <g data-view="2">
               <use href="#tray-window" opacity=".22"/>
               <use href="#tray-window" class="demo-stow" opacity="0"/>
-              <path class="demo-trace" pathLength="1" d="M157 90C215 94 222 139 251 159s37 17 33 25" stroke="url(#tray-trail)" stroke-width="2.5"/>
-              <use href="#tray-window" transform="translate(165 108) scale(.37)" opacity=".75"/>
-              <use href="#tray-window" transform="translate(232 142) scale(.17)" opacity=".8"/>
+              <use class="demo-trace" href="#tray-descent" stroke="url(#tray-trail)" stroke-width="2.5"/>
+              <use class="tray-comet" href="#tray-descent" opacity="0"/>
+              <use class="tray-afterimage" href="#tray-window" transform="translate(165 108) scale(.37)" opacity=".75"/>
+              <use class="tray-afterimage tray-afterimage-small" href="#tray-window" transform="translate(232 142) scale(.17)" opacity=".8"/>
               <ellipse cx="284" cy="187" rx="40" ry="28" fill="url(#tray-glow)"/>
               <circle cx="284" cy="187" r="13" stroke="#9afcde" stroke-width="1.5"/>
               <path d="m279 187 4 4 7-8" stroke="#d8fff2" stroke-width="2"/>
+              <g transform="translate(284 187)" color="#85ffe4"><use class="tray-wave" href="#tray-wave" opacity="0"/></g>
             </g>
             <g data-view="3">
               <ellipse cx="284" cy="187" rx="36" ry="27" fill="url(#tray-glow)"/>
-              <path class="demo-trace" pathLength="1" d="M284 179c36-54-5-94-41-93" stroke="url(#tray-trail)" stroke-width="2.8"/>
+              <use class="demo-trace" href="#tray-ascent" stroke="url(#tray-trail)" stroke-width="2.8"/>
+              <use class="tray-comet" href="#tray-ascent" opacity="0"/>
               <use href="#tray-window" class="demo-restore"/>
+              <use href="#tray-heart" class="tray-telemetry" opacity="0"/>
+              <g transform="translate(284 187)" color="#85ffe4"><use class="tray-wave" href="#tray-wave" opacity="0"/></g>
               <path d="M49 50V36a9 9 0 0 1 9-9h22m187 101v12a9 9 0 0 1-9 9h-19" stroke="#92efd3" stroke-width="1.6"/>
-              <use href="#tray-pointer" x="288" y="189"/>
+              <use class="tray-pointer-open" href="#tray-pointer" x="288" y="189"/>
             </g>
           </svg>
         </div>

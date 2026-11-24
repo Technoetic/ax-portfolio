@@ -125,19 +125,23 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .slide.active .demo-art [data-view] { animation: project-appear 420ms ease-out; }
-  .slide.active .demo-art .demo-trace { animation: project-trace 820ms cubic-bezier(.2,.75,.25,1); }
-  .slide.active .demo-art .demo-appear { animation: project-appear 700ms ease-in; }
-  .slide.active .demo-bars rect {
+  :where(.project-demo[data-playing]) .demo-art [data-view] { animation: project-appear 400ms ease-out; }
+  :where(.project-demo[data-playing]) .demo-trace { animation: project-trace 1.2s cubic-bezier(.2,.75,.25,1); }
+  :where(.project-demo[data-playing]) .demo-appear { animation: project-appear 700ms ease-in; }
+  :where(.project-demo[data-playing]) .demo-bars rect {
     transform-box: fill-box;
     transform-origin: center bottom;
     animation: project-grow 620ms cubic-bezier(.2,.75,.25,1) backwards;
   }
-  .slide.active .demo-bars rect:nth-child(2) { animation-delay: 75ms; }
-  .slide.active .demo-bars rect:nth-child(3) { animation-delay: 150ms; }
-  .slide.active .demo-orbit { animation: project-orbit 1050ms ease-in-out; }
-  .slide.active .demo-stow { animation: project-stow 750ms cubic-bezier(.45,.04,.85,.6); }
-  .slide.active .demo-restore { animation: project-stow 680ms cubic-bezier(.3,.65,.35,1) reverse; }
+  :where(.project-demo[data-playing]) .demo-bars rect:nth-child(2) { animation-delay: 75ms; }
+  :where(.project-demo[data-playing]) .demo-bars rect:nth-child(3) { animation-delay: 150ms; }
+  :where(.project-demo[data-playing]) .demo-orbit { animation: project-orbit 1050ms ease-in-out; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .demo-art > svg {
+    transform: perspective(900px) rotateX(var(--demo-pitch, 0deg)) rotateY(var(--demo-yaw, 0deg));
+    transition: transform 180ms ease-out;
+  }
 }
 @keyframes project-appear { from { opacity: .18; } to { opacity: 1; } }
 @keyframes project-trace {
@@ -146,10 +150,6 @@
 }
 @keyframes project-grow { from { transform: scaleY(.08); } to { transform: scaleY(1); } }
 @keyframes project-orbit { from { transform: rotate(0); } to { transform: rotate(1turn); } }
-@keyframes project-stow {
-  from { transform: translate(0) scale(1); opacity: 1; }
-  to { transform: translate(274px, 181px) scale(.06); opacity: 0; }
-}
 
 @container (max-width: 480px) {
   .demo-picker:has(label:nth-of-type(5)) { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -170,6 +170,8 @@
 @media print {
   .project-demo { break-inside: avoid; }
   .demo-art { print-color-adjust: exact; }
+  .project-demo .demo-art *, .project-demo .demo-art > svg { animation: none !important; transition: none !important; }
+  .project-demo .demo-art > svg { transform: none; }
   .demo-readout strong, .demo-readout p, .demo-readout a, .demo-picker span { color: #172c43; }
   .demo-picker input:checked + span { color: #172c43; text-decoration: underline; }
 }
