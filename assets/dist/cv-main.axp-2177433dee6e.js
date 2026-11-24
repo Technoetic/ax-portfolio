@@ -1,8 +1,8 @@
-import { EntryService } from './services/entry-service.axp-0a0eea213047.js';
-import { VersionService } from './services/version-service.axp-0a0eea213047.js';
-import { CountUp } from './visuals/count-up.axp-0a0eea213047.js';
-import { ScrollReveal } from './visuals/scroll-reveal.axp-0a0eea213047.js';
-import { CvScreen } from './screens/cv-screen.axp-0a0eea213047.js';
+import { EntryService } from './services/entry-service.axp-2177433dee6e.js';
+import { VersionService } from './services/version-service.axp-2177433dee6e.js';
+import { CountUp } from './visuals/count-up.axp-2177433dee6e.js';
+import { ScrollReveal } from './visuals/scroll-reveal.axp-2177433dee6e.js';
+import { CvScreen } from './screens/cv-screen.axp-2177433dee6e.js';
 
 function bootCv() {
   const loadedBuild = document.querySelector('meta[name="app-build-id"]')?.content || '';
