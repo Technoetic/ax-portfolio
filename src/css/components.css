@@ -625,50 +625,10 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   width: 100%;
 }
 
-/* Static tool diagrams (#smv, #sw6, #sctt) */
-.tool-figure {
-  min-width: 0;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--bg-2);
-}
-
-.tool-figure img {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.tool-figure figcaption {
-  color: var(--fg-dim);
-  font-size: 13px;
-  line-height: 1.6;
-  margin-top: 12px;
-  word-break: keep-all;
-}
-
-.tool-figure figcaption a {
-  color: var(--accent-2);
-  text-underline-offset: 3px;
-}
-
 @media (min-width: 1051px) {
   .av-figure.rise,
-  .sxc-figure.rise,
-  .tool-figure.rise,
-  #sref .ref-visuals.rise {
+  .project-demo.rise {
     transform: none;
-  }
-
-  .sxc-figure figcaption,
-  .tool-figure figcaption,
-  #sref .ref-diagram figcaption {
-    min-height: 42px;
   }
 }
 
@@ -711,37 +671,6 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 
 .sxc-checks span {
   color: var(--fg-dim);
-}
-
-.sxc-figure {
-  min-width: 0;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--bg-2);
-}
-
-.sxc-figure img {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.sxc-figure figcaption {
-  color: var(--fg-dim);
-  font-size: 13px;
-  line-height: 1.6;
-  margin-top: 12px;
-  word-break: keep-all;
-}
-
-.sxc-figure figcaption a {
-  color: var(--accent-2);
-  text-underline-offset: 3px;
 }
 
 #sxc .linkbtn,
