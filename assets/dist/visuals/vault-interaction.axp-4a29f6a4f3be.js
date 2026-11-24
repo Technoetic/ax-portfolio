@@ -14,8 +14,7 @@ export class VaultInteraction {
     this.hosts = [...this.map.querySelectorAll('[data-av-host]')];
     this.status = this.map.querySelector('[data-av-status]');
     this.note = this.map.querySelector('[data-av-note]');
-    this.replay = this.map.querySelector('[data-av-replay]');
-    if (!this.note || !this.status || !this.replay || this.hosts.length !== 3) return;
+    if (!this.note || !this.status || this.hosts.length !== 3) return;
 
     this.root = root;
     this.win = root.defaultView;
@@ -47,12 +46,6 @@ export class VaultInteraction {
         this.start({ source, target });
       }, options);
     }
-    this.replay.disabled = false;
-    this.replay.addEventListener('click', () => {
-      if (!this.available) return;
-      onInteract?.();
-      this.start(this.pending ?? this.lastRoute);
-    }, options);
     this.media?.addEventListener('change', () => {
       if (this.media.matches) this.finish();
       else this.observe();
@@ -151,6 +144,6 @@ export class VaultInteraction {
     this.status.textContent = this.initialStatus;
     delete this.map.dataset.avReady;
     this.map.dataset.phase = 'idle';
-    for (const button of [...this.hosts, this.replay]) button.disabled = true;
+    for (const button of this.hosts) button.disabled = true;
   }
 }

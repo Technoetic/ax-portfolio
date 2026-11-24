@@ -234,32 +234,38 @@ test('#sav explains the shared vault and session flow in native HTML', async () 
   }
 });
 
-test('#sxc, #sref, #smv, #sw6, and #sctt use lightweight 960x640 WebP diagrams without the removed sxc animation toggle', async () => {
-  const [indexHtml, deckJs] = await Promise.all([
-    readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
-    readFile(path.join(APP_ROOT, 'src', 'js', 'screens', 'deck-screen.js'), 'utf8'),
-  ]);
-
-  const expectedDiagrams = [
-    ['sxc', 'assets/semantic-crosscheck/semantic-crosscheck-hero.webp'],
-    ['sref', 'assets/reference-atlas/reference-map.webp'],
-    ['smv', 'assets/md-viz/md-viz-hero.webp'],
-    ['sw6', 'assets/webapp6/webapp6-hero.webp'],
-    ['sctt', 'assets/close-to-tray-helper/close-to-tray-hero.webp'],
-  ];
-
-  for (const [id, relPath] of expectedDiagrams) {
-    const slide = indexHtml.match(new RegExp(`<section\\b[^>]*\\bid="${id}"[^>]*>([\\s\\S]*?)<\\/section>`))?.[1];
-    assert.ok(slide, `missing #${id} slide`);
-    assert.ok(slide.includes(`src="${relPath}"`), `#${id} must reference ${relPath}`);
-    assert.ok(slide.includes('width="960" height="640"'), `#${id} diagram must declare 960x640 dimensions`);
-
-    const bytes = await readFile(path.join(APP_ROOT, relPath));
-    assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', `${relPath} missing RIFF header`);
-    assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', `${relPath} missing WEBP signature`);
-    assert.ok(bytes.length < 100 * 1024, `${relPath} should stay under 100 KB, got ${bytes.length}`);
+test('each project diagram offers native controls, artwork and a matching description for every choice', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const groups = new Set();
+  for (const id of ['sxc', 'sref', 'smv', 'sw6', 'sctt']) {
+    const slide = html.match(new RegExp(`<section\\b[^>]*\\bid="${id}"[^>]*>([\\s\\S]*?)<\\/section>`))?.[1];
+    assert.ok(slide, `missing #${id}`);
+    const figure = slide.match(/<figure\b[^>]*aria-label="[^"]+"[^>]*>([\s\S]*?)<\/figure>/)?.[1];
+    assert.ok(figure, `#${id} needs a named figure`);
+    assert.doesNotMatch(slide, /<(?:img|picture|canvas|image)\b|\.webp\b/i);
+    assert.match(figure, /<legend\b[^>]*>[^<]+<\/legend>/);
+    const radios = [...figure.matchAll(/<input\b[^>]*\btype="radio"[^>]*>/g)].map(match => match[0]);
+    assert.ok(radios.length >= 2);
+    assert.equal(radios.filter(radio => /\schecked\b/.test(radio)).length, 1);
+    const names = new Set(radios.map(radio => radio.match(/\bname="([^"]+)"/)?.[1]));
+    assert.equal(names.size, 1);
+    const [name] = names;
+    assert.ok(name && !groups.has(name), 'each slide needs an independent radio group');
+    groups.add(name);
+    const values = radios.map(radio => radio.match(/\bvalue="(\d+)"/)?.[1]);
+    assert.ok(values.every(Boolean));
+    assert.equal(new Set(values).size, radios.length);
+    const art = figure.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/)?.[0];
+    assert.ok(art);
+    assert.match(art, /<svg\b[^>]*aria-hidden="true"/);
+    const readout = figure.slice(figure.indexOf('class="demo-readout"'));
+    for (const value of values) {
+      assert.ok(art.includes(`data-view="${value}"`), `#${id} has no drawing for choice ${value}`);
+      const radio = radios.find(input => input.includes(`value="${value}"`));
+      const descriptionId = radio.match(/\baria-describedby="([^"]+)"/)?.[1];
+      assert.ok(descriptionId && readout.includes(`data-view="${value}" id="${descriptionId}"`),
+        `#${id} choice ${value} needs its own accessible description`);
+    }
   }
-
-  assert.doesNotMatch(indexHtml, /sxc-animation-toggle/);
-  assert.doesNotMatch(deckJs, /sxc-animation-toggle|_initSxcMotionToggle/);
+  assert.doesNotMatch(html, /sxc-animation-toggle/);
 });

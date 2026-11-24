@@ -1,5 +1,5 @@
-import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-93f70a84d631.js';
-import { VaultInteraction } from '../visuals/vault-interaction.axp-93f70a84d631.js';
+import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-4a29f6a4f3be.js';
+import { VaultInteraction } from '../visuals/vault-interaction.axp-4a29f6a4f3be.js';
 
 export class DeckScreen {
   constructor({

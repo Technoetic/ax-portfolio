@@ -267,15 +267,63 @@
           <li><b>추론과 지표</b><span>HermiT · Cube Core</span></li>
           <li><b>결과 확인</b><span>V1–V5 교차 검사(V4 변이 검사 포함) · SHACL↔SQL 위반 대조 · 리포트</span></li>
         </ul>
-        <p class="snapshot-note rise">PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다. 검사를 건너뛰면 통과로 치지 않고, 검증하지 못한 범위(<code>not_proven</code>)를 함께 보여 줍니다.<br>v0.33.0 릴리스 기준 태그 CI 11개 작업 통과(PostgreSQL&nbsp;17·HermiT·Cube·Jena 통합·공급망 검증 포함).</p>
+        <p class="snapshot-note rise">PASS는 해당 데이터에서 수행한 검사가 불일치를 찾지 못했다는 뜻입니다. 검사를 건너뛰면 통과로 치지 않고, 검증하지 못한 범위(<code>not_proven</code>)를 함께 보여 줍니다.<br><a href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.33.0" target="_blank" rel="noopener">v0.33.0 릴리스<span class="sr-only"> (새 탭)</span></a> 기준 태그 CI 11개 작업 통과(PostgreSQL&nbsp;17·HermiT·Cube·Jena 통합·공급망 검증 포함).</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/semantic-crosscheck</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
-      <figure class="sxc-figure rise">
-        <img id="sxc-diagram" src="assets/semantic-crosscheck/semantic-crosscheck-hero.webp" width="960" height="640" alt="단일 모델·규칙 설정 파일 crosscheck.toml에서 PostgreSQL 17+(계층·SQL 뷰), SHACL(데이터 규칙), OWL·HermiT(논리 추론), Cube Core(지표·집계) 네 모델을 만들고, 별도 작성한 기준 SQL(정답지)과 함께 교차 검증 리포트(V1–V5 대조·불일치 탐지·미검증 범위 not_proven 표시)로 합류하는 구조도." loading="lazy" decoding="async">
-        <figcaption>단일 설정에서 4개 모델을 생성해 기준 SQL과 교차 대조하는 구조도입니다. 실제 검증 범위와 결과는 <a href="https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.33.0" target="_blank" rel="noopener">v0.33.0 릴리스 근거<span class="sr-only"> (새 탭)</span></a>에서 확인합니다.</figcaption>
+      <figure class="project-demo rise" aria-label="semantic-crosscheck의 교차 검증 과정">
+        <fieldset class="demo-picker">
+          <legend class="sr-only">살펴볼 검증 단계</legend>
+          <label><input type="radio" name="sxc-view" value="1" aria-describedby="sxc-detail-1" checked><span>모델 생성</span></label>
+          <label><input type="radio" name="sxc-view" value="2" aria-describedby="sxc-detail-2"><span>결과 대조</span></label>
+          <label><input type="radio" name="sxc-view" value="3" aria-describedby="sxc-detail-3"><span>리포트</span></label>
+        </fieldset>
+        <div class="demo-art">
+          <svg viewBox="0 0 400 220" aria-hidden="true" focusable="false" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <radialGradient id="sxc-field"><stop stop-color="#237482" stop-opacity=".56"/><stop offset="1" stop-color="#102a40" stop-opacity="0"/></radialGradient>
+              <linearGradient id="sxc-rail" x2="1" y2=".75"><stop stop-color="#b9fff1"/><stop offset=".48" stop-color="#4be6cb"/><stop offset="1" stop-color="#6c94ff"/></linearGradient>
+              <linearGradient id="sxc-surface" x2=".9" y2="1"><stop stop-color="#214657"/><stop offset="1" stop-color="#091725"/></linearGradient>
+              <pattern id="sxc-grid" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M16 0H0v16" stroke="#84d7d7" stroke-opacity=".16" stroke-width=".8"/></pattern>
+            </defs>
+            <ellipse cx="198" cy="112" rx="175" ry="106" fill="url(#sxc-field)"/>
+            <g stroke="#64adaf" opacity=".4"><path d="M24 57V36h21m310 0h21v21M24 162v21h21m310 0h21v-21"/><path d="M66 36h268M66 183h268" stroke-dasharray="2 13"/></g>
+            <g data-view="1">
+              <path d="M123 111h48m0 0c34 0 30-69 69-69h27m-96 69c33 0 35-23 69-23h27m-96 23c33 0 35 23 69 23h27m-96-23c34 0 30 69 69 69h27" stroke="#163c4a" stroke-width="8"/>
+              <path class="demo-trace" pathLength="1" d="M123 111h48m0 0c34 0 30-69 69-69h27m-96 69c33 0 35-23 69-23h27m-96 23c33 0 35 23 69 23h27m-96-23c34 0 30 69 69 69h27" stroke="url(#sxc-rail)" stroke-width="2.4"/>
+              <path d="m57 68 44-5 24 19v70l-68 8z" fill="url(#sxc-surface)" stroke="#7ddbcf" stroke-width="1.6"/><path d="m101 63 1 22 23-3" stroke="#96eddf"/>
+              <path d="m68 102 7-1m5-1 13-1m-25 15 22-3m6-1 14-2m-42 17 10-1m6-1 18-3" stroke="#8bf6e1" stroke-width="2.5"/>
+              <circle cx="171" cy="111" r="7" fill="#b1fff0" stroke="#447c87" stroke-width="3"/>
+              <g fill="url(#sxc-surface)" stroke="url(#sxc-rail)" stroke-width="1.5"><rect x="267" y="25" width="58" height="34" rx="9"/><rect x="267" y="71" width="58" height="34" rx="9"/><rect x="267" y="117" width="58" height="34" rx="9"/><rect x="267" y="163" width="58" height="34" rx="9"/></g>
+              <g stroke="#c4fff2" stroke-width="1.7"><ellipse cx="296" cy="36" rx="8" ry="3"/><path d="M288 36v10c0 4 16 4 16 0V36m-16 5c0 4 16 4 16 0m-12 38-6 9 6 9m8-18 6 9-6 9m-9 30 10 7-10 7Z"/><circle cx="291" cy="127" r="2.3"/><circle cx="301" cy="134" r="2.3"/><circle cx="291" cy="141" r="2.3"/><path d="m287 176 9-5 9 5v9l-9 5-9-5zm0 0 9 5 9-5m-9 5v9"/></g>
+            </g>
+            <g data-view="2">
+              <rect x="99" y="47" width="222" height="127" rx="13" fill="url(#sxc-surface)" stroke="#5baaa7"/>
+              <rect x="111" y="59" width="198" height="103" rx="6" fill="url(#sxc-grid)"/>
+              <path d="M42 89h57m-57 48h57" stroke="#68e6cb" stroke-width="2"/><path d="M42 137h57" stroke="#bca1ff" stroke-width="2"/>
+              <circle cx="42" cy="89" r="5" fill="#81efce"/><path d="m42 131 6 6-6 6-6-6z" fill="#c5a9ff"/>
+              <path class="demo-trace" pathLength="1" d="M112 123h29l14-22h29l12-22h23l14 24h39l9-12h25" stroke="#6af3c9" stroke-width="3.5"/>
+              <path class="demo-trace" pathLength="1" d="M112 128h30l14-22h30l12-5h19l13 7h43l9-12h24" stroke="#c4acf9" stroke-width="2.2" stroke-dasharray="5 4"/>
+              <g stroke="#f9d7a4"><path d="M208 76v59" stroke-dasharray="2 4"/><circle cx="208" cy="79" r="4" fill="#16373f"/><circle cx="208" cy="101" r="4" fill="#28303b"/></g>
+              <path d="M321 112h34m-8-7 8 7-8 7" stroke="#9cf8d5" stroke-width="2"/>
+            </g>
+            <g data-view="3">
+              <path d="M112 56h148l20 21v100H112z" fill="#0d202d" stroke="#40717e"/><path d="M123 42h140l27 26v98H123z" fill="url(#sxc-surface)" stroke="#86cfc5" stroke-width="1.6"/><path d="M263 42v26h27" stroke="#86cfc5"/>
+              <path d="M140 61h51" stroke="#a7efdf" stroke-width="3"/>
+              <g class="demo-appear"><circle cx="149" cy="86" r="8" fill="#173c3a" stroke="#69e8c4"/><path d="m145 86 3 3 5-6m12 3h77" stroke="#7df3ce" stroke-width="2.2"/>
+                <path d="m149 105 8 8-8 8-8-8z" fill="#422f32" stroke="#ffb493"/><path d="M149 110v5m16-2h56" stroke="#ffb493" stroke-width="2.2"/>
+                <circle cx="149" cy="140" r="8" stroke="#bca9ee" stroke-dasharray="2 3"/><path d="M146 140h6m13 0h69" stroke="#c2abf4" stroke-width="2.2"/></g>
+              <path d="M56 111h48m-16-5 7 5-7 5m208-5h34" stroke="#82b3bd" stroke-width="1.5" stroke-dasharray="3 5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="demo-readout">
+          <div data-view="1" id="sxc-detail-1"><strong>설정 하나에서 네 모델로</strong><p><code>crosscheck.toml</code>을 PostgreSQL, SHACL, OWL·HermiT, Cube Core 모델로 펼칩니다.</p></div>
+          <div data-view="2" id="sxc-detail-2"><strong>독립된 기준 SQL과 대조</strong><p>같은 질문에 대한 모델별 결과를 따로 작성한 SQL의 결과와 비교합니다.</p></div>
+          <div data-view="3" id="sxc-detail-3"><strong>결과와 검증 범위를 함께 읽기</strong><p>V1–V5 리포트에서 일치·불일치를 확인하고, 검증하지 못한 범위는 <code>not_proven</code>으로 구분합니다.</p></div>
+        </div>
       </figure>
     </div>
   </section>
@@ -298,20 +346,66 @@
         </div>
         <p class="snapshot-note ref-boundary rise">출처 등재는 모든 기능의 구현이나 논문 성능의 재현을 뜻하지 않습니다.<br>각 플러그인의 공개 문서에 남은 참고 기록을 연결합니다.</p>
       </div>
-      <div class="ref-visuals rise">
-        <figure class="ref-diagram">
-          <img src="assets/reference-atlas/reference-map.webp" width="960" height="640" alt="어떤 자료를 어디에 참고했는지 보여 주는 성좌 관계도. 논문·오픈소스·규격과 공식 글이 Reference Atlas 성좌 지도와 agentic-vault·semantic-crosscheck의 참고 기록 및 공통 참조로 연결됩니다." loading="lazy" decoding="async">
-          <div class="ref-small-diagram">
-            <p class="ref-map-title">어떤 자료를, 어디에 참고했는지 한눈에.</p>
-            <div class="ref-source-types"><span>논문</span><span>오픈소스</span><span>규격·공식 글</span></div>
-            <div class="ref-map-connector" aria-hidden="true"></div>
-            <div class="ref-catalog-node"><b>Reference Atlas</b><span>자료 검색 · 분류 · 참고 위치 확인</span></div>
-            <div class="ref-map-connector" aria-hidden="true"></div>
-            <div class="ref-plugin-nodes"><div><b>agentic-vault의<br>참고 기록</b><span>기억·인계</span></div><div><b>semantic-<br>crosscheck의<br>참고 기록</b><span>의미 검증</span></div></div>
-          </div>
-          <figcaption>Atlas에서 원문과 참고 문서를 확인합니다.</figcaption>
-        </figure>
-      </div>
+      <figure class="project-demo rise" aria-label="Reference Atlas의 공개 출처와 플러그인 인용 지도">
+        <fieldset class="demo-picker">
+          <legend class="sr-only">인용 경로를 살펴볼 자료 유형</legend>
+          <label><input type="radio" name="sref-view" value="1" aria-describedby="sref-detail-1" checked><span>논문</span></label>
+          <label><input type="radio" name="sref-view" value="2" aria-describedby="sref-detail-2"><span>오픈소스</span></label>
+          <label><input type="radio" name="sref-view" value="3" aria-describedby="sref-detail-3"><span>규격</span></label>
+        </fieldset>
+        <div class="demo-art">
+          <svg viewBox="0 0 400 220" aria-hidden="true" focusable="false" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <radialGradient id="atlas-sky"><stop stop-color="#6246b6" stop-opacity=".57"/><stop offset="1" stop-color="#3b3380" stop-opacity="0"/></radialGradient>
+              <radialGradient id="atlas-sphere" cx=".35" cy=".27" r=".8"><stop stop-color="#b6abef"/><stop offset=".38" stop-color="#6557a4"/><stop offset=".85" stop-color="#232440"/><stop offset="1" stop-color="#837bc1"/></radialGradient>
+              <linearGradient id="atlas-ribbon" x2="1" y2="0"><stop stop-color="#e7c7ff"/><stop offset=".56" stop-color="#b5acff"/><stop offset="1" stop-color="#7bdcff"/></linearGradient>
+              <path id="atlas-paper-mark" d="M-7-10H4l4 4v16H-7zM4-10v5h4M-3-1h7m-7 4h7m-7 4h4"/>
+              <path id="atlas-code-mark" d="m-5-5-5 5 5 5m10-10 5 5-5 5M2-8l-4 16"/>
+              <path id="atlas-spec-mark" d="m-9-7 9-3 9 3v15l-9-3-9 3Zm9-3V5"/>
+              <path id="atlas-vault-mark" d="m-10-4 10-5 10 5-10 5zm0 0v9l10 5 10-5v-9M0 1v9"/>
+              <path id="atlas-check-mark" d="M-9-6h18m-18 6h13m-13 6h7m4 1 3 3 7-8"/>
+              <g id="atlas-in-stars"><circle r="14" stroke-width="1.1"/><circle r="19" stroke-dasharray="1 6" opacity=".55"/></g>
+            </defs>
+            <ellipse cx="187" cy="110" rx="156" ry="107" fill="url(#atlas-sky)"/>
+            <g fill="#d4d9ff" opacity=".65"><circle cx="29" cy="76" r="1.4"/><circle cx="91" cy="17" r="1.3"/><circle cx="117" cy="46" r="1.4"/><circle cx="145" cy="28" r="1"/><circle cx="251" cy="32" r="1.5"/><circle cx="284" cy="74" r="1.1"/><circle cx="350" cy="26" r="1.5"/><circle cx="373" cy="111" r="1.3"/><circle cx="256" cy="199" r="1.3"/><circle cx="122" cy="181" r="1.4"/><circle cx="22" cy="187" r="1.5"/><circle cx="166" cy="198" r="1"/></g>
+            <g stroke="#b5b2ef" stroke-opacity=".24"><path d="m91 17 26 29 28-18m106 4 33 42m-162 107 44 17"/><ellipse cx="190" cy="110" rx="106" ry="67" transform="rotate(-18 190 110)" stroke-dasharray="2 6"/></g>
+            <g stroke="#8378b2" stroke-width="1.2" opacity=".48">
+              <path d="m61 49 47 15 36 30 46 17m-129-1 54 5 38-13 37 9m-129 60 50-10 38-35 41-15m0 0 39-22 38 3 53-42m-130 61 55 14 29 27 46 13"/>
+              <use href="#atlas-in-stars" x="61" y="49"/><use href="#atlas-in-stars" x="61" y="110"/><use href="#atlas-in-stars" x="61" y="171"/>
+            </g>
+            <g stroke="#bcaddd" stroke-width="1.55"><use href="#atlas-paper-mark" x="61" y="49"/><use href="#atlas-code-mark" x="61" y="110"/><use href="#atlas-spec-mark" x="61" y="171"/></g>
+            <g fill="#151c31" stroke="#8f9cb5"><circle cx="320" cy="50" r="16"/><circle cx="320" cy="165" r="16"/></g>
+            <g stroke="#d4def1" stroke-width="1.6"><use href="#atlas-vault-mark" x="320" y="50"/><use href="#atlas-check-mark" x="320" y="165"/></g>
+            <g data-view="1" stroke="url(#atlas-ribbon)" stroke-width="2">
+              <path class="demo-trace" pathLength="1" d="m76 54 32 10 36 30 46 17 39-22 38 3 40-32"/>
+              <g fill="#ede4ff"><circle cx="108" cy="64" r="3"/><circle cx="144" cy="94" r="2"/><circle cx="229" cy="89" r="2"/><circle cx="267" cy="92" r="3"/></g>
+              <use href="#atlas-in-stars" x="61" y="49" stroke="#e8c8ff"/><circle cx="320" cy="50" r="19" stroke="#8ce7ff"/>
+            </g>
+            <g data-view="2" stroke="url(#atlas-ribbon)" stroke-width="2">
+              <path class="demo-trace" pathLength="1" d="m76 111 39 4 38-13 37 9 55 14 29 27 30 9"/>
+              <g fill="#ede4ff"><circle cx="115" cy="115" r="3"/><circle cx="153" cy="102" r="2"/><circle cx="245" cy="125" r="3"/><circle cx="274" cy="152" r="2"/></g>
+              <use href="#atlas-in-stars" x="61" y="110" stroke="#e8c8ff"/><circle cx="320" cy="165" r="19" stroke="#8ce7ff"/>
+            </g>
+            <g data-view="3" stroke="url(#atlas-ribbon)" stroke-width="2">
+              <path class="demo-trace" pathLength="1" d="m76 168 35-7 38-35 41-15 39-22 38 3 40-32m-117 51 55 14 29 27 30 9"/>
+              <g fill="#ede4ff"><circle cx="111" cy="161" r="3"/><circle cx="149" cy="126" r="2"/><circle cx="267" cy="92" r="3"/><circle cx="274" cy="152" r="3"/></g>
+              <use href="#atlas-in-stars" x="61" y="171" stroke="#e8c8ff"/><g stroke="#8ce7ff"><circle cx="320" cy="50" r="19"/><circle cx="320" cy="165" r="19"/></g>
+            </g>
+            <g transform="rotate(-18 190 110)">
+              <circle cx="190" cy="110" r="34" fill="url(#atlas-sphere)" stroke="#d0bfff"/>
+              <g stroke="#c8c0ff" stroke-width=".9" opacity=".58"><ellipse cx="190" cy="110" rx="15" ry="34"/><ellipse cx="190" cy="110" rx="34" ry="12"/><path d="M156 110h68m-34-34v68"/></g>
+              <path d="M223 100c21-1 23 6 6 14-13 7-49 15-68 14-20 0-20-7-4-15" stroke="#cab2ff" stroke-width="2.2"/>
+              <path d="M156 124c12 2 30 0 43-4" stroke="#f4ebff" stroke-width="2.5"/>
+            </g>
+            <g fill="#d1d7ed" font-family="system-ui,sans-serif" font-size="13" font-weight="550" text-anchor="middle"><text x="320" y="84">agentic-vault</text><text x="320" y="200">semantic-crosscheck</text></g>
+          </svg>
+        </div>
+        <div class="demo-readout">
+          <div data-view="1" id="sref-detail-1"><strong>A-MEM 논문과 노트 연결</strong><p><a href="https://github.com/Technoetic/agentic-vault/blob/a478283b71b455e37fe7fef222101abd386c8c37/docs/link-proposals.md#L68" target="_blank" rel="noopener">에이전틱 볼트의 링크 제안 문서<span class="sr-only"> (새 탭)</span></a>에서 관련 노트를 연결하는 아이디어의 출처를 확인합니다.</p></div>
+          <div data-view="2" id="sref-detail-2"><strong>W3C의 SHACL 테스트 모음</strong><p><a href="https://github.com/Technoetic/semantic-crosscheck/blob/381212b8d3f63eebaa3bef48540ec4be1b22bb98/THIRD_PARTY.md#L199" target="_blank" rel="noopener">semantic-crosscheck의 출처 기록<span class="sr-only"> (새 탭)</span></a>에서 검증에 참고한 테스트 모음의 위치를 확인합니다.</p></div>
+          <div data-view="3" id="sref-detail-3"><strong>두 플러그인이 참고한 OKF 규격</strong><p>Open Knowledge Format의 쓰임을 <a href="https://github.com/Technoetic/agentic-vault/blob/a478283b71b455e37fe7fef222101abd386c8c37/README.md#L1270" target="_blank" rel="noopener">에이전틱 볼트<span class="sr-only"> (새 탭)</span></a>와 <a href="https://github.com/Technoetic/semantic-crosscheck/blob/381212b8d3f63eebaa3bef48540ec4be1b22bb98/docs/okf.md#L44" target="_blank" rel="noopener">semantic-crosscheck<span class="sr-only"> (새 탭)</span></a>의 문서에서 확인합니다.</p></div>
+        </div>
+      </figure>
     </div>
   </section>
 
@@ -333,15 +427,81 @@
           <li><b>순수 SVG 10종</b><span>외부 설치 없이 stdlib로 바·도넛·스파크라인·히트맵 생성</span></li>
           <li><b>배지 · GIF89a</b><span>WCAG 대비 네온 배지 · 루프 GIF89a+PNG · 환경 점검기</span></li>
         </ul>
-        <p class="snapshot-note rise">v0.4.0 릴리스 기준 Ubuntu·Windows CI(25개 시험), 공식 플러그인 디렉터리 규격 점검(0 오류·0 경고) 및 불변 릴리스를 통과했습니다.</p>
+        <p class="snapshot-note rise"><a class="accent" href="https://github.com/Technoetic/md-viz/releases/tag/v0.4.0" target="_blank" rel="noopener">v0.4.0 릴리스<span class="sr-only"> (새 탭)</span></a> 기준 Ubuntu·Windows CI(25개 시험), 공식 플러그인 디렉터리 규격 점검(0 오류·0 경고) 및 불변 릴리스를 통과했습니다.</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/md-viz" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/md-viz</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
-      <figure class="tool-figure rise">
-        <img src="assets/md-viz/md-viz-hero.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 md-viz(무설치 GitHub README 시각화 · stdlib)를 거쳐 GitHub 네이티브(Mermaid·MathJax·GeoJSON), 순수 SVG 차트 10종(외부 설치 0 · stdlib 생성), 배지·GIF·트리(GIF89a·네온 배지·알림 5종)로 문서를 시각화하는 구조도." loading="lazy" decoding="async">
-        <figcaption>외부 패키지 설치 없이 GitHub 네이티브와 순수 SVG·GIF로 문서를 시각화합니다. <a href="https://github.com/Technoetic/md-viz/releases/tag/v0.4.0" target="_blank" rel="noopener">v0.4.0 릴리스<span class="sr-only"> (새 탭)</span></a>에서 설치합니다.</figcaption>
+      <figure class="project-demo rise" aria-label="md-viz README 시각화 미리보기">
+        <fieldset class="demo-picker">
+          <legend class="sr-only">미리 볼 시각화 형식</legend>
+          <label><input type="radio" name="smv-format" value="1" aria-describedby="smv-detail-1" checked><span>흐름도</span></label>
+          <label><input type="radio" name="smv-format" value="2" aria-describedby="smv-detail-2"><span>SVG 차트</span></label>
+          <label><input type="radio" name="smv-format" value="3" aria-describedby="smv-detail-3"><span>루프 GIF</span></label>
+        </fieldset>
+        <div class="demo-art">
+          <svg viewBox="0 0 400 220" fill="none" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <linearGradient id="smv-paper" x1="0" x2="1" y2="1"><stop stop-color="#203c58"/><stop offset=".56" stop-color="#192c44"/><stop offset="1" stop-color="#312746"/></linearGradient>
+              <linearGradient id="smv-ink"><stop stop-color="#80f6e5"/><stop offset=".5" stop-color="#8ccfff"/><stop offset="1" stop-color="#bf9aff"/></linearGradient>
+              <radialGradient id="smv-light"><stop stop-color="#70c3e7" stop-opacity=".25"/><stop offset="1" stop-color="#8295ef" stop-opacity="0"/></radialGradient>
+              <path id="smv-star" d="m0-7 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#d7fff8"/>
+            </defs>
+            <ellipse cx="237" cy="125" rx="153" ry="85" fill="url(#smv-light)"/>
+            <g transform="rotate(-5 80 110)">
+              <path d="M31 49h76l21 23v104H31Z" fill="#162237" stroke="#516880"/>
+              <path d="M37 42h68l24 24v103H37Z" fill="url(#smv-paper)" stroke="#9cc4db"/>
+              <path d="M105 42v24h24" fill="#386078" stroke="#a4dbe7"/>
+              <path d="M53 64h29M53 71h15" stroke="#6d94ad" stroke-width="3"/>
+              <path d="M54 109V85l10 14 11-14v24m16-23v22m-7-7 7 7 7-7" stroke="#b2ffec" stroke-width="3.2"/>
+              <path d="M53 127h55m-55 9h31m7 0h10m-48 9h39" stroke="#70a6be" stroke-width="3"/>
+            </g>
+            <path d="M139 108h42m-8-6 8 6-8 6" stroke="url(#smv-ink)" stroke-width="2"/>
+            <g data-view="1">
+              <g stroke="#7389a8" stroke-width="2"><path d="M211 110h24q7 0 13-8l21-30q5-7 15-7h24M211 110h24q7 0 13 8l21 30q5 7 15 7h24"/></g>
+              <path class="demo-trace" pathLength="1" d="M211 110h24q7 0 13-8l21-30q5-7 15-7h24" stroke="#91f7dd" stroke-width="3"/>
+              <path d="m204 92 18 18-18 18-18-18Z" fill="#205961" stroke="#9affdd" stroke-width="2"/>
+              <path d="m198 109 4 4 8-9" stroke="#d5fff1" stroke-width="2"/>
+              <g fill="#244659" stroke="#7de4de"><rect x="296" y="47" width="69" height="36" rx="11"/><path d="M306 61h36m-36 8h25" stroke-width="2.8"/></g>
+              <g fill="#302d54" stroke="#b8a7fa"><rect x="296" y="137" width="69" height="36" rx="11"/><path d="M306 151h36m-36 8h25" stroke-width="2.8"/></g>
+              <circle cx="236" cy="110" r="3" fill="#dcfaff"/>
+            </g>
+            <g data-view="2">
+              <g stroke="#526a86" opacity=".55" stroke-dasharray="2 5"><path d="M193 95h74m-74 28h74m-74 28h74"/></g>
+              <g class="demo-bars" fill="url(#smv-ink)"><rect x="197" y="119" width="13" height="39" rx="3"/><rect x="220" y="90" width="13" height="68" rx="3"/><rect x="243" y="66" width="13" height="92" rx="3"/></g>
+              <circle cx="322" cy="109" r="35" stroke="#253347" stroke-width="16"/>
+              <g transform="rotate(-90 322 109)" stroke-width="16" stroke-linecap="butt" fill="none">
+                <circle cx="322" cy="109" r="35" pathLength="100" stroke="#81edcf" stroke-dasharray="48 52"/>
+                <circle cx="322" cy="109" r="35" pathLength="100" stroke="#83baf1" stroke-dasharray="28 72" stroke-dashoffset="-50"/>
+                <circle cx="322" cy="109" r="35" pathLength="100" stroke="#b499f2" stroke-dasharray="18 82" stroke-dashoffset="-80"/>
+              </g>
+              <path class="demo-trace" pathLength="1" d="m307 113 8-7 6 5 11-13" stroke="#c2e6fa" stroke-width="2"/>
+            </g>
+            <g data-view="3">
+              <g transform="rotate(-9 262 110)">
+                <rect x="197" y="60" width="112" height="99" rx="9" fill="#172a42" stroke="#638998"/>
+                <rect x="204" y="67" width="98" height="13" rx="3" fill="#283f56"/>
+              </g>
+              <g transform="rotate(-3 274 112)">
+                <rect x="216" y="65" width="111" height="101" rx="9" fill="#1b3448" stroke="#6fabb3"/>
+                <rect x="223" y="72" width="97" height="11" rx="3" fill="#31495f"/>
+              </g>
+              <rect x="236" y="72" width="113" height="101" rx="9" fill="url(#smv-paper)" stroke="#b4e7db"/>
+              <g fill="#85b7cc"><circle cx="246" cy="82" r="1.7"/><circle cx="252" cy="82" r="1.7"/><circle cx="258" cy="82" r="1.7"/></g>
+              <ellipse cx="292" cy="126" rx="33" ry="16" transform="rotate(-24 292 126)" stroke="#799aa5" stroke-dasharray="2 4"/>
+              <path class="demo-trace" pathLength="1" d="M261 137c4 11 29 9 50-6 7-5 12-11 13-16" stroke="#8ce6cf" stroke-width="1.8"/>
+              <g transform="translate(292 126) rotate(-24) scale(1 .5)"><g class="demo-orbit"><use href="#smv-star" x="33"/></g></g>
+              <circle cx="292" cy="126" r="6" fill="#a9a0ff"/>
+              <path d="M358 117c9 24 2 46-16 58m3-11-3 11 12-1" stroke="#ad9cea" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="demo-readout">
+          <div data-view="1" id="smv-detail-1"><strong>Mermaid 흐름도</strong><p>Markdown에 단계와 분기를 적으면 GitHub가 연결된 흐름도로 그립니다.</p></div>
+          <div data-view="2" id="smv-detail-2"><strong>순수 SVG 차트</strong><p>Python 표준 라이브러리로 막대·도넛·히트맵 등 10종의 차트를 생성합니다.</p></div>
+          <div data-view="3" id="smv-detail-3"><strong>반복 재생하는 GIF</strong><p>여러 프레임을 GIF89a로 묶고 정지 화면은 PNG로 함께 내보냅니다.</p></div>
+        </div>
       </figure>
     </div>
   </section>
@@ -364,15 +524,98 @@
           <li><b>무중단 배포 6원칙</b><span>내장 빌드 ID 비교 · 안전한 다음 이동 자동 전환 · 초안·저장 보호</span></li>
           <li><b>합격·모션 기준</b><span>실제 앱 15항목 검증 · 카운트업·스크롤 선택 규칙 · 16개 패키징 시험</span></li>
         </ul>
-        <p class="snapshot-note rise">v0.2.0 릴리스 기준 Ubuntu·Windows CI(16개 시험), 공식 Claude·Antigravity 검증기(0 경고) 및 불변 릴리스·SHA-256 증명을 통과했습니다.</p>
+        <p class="snapshot-note rise"><a class="accent" href="https://github.com/Technoetic/webapp6/releases/tag/v0.2.0" target="_blank" rel="noopener">v0.2.0 릴리스<span class="sr-only"> (새 탭)</span></a> 기준 Ubuntu·Windows CI(16개 시험), 공식 Claude·Antigravity 검증기(0 경고) 및 불변 릴리스·SHA-256 증명을 통과했습니다.</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/webapp6" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/webapp6</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
-      <figure class="tool-figure rise">
-        <img src="assets/webapp6/webapp6-hero.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 webapp6(웹앱 제작 6원칙 · 선택 모션 규칙)을 거쳐 구조·상태 1–5원칙(모듈·CSS·비동기·URL), 무중단 배포 6원칙(빌드ID·자동전환·초안보호), 합격 기준 15항(실앱 검증·모션·CI 16시험)으로 연결되는 구조도." loading="lazy" decoding="async">
-        <figcaption>3개 호스트에서 웹앱 제작 6원칙과 15개 합격 기준을 바로 적용합니다. <a href="https://github.com/Technoetic/webapp6/releases/tag/v0.2.0" target="_blank" rel="noopener">v0.2.0 릴리스<span class="sr-only"> (새 탭)</span></a>에서 설치합니다.</figcaption>
+      <figure class="project-demo rise" aria-label="webapp6 웹앱 개발 원칙 탐색">
+        <fieldset class="demo-picker">
+          <legend class="sr-only">살펴볼 웹앱 개발 원칙</legend>
+          <label><input type="radio" name="sw6-rule" value="1" aria-describedby="sw6-detail-1" checked><span>모듈</span></label>
+          <label><input type="radio" name="sw6-rule" value="2" aria-describedby="sw6-detail-2"><span>CSS</span></label>
+          <label><input type="radio" name="sw6-rule" value="3" aria-describedby="sw6-detail-3"><span>화면·서비스</span></label>
+          <label><input type="radio" name="sw6-rule" value="4" aria-describedby="sw6-detail-4"><span>비동기</span></label>
+          <label><input type="radio" name="sw6-rule" value="5" aria-describedby="sw6-detail-5"><span>URL</span></label>
+          <label><input type="radio" name="sw6-rule" value="6" aria-describedby="sw6-detail-6"><span>배포</span></label>
+        </fieldset>
+        <div class="demo-art">
+          <svg viewBox="0 0 400 220" fill="none" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <linearGradient id="sw6-glass" x2=".85" y2="1"><stop stop-color="#294b68"/><stop offset=".55" stop-color="#223650"/><stop offset="1" stop-color="#242943"/></linearGradient>
+              <linearGradient id="sw6-edge"><stop stop-color="#80d9ef"/><stop offset="1" stop-color="#bd9bfa"/></linearGradient>
+              <radialGradient id="sw6-aura"><stop stop-color="#86acff" stop-opacity=".27"/><stop offset="1" stop-color="#6691e4" stop-opacity="0"/></radialGradient>
+              <g id="sw6-slab" stroke-linejoin="round">
+                <path d="M-65 0 0-29 65 0v8L0 37-65 8Z" fill="#21344e" stroke="#6e95bd"/>
+                <path d="M-65 0 0-29 65 0 0 29Z" fill="url(#sw6-glass)" stroke="url(#sw6-edge)"/>
+                <path d="M0 29v8" stroke="#8badd8"/>
+              </g>
+              <g id="sw6-browser">
+                <rect x="-52" y="-33" width="104" height="70" rx="8" fill="url(#sw6-glass)" stroke="#9dcce7"/>
+                <path d="M-52-17H52" stroke="#526986"/><g fill="#a2bdd4"><circle cx="-42" cy="-25" r="1.8"/><circle cx="-35" cy="-25" r="1.8"/><circle cx="-28" cy="-25" r="1.8"/></g>
+              </g>
+            </defs>
+            <ellipse cx="200" cy="119" rx="170" ry="93" fill="url(#sw6-aura)"/>
+            <g data-view="1">
+              <g stroke="#6b87a5" stroke-width="1.7"><path d="M147 122 108 141l-33-15m122 6v32m53-42 38 17 30-14M200 73V54"/></g>
+              <path class="demo-trace" pathLength="1" d="M74 126l34 15 92-44 89 42 29-14" stroke="#7cdcec" stroke-width="2"/>
+              <use href="#sw6-slab" transform="translate(200 49) scale(.4)"/><use href="#sw6-slab" transform="translate(75 124) scale(.49)"/><use href="#sw6-slab" transform="translate(324 122) scale(.49)"/><use href="#sw6-slab" transform="translate(198 169) scale(.45)"/>
+              <use href="#sw6-slab" transform="translate(200 111)"/><use href="#sw6-slab" transform="translate(200 97)"/>
+              <g stroke="#b7efff" stroke-width="2.4"><path d="m187 94-10 5 10 5m25-14 10 5-10 5m-10-9-5 12"/></g>
+              <g fill="#baafff"><circle cx="75" cy="124" r="3"/><circle cx="324" cy="122" r="3"/><circle cx="198" cy="169" r="3"/><circle cx="200" cy="49" r="3"/></g>
+            </g>
+            <g data-view="2">
+              <g stroke="#72879c" stroke-dasharray="2 5"><path d="M104 68v79M296 68v79M200 106v81"/></g>
+              <use href="#sw6-slab" transform="translate(200 148) scale(1.48 1)"/>
+              <g fill="#7fd9eb"><circle cx="147" cy="150" r="3.8"/><circle cx="160" cy="156" r="3.8" fill="#baa2ee"/><circle cx="173" cy="162" r="3.8" fill="#efa987"/></g>
+              <use href="#sw6-slab" transform="translate(200 106) scale(1.48 1)"/>
+              <path d="m137 108 53 16m-42-24 64 20m-44-28 63 20" stroke="#83acc8" stroke-width="2"/>
+              <use href="#sw6-slab" transform="translate(200 64) scale(1.48 1)"/>
+              <path d="m142 65 28-9 20 6-28 9Z" fill="#7fe0e9" fill-opacity=".75"/><path d="m178 53 21-7 50 15-21 7Z" fill="#b39af7" fill-opacity=".75"/>
+              <path class="demo-trace" pathLength="1" d="m176 77 22 7 46-15" stroke="#c6f5ff" stroke-width="2"/>
+            </g>
+            <g data-view="3">
+              <use href="#sw6-browser" transform="translate(108 111) scale(1.18)"/>
+              <rect x="59" y="104" width="26" height="33" rx="3" fill="#77bacf" fill-opacity=".54"/><path d="M95 106h48m-48 11h34m-34 12h42" stroke="#91b7d2" stroke-width="3"/>
+              <g fill="url(#sw6-glass)" stroke="#b29feb"><path d="M255 89v51c0 10 71 10 71 0V89"/><ellipse cx="290.5" cy="89" rx="35.5" ry="11"/><path d="M255 104c0 12 71 12 71 0m-71 18c0 12 71 12 71 0"/></g>
+              <path class="demo-trace" pathLength="1" d="M183 97h54m-8-6 8 6-8 6" stroke="#a0e9ed" stroke-width="2.3"/><path d="M238 122h-54m8-6-8 6 8 6" stroke="#b4a8ef" stroke-width="2.3"/>
+            </g>
+            <g data-view="4">
+              <g stroke="#55708a" stroke-dasharray="2 6"><path d="M76 74h247M76 141h247M128 48v116m75-116v116m75-116v116"/></g>
+              <path d="M75 73h65c23 0 34 37 57 37h91" stroke="#8fa3b7" stroke-width="3"/>
+              <circle cx="75" cy="73" r="7" fill="#1b3144" stroke="#a6b8c6" stroke-width="2"/><path d="m294 103 12 14m0-14-12 14" stroke="#efa38f" stroke-width="3"/>
+              <path class="demo-trace" pathLength="1" d="M125 141h46c20 0 36-55 59-55h77" stroke="url(#sw6-edge)" stroke-width="4"/>
+              <circle cx="125" cy="141" r="7" fill="#263d53" stroke="#92ddeb" stroke-width="2"/><circle cx="316" cy="86" r="15" fill="#24444f" stroke="#8de5cf"/><path d="m309 86 5 5 9-10" stroke="#b1ffe7" stroke-width="2.6"/>
+              <path d="M76 168h251m-7-5 7 5-7 5" stroke="#67879d"/>
+            </g>
+            <g data-view="5">
+              <use href="#sw6-browser" transform="translate(99 112)"/>
+              <path d="m81 116 17-13 17 13m-29-3v15h23v-15" stroke="#9ed8ea" stroke-width="2.6"/>
+              <path d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42m-123 40h32q10 0 17 9l15 21q5 8 17 8h42" stroke="#617f9e" stroke-width="2"/>
+              <path class="demo-trace" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42" stroke="#92e3ee" stroke-width="2.8"/>
+              <rect x="266" y="53" width="80" height="39" rx="8" fill="url(#sw6-glass)" stroke="#88c5dd"/><path d="m289 79 10-16m5 16 10-16" stroke="#b8ecf4" stroke-width="2.5"/>
+              <rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/>
+              <text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-family="monospace" font-size="18">404</text>
+            </g>
+            <g data-view="6">
+              <use href="#sw6-browser" transform="translate(99 108) scale(.92)"/><use href="#sw6-browser" transform="translate(302 108) scale(.92)"/>
+              <g font-family="monospace" font-weight="bold" font-size="27" text-anchor="middle"><text x="99" y="124" fill="#9fc9e8">A</text><text x="302" y="124" fill="#a0f1dd">B</text></g>
+              <path class="demo-trace" pathLength="1" d="M149 97q15-25 50-25t51 25m-10-2 10 2 1-10" stroke="url(#sw6-edge)" stroke-width="2.6"/>
+              <path d="M147 120c15 17 27 25 42 26m24 0c17-1 31-11 43-26" stroke="#728fa3" stroke-dasharray="3 5"/>
+              <path d="M201 109c6 6 13 8 21 10v15c0 13-10 23-21 28-12-5-21-15-21-28v-15c9-2 15-4 21-10Z" fill="#234653" stroke="#8fd7cf"/>
+              <rect x="193" y="129" width="16" height="13" rx="2.5" stroke="#bcfbea" stroke-width="2"/><path d="M196 129v-4a5 5 0 0 1 10 0v4" stroke="#bcfbea" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="demo-readout">
+          <div data-view="1" id="sw6-detail-1"><strong>책임별 JavaScript 모듈</strong><p>진입점·화면·서비스·공통 기능을 분리해 바꿀 코드의 위치를 분명히 합니다.</p></div>
+          <div data-view="2" id="sw6-detail-2"><strong>층으로 나누는 CSS</strong><p>색과 간격을 정하는 토큰 위에 기본 스타일과 컴포넌트 스타일을 쌓습니다.</p></div>
+          <div data-view="3" id="sw6-detail-3"><strong>화면과 서비스의 역할</strong><p>화면은 입력과 표시를 맡고, 서비스는 통신과 데이터 처리를 맡습니다.</p></div>
+          <div data-view="4" id="sw6-detail-4"><strong>늦게 온 응답 처리</strong><p>이전 요청이 늦게 도착해도 최신 화면을 덮어쓰지 않게 합니다.</p></div>
+          <div data-view="5" id="sw6-detail-5"><strong>주소로 여는 화면</strong><p>각 화면은 직접 주소와 뒤로 가기로 열리고, 없는 파일은 실제 404를 반환합니다.</p></div>
+          <div data-view="6" id="sw6-detail-6"><strong>열린 탭의 배포 전환</strong><p>빌드 ID가 바뀌면 초안과 저장을 보호하고 안전한 다음 이동에서 새 버전을 엽니다.</p></div>
+        </div>
       </figure>
     </div>
   </section>
@@ -395,15 +638,79 @@
           <li><b>세션·데몬 유지</b><span>트레이 클릭 시 즉시 복원 · 브라우저 데몬 종료 방지</span></li>
           <li><b>3호스트 번들</b><span>감지된 Claude Code · Codex · Antigravity에 <code>aside-repl</code> 자동 설치</span></li>
         </ul>
-        <p class="snapshot-note rise">v0.2.1 릴리스 기준 Windows CI 단위 테스트·슬림 ZIP(~45&nbsp;KB)·SHA-256 검증과 설치·제거기를 포함합니다.</p>
+        <p class="snapshot-note rise"><a class="accent" href="https://github.com/Technoetic/close-to-tray-helper/releases/tag/v0.2.1" target="_blank" rel="noopener">v0.2.1 릴리스<span class="sr-only"> (새 탭)</span></a> 기준 Windows CI 단위 테스트·슬림 ZIP(~45&nbsp;KB)·SHA-256 검증과 설치·제거기를 포함합니다.</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/close-to-tray-helper" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/close-to-tray-helper</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
-      <figure class="tool-figure rise">
-        <img src="assets/close-to-tray-helper/close-to-tray-hero.webp" width="960" height="640" alt="Aside·Chromium 브라우저의 창 닫기(×) 요청과 aside-repl 자동화가 close-to-tray-helper(무DLL Win32·UIA 닫기 가로채기)를 거쳐 종료 차단(프로세스·데몬 유지), 시스템 트레이 격납(클릭 시 즉시 복원), 3호스트 연동(Claude·Codex·Antigravity)으로 이어지는 구조도." loading="lazy" decoding="async">
-        <figcaption>DLL 주입 없이 창 닫기(×)를 트레이 격납으로 전환해 브라우저 자동화를 유지합니다. <a href="https://github.com/Technoetic/close-to-tray-helper/releases/tag/v0.2.1" target="_blank" rel="noopener">v0.2.1 릴리스<span class="sr-only"> (새 탭)</span></a>에서 설치합니다.</figcaption>
+      <figure class="project-demo rise" aria-label="브라우저 창과 시스템 트레이의 동작">
+        <fieldset class="demo-picker">
+          <legend class="sr-only">트레이 도우미의 동작 선택</legend>
+          <label><input type="radio" name="tray-view" value="1" aria-describedby="sctt-detail-1" checked><span>창 닫기</span></label>
+          <label><input type="radio" name="tray-view" value="2" aria-describedby="sctt-detail-2"><span>트레이 보관</span></label>
+          <label><input type="radio" name="tray-view" value="3" aria-describedby="sctt-detail-3"><span>창 복원</span></label>
+        </fieldset>
+        <div class="demo-art">
+          <svg viewBox="0 0 400 220" fill="none" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <linearGradient id="tray-surface" x1="0" x2="1" y2="1">
+                <stop stop-color="#223d50"/><stop offset=".55" stop-color="#142a39"/><stop offset="1" stop-color="#162235"/>
+              </linearGradient>
+              <linearGradient id="tray-trail"><stop stop-color="#78cce2" stop-opacity=".2"/><stop offset=".65" stop-color="#80ffe1"/><stop offset="1" stop-color="#e3fff3"/></linearGradient>
+              <radialGradient id="tray-glow"><stop stop-color="#60ffd1" stop-opacity=".56"/><stop offset="1" stop-color="#28d2b5" stop-opacity="0"/></radialGradient>
+              <g id="tray-window">
+                <rect x="55" y="33" width="207" height="110" rx="9" fill="#0c1723" opacity=".6" transform="translate(5 6)"/>
+                <rect x="55" y="33" width="207" height="110" rx="9" fill="url(#tray-surface)" stroke="#90c8d6" stroke-opacity=".8"/>
+                <path d="M56 55h205" stroke="#76aabc" stroke-opacity=".5"/>
+                <path d="M70 49v-6a4 4 0 0 1 4-4h46a4 4 0 0 1 4 4v6" fill="#42606c"/>
+                <path d="M79 45h20m7 0h9M210 45h6m12-3h6v6h-6zM247 42l6 6m0-6-6 6" stroke="#c0dce4" stroke-width="1.3"/>
+                <rect x="69" y="68" width="35" height="58" rx="5" fill="#8dbac6" fill-opacity=".09"/>
+                <path d="M77 79h18m-18 8h12m-12 8h17m-17 8h9" stroke="#89a8ba" stroke-width="2"/>
+                <path d="M118 78h57m7 0h18M118 87h41" stroke="#a5c9d0" stroke-width="2.4"/>
+                <path d="M119 117h14l6-8 7 11 9-22 10 18h13l7-6 7 5h43" stroke="#83fad6" stroke-width="2.5"/>
+              </g>
+              <g id="tray-pointer" stroke="#102b34" stroke-width="1.2">
+                <path d="m0 0 3 20 5-6 5 8 4-2-5-8 8-2Z" fill="#ecfff8"/>
+              </g>
+            </defs>
+            <!-- Windows notification area; the ring marks the helper's tray icon. -->
+            <path d="M44 188h308" stroke="#537785" stroke-opacity=".35"/>
+            <rect x="210" y="172" width="147" height="30" rx="10" fill="#182a35" stroke="#608190" stroke-opacity=".55"/>
+            <path d="m226 189 4-4 4 4m22-10v16" stroke="#87a4b4"/>
+            <rect x="277" y="181" width="14" height="12" rx="3" fill="#234b4c" stroke="#8ff3d1"/>
+            <path d="m280 187 3 3 5-6m13 7h5m4 0v-5m4 5v-8m11 3h17m-13 4h13" stroke="#b0d1d2" stroke-width="1.5"/>
+            <g data-view="1">
+              <use href="#tray-window"/>
+              <circle cx="250" cy="45" r="16" stroke="#ffb397" stroke-opacity=".5" stroke-dasharray="2 4"/>
+              <rect x="239" y="36" width="21" height="17" rx="4" fill="#874b49"/>
+              <path d="m246 41 8 8m0-8-8 8" stroke="#fff2dc" stroke-width="1.7"/>
+              <use href="#tray-pointer" x="252" y="48"/>
+            </g>
+            <g data-view="2">
+              <use href="#tray-window" opacity=".22"/>
+              <use href="#tray-window" class="demo-stow" opacity="0"/>
+              <path class="demo-trace" pathLength="1" d="M157 90C215 94 222 139 251 159s37 17 33 25" stroke="url(#tray-trail)" stroke-width="2.5"/>
+              <use href="#tray-window" transform="translate(165 108) scale(.37)" opacity=".75"/>
+              <use href="#tray-window" transform="translate(232 142) scale(.17)" opacity=".8"/>
+              <ellipse cx="284" cy="187" rx="40" ry="28" fill="url(#tray-glow)"/>
+              <circle cx="284" cy="187" r="13" stroke="#9afcde" stroke-width="1.5"/>
+              <path d="m279 187 4 4 7-8" stroke="#d8fff2" stroke-width="2"/>
+            </g>
+            <g data-view="3">
+              <ellipse cx="284" cy="187" rx="36" ry="27" fill="url(#tray-glow)"/>
+              <path class="demo-trace" pathLength="1" d="M284 179c36-54-5-94-41-93" stroke="url(#tray-trail)" stroke-width="2.8"/>
+              <use href="#tray-window" class="demo-restore"/>
+              <path d="M49 50V36a9 9 0 0 1 9-9h22m187 101v12a9 9 0 0 1-9 9h-19" stroke="#92efd3" stroke-width="1.6"/>
+              <use href="#tray-pointer" x="288" y="189"/>
+            </g>
+          </svg>
+        </div>
+        <div class="demo-readout">
+          <div data-view="1" id="sctt-detail-1"><strong>닫기 요청 감지</strong><p>Win32와 UI 자동화(UIA)로 브라우저의 닫기 요청을 감지합니다.</p></div>
+          <div data-view="2" id="sctt-detail-2"><strong>창은 트레이에, 세션은 계속</strong><p>창을 숨긴 뒤에도 브라우저 프로세스와 aside-repl 연결이 유지됩니다.</p></div>
+          <div data-view="3" id="sctt-detail-3"><strong>같은 창으로 복귀</strong><p>시스템 트레이 아이콘을 누르면 기존 브라우저 창이 다시 나타납니다.</p></div>
+        </div>
       </figure>
     </div>
   </section>
