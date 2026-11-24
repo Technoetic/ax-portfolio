@@ -22,7 +22,6 @@ function fixture({ reduced = false } = {}) {
   const slide = { id: 'sav' };
   const status = node('다음 도구를 선택하세요.');
   const note = node('결정과 다음 할 일');
-  const replay = node();
   const hosts = Object.fromEntries(['claude', 'codex', 'antigravity'].map(id => {
     const button = node();
     button.dataset.avHost = id;
@@ -32,7 +31,7 @@ function fixture({ reduced = false } = {}) {
   slide.querySelector = () => map;
   root.getElementById = () => slide;
   map.querySelector = key => ({
-    '[data-av-status]': status, '[data-av-note]': note, '[data-av-replay]': replay,
+    '[data-av-status]': status, '[data-av-note]': note,
   })[key];
   map.querySelectorAll = () => Object.values(hosts);
   let interactions = 0;
@@ -49,11 +48,11 @@ function fixture({ reduced = false } = {}) {
     timers.delete(id);
     timer.action();
   };
-  return { root, win, media, timers, map, slide, status, note, replay, hosts, controller, visible, tick,
+  return { root, win, media, timers, map, slide, status, note, hosts, controller, visible, tick,
     interactions: () => interactions, click: id => hosts[id].dispatchEvent(new Event('click')) };
 }
 
-test('only the first visible visit previews the route; replay and selecting a host transfer the same note', () => {
+test('only the first visible visit previews the route; selecting the current host repeats the handoff', () => {
   const f = fixture();
   assert.equal(f.map.dataset.avReady, 'true');
   assert.equal(f.hosts.codex.disabled, false);
@@ -79,7 +78,7 @@ test('only the first visible visit previews the route; replay and selecting a ho
   assert.equal(f.map.dataset.target, 'antigravity');
   assert.equal(f.status.textContent, 'Codex → Antigravity · 작업 인계 중');
   f.tick(700); f.tick(550); f.tick(850);
-  f.replay.dispatchEvent(new Event('click'));
+  f.click('antigravity');
   assert.equal(f.map.dataset.source, 'codex');
   assert.equal(f.map.dataset.target, 'antigravity');
   assert.equal(f.map.dataset.phase, 'send');

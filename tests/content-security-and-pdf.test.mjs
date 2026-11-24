@@ -208,7 +208,7 @@ test('#sav explains the shared vault and session flow in native HTML', async () 
     assert.match(figure, new RegExp(`<button\\b[^>]*data-av-host="${host}"`));
     assert.match(figure, new RegExp(`data-pulse="${host}"`));
   }
-  assert.match(figure, /<button\b[^>]*data-av-replay/);
+  assert.equal([...figure.matchAll(/<button\b/g)].length, 3, 'only the three host selectors are needed');
   assert.match(figure, /aria-live="polite"/);
 
   const listItems = list => [...list.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)]
