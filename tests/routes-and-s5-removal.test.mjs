@@ -18,6 +18,8 @@ test('the deck reserves its initial layout before modules load and releases it e
   const head = html.split('</head>')[0];
   const startup = head.match(/<script>([\s\S]*?)<\/script>/);
   assert.ok(startup, 'the document needs a synchronous layout bootstrap in its head');
+  assert.match(head.slice(0, startup.index), /<style media="screen">\s*html\[data-entry-slide\]\s*\{\s*overflow:\s*hidden;/,
+    'the root scrollbar must stay hidden even before the external stylesheet arrives');
 
   for (const hash of ['', '#sav', '#s4', '#s5', '#%73av', '#no-such-slide', '#%', '#constructor']) {
     const document = new EventTarget();
