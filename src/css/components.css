@@ -590,6 +590,13 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   transform: translateY(-2px);
 }
 
+.linkbtn-label {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 .linkbtn .url {
   color: var(--fg-mute);
   font-size: 12px;
