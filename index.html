@@ -16,7 +16,7 @@
     document.addEventListener('DOMContentLoaded', () => { delete root.dataset.entrySlide; }, { once: true });
   }
 </script>
-<meta name="app-build-id" content="axp-18703022495c">
+<meta name="app-build-id" content="axp-f53c34c4e2f9">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
@@ -33,7 +33,7 @@
 <meta name="twitter:description" content="전문준 · 현장 업무를 자동화하는 AX 엔지니어. 실무 사례, 공개 플러그인, Reference Atlas, 이력서.">
 <meta name="twitter:image" content="https://technoetic.github.io/ax-portfolio/assets/og-card.png">
 <link rel="canonical" href="https://technoetic.github.io/ax-portfolio/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Ctext x='16' y='23' font-size='19' fill='%233b82f6' text-anchor='middle' font-family='monospace' font-weight='bold'%3EAX%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Ctext x='16' y='23' font-size='19' fill='%233b82f6' text-anchor='middle' font-family='sans-serif' font-weight='bold'%3EAX%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,7 +57,7 @@
 <!-- 선택적 배경 효과는 비동기·SRI 검증으로 로드하며 탐색을 막지 않습니다. -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./assets/dist/portfolio.axp-18703022495c.css">
+<link rel="stylesheet" href="./assets/dist/portfolio.axp-f53c34c4e2f9.css">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -73,7 +73,7 @@
 </header>
 <p class="sr-only" id="section-status" role="status" aria-live="polite" aria-atomic="true"></p>
 <p class="update-banner" id="update-status" role="status" aria-live="polite" hidden></p>
-<div id="loader" style="position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:#0a0c10;font-family:ui-monospace,Consolas,monospace;color:#828d9c;font-size:13px;letter-spacing:.1em;transition:opacity .5s">불러오는 중…</div>
+<div id="loader" style="position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:#0a0c10;color:#828d9c;font-size:13px;transition:opacity .5s">불러오는 중…</div>
 <div class="bg-layer" aria-hidden="true">
   <canvas id="three"></canvas>
   <canvas id="net"></canvas>
@@ -569,7 +569,7 @@
         </div>
         <p class="lead rise">직접 패키지화한 <b>3개 호스트 단일 설치 웹앱 개발 원칙 플러그인</b>입니다.<br>모듈·CSS 분리부터 <span class="accent">열린 탭 무중단 배포 자동 전환</span>과 선택 모션 규칙까지 한 스킬(~37&nbsp;KB)로 제공합니다.</p>
         <ul class="sxc-checks rise">
-          <li><b>구조·상태 1–5원칙</b><span>책임 모듈 · CSS 계층 · 비동기 경합 차단 · 단일 URL·실제 404</span></li>
+          <li><b>구조·상태 1–5원칙</b><span>책임별 모듈 · CSS 계층 · 비동기 경합 차단 · 클라이언트 사이드 라우팅</span></li>
           <li><b>무중단 배포 6원칙</b><span>내장 빌드 ID 비교 · 안전한 다음 이동 자동 전환 · 초안·저장 보호</span></li>
           <li><b>합격·모션 기준</b><span>실제 앱 15항목 검증 · 카운트업·스크롤 선택 규칙 · 16개 패키징 시험</span></li>
         </ul>
@@ -586,7 +586,7 @@
           <label><input type="radio" name="sw6-rule" value="2" aria-describedby="sw6-detail-2"><span>CSS</span></label>
           <label><input type="radio" name="sw6-rule" value="3" aria-describedby="sw6-detail-3"><span>화면·서비스</span></label>
           <label><input type="radio" name="sw6-rule" value="4" aria-describedby="sw6-detail-4"><span>비동기</span></label>
-          <label><input type="radio" name="sw6-rule" value="5" aria-describedby="sw6-detail-5"><span>URL</span></label>
+          <label><input type="radio" name="sw6-rule" value="5" aria-describedby="sw6-detail-5"><span>라우팅</span></label>
           <label><input type="radio" name="sw6-rule" value="6" aria-describedby="sw6-detail-6"><span>배포</span></label>
         </fieldset>
         <div class="demo-art">
@@ -660,11 +660,11 @@
               <path class="mk-signal" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h34" stroke="#a9ffec"/>
               <path class="mk-signal mk-later" pathLength="1" d="M151 112h32q10 0 17 9l15 21q5 8 17 8h34" stroke="#ffc0ad"/>
               <g class="mk-arrival"><rect x="266" y="53" width="80" height="39" rx="8" fill="url(#sw6-glass)" stroke="#88c5dd"/><path d="m289 79 10-16m5 16 10-16" stroke="#b8ecf4" stroke-width="2.5"/></g>
-              <g class="mk-arrival mk-later"><rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/><text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-family="monospace" font-size="18">404</text></g>
+              <g class="mk-arrival mk-later"><rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/><text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-size="18">404</text></g>
             </g>
             <g data-view="6">
               <use href="#sw6-browser" transform="translate(99 108) scale(.92)"/><use href="#sw6-browser" transform="translate(302 108) scale(.92)"/>
-              <g font-family="monospace" font-weight="bold" font-size="27" text-anchor="middle"><text x="99" y="124" fill="#9fc9e8">A</text><text x="302" y="124" fill="#a0f1dd">B</text></g>
+              <g font-weight="bold" font-size="27" text-anchor="middle"><text x="99" y="124" fill="#9fc9e8">A</text><text x="302" y="124" fill="#a0f1dd">B</text></g>
               <path class="demo-trace" pathLength="1" d="M149 97q15-25 50-25t51 25m-10-2 10 2 1-10" stroke="url(#sw6-edge)" stroke-width="2.6"/>
               <path d="M147 120c15 17 27 25 42 26m24 0c17-1 31-11 43-26" stroke="#728fa3" stroke-dasharray="3 5"/>
               <g class="mk-arrival mk-shield"><path d="M201 109c6 6 13 8 21 10v15c0 13-10 23-21 28-12-5-21-15-21-28v-15c9-2 15-4 21-10Z" fill="#234653" stroke="#8fd7cf"/>
@@ -681,7 +681,7 @@
           <div data-view="2" id="sw6-detail-2"><strong>층으로 나누는 CSS</strong><p>색과 간격을 정하는 토큰 위에 기본 스타일과 컴포넌트 스타일을 쌓습니다.</p></div>
           <div data-view="3" id="sw6-detail-3"><strong>화면과 서비스의 역할</strong><p>화면은 입력과 표시를 맡고, 서비스는 통신과 데이터 처리를 맡습니다.</p></div>
           <div data-view="4" id="sw6-detail-4"><strong>늦게 온 응답 처리</strong><p>이전 요청이 늦게 도착해도 최신 화면을 덮어쓰지 않게 합니다.</p></div>
-          <div data-view="5" id="sw6-detail-5"><strong>주소로 여는 화면</strong><p>각 화면은 직접 주소와 뒤로 가기로 열리고, 없는 파일은 실제 404를 반환합니다.</p></div>
+          <div data-view="5" id="sw6-detail-5"><strong>클라이언트 사이드 라우팅</strong><p>페이지 전체를 다시 로드하지 않고 URL에 맞춰 화면을 전환합니다. 딥 링크, 새로고침, 뒤로·앞으로 가기를 지원하며 없는 파일·API 요청에는 HTTP 404를 반환합니다.</p></div>
           <div data-view="6" id="sw6-detail-6"><strong>열린 탭의 배포 전환</strong><p>빌드 ID가 바뀌면 초안과 저장을 보호하고 안전한 다음 이동에서 새 버전을 엽니다.</p></div>
         </div>
       </figure>
@@ -1084,6 +1084,6 @@
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script type="module" src="./assets/dist/main.axp-18703022495c.js"></script>
+<script type="module" src="./assets/dist/main.axp-f53c34c4e2f9.js"></script>
 </body>
 </html>

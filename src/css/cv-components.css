@@ -6,7 +6,7 @@ nav.top a { display: inline-flex; align-items: center; min-height: 44px; padding
 .cv-update-banner[hidden] { display: none; }
 main { max-width: 960px; padding: 52px 32px 64px; margin: auto; }
 header { padding-bottom: 32px; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
-.eyebrow { font: 700 12px/1.5 var(--mono); letter-spacing: 0.12em; color: var(--accent); margin-bottom: 14px; }
+.eyebrow { font: 650 12px/1.5 var(--sans); letter-spacing: 0.025em; color: var(--accent); margin-bottom: 14px; }
 h1 { font-size: clamp(36px, 7vw, 52px); letter-spacing: -0.04em; }
 h1 span { display: inline-block; font-size: 17px; letter-spacing: 0; color: var(--muted); margin-left: 12px; font-weight: 500; }
 .role { font-size: clamp(19px, 3vw, 24px); font-weight: 700; color: var(--accent); margin-top: 10px; }
@@ -57,7 +57,7 @@ a.chip { min-height: 44px; text-decoration: none; }
 .entry { position: relative; padding-bottom: 22px; }
 .entry:last-child { padding-bottom: 0; }
 .entry:before { content: ""; position: absolute; left: -30px; top: 7px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px var(--bg); }
-.when { font: 700 12px/1.6 var(--mono); color: var(--accent); }
+.when { font: 650 12px/1.6 var(--sans); font-variant-numeric: tabular-nums; color: var(--accent); }
 .entry h3 { font-size: 17px; margin-top: 4px; }
 .where { font-size: 14px; color: var(--muted); margin-top: 6px; }
 .entry .company { display: inline-flex; align-items: center; min-height: 32px; margin-top: 3px; font-size: 13px; }

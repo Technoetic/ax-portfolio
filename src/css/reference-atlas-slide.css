@@ -26,7 +26,6 @@
 
 @media (max-width: 600px) {
   #sref h2 { font-size: 30px; }
-  #sref .kicker { font-size: 10px; letter-spacing: 0.04em; }
   #sref .ref-features li { grid-template-columns: 96px minmax(0, 1fr); font-size: 13px; gap: 8px; }
   #sref .ref-context { font-size: 13px; }
   #sref .hero-actions .action-link { flex: 1 1 120px; padding-inline: 10px; font-size: 13px; }
