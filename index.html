@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="app-build-id" content="axp-0358aeec0546">
+<meta name="app-build-id" content="axp-6c15666f0aa0">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
@@ -44,7 +44,7 @@
 <!-- 선택적 배경 효과는 비동기·SRI 검증으로 로드하며 탐색을 막지 않습니다. -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./assets/dist/portfolio.axp-0358aeec0546.css">
+<link rel="stylesheet" href="./assets/dist/portfolio.axp-6c15666f0aa0.css">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -127,23 +127,22 @@
         <div class="kicker rise">Memory</div>
         <div class="bignum-row rise">
           <div class="bignum"><span class="countup-value cu-d1" data-countup-target="3" aria-hidden="true">3</span><span class="sr-only countup-sr">3</span></div>
-          <span class="vbadge">v0.57.0<i>공개 릴리스 · 3개 호스트</i></span>
+          <span class="vbadge">v0.57.0<i>3개 AI 도구 지원</i></span>
         </div>
         <div class="project-heading rise">
           <h2>에이전틱 볼트</h2>
           <span class="vbadge">Claude Code · Codex · Antigravity</span>
         </div>
-        <p class="lead rise">세션이 끝날 때 결정 사항과 다음 할 일을 <b>하나의 Markdown 볼트</b>에 기록합니다. Claude Code에서 하던 일을 Codex나 Antigravity에서도 이어갈 수 있습니다.</p>
-        <p class="lead rise"><a class="accent" href="https://github.com/Technoetic/agentic-vault/releases/tag/v0.57.0" target="_blank" rel="noopener">공개판 v0.57.0<span class="sr-only"> (새 탭)</span></a>에는 검색 품질을 평가하고 후보 순위를 조정하는 도구를 추가했습니다. 웹앱 제작 6원칙은 별도 플러그인 <a class="accent" href="#sw6" data-slide-target>webapp6</a>로 분리했습니다.</p>
-        <p class="lead rise">공개판 이후 <a class="accent" href="https://github.com/Technoetic/agentic-vault/blob/435425e02735b32c9d806d8e694c3a22ddac3fc1/docs/releases/unreleased.md" target="_blank" rel="noopener">개발 브랜치(master)<span class="sr-only"> (새 탭)</span></a>에서 자비스(Jarvis) 텔레그램 연동과 내장 <code>/aside-repl</code> 명령을 제거했습니다.</p>
+        <p class="lead rise">에이전틱 볼트는 <b>AI와 함께 쓰는 프로젝트 노트</b>입니다. 새 대화를 열면 지난번에 내린 결정과 남은 일을 불러옵니다. 어디까지 했는지 처음부터 다시 설명하는 시간을 줄일 수 있습니다.</p>
+        <p class="lead rise">예를 들어 Claude Code에서 결제 오류를 고치고 “환불 테스트가 남았다”고 적어 두면, 다음 날 Codex에서 그 테스트부터 이어갈 수 있습니다. 왜 그렇게 고쳤는지 궁금할 때는 검색으로 결정 이유를 적은 노트의 해당 줄을 찾을 수 있습니다.</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
-          GitHub에서 보기<span class="url">github.com/Technoetic/agentic-vault</span><span class="sr-only"> (새 탭)</span>
+          설치 방법 보기<span class="url">github.com/Technoetic/agentic-vault</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
       <figure class="av-figure rise">
         <img src="assets/agentic-vault/agentic-vault-map.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 공유 Markdown 볼트(원자 노트·위키링크)를 중심으로 세션 시작(직전 기억 주입), 볼트 기록(검증·위키링크), 세션 종료(다음 세션 인계)를 순환하는 구조도." loading="lazy" decoding="async">
-        <figcaption>세 호스트가 하나의 Markdown 볼트로 기억과 세션 인계를 이어갑니다.</figcaption>
+        <figcaption>세 AI 도구가 같은 폴더를 사용합니다. 작업 기록은 직접 열어 읽고 고칠 수 있는 Markdown 파일로 남습니다.</figcaption>
       </figure>
     </div>
   </section>
@@ -597,6 +596,6 @@
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script type="module" src="./assets/dist/main.axp-0358aeec0546.js"></script>
+<script type="module" src="./assets/dist/main.axp-6c15666f0aa0.js"></script>
 </body>
 </html>
