@@ -1,0 +1,186 @@
+/* Agentic Vault — three tools share one folder across sessions. */
+.av-figure {
+  container-type: inline-size;
+}
+
+.av-map {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  aspect-ratio: 3 / 2;
+  padding: clamp(12px, 4cqi, 36px);
+  border: 1px solid #2b3950;
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at 50% 53%, #487abd27, transparent 62%),
+    radial-gradient(circle, #94b7ed24 0.8px, transparent 1px) 50% 50% / 16px 16px,
+    #0e1623;
+}
+
+.av-hosts,
+.av-cycle {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  list-style: none;
+  text-align: center;
+}
+
+.av-hosts li {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 5px;
+  margin-inline: 3%;
+  padding: clamp(7px, 1.7cqi, 14px) 2px;
+  border: 1px solid #35445a;
+  border-radius: 7px;
+  background: #182332;
+  color: #e5edf7;
+  font-size: clamp(12px, 2.7cqi, 17px);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.av-hosts svg {
+  width: clamp(18px, 4.2cqi, 26px);
+  height: auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.av-hosts li:first-child svg { color: #f3ae8e; }
+.av-hosts li:nth-child(2) svg { color: #a7c9ff; }
+.av-hosts li:last-child svg { color: #b9b4fd; }
+
+.av-wires {
+  width: 100%;
+  height: clamp(30px, 8cqi, 64px);
+  fill: none;
+  stroke: #82a7db;
+}
+
+.av-wires path {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.5;
+}
+
+.av-vault {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2.5cqi, 20px);
+  max-width: 100%;
+  padding: clamp(10px, 2.5cqi, 20px) clamp(12px, 4cqi, 32px);
+  border: 1px solid #7297ce;
+  border-radius: 10px;
+  background: linear-gradient(110deg, #2b4161, #1a2b43);
+  box-shadow: 0 5px 18px #050a153d;
+}
+
+.av-vault::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border: 1px solid #dceaff;
+  border-radius: 50%;
+  background: #86b5ff;
+}
+
+.av-folder {
+  flex: none;
+  width: clamp(36px, 9cqi, 70px);
+  height: auto;
+}
+
+.av-vault strong {
+  display: block;
+  color: #f5f8ff;
+  font-size: clamp(17px, 4.2cqi, 30px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
+}
+
+.av-vault span,
+.av-cycle span {
+  display: block;
+  color: #b5c4d8;
+  font-size: clamp(12px, 2.4cqi, 15px);
+  line-height: 1.5;
+}
+
+.av-vault span { margin-top: 4px; }
+
+.av-cycle {
+  margin-top: clamp(16px, 4.8cqi, 36px);
+  padding-top: clamp(10px, 2.8cqi, 20px);
+  border-top: 1px solid #344256;
+}
+
+.av-cycle li {
+  position: relative;
+  padding-inline: 4px;
+}
+
+.av-cycle b {
+  color: #e2eafa;
+  font-size: clamp(13px, 2.9cqi, 18px);
+  font-weight: 650;
+}
+
+.av-cycle :where(li + li)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  transform: translateY(-50%) rotate(45deg);
+  border-top: 1.5px solid #819bbd;
+  border-right: 1.5px solid #819bbd;
+}
+
+@container (max-width: 340px) {
+  .av-map { aspect-ratio: auto; padding: 16px 8px; }
+  .av-cycle { grid-template-columns: 1fr; gap: 8px; text-align: left; }
+  .av-cycle li { display: grid; grid-template-columns: 1fr 1.2fr; align-items: baseline; padding-left: 16px; }
+  .av-cycle li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.8em;
+    width: 5px;
+    height: 5px;
+    transform: translateY(-50%);
+    border: 0;
+    border-radius: 50%;
+    background: #94b6e6;
+  }
+  .av-cycle li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: calc(0.8em + 3px);
+    height: calc(100% + 2px);
+    border-left: 1px solid #4e6380;
+  }
+}
+
+@media print {
+  .av-figure, .av-map, .av-hosts li, .av-vault {
+    background: white;
+    border-color: #8492a6;
+    box-shadow: none;
+  }
+  .av-hosts li, .av-vault strong, .av-cycle b { color: #172438; }
+  .av-vault span, .av-cycle span, .av-figure figcaption { color: #38485e; }
+  .av-wires { stroke: #506882; }
+}

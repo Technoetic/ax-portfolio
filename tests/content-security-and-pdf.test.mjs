@@ -196,14 +196,45 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.ok(!latin.includes('harness20'), 'PDF must not contain retired harness20 URI');
 });
 
-test('#sav, #sxc, #sref, #smv, #sw6, and #sctt use unified lightweight 960x640 WebP diagrams without the removed sxc animation toggle', async () => {
+test('#sav explains the shared vault and session flow in native HTML', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const slide = html.match(/<section\b[^>]*\bid="sav"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  const figure = slide?.match(/<figure\b[^>]*>([\s\S]*?)<\/figure>/)?.[1];
+  assert.ok(figure, 'missing Agentic Vault figure');
+  assert.doesNotMatch(figure, /<(?:img|picture|canvas|image)\b/i);
+  const caption = figure.match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/)?.[1];
+  assert.ok(caption?.replace(/<[^>]+>/g, '').trim(), 'the figure needs a readable caption');
+
+  const listItems = list => [...list.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)]
+    .map(([, item]) => item.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+  const hosts = figure.match(/<ul\b[^>]*>([\s\S]*?)<\/ul>/)?.[1];
+  assert.ok(hosts, 'the tools sharing the vault need a list');
+  const names = listItems(hosts);
+  assert.equal(names.length, 3);
+  for (const host of ['Claude Code', 'Codex', 'Antigravity']) {
+    assert.ok(names.some(name => name.includes(host)), 'missing host ' + host);
+  }
+  assert.match(figure.replace(/<[^>]+>/g, ' '), /공유\s+Markdown\s+볼트/);
+
+  const flow = figure.match(/<ol\b[^>]*>([\s\S]*?)<\/ol>/)?.[1];
+  assert.ok(flow, 'the session flow needs an ordered list');
+  const steps = listItems(flow);
+  assert.equal(steps.length, 3);
+  assert.match(steps[0], /세션 시작/);
+  assert.match(steps[1], /작업 기록/);
+  assert.match(steps[2], /다음 세션 인계/);
+  for (const [svg] of figure.matchAll(/<svg\b[^>]*>/g)) {
+    assert.match(svg, /\baria-hidden="true"/, 'diagram connectors and icons are decorative');
+  }
+});
+
+test('#sxc, #sref, #smv, #sw6, and #sctt use lightweight 960x640 WebP diagrams without the removed sxc animation toggle', async () => {
   const [indexHtml, deckJs] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'src', 'js', 'screens', 'deck-screen.js'), 'utf8'),
   ]);
 
   const expectedDiagrams = [
-    ['sav', 'assets/agentic-vault/agentic-vault-map.webp'],
     ['sxc', 'assets/semantic-crosscheck/semantic-crosscheck-hero.webp'],
     ['sref', 'assets/reference-atlas/reference-map.webp'],
     ['smv', 'assets/md-viz/md-viz-hero.webp'],

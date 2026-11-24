@@ -6,7 +6,7 @@ import { LEGACY_SLIDE_ALIASES, SLIDE_IDS } from '../src/js/shared/routes.js';
 
 export const APP_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-const DECK_STYLES = ['tokens.css', 'base.css', 'components.css', 'reference-atlas-slide.css', 'motion.css'];
+const DECK_STYLES = ['tokens.css', 'base.css', 'components.css', 'vault-diagram.css', 'reference-atlas-slide.css', 'motion.css'];
 const CV_STYLES = ['cv-tokens.css', 'cv-base.css', 'cv-components.css', 'cv-motion.css'];
 
 const toLf = text => String(text).replace(/\r\n/g, '\n');

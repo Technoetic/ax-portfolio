@@ -16,7 +16,7 @@
     document.addEventListener('DOMContentLoaded', () => { delete root.dataset.entrySlide; }, { once: true });
   }
 </script>
-<meta name="app-build-id" content="axp-8e12ca1a9289">
+<meta name="app-build-id" content="axp-0a0eea213047">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
@@ -57,7 +57,7 @@
 <!-- 선택적 배경 효과는 비동기·SRI 검증으로 로드하며 탐색을 막지 않습니다. -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./assets/dist/portfolio.axp-8e12ca1a9289.css">
+<link rel="stylesheet" href="./assets/dist/portfolio.axp-0a0eea213047.css">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -158,7 +158,41 @@
         </a>
       </div>
       <figure class="av-figure rise">
-        <img src="assets/agentic-vault/agentic-vault-map.webp" width="960" height="640" alt="Claude Code, Codex, Antigravity 세 호스트가 공유 Markdown 볼트(원자 노트·위키링크)를 중심으로 세션 시작(직전 기억 주입), 볼트 기록(검증·위키링크), 세션 종료(다음 세션 인계)를 순환하는 구조도." loading="lazy" decoding="async">
+        <div class="av-map">
+          <ul class="av-hosts" aria-label="볼트를 함께 쓰는 도구" role="list">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5M8 2.8l8 18.4M2.8 16l18.4-8"/></svg>
+              Claude Code
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3.5"/><path d="m6.5 9 3 3-3 3M13 15h4"/></svg>
+              Codex
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18c5.4 0 5-13 10-13s4.6 13 10 13M7 16c1.7-1.6 3.1-4.1 5-4.1s3.3 2.5 5 4.1"/></svg>
+              Antigravity
+            </li>
+          </ul>
+          <svg class="av-wires" viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M100 0v13q0 8 8 8h180q12 0 12 12M500 0v13q0 8-8 8H312q-12 0-12 12M300 0v56"/>
+          </svg>
+          <div class="av-vault">
+            <svg class="av-folder" viewBox="0 0 64 56" aria-hidden="true">
+              <path d="M5 18V11a4 4 0 0 1 4-4h13l6 6h22a4 4 0 0 1 4 4v24H5Z" fill="#3e64a0" stroke="#87adf2"/>
+              <path d="m14 24 2-20 32 3-2 20Z" fill="#adc7f3" stroke="#cbdcf9"/>
+              <path d="M20 22V8h25l6 6v12Z" fill="#e3eeff" stroke="#f1f6ff"/>
+              <path d="M45 8v6h6M26 15h12" fill="none" stroke="#738bad"/>
+              <path d="M5 21a3 3 0 0 1 3-3h14l6 5h28a3 3 0 0 1 3 3l-4 22a4 4 0 0 1-4 3H12a4 4 0 0 1-4-3Z" fill="#729fe9" stroke="#bfdaff"/>
+              <path d="m19 32-4 4 4 4m9-8 4 4-4 4m-4-9-3 10" fill="none" stroke="#1c3d70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div><strong>공유 Markdown 볼트</strong><span>위키링크로 연결한 프로젝트 노트</span></div>
+          </div>
+          <ol class="av-cycle" aria-label="볼트로 작업을 이어가는 순서" role="list">
+            <li><b>세션 시작</b><span>지난 맥락 읽기</span></li>
+            <li><b>작업 기록</b><span>결정과 근거 남기기</span></li>
+            <li><b>다음 세션 인계</b><span>남은 일 이어가기</span></li>
+          </ol>
+        </div>
         <figcaption>세 AI 도구가 같은 폴더를 사용합니다. 작업 기록은 직접 열어 읽고 고칠 수 있는 Markdown 파일로 남습니다.</figcaption>
       </figure>
     </div>
@@ -613,6 +647,6 @@
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script type="module" src="./assets/dist/main.axp-8e12ca1a9289.js"></script>
+<script type="module" src="./assets/dist/main.axp-0a0eea213047.js"></script>
 </body>
 </html>
