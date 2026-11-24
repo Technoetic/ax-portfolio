@@ -625,8 +625,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   width: 100%;
 }
 
-/* Agentic Vault & Tool diagrams (#sav, #smv, #sw6, #sctt) */
-.av-figure,
+/* Static tool diagrams (#smv, #sw6, #sctt) */
 .tool-figure {
   min-width: 0;
   padding: 14px;
@@ -645,7 +644,6 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   border-radius: 8px;
 }
 
-.av-figure figcaption,
 .tool-figure figcaption {
   color: var(--fg-dim);
   font-size: 13px;
@@ -667,7 +665,6 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
     transform: none;
   }
 
-  .av-figure figcaption,
   .sxc-figure figcaption,
   .tool-figure figcaption,
   #sref .ref-diagram figcaption {

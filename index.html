@@ -16,7 +16,7 @@
     document.addEventListener('DOMContentLoaded', () => { delete root.dataset.entrySlide; }, { once: true });
   }
 </script>
-<meta name="app-build-id" content="axp-0a0eea213047">
+<meta name="app-build-id" content="axp-93f70a84d631">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
@@ -57,7 +57,7 @@
 <!-- 선택적 배경 효과는 비동기·SRI 검증으로 로드하며 탐색을 막지 않습니다. -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./assets/dist/portfolio.axp-0a0eea213047.css">
+<link rel="stylesheet" href="./assets/dist/portfolio.axp-93f70a84d631.css">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -157,43 +157,100 @@
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/agentic-vault</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
-      <figure class="av-figure rise">
+      <figure class="av-figure rise" aria-label="에이전틱 볼트 작업 인계 체험">
         <div class="av-map">
           <ul class="av-hosts" aria-label="볼트를 함께 쓰는 도구" role="list">
             <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5M8 2.8l8 18.4M2.8 16l18.4-8"/></svg>
-              Claude Code
+              <button type="button" data-av-host="claude" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5M8 2.8l8 18.4M2.8 16l18.4-8"/></svg>
+                <span>Claude Code</span>
+              </button>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3.5"/><path d="m6.5 9 3 3-3 3M13 15h4"/></svg>
-              Codex
+              <button type="button" data-av-host="codex" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3.5"/><path d="m6.5 9 3 3-3 3M13 15h4"/></svg>
+                <span>Codex</span>
+              </button>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18c5.4 0 5-13 10-13s4.6 13 10 13M7 16c1.7-1.6 3.1-4.1 5-4.1s3.3 2.5 5 4.1"/></svg>
-              Antigravity
+              <button type="button" data-av-host="antigravity" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18c5.4 0 5-13 10-13s4.6 13 10 13M7 16c1.7-1.6 3.1-4.1 5-4.1s3.3 2.5 5 4.1"/></svg>
+                <span>Antigravity</span>
+              </button>
             </li>
           </ul>
-          <svg class="av-wires" viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M100 0v13q0 8 8 8h180q12 0 12 12M500 0v13q0 8-8 8H312q-12 0-12 12M300 0v56"/>
+          <svg class="av-wires" viewBox="0 0 600 56" preserveAspectRatio="none" aria-hidden="true" fill="none">
+            <path data-wire="claude" pathLength="1" d="M100 0v5q0 6 10 8l155 13c23 2 35 10 35 30"/>
+            <path data-wire="codex" pathLength="1" d="M300 0v56"/>
+            <path data-wire="antigravity" pathLength="1" d="M500 0v5q0 6-10 8L335 26c-23 2-35 10-35 30"/>
+            <path data-pulse="claude" pathLength="1" d="M100 0v5q0 6 10 8l155 13c23 2 35 10 35 30"/>
+            <path data-pulse="codex" pathLength="1" d="M300 0v56"/>
+            <path data-pulse="antigravity" pathLength="1" d="M500 0v5q0 6-10 8L335 26c-23 2-35 10-35 30"/>
           </svg>
           <div class="av-vault">
-            <svg class="av-folder" viewBox="0 0 64 56" aria-hidden="true">
-              <path d="M5 18V11a4 4 0 0 1 4-4h13l6 6h22a4 4 0 0 1 4 4v24H5Z" fill="#3e64a0" stroke="#87adf2"/>
-              <path d="m14 24 2-20 32 3-2 20Z" fill="#adc7f3" stroke="#cbdcf9"/>
-              <path d="M20 22V8h25l6 6v12Z" fill="#e3eeff" stroke="#f1f6ff"/>
-              <path d="M45 8v6h6M26 15h12" fill="none" stroke="#738bad"/>
-              <path d="M5 21a3 3 0 0 1 3-3h14l6 5h28a3 3 0 0 1 3 3l-4 22a4 4 0 0 1-4 3H12a4 4 0 0 1-4-3Z" fill="#729fe9" stroke="#bfdaff"/>
-              <path d="m19 32-4 4 4 4m9-8 4 4-4 4m-4-9-3 10" fill="none" stroke="#1c3d70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="av-core-art" viewBox="0 0 200 140" aria-hidden="true" focusable="false" fill="none" stroke-linejoin="round">
+              <defs>
+                <radialGradient id="av-aura"><stop stop-color="#5efbff" stop-opacity=".72"/><stop offset=".43" stop-color="#548cff" stop-opacity=".33"/><stop offset="1" stop-color="#9956fc" stop-opacity="0"/></radialGradient>
+                <linearGradient id="av-facet" x2="1" y2=".3" gradientUnits="objectBoundingBox"><stop stop-color="#5ffbff"/><stop offset=".46" stop-color="#5d82d9"/><stop offset=".72" stop-color="#53479b"/><stop offset="1" stop-color="#db98ff"/></linearGradient>
+                <linearGradient id="av-paper" x2=".8" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#fff"/><stop offset=".51" stop-color="#b7ffff"/><stop offset="1" stop-color="#9590fa"/></linearGradient>
+              </defs>
+              <ellipse class="av-core-halo" cx="100" cy="79" rx="97" ry="59" fill="url(#av-aura)"/>
+              <path d="M100 0v21" stroke="#7defff" stroke-width="1.2"/>
+              <circle cx="100" cy="21" r="3.2" fill="#7defff" opacity=".35"/>
+              <circle cx="100" cy="21" r="1.6" fill="#e0ffff"/>
+              <g class="av-core-ring" stroke-width=".8">
+                <ellipse cx="100" cy="102" rx="86" ry="27" stroke="#a5a1ff" opacity=".35"/>
+                <path d="M14 102c0 8 12 16 32 21m102 1c19-5 33-12 37-18" stroke="#96edff"/>
+                <ellipse cx="100" cy="102" rx="75" ry="23" stroke="#a4b1ff" stroke-dasharray="1 6" opacity=".7"/>
+              </g>
+              <g class="av-core-layer av-core-layer-lower">
+                <path d="m100 71 57 24v6l-57 24-57-24v-6Z" fill="#242b66" stroke="#7884db"/>
+                <path d="m43 95 57 24 57-24-57-24Z" fill="url(#av-facet)" stroke="#b9c9ff"/>
+                <path d="m43 96 57 24v5l-57-24Z" fill="#68c9eb" opacity=".4"/>
+                <path d="m47 101 53 22 53-22" stroke="#aebdff" stroke-width=".75"/>
+              </g>
+              <g class="av-core-layer av-core-layer-upper">
+                <path d="m100 58 57 24v5l-57 24-57-24v-5Z" fill="#593dab" stroke="#b898ff"/>
+                <path d="m43 82 57 24 57-24-57-24Z" fill="url(#av-facet)" stroke="#caf8ff"/>
+                <path d="m55 82 45 19 45-19-45-19Z" fill="#26366d" stroke="#98daff"/>
+                <path d="m48 86 29 12m30 7 44-19" stroke="#d6efff" stroke-width="1.4"/>
+              </g>
+              <g class="av-core-glass">
+                <path d="m63 37 37-16 37 16v39l-37 16-37-16Z" fill="url(#av-facet)" fill-opacity=".27" stroke="#8dedff"/>
+                <path d="m63 37 37 16 37-16-37-16Z" fill="#a1e4ff" fill-opacity=".22" stroke="#a2d9ff"/>
+                <path d="M63 37v39l37 16V53Z" fill="#67d7ed" fill-opacity=".17"/>
+                <path d="M137 37v39l-37 16V53Z" fill="#9562f9" fill-opacity=".24"/>
+                <path d="m63 76 37-16 37 16M100 21v39" stroke="#d0dfff" stroke-opacity=".4" stroke-dasharray="2 3"/>
+              </g>
+              <g class="av-core-note">
+                <g transform="matrix(1 -.23 0 1 84 33)">
+                  <path d="M-3 4h22l8 8v32H-3Z" fill="#445ca3" stroke="#86b5ff"/>
+                  <path d="M0 0h23l8 8v32H0Z" fill="url(#av-paper)" stroke="#eaffff" stroke-width="1.3"/>
+                  <path d="M23 0v9h8" stroke="#6268a7"/>
+                  <path d="M6 20v-7l4 5 4-5v7m5-7v7m-3-3 3 3 3-3M6 26h17m-17 5h11" stroke="#354575" stroke-width="1.8" stroke-linecap="round"/>
+                </g>
+              </g>
+              <path d="M63 44v32l37 16 37-16V44m-37 48V79" stroke="#d0e4ff" stroke-opacity=".75"/>
+              <g class="av-core-sparks" fill="#c9fbff">
+                <path d="m49 37 1.2 4.2L55 42.5l-4.8 1.3L49 48l-1.2-4.2-4.8-1.3 4.8-1.3Zm102 17 .9 3.2 3.6.9-3.6 1-.9 3.2-.9-3.2-3.6-1 3.6-.9Z"/>
+                <circle cx="58" cy="59" r="1.25"/><circle cx="146" cy="43" r="1.1"/><circle cx="28" cy="117" r="1.4"/><circle cx="168" cy="86" r="1.4"/>
+              </g>
             </svg>
-            <div><strong>공유 Markdown 볼트</strong><span>위키링크로 연결한 프로젝트 노트</span></div>
+            <div class="av-vault-copy"><strong>공유 Markdown 볼트</strong><p data-av-note>결정과 다음 할 일</p></div>
           </div>
           <ol class="av-cycle" aria-label="볼트로 작업을 이어가는 순서" role="list">
             <li><b>세션 시작</b><span>지난 맥락 읽기</span></li>
             <li><b>작업 기록</b><span>결정과 근거 남기기</span></li>
             <li><b>다음 세션 인계</b><span>남은 일 이어가기</span></li>
           </ol>
+          <div class="av-controls">
+            <p data-av-status role="status" aria-live="polite" aria-atomic="true">작업을 이어받을 도구를 선택하세요.</p>
+            <button type="button" data-av-replay disabled>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a6 6 0 1 1 .2 4M4 3.5V8h4.5"/></svg>
+              다시 재생
+            </button>
+          </div>
         </div>
-        <figcaption>세 AI 도구가 같은 폴더를 사용합니다. 작업 기록은 직접 열어 읽고 고칠 수 있는 Markdown 파일로 남습니다.</figcaption>
       </figure>
     </div>
   </section>
@@ -647,6 +704,6 @@
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script type="module" src="./assets/dist/main.axp-0a0eea213047.js"></script>
+<script type="module" src="./assets/dist/main.axp-93f70a84d631.js"></script>
 </body>
 </html>

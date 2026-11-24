@@ -202,8 +202,14 @@ test('#sav explains the shared vault and session flow in native HTML', async () 
   const figure = slide?.match(/<figure\b[^>]*>([\s\S]*?)<\/figure>/)?.[1];
   assert.ok(figure, 'missing Agentic Vault figure');
   assert.doesNotMatch(figure, /<(?:img|picture|canvas|image)\b/i);
-  const caption = figure.match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/)?.[1];
-  assert.ok(caption?.replace(/<[^>]+>/g, '').trim(), 'the figure needs a readable caption');
+  assert.doesNotMatch(figure, /<figcaption\b/i);
+  assert.match(slide, /<figure\b[^>]*aria-label="[^"]+"/);
+  for (const host of ['claude', 'codex', 'antigravity']) {
+    assert.match(figure, new RegExp(`<button\\b[^>]*data-av-host="${host}"`));
+    assert.match(figure, new RegExp(`data-pulse="${host}"`));
+  }
+  assert.match(figure, /<button\b[^>]*data-av-replay/);
+  assert.match(figure, /aria-live="polite"/);
 
   const listItems = list => [...list.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)]
     .map(([, item]) => item.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
