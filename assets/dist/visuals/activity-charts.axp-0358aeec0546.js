@@ -76,11 +76,13 @@ export class ActivityCharts {
     this.reducedMotion = reducedMotion;
     this.revealed = false;
     this.revealTimer = null;
+    this.abort = new AbortController();
   }
 
   mount() {
     this._renderGrass();
     this._renderLanguages();
+    globalThis.addEventListener?.('beforeprint', () => this._applyBarScales(), { signal: this.abort.signal });
   }
 
   _renderGrass() {
@@ -130,7 +132,9 @@ export class ActivityCharts {
       bar.setAttribute('aria-valuemax', String(max));
 
       const fill = this.root.createElement('i');
-      fill.dataset.w = String((count / max) * 100);
+      const scale = String(Number((count / max).toFixed(4)));
+      fill.dataset.scale = scale;
+      fill.style.setProperty('--bar-scale', scale);
       bar.appendChild(fill);
 
       const ct = this.root.createElement('span');
@@ -142,42 +146,25 @@ export class ActivityCharts {
     }
   }
 
-  revealMetrics(slideElement) {
-    if (this.revealed || !slideElement) return;
-    this.revealed = true;
-    for (const num of slideElement.querySelectorAll('.num[data-target]')) {
-      this._countUp(num);
-    }
-    const applyWidths = () => {
-      for (const bar of this.root.querySelectorAll('#langs .bar i')) {
-        bar.style.width = `${bar.dataset.w}%`;
-      }
-    };
-    if (this.reducedMotion) {
-      applyWidths();
-    } else {
-      this.revealTimer = setTimeout(applyWidths, 280);
+  _applyBarScales() {
+    for (const bar of this.root.querySelectorAll('#langs .bar i')) {
+      bar.style.transform = `scaleX(${bar.dataset.scale || 1})`;
     }
   }
 
-  _countUp(element) {
-    const target = Number(element.dataset.target || 0);
-    if (this.reducedMotion) {
-      element.textContent = target.toLocaleString('en-US');
-      return;
+  revealMetrics(slideElement) {
+    if (this.revealed || !slideElement) return;
+    this.revealed = true;
+    const reduced = this.reducedMotion || Boolean(globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
+    if (reduced) {
+      this._applyBarScales();
+    } else {
+      this.revealTimer = setTimeout(() => this._applyBarScales(), 280);
     }
-    const duration = 1000;
-    const start = performance.now();
-    const tick = now => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      element.textContent = Math.round(target * eased).toLocaleString('en-US');
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    tick(start);
   }
 
   dispose() {
     if (this.revealTimer !== null) clearTimeout(this.revealTimer);
+    this.abort.abort();
   }
 }

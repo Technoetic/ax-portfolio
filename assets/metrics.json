@@ -51,15 +51,15 @@
   "pluginReleases": {
     "asOf": "2026-11-23",
     "agentic-vault": {
-      "asOf": "2026-11-23",
-      "version": "0.56.0",
+      "asOf": "2026-11-24",
+      "version": "0.57.0",
       "hosts": [
         "Claude Code",
         "Codex",
         "Antigravity"
       ],
-      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.56.0",
-      "commit": "de80d0bf7cd80ab73238ec17539909b44d52c2b3"
+      "source": "https://github.com/Technoetic/agentic-vault/releases/tag/v0.57.0",
+      "commit": "a478283b71b455e37fe7fef222101abd386c8c37"
     },
     "semantic-crosscheck": {
       "version": "0.33.0",
