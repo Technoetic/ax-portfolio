@@ -876,10 +876,6 @@ html.js .slide.is-leaving {
 }
 
 /* Agentic Vault & Tool diagrams (#sav, #smv, #sw6, #sctt) */
-#sav .lead + .lead {
-  margin-top: 12px;
-}
-
 .av-figure,
 .tool-figure {
   min-width: 0;
@@ -2210,10 +2206,12 @@ a.lg:hover {
   #smv .lead,
   #sw6 .lead,
   #sctt .lead { font-size: 17px; }
+  #sav .sxc-checks,
   #sxc .sxc-checks,
   #smv .sxc-checks,
   #sw6 .sxc-checks,
   #sctt .sxc-checks { gap: 8px; margin-top: var(--s2); }
+  #sav .sxc-checks li,
   #sxc .sxc-checks li,
   #smv .sxc-checks li,
   #sw6 .sxc-checks li,
