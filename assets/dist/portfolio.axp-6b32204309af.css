@@ -956,6 +956,25 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   color: var(--fg-dim);
 }
 
+.sw6-principles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 20px;
+  margin-top: var(--s2);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sw6-principles li {
+  margin-inline-start: 1.5em;
+  padding-inline-start: 2px;
+}
+
+.sw6-principles li::marker {
+  color: var(--accent-2);
+  font-variant-numeric: tabular-nums;
+}
+
 #sxc .linkbtn,
 #smv .linkbtn,
 #sw6 .linkbtn,
@@ -2167,12 +2186,10 @@ a.lg:hover {
   #sav .sxc-checks,
   #sxc .sxc-checks,
   #smv .sxc-checks,
-  #sw6 .sxc-checks,
   #sctt .sxc-checks { gap: 8px; margin-top: var(--s2); }
   #sav .sxc-checks li,
   #sxc .sxc-checks li,
   #smv .sxc-checks li,
-  #sw6 .sxc-checks li,
   #sctt .sxc-checks li { font-size: 14px; }
   #sxc .snapshot-note,
   #smv .snapshot-note,
@@ -2950,7 +2967,6 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
     stroke-dasharray: 1;
     animation: mk-write-lines 570ms steps(9, end) backwards;
   }
-  :where(.project-demo[data-playing]) .mk-write.mk-response { animation-delay: 2580ms; }
 
   :where(.project-demo[data-playing]) .mk-arrival {
     transform-box: fill-box;
