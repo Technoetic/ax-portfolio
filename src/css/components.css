@@ -184,13 +184,27 @@ html.js .slide.is-leaving {
   display: flex;
 }
 
+/* Before navigation mounts, show the bookmarked slide or the cover at its final size. */
+@media screen {
+  html[data-entry-slide]:not(.js) .slide {
+    display: none;
+  }
+  __ENTRY_SLIDE_SELECTORS__ {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
 .slide.active {
   opacity: 1;
   visibility: visible;
   transform: none;
 }
 
-.slide.active:not(#s0) {
+.slide.active:not(#s0),
+html[data-entry-slide]:not(.js) .slide:not(#s0) {
   background: linear-gradient(90deg, #0a0c10bd, #0a0c1066);
 }
 

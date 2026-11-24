@@ -3,6 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style media="screen">html[data-entry-slide] { overflow: hidden; }</style>
+<script>
+  {
+    // A fragment may only become :target after the deferred modules finish.
+    const routes = __ENTRY_ROUTES__;
+    let fragment = '';
+    try { fragment = decodeURIComponent(location.hash.slice(1)); } catch { /* Malformed bookmark: use the cover. */ }
+    const root = document.documentElement;
+    root.dataset.entrySlide = Object.hasOwn(routes, fragment) ? routes[fragment] : 's0';
+    // A failed module also reaches this event and falls back to the readable document.
+    document.addEventListener('DOMContentLoaded', () => { delete root.dataset.entrySlide; }, { once: true });
+  }
+</script>
 <meta name="app-build-id" content="__BUILD_ID__">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">

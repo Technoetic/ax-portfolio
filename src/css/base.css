@@ -131,13 +131,13 @@ select:focus-visible,
 }
 
 /* Progressive enhancement: document reading works if scripts fail or are disabled */
-html:not(.js),
-html:not(.js) body {
+html:not(.js, [data-entry-slide]),
+html:not(.js, [data-entry-slide]) body {
   height: auto;
   overflow: visible;
 }
 
-html:not(.js) .site-header {
+html:not(.js, [data-entry-slide]) .site-header {
   position: relative;
 }
 
@@ -153,11 +153,11 @@ html:not(.js) .progress {
   display: none;
 }
 
-html:not(.js) .deck {
+html:not(.js, [data-entry-slide]) .deck {
   height: auto;
 }
 
-html:not(.js) .slide {
+html:not(.js, [data-entry-slide]) .slide {
   display: flex;
   position: relative;
   inset: auto;
