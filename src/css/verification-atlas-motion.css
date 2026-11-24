@@ -1,0 +1,108 @@
+/* Moving light rides the same SVG paths as the static diagrams. */
+.optical-packet, .optical-halo, .sxc-sweep, .sxc-reader {
+  opacity: 0;
+  pointer-events: none;
+}
+.optical-packet { stroke-dasharray: .10 .035 .014 1.15; }
+.optical-halo, .sxc-models rect, .atlas-beacons circle, .atlas-meridian {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.atlas-armillary { transform-origin: 190px 110px; }
+
+/* The file feeds a junction, then each branch lights its destination. */
+.sxc-stream { --travel: 900ms; }
+.sxc-stream :first-child { --launch: 0ms; --travel: 520ms; }
+.sxc-stream :nth-child(2) { --launch: 470ms; }
+.sxc-stream :nth-child(3) { --launch: 900ms; }
+.sxc-stream :nth-child(4) { --launch: 1330ms; }
+.sxc-stream :nth-child(5) { --launch: 1760ms; }
+.sxc-relay { --hit: 380ms; }
+.sxc-models rect:nth-child(1) { --hit: 1230ms; }
+.sxc-models rect:nth-child(2) { --hit: 1660ms; }
+.sxc-models rect:nth-child(3) { --hit: 2090ms; }
+.sxc-models rect:nth-child(4) { --hit: 2520ms; }
+.sxc-compare-stream { --launch: 300ms; --travel: 2450ms; }
+.sxc-difference { --hit: 1380ms; }
+.sxc-rows > :first-child { --hit: 340ms; }
+.sxc-rows > :nth-child(2) { --hit: 1290ms; }
+.sxc-rows > :nth-child(3) { --hit: 2260ms; }
+
+/* The atlas takes an incoming citation, then routes it to one or both tools. */
+.atlas-stream { --travel: 1250ms; --launch: 160ms; }
+.atlas-stream :nth-child(2) { --launch: 1430ms; }
+.atlas-stream :nth-child(3) { --launch: 1730ms; }
+.atlas-relay { --hit: 1260ms; }
+.atlas-arrival { --hit: 2490ms; }
+.atlas-second { --hit: 2790ms; }
+.atlas-beacons :nth-child(1) { --hit: 440ms; }
+.atlas-beacons :nth-child(2) { --hit: 830ms; }
+.atlas-beacons :nth-child(3) { --hit: 1940ms; }
+.atlas-beacons :nth-child(4) { --hit: 2220ms; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :where(.project-demo[data-playing]) .optical-packet {
+    animation: optical-travel var(--travel) linear var(--launch) both;
+    filter: drop-shadow(0 0 2px #bdfffb);
+  }
+  :where(.project-demo[data-playing]) .optical-halo {
+    animation: optical-arrival 920ms ease-out var(--hit) both;
+  }
+  :where(.project-demo[data-playing]) .sxc-models rect {
+    animation: sxc-model-lock 830ms ease-out var(--hit);
+  }
+  :where(.project-demo[data-playing]) .sxc-compare-stream :last-child { animation-direction: reverse; }
+  :where(.project-demo[data-playing]) .sxc-sweep { animation: sxc-compare-sweep 3150ms ease-in-out 120ms both; }
+  :where(.project-demo[data-playing]) .sxc-reader { animation: sxc-read-lines 3200ms ease-in-out 140ms both; }
+  :where(.project-demo[data-playing]) .sxc-rows > g { animation: sxc-write-row 850ms ease-out var(--hit) backwards; }
+  :where(.project-demo[data-playing]) .atlas-beacons circle {
+    animation: atlas-ignite 850ms ease-out var(--hit);
+  }
+  :where(.project-demo[data-playing]) .atlas-meridian { animation: atlas-turn 3150ms ease-in-out; }
+  :where(.project-demo[data-playing]) .atlas-armillary { animation: atlas-tilt 3350ms ease-in-out; }
+}
+
+@keyframes optical-travel {
+  0% { stroke-dashoffset: .16; opacity: 0; }
+  9%, 90% { opacity: 1; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
+}
+@keyframes optical-arrival {
+  0% { transform: scale(.66); opacity: 0; }
+  23% { opacity: .95; }
+  100% { transform: scale(1.42); opacity: 0; }
+}
+@keyframes sxc-model-lock {
+  30% { transform: scale(1.10); stroke: #d6fff4; stroke-width: 2.5; filter: drop-shadow(0 0 4px #72efcd); }
+}
+@keyframes sxc-compare-sweep {
+  0% { transform: translateX(0); opacity: 0; }
+  12% { opacity: .8; }
+  43%, 57% { transform: translateX(80px); opacity: .85; }
+  100% { transform: translateX(179px); opacity: 0; }
+}
+@keyframes sxc-read-lines {
+  0% { transform: translateY(-18px); opacity: 0; }
+  14%, 22% { transform: translateY(0); opacity: .55; }
+  42%, 50% { transform: translateY(27px); opacity: .58; }
+  73%, 81% { transform: translateY(54px); opacity: .58; }
+  100% { transform: translateY(64px); opacity: 0; }
+}
+@keyframes sxc-write-row {
+  from { opacity: .35; transform: translateX(-7px); }
+  50% { filter: drop-shadow(0 0 3px #baf7ff); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes atlas-ignite {
+  35% { transform: scale(1.8); fill: #fff; filter: drop-shadow(0 0 3px #d5b9ff); }
+}
+@keyframes atlas-turn {
+  0%, 100% { transform: scaleX(1); }
+  42% { transform: scaleX(.36); }
+  68% { transform: scaleX(.88); }
+}
+@keyframes atlas-tilt {
+  0%, 100% { transform: rotate(0); }
+  42% { transform: rotate(-23deg); }
+  75% { transform: rotate(9deg); }
+}

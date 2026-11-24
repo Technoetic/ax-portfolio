@@ -1,0 +1,58 @@
+/* The cursor hits the close button, the window folds into the tray, then the same session returns. */
+@media (prefers-reduced-motion: no-preference) {
+  :where(.project-demo[data-playing]) .tray-pointer-close { animation: tray-click 1.6s ease-in-out both; }
+  :where(.project-demo[data-playing]) .tray-pointer-open { animation: tray-click 1s ease-out both; }
+  :where(.project-demo[data-playing]) .tray-close-key { animation: tray-key 950ms 1s ease-out; }
+  :where(.project-demo[data-playing]) .tray-wave {
+    transform-origin: 0 0;
+    animation: tray-wave 1.3s 1.05s ease-out;
+  }
+  :where(.project-demo[data-playing]) [data-view="2"] .tray-wave { animation-delay: 1.65s; }
+  :where(.project-demo[data-playing]) [data-view="3"] .tray-wave { animation-delay: .65s; }
+  :where(.project-demo[data-playing]) .demo-stow {
+    animation: tray-fold 1.7s .2s cubic-bezier(.5,.1,.7,.9) backwards;
+  }
+  :where(.project-demo[data-playing]) .demo-restore {
+    animation: tray-fold 1.25s .75s cubic-bezier(.45,.1,.65,.95) reverse backwards;
+  }
+  :where(.project-demo[data-playing]) .tray-afterimage {
+    animation: tray-echo .55s .65s ease-out backwards;
+  }
+  :where(.project-demo[data-playing]) .tray-afterimage-small { animation-delay: 1.12s; }
+  :where(.project-demo[data-playing]) .tray-telemetry,
+  :where(.project-demo[data-playing]) .tray-comet {
+    stroke: #d9fff5;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 2px #68ffc9);
+    animation: tray-signal 1.3s 2s ease-in-out;
+  }
+  :where(.project-demo[data-playing]) .tray-comet { animation-delay: .72s; }
+  :where(.project-demo[data-playing]) [data-view="2"] .tray-comet { animation-iteration-count: 2; }
+}
+@keyframes tray-click {
+  0% { transform: translate(-108px, 49px); opacity: .3; }
+  62% { transform: translate(0); opacity: 1; }
+  77% { transform: translate(2px, 3px); }
+  100% { transform: translate(0); }
+}
+@keyframes tray-key {
+  30% { fill: #d87563; filter: drop-shadow(0 0 6px #ffab80); }
+}
+@keyframes tray-wave {
+  0% { opacity: 0; transform: scale(.25); }
+  24% { opacity: .95; }
+  100% { opacity: 0; transform: scale(2.5); }
+}
+@keyframes tray-fold {
+  0% { transform: translate(0) scale(1); opacity: 1; }
+  14% { transform: translate(-3px, -4px) scale(1.02); opacity: 1; }
+  60% { transform: translate(135px, 68px) scale(.56) rotate(4deg); opacity: .94; }
+  90% { transform: translate(256px, 157px) scale(.15); opacity: .85; }
+  100% { transform: translate(274px, 181px) scale(.06); opacity: 0; }
+}
+@keyframes tray-echo { from { opacity: 0; } }
+@keyframes tray-signal {
+  0% { opacity: 0; stroke-dasharray: .16 1; stroke-dashoffset: .16; }
+  18%, 78% { opacity: 1; }
+  100% { opacity: 0; stroke-dasharray: .16 1; stroke-dashoffset: -1; }
+}

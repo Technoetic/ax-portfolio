@@ -1,4 +1,4 @@
-import { buildReloadUrl } from '../shared/routes.axp-2177433dee6e.js';
+import { buildReloadUrl } from '../shared/routes.axp-73e4a30a33c2.js';
 
 export class CvScreen {
   constructor({
