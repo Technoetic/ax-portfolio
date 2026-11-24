@@ -567,13 +567,16 @@
           <h2>webapp6</h2>
           <span class="vbadge">Claude Code · Codex · Antigravity</span>
         </div>
-        <p class="lead rise">직접 패키지화한 <b>3개 호스트 단일 설치 웹앱 개발 원칙 플러그인</b>입니다.<br>모듈·CSS 분리, <span class="accent">하드 리프레시 없는 업데이트</span>, 선택 모션 규칙을 한 스킬(~37&nbsp;KB)에 담았습니다.</p>
-        <ul class="sxc-checks rise">
-          <li><b>원칙 1–5 · 구조와 상태</b><span>책임별 모듈 · CSS 계층 · 비동기 경합 차단 · 클라이언트 사이드 라우팅</span></li>
-          <li><b>원칙 6 · 배포 갱신</b><span>빌드 ID 비교 · 다음 화면 이동 시 새 빌드 로드 · 미저장 초안 보호</span></li>
-          <li><b>합격·모션 기준</b><span>실제 앱 15항목 검증 · 카운트업·스크롤 선택 규칙 · 16개 패키징 시험</span></li>
-        </ul>
-        <p class="snapshot-note rise"><a class="accent" href="https://github.com/Technoetic/webapp6/releases/tag/v0.2.0" target="_blank" rel="noopener">v0.2.0 릴리스<span class="sr-only"> (새 탭)</span></a> 기준 Ubuntu·Windows CI(16개 시험), 공식 Claude·Antigravity 검증기(0 경고) 및 불변 릴리스·SHA-256 증명을 통과했습니다.</p>
+        <p class="lead rise">웹앱을 만들 때 제가 처음 세운 <b>여섯 가지 설계 원칙</b>입니다. 앞의 다섯 기법을 최대한 활용하고, 배포 후에는 <span class="accent">하드 리프레시 없이</span> 새 버전을 받도록 설계합니다.</p>
+        <ol class="sw6-principles rise">
+          <li>JavaScript 모듈화</li>
+          <li>CSS 모듈화</li>
+          <li>클라이언트 사이드 라우팅</li>
+          <li>비동기 처리</li>
+          <li>클래스 기반 설계</li>
+          <li>하드 리프레시 방지</li>
+        </ol>
+        <p class="snapshot-note rise">이 원칙을 바탕으로 만든 <a class="accent" href="https://github.com/Technoetic/webapp6/releases/tag/v0.2.0" target="_blank" rel="noopener">webapp6 v0.2.0<span class="sr-only"> (새 탭)</span></a>에는 실제 앱 검증 기준 15개와 선택 모션 규칙을 담았습니다. Ubuntu·Windows 패키징 시험 16개, 공식 검증기(경고 0건), 릴리스 SHA-256 검증을 통과했습니다.</p>
         <a class="linkbtn rise" href="https://github.com/Technoetic/webapp6" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/webapp6</span><span class="sr-only"> (새 탭)</span>
@@ -582,11 +585,11 @@
       <figure class="project-demo rise" aria-label="webapp6 웹앱 개발 원칙 탐색">
         <fieldset class="demo-picker">
           <legend class="sr-only">살펴볼 웹앱 개발 원칙</legend>
-          <label><input type="radio" name="sw6-rule" value="1" aria-describedby="sw6-detail-1" checked><span>모듈</span></label>
+          <label><input type="radio" name="sw6-rule" value="1" aria-describedby="sw6-detail-1" checked><span>JS</span></label>
           <label><input type="radio" name="sw6-rule" value="2" aria-describedby="sw6-detail-2"><span>CSS</span></label>
-          <label><input type="radio" name="sw6-rule" value="3" aria-describedby="sw6-detail-3"><span>화면·서비스</span></label>
+          <label><input type="radio" name="sw6-rule" value="3" aria-describedby="sw6-detail-3"><span>라우팅</span></label>
           <label><input type="radio" name="sw6-rule" value="4" aria-describedby="sw6-detail-4"><span>비동기</span></label>
-          <label><input type="radio" name="sw6-rule" value="5" aria-describedby="sw6-detail-5"><span>라우팅</span></label>
+          <label><input type="radio" name="sw6-rule" value="5" aria-describedby="sw6-detail-5"><span>클래스</span></label>
           <label><input type="radio" name="sw6-rule" value="6" aria-describedby="sw6-detail-6"><span>배포</span></label>
         </fieldset>
         <div class="demo-art">
@@ -634,12 +637,14 @@
               </g>
             </g>
             <g data-view="3">
-              <use href="#sw6-browser" transform="translate(108 111) scale(1.18)"/>
-              <rect x="59" y="104" width="26" height="33" rx="3" fill="#77bacf" fill-opacity=".54"/><path class="mk-write mk-response" pathLength="1" d="M95 106h48m-48 11h34m-34 12h42" stroke="#91b7d2" stroke-width="3"/>
-              <g class="mk-arrival" fill="url(#sw6-glass)" stroke="#b29feb"><path d="M255 89v51c0 10 71 10 71 0V89"/><ellipse cx="290.5" cy="89" rx="35.5" ry="11"/><path d="M255 104c0 12 71 12 71 0m-71 18c0 12 71 12 71 0"/></g>
-              <path class="demo-trace" pathLength="1" d="M183 97h54m-8-6 8 6-8 6" stroke="#a0e9ed" stroke-width="2.3"/><path d="M238 122h-54m8-6-8 6 8 6" stroke="#b4a8ef" stroke-width="2.3"/>
-              <path class="mk-signal" pathLength="1" d="M175 97h77" stroke="#a5fff1"/>
-              <path class="mk-signal mk-later" pathLength="1" d="M251 122h-78" stroke="#cdbaff"/>
+              <use href="#sw6-browser" transform="translate(99 112)"/>
+              <path d="m81 116 17-13 17 13m-29-3v15h23v-15" stroke="#9ed8ea" stroke-width="2.6"/>
+              <path d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42m-123 40h32q10 0 17 9l15 21q5 8 17 8h42" stroke="#617f9e" stroke-width="2"/>
+              <path class="demo-trace" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42" stroke="#92e3ee" stroke-width="2.8"/>
+              <path class="mk-signal" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h34" stroke="#a9ffec"/>
+              <path class="mk-signal mk-later" pathLength="1" d="M151 112h32q10 0 17 9l15 21q5 8 17 8h34" stroke="#ffc0ad"/>
+              <g class="mk-arrival"><rect x="266" y="53" width="80" height="39" rx="8" fill="url(#sw6-glass)" stroke="#88c5dd"/><path d="m289 79 10-16m5 16 10-16" stroke="#b8ecf4" stroke-width="2.5"/></g>
+              <g class="mk-arrival mk-later"><rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/><text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-size="18">404</text></g>
             </g>
             <g data-view="4">
               <g stroke="#55708a" stroke-dasharray="2 6"><path d="M76 74h247M76 141h247M128 48v116m75-116v116m75-116v116"/></g>
@@ -653,14 +658,22 @@
               <path d="M76 168h251m-7-5 7 5-7 5" stroke="#67879d"/>
             </g>
             <g data-view="5">
-              <use href="#sw6-browser" transform="translate(99 112)"/>
-              <path d="m81 116 17-13 17 13m-29-3v15h23v-15" stroke="#9ed8ea" stroke-width="2.6"/>
-              <path d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42m-123 40h32q10 0 17 9l15 21q5 8 17 8h42" stroke="#617f9e" stroke-width="2"/>
-              <path class="demo-trace" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h42" stroke="#92e3ee" stroke-width="2.8"/>
-              <path class="mk-signal" pathLength="1" d="M151 112h32q10 0 17-10l15-22q5-8 17-8h34" stroke="#a9ffec"/>
-              <path class="mk-signal mk-later" pathLength="1" d="M151 112h32q10 0 17 9l15 21q5 8 17 8h34" stroke="#ffc0ad"/>
-              <g class="mk-arrival"><rect x="266" y="53" width="80" height="39" rx="8" fill="url(#sw6-glass)" stroke="#88c5dd"/><path d="m289 79 10-16m5 16 10-16" stroke="#b8ecf4" stroke-width="2.5"/></g>
-              <g class="mk-arrival mk-later"><rect x="266" y="132" width="80" height="36" rx="8" fill="#292d3f" stroke="#968199" stroke-dasharray="3 4"/><text x="306" y="156" text-anchor="middle" fill="#e0b3b4" font-size="18">404</text></g>
+              <g font-size="14" fill="#bccfe1">
+                <rect x="21" y="62" width="133" height="98" rx="9" fill="url(#sw6-glass)" stroke="#8ac9df" stroke-width="1.4"/>
+                <path d="M21 94h133" stroke="#61899e"/>
+                <text x="87.5" y="84" text-anchor="middle" font-size="17" font-weight="650" fill="#c0efff">QuoteView</text>
+                <text x="35" y="117">draft</text><text x="35" y="143">render()</text>
+              </g>
+              <g class="mk-arrival" font-size="14" fill="#bccfe1">
+                <rect x="246" y="62" width="133" height="98" rx="9" fill="url(#sw6-glass)" stroke="#b29feb" stroke-width="1.4"/>
+                <path d="M246 94h133" stroke="#8d82aa"/>
+                <text x="312.5" y="84" text-anchor="middle" font-size="17" font-weight="650" fill="#e4d9ff">QuoteService</text>
+                <text x="260" y="117">endpoint</text><text x="260" y="143">save(quote)</text>
+              </g>
+              <path class="demo-trace" pathLength="1" d="M157 100h83m-7-6 7 6-7 6" stroke="#a0e9ed" stroke-width="2.3"/>
+              <path d="M241 127h-83m7-6-7 6 7 6" stroke="#b4a8ef" stroke-width="2"/>
+              <path class="mk-signal" pathLength="1" d="M157 100h83" stroke="#a5fff1"/>
+              <path class="mk-signal mk-later" pathLength="1" d="M241 127h-83" stroke="#cdbaff"/>
             </g>
             <g data-view="6">
               <use href="#sw6-browser" transform="translate(99 108) scale(.92)"/><use href="#sw6-browser" transform="translate(302 108) scale(.92)"/>
@@ -677,11 +690,11 @@
           </svg>
         </div>
         <div class="demo-readout">
-          <div data-view="1" id="sw6-detail-1"><strong>책임별 JavaScript 모듈</strong><p>진입점·화면·서비스·공통 기능을 분리해 바꿀 코드의 위치를 분명히 합니다.</p></div>
-          <div data-view="2" id="sw6-detail-2"><strong>층으로 나누는 CSS</strong><p>색과 간격을 정하는 토큰 위에 기본 스타일과 컴포넌트 스타일을 쌓습니다.</p></div>
-          <div data-view="3" id="sw6-detail-3"><strong>화면과 서비스의 역할</strong><p>화면은 입력과 표시를 맡고, 서비스는 통신과 데이터 처리를 맡습니다.</p></div>
-          <div data-view="4" id="sw6-detail-4"><strong>늦게 온 응답 처리</strong><p>이전 요청이 늦게 도착해도 최신 화면을 덮어쓰지 않게 합니다.</p></div>
-          <div data-view="5" id="sw6-detail-5"><strong>클라이언트 사이드 라우팅</strong><p>페이지 전체를 다시 로드하지 않고 URL에 맞춰 화면을 전환합니다. 딥 링크, 새로고침, 뒤로·앞으로 가기를 지원하며 없는 파일·API 요청에는 HTTP 404를 반환합니다.</p></div>
+          <div data-view="1" id="sw6-detail-1"><strong>JavaScript 모듈화</strong><p>진입점, 화면, 서비스, 공통 기능을 모듈로 나누고 필요한 기능만 import합니다.</p></div>
+          <div data-view="2" id="sw6-detail-2"><strong>CSS 모듈화</strong><p>색·간격 같은 디자인 토큰과 기본 스타일을 분리하고, 컴포넌트별 스타일을 각자의 파일에서 관리합니다.</p></div>
+          <div data-view="3" id="sw6-detail-3"><strong>클라이언트 사이드 라우팅</strong><p>페이지 전체를 다시 로드하지 않고 URL에 맞춰 화면을 전환합니다. 딥 링크, 새로고침, 뒤로·앞으로 가기를 지원하며 없는 파일·API 요청에는 HTTP 404를 반환합니다.</p></div>
+          <div data-view="4" id="sw6-detail-4"><strong>비동기 처리</strong><p>네트워크 요청에는 async/await를 써서 응답을 기다리는 동안에도 화면이 입력을 받게 합니다. 응답 순서가 뒤바뀌면 최신 요청의 결과만 표시합니다.</p></div>
+          <div data-view="5" id="sw6-detail-5"><strong>클래스 기반 설계</strong><p>관련된 상태와 동작을 JavaScript의 class로 묶습니다. 예를 들어 QuoteView는 작성 중인 견적을 표시하고, QuoteService는 견적 저장 요청을 처리합니다.</p></div>
           <div data-view="6" id="sw6-detail-6"><strong>하드 리프레시 없는 버전 전환</strong><p>열린 탭의 빌드 ID가 서버의 빌드 ID와 다르면 다음 화면 이동 때 새 버전을 로드합니다. 미저장 초안이 있거나 저장 요청이 진행 중이면 전환을 보류합니다.</p></div>
         </div>
       </figure>

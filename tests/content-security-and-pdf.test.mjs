@@ -269,3 +269,28 @@ test('each project diagram offers native controls, artwork and a matching descri
   }
   assert.doesNotMatch(html, /sxc-animation-toggle/);
 });
+
+test('#sw6 presents the six original principles in order with matching controls and scenes', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const slide = html.match(/<section\b[^>]*\bid="sw6"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(slide, 'missing webapp6 slide');
+  const controls = [...slide.matchAll(/<label>\s*<input\b[^>]*\bvalue="(\d+)"[^>]*>\s*<span>([^<]+)<\/span>/g)];
+  const principles = [
+    ['JS', /JavaScript/], ['CSS', /CSS/], ['라우팅', /클라이언트 사이드 라우팅/],
+    ['비동기', /비동기/], ['클래스', /클래스/], ['배포', /하드 리프레시/],
+  ];
+  assert.equal(controls.length, principles.length);
+  for (const [index, [label, heading]] of principles.entries()) {
+    const number = index + 1;
+    assert.equal(controls[index][1], String(number));
+    assert.equal(controls[index][2], label);
+    const detail = slide.match(new RegExp(`\\bid="sw6-detail-${number}"[^>]*>\\s*<strong>([^<]+)</strong>`));
+    assert.ok(detail, `missing heading for principle ${number}`);
+    assert.match(detail[1], heading);
+  }
+  const art = slide.match(/<div class="demo-art">\s*(<svg\b[\s\S]*?<\/svg>)/)?.[1];
+  assert.ok(art, 'missing principles artwork');
+  const scenes = art.split(/(?=<g data-view=")/);
+  assert.match(scenes.find(scene => scene.startsWith('<g data-view="3">')) ?? '', />404</);
+  assert.match(scenes.find(scene => scene.startsWith('<g data-view="5">')) ?? '', /QuoteView[\s\S]*QuoteService/);
+});

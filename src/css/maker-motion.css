@@ -19,7 +19,6 @@
     stroke-dasharray: 1;
     animation: mk-write-lines 570ms steps(9, end) backwards;
   }
-  :where(.project-demo[data-playing]) .mk-write.mk-response { animation-delay: 2580ms; }
 
   :where(.project-demo[data-playing]) .mk-arrival {
     transform-box: fill-box;
