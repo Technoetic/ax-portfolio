@@ -1,5 +1,6 @@
-import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-4a29f6a4f3be.js';
-import { VaultInteraction } from '../visuals/vault-interaction.axp-4a29f6a4f3be.js';
+import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-18703022495c.js';
+import { VaultInteraction } from '../visuals/vault-interaction.axp-18703022495c.js';
+import { ProjectMotion } from '../visuals/project-motion.axp-18703022495c.js';
 
 export class DeckScreen {
   constructor({
@@ -46,10 +47,9 @@ export class DeckScreen {
   }
 
   mount() {
-    this.vault = new VaultInteraction({
-      root: this.root,
-      onInteract: () => { this.hasUserInteracted = true; },
-    });
+    const interactions = { root: this.root, onInteract: () => { this.hasUserInteracted = true; } };
+    this.vault = new VaultInteraction(interactions);
+    this.projectMotion = new ProjectMotion(interactions);
     this.counter = this.root.getElementById('counter');
     this.progress = this.root.getElementById('progress');
     this.dotsWrap = this.root.getElementById('dots');
@@ -238,6 +238,7 @@ export class DeckScreen {
     if (moveFocus) nextSlide.focus({ preventScroll: true });
     this.visuals?.setIntensity(nextIndex === 0);
     this.vault?.activateSlide(nextSlide);
+    this.projectMotion?.activateSlide(nextSlide);
     this.reveal?.activateSlide(nextSlide);
     this.countUp?.activateScope(nextSlide);
     if (nextSlide.id === 's6') {
@@ -456,6 +457,7 @@ export class DeckScreen {
     this.abort.abort();
     this.countUp?.dispose();
     this.vault?.dispose();
+    this.projectMotion?.dispose();
     this.reveal?.dispose();
     this.charts?.dispose();
     for (const timer of this.leaveTimers.values()) clearTimeout(timer);
