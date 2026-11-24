@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
+import { runInNewContext } from 'node:vm';
 import { APP_ROOT } from '../scripts/build.mjs';
 import {
   BOOTSTRAP_PARAM,
@@ -11,6 +12,22 @@ import {
   parseSlideHash,
   SLIDE_IDS,
 } from '../src/js/shared/routes.js';
+
+test('the deck reserves its initial layout before modules load and releases it even if they fail', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const head = html.split('</head>')[0];
+  const startup = head.match(/<script>([\s\S]*?)<\/script>/);
+  assert.ok(startup, 'the document needs a synchronous layout bootstrap in its head');
+
+  for (const hash of ['', '#sav', '#s4', '#s5', '#%73av', '#no-such-slide', '#%', '#constructor']) {
+    const document = new EventTarget();
+    document.documentElement = { dataset: {} };
+    runInNewContext(startup[1], { document, location: { hash } });
+    assert.equal(document.documentElement.dataset.entrySlide, parseSlideHash(hash).id);
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    assert.equal(document.documentElement.dataset.entrySlide, undefined);
+  }
+});
 
 test('index.html has 15 slides with #smv, #sw6, and #sctt added and #s5/#s4 retired', async () => {
   const [indexHtml, cvHtml] = await Promise.all([

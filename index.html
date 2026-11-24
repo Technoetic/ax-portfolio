@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="app-build-id" content="axp-e25c71da7238">
+<script>
+  {
+    // A fragment may only become :target after the deferred modules finish.
+    const routes = {"s0":"s0","sdhis":"sdhis","sav":"sav","sxc":"sxc","sref":"sref","smv":"smv","sw6":"sw6","sctt":"sctt","stut":"stut","sbcp":"sbcp","s3":"s3","scv":"scv","s6":"s6","s7":"s7","s8":"s8","s4":"sav","s5":"sav"};
+    let fragment = '';
+    try { fragment = decodeURIComponent(location.hash.slice(1)); } catch { /* Malformed bookmark: use the cover. */ }
+    const root = document.documentElement;
+    root.dataset.entrySlide = Object.hasOwn(routes, fragment) ? routes[fragment] : 's0';
+    // A failed module also reaches this event and falls back to the readable document.
+    document.addEventListener('DOMContentLoaded', () => { delete root.dataset.entrySlide; }, { once: true });
+  }
+</script>
+<meta name="app-build-id" content="axp-cced88bff983">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
@@ -44,7 +56,7 @@
 <!-- 선택적 배경 효과는 비동기·SRI 검증으로 로드하며 탐색을 막지 않습니다. -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./assets/dist/portfolio.axp-e25c71da7238.css">
+<link rel="stylesheet" href="./assets/dist/portfolio.axp-cced88bff983.css">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -600,6 +612,6 @@
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script type="module" src="./assets/dist/main.axp-e25c71da7238.js"></script>
+<script type="module" src="./assets/dist/main.axp-cced88bff983.js"></script>
 </body>
 </html>

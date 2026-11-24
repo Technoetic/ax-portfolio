@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LEGACY_SLIDE_ALIASES, SLIDE_IDS } from '../src/js/shared/routes.js';
 
 export const APP_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -42,15 +43,19 @@ export async function computeBuildArtifacts({ rootDir = APP_ROOT, tag = '' } = {
     })),
   );
 
+  // The first paint and the module router use the same slide IDs and bookmarks.
+  const entryRoutes = Object.fromEntries(SLIDE_IDS.map(id => [id, id]));
+  const entrySelectors = SLIDE_IDS.map(id => `html[data-entry-slide="${id}"]:not(.js) #${id}`).join(',\n');
   const deckCss = (
     await Promise.all(DECK_STYLES.map(async name => toLf(await readFile(path.join(srcCssDir, name), 'utf8'))))
-  ).join('\n');
+  ).join('\n').replace('__ENTRY_SLIDE_SELECTORS__', entrySelectors);
 
   const cvCss = (
     await Promise.all(CV_STYLES.map(async name => toLf(await readFile(path.join(srcCssDir, name), 'utf8'))))
   ).join('\n');
 
-  const indexTemplate = toLf(await readFile(path.join(templatesDir, 'index.template.html'), 'utf8'));
+  const indexTemplate = toLf(await readFile(path.join(templatesDir, 'index.template.html'), 'utf8'))
+    .replace('__ENTRY_ROUTES__', JSON.stringify({ ...entryRoutes, ...LEGACY_SLIDE_ALIASES }));
   const cvTemplate = toLf(await readFile(path.join(templatesDir, 'cv.template.html'), 'utf8'));
 
   const fingerprintInput = [
