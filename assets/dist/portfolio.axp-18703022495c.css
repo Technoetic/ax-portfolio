@@ -2772,19 +2772,23 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .slide.active .demo-art [data-view] { animation: project-appear 420ms ease-out; }
-  .slide.active .demo-art .demo-trace { animation: project-trace 820ms cubic-bezier(.2,.75,.25,1); }
-  .slide.active .demo-art .demo-appear { animation: project-appear 700ms ease-in; }
-  .slide.active .demo-bars rect {
+  :where(.project-demo[data-playing]) .demo-art [data-view] { animation: project-appear 400ms ease-out; }
+  :where(.project-demo[data-playing]) .demo-trace { animation: project-trace 1.2s cubic-bezier(.2,.75,.25,1); }
+  :where(.project-demo[data-playing]) .demo-appear { animation: project-appear 700ms ease-in; }
+  :where(.project-demo[data-playing]) .demo-bars rect {
     transform-box: fill-box;
     transform-origin: center bottom;
     animation: project-grow 620ms cubic-bezier(.2,.75,.25,1) backwards;
   }
-  .slide.active .demo-bars rect:nth-child(2) { animation-delay: 75ms; }
-  .slide.active .demo-bars rect:nth-child(3) { animation-delay: 150ms; }
-  .slide.active .demo-orbit { animation: project-orbit 1050ms ease-in-out; }
-  .slide.active .demo-stow { animation: project-stow 750ms cubic-bezier(.45,.04,.85,.6); }
-  .slide.active .demo-restore { animation: project-stow 680ms cubic-bezier(.3,.65,.35,1) reverse; }
+  :where(.project-demo[data-playing]) .demo-bars rect:nth-child(2) { animation-delay: 75ms; }
+  :where(.project-demo[data-playing]) .demo-bars rect:nth-child(3) { animation-delay: 150ms; }
+  :where(.project-demo[data-playing]) .demo-orbit { animation: project-orbit 1050ms ease-in-out; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .demo-art > svg {
+    transform: perspective(900px) rotateX(var(--demo-pitch, 0deg)) rotateY(var(--demo-yaw, 0deg));
+    transition: transform 180ms ease-out;
+  }
 }
 @keyframes project-appear { from { opacity: .18; } to { opacity: 1; } }
 @keyframes project-trace {
@@ -2793,10 +2797,6 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 }
 @keyframes project-grow { from { transform: scaleY(.08); } to { transform: scaleY(1); } }
 @keyframes project-orbit { from { transform: rotate(0); } to { transform: rotate(1turn); } }
-@keyframes project-stow {
-  from { transform: translate(0) scale(1); opacity: 1; }
-  to { transform: translate(274px, 181px) scale(.06); opacity: 0; }
-}
 
 @container (max-width: 480px) {
   .demo-picker:has(label:nth-of-type(5)) { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -2817,8 +2817,262 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 @media print {
   .project-demo { break-inside: avoid; }
   .demo-art { print-color-adjust: exact; }
+  .project-demo .demo-art *, .project-demo .demo-art > svg { animation: none !important; transition: none !important; }
+  .project-demo .demo-art > svg { transform: none; }
   .demo-readout strong, .demo-readout p, .demo-readout a, .demo-picker span { color: #172c43; }
   .demo-picker input:checked + span { color: #172c43; text-decoration: underline; }
+}
+
+/* Moving light rides the same SVG paths as the static diagrams. */
+.optical-packet, .optical-halo, .sxc-sweep, .sxc-reader {
+  opacity: 0;
+  pointer-events: none;
+}
+.optical-packet { stroke-dasharray: .10 .035 .014 1.15; }
+.optical-halo, .sxc-models rect, .atlas-beacons circle, .atlas-meridian {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.atlas-armillary { transform-origin: 190px 110px; }
+
+/* The file feeds a junction, then each branch lights its destination. */
+.sxc-stream { --travel: 900ms; }
+.sxc-stream :first-child { --launch: 0ms; --travel: 520ms; }
+.sxc-stream :nth-child(2) { --launch: 470ms; }
+.sxc-stream :nth-child(3) { --launch: 900ms; }
+.sxc-stream :nth-child(4) { --launch: 1330ms; }
+.sxc-stream :nth-child(5) { --launch: 1760ms; }
+.sxc-relay { --hit: 380ms; }
+.sxc-models rect:nth-child(1) { --hit: 1230ms; }
+.sxc-models rect:nth-child(2) { --hit: 1660ms; }
+.sxc-models rect:nth-child(3) { --hit: 2090ms; }
+.sxc-models rect:nth-child(4) { --hit: 2520ms; }
+.sxc-compare-stream { --launch: 300ms; --travel: 2450ms; }
+.sxc-difference { --hit: 1380ms; }
+.sxc-rows > :first-child { --hit: 340ms; }
+.sxc-rows > :nth-child(2) { --hit: 1290ms; }
+.sxc-rows > :nth-child(3) { --hit: 2260ms; }
+
+/* The atlas takes an incoming citation, then routes it to one or both tools. */
+.atlas-stream { --travel: 1250ms; --launch: 160ms; }
+.atlas-stream :nth-child(2) { --launch: 1430ms; }
+.atlas-stream :nth-child(3) { --launch: 1730ms; }
+.atlas-relay { --hit: 1260ms; }
+.atlas-arrival { --hit: 2490ms; }
+.atlas-second { --hit: 2790ms; }
+.atlas-beacons :nth-child(1) { --hit: 440ms; }
+.atlas-beacons :nth-child(2) { --hit: 830ms; }
+.atlas-beacons :nth-child(3) { --hit: 1940ms; }
+.atlas-beacons :nth-child(4) { --hit: 2220ms; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :where(.project-demo[data-playing]) .optical-packet {
+    animation: optical-travel var(--travel) linear var(--launch) both;
+    filter: drop-shadow(0 0 2px #bdfffb);
+  }
+  :where(.project-demo[data-playing]) .optical-halo {
+    animation: optical-arrival 920ms ease-out var(--hit) both;
+  }
+  :where(.project-demo[data-playing]) .sxc-models rect {
+    animation: sxc-model-lock 830ms ease-out var(--hit);
+  }
+  :where(.project-demo[data-playing]) .sxc-compare-stream :last-child { animation-direction: reverse; }
+  :where(.project-demo[data-playing]) .sxc-sweep { animation: sxc-compare-sweep 3150ms ease-in-out 120ms both; }
+  :where(.project-demo[data-playing]) .sxc-reader { animation: sxc-read-lines 3200ms ease-in-out 140ms both; }
+  :where(.project-demo[data-playing]) .sxc-rows > g { animation: sxc-write-row 850ms ease-out var(--hit) backwards; }
+  :where(.project-demo[data-playing]) .atlas-beacons circle {
+    animation: atlas-ignite 850ms ease-out var(--hit);
+  }
+  :where(.project-demo[data-playing]) .atlas-meridian { animation: atlas-turn 3150ms ease-in-out; }
+  :where(.project-demo[data-playing]) .atlas-armillary { animation: atlas-tilt 3350ms ease-in-out; }
+}
+
+@keyframes optical-travel {
+  0% { stroke-dashoffset: .16; opacity: 0; }
+  9%, 90% { opacity: 1; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
+}
+@keyframes optical-arrival {
+  0% { transform: scale(.66); opacity: 0; }
+  23% { opacity: .95; }
+  100% { transform: scale(1.42); opacity: 0; }
+}
+@keyframes sxc-model-lock {
+  30% { transform: scale(1.10); stroke: #d6fff4; stroke-width: 2.5; filter: drop-shadow(0 0 4px #72efcd); }
+}
+@keyframes sxc-compare-sweep {
+  0% { transform: translateX(0); opacity: 0; }
+  12% { opacity: .8; }
+  43%, 57% { transform: translateX(80px); opacity: .85; }
+  100% { transform: translateX(179px); opacity: 0; }
+}
+@keyframes sxc-read-lines {
+  0% { transform: translateY(-18px); opacity: 0; }
+  14%, 22% { transform: translateY(0); opacity: .55; }
+  42%, 50% { transform: translateY(27px); opacity: .58; }
+  73%, 81% { transform: translateY(54px); opacity: .58; }
+  100% { transform: translateY(64px); opacity: 0; }
+}
+@keyframes sxc-write-row {
+  from { opacity: .35; transform: translateX(-7px); }
+  50% { filter: drop-shadow(0 0 3px #baf7ff); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes atlas-ignite {
+  35% { transform: scale(1.8); fill: #fff; filter: drop-shadow(0 0 3px #d5b9ff); }
+}
+@keyframes atlas-turn {
+  0%, 100% { transform: scaleX(1); }
+  42% { transform: scaleX(.36); }
+  68% { transform: scaleX(.88); }
+}
+@keyframes atlas-tilt {
+  0%, 100% { transform: rotate(0); }
+  42% { transform: rotate(-23deg); }
+  75% { transform: rotate(9deg); }
+}
+
+/* A short highlight travels along the same SVG coordinates as the diagram. */
+.demo-art .mk-signal {
+  opacity: 0;
+  stroke-width: 5;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :where(.project-demo[data-playing]) .mk-signal {
+    stroke-dasharray: .12 1.2;
+    filter: drop-shadow(0 0 3px #aefff590);
+    animation: mk-run-path 950ms ease-in-out 650ms both;
+  }
+  :where(.project-demo[data-playing]) .mk-signal.mk-compile { animation-delay: 180ms; animation-duration: 650ms; }
+  :where(.project-demo[data-playing]) .mk-signal.mk-later { animation-delay: 1700ms; }
+  :where(.project-demo[data-playing]) .mk-signal.mk-stale { animation-delay: 180ms; animation-duration: 2810ms; }
+  :where(.project-demo[data-playing]) .mk-write {
+    stroke-dasharray: 1;
+    animation: mk-write-lines 570ms steps(9, end) backwards;
+  }
+  :where(.project-demo[data-playing]) .mk-write.mk-response { animation-delay: 2580ms; }
+
+  :where(.project-demo[data-playing]) .mk-arrival {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: mk-receive 820ms ease-out 1450ms backwards;
+  }
+  :where(.project-demo[data-playing]) .mk-arrival.mk-later { animation-delay: 2480ms; }
+  :where(.project-demo[data-playing]) .mk-arrival.mk-rejected { animation-delay: 2940ms; }
+
+  /* Chart conversion builds the encoded donut segments in reading order. */
+  :where(.project-demo[data-playing]) .mk-donut circle { animation: mk-arc 760ms cubic-bezier(.18,.76,.3,1) backwards; }
+  :where(.project-demo[data-playing]) .mk-donut circle:nth-child(1) { --arc: 48; --gap: 52; animation-delay: 820ms; }
+  :where(.project-demo[data-playing]) .mk-donut circle:nth-child(2) { --arc: 28; --gap: 72; animation-delay: 1440ms; }
+  :where(.project-demo[data-playing]) .mk-donut circle:nth-child(3) { --arc: 18; --gap: 82; animation-delay: 1980ms; }
+
+  /* Separately printed frames fan from the front card into their final stack. */
+  :where(.project-demo[data-playing]) .mk-frame-back { --fan-x: 40px; --fan-y: 12px; animation: mk-fan 990ms ease-out 400ms backwards; }
+  :where(.project-demo[data-playing]) .mk-frame-mid { --fan-x: 19px; --fan-y: 7px; animation: mk-fan 850ms ease-out 670ms backwards; }
+  #smv :where(.project-demo[data-playing]) .demo-orbit { animation-delay: 850ms; animation-duration: 1250ms; animation-iteration-count: 2; }
+
+  /* webapp6: independent modules emerge from the core, then the layers unfold. */
+  :where(.project-demo[data-playing]) .mk-module { animation: mk-fan 1090ms cubic-bezier(.15,.75,.22,1.08) backwards; }
+  :where(.project-demo[data-playing]) .mk-north { --fan-x: 0px; --fan-y: 50px; animation-delay: 180ms; }
+  :where(.project-demo[data-playing]) .mk-west  { --fan-x: 111px; --fan-y: -19px; animation-delay: 390ms; }
+  :where(.project-demo[data-playing]) .mk-east  { --fan-x: -111px; --fan-y: -19px; animation-delay: 600ms; }
+  :where(.project-demo[data-playing]) .mk-south { --fan-x: 0px; --fan-y: -58px; animation-delay: 810ms; }
+  :where(.project-demo[data-playing]) .mk-sheet { animation: mk-fan 1460ms cubic-bezier(.19,.7,.26,1.12) backwards; }
+  :where(.project-demo[data-playing]) .mk-tokens { --fan-x: -13px; --fan-y: -36px; animation-delay: 180ms; }
+  :where(.project-demo[data-playing]) .mk-base { --fan-x: -31px; --fan-y: 10px; animation-delay: 480ms; }
+  :where(.project-demo[data-playing]) .mk-component { --fan-x: 7px; --fan-y: 50px; animation-delay: 760ms; }
+
+  :where(.project-demo[data-playing]) .mk-arrival.mk-shield { animation-delay: 1100ms; }
+  :where(.project-demo[data-playing]) .mk-draft {
+    filter: drop-shadow(0 0 4px #bdfff580);
+    animation: mk-carry-draft 3200ms ease-in-out 100ms both;
+  }
+}
+
+@keyframes mk-run-path {
+  0% { stroke-dashoffset: .15; opacity: 0; }
+  12%, 86% { opacity: 1; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
+}
+@keyframes mk-write-lines { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes mk-arc { from { stroke-dasharray: 0 100; } to { stroke-dasharray: var(--arc) var(--gap); } }
+@keyframes mk-fan {
+  from { translate: var(--fan-x) var(--fan-y); opacity: .3; }
+  to { translate: 0 0; opacity: 1; }
+}
+@keyframes mk-receive {
+  0% { opacity: .55; transform: scale(.94); }
+  38% { opacity: 1; transform: scale(1.1); filter: brightness(1.55); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes mk-carry-draft {
+  0% { opacity: 0; transform: translate(99px, 121px) scale(.5); }
+  10% { opacity: 1; transform: translate(117px, 123px) scale(.9); }
+  38%, 53% { opacity: 1; transform: translate(201px, 103px) scale(.85); }
+  84% { opacity: 1; transform: translate(298px, 118px) scale(.92); }
+  100% { opacity: 0; transform: translate(302px, 118px) scale(.4); }
+}
+
+/* The cursor hits the close button, the window folds into the tray, then the same session returns. */
+@media (prefers-reduced-motion: no-preference) {
+  :where(.project-demo[data-playing]) .tray-pointer-close { animation: tray-click 1.6s ease-in-out both; }
+  :where(.project-demo[data-playing]) .tray-pointer-open { animation: tray-click 1s ease-out both; }
+  :where(.project-demo[data-playing]) .tray-close-key { animation: tray-key 950ms 1s ease-out; }
+  :where(.project-demo[data-playing]) .tray-wave {
+    transform-origin: 0 0;
+    animation: tray-wave 1.3s 1.05s ease-out;
+  }
+  :where(.project-demo[data-playing]) [data-view="2"] .tray-wave { animation-delay: 1.65s; }
+  :where(.project-demo[data-playing]) [data-view="3"] .tray-wave { animation-delay: .65s; }
+  :where(.project-demo[data-playing]) .demo-stow {
+    animation: tray-fold 1.7s .2s cubic-bezier(.5,.1,.7,.9) backwards;
+  }
+  :where(.project-demo[data-playing]) .demo-restore {
+    animation: tray-fold 1.25s .75s cubic-bezier(.45,.1,.65,.95) reverse backwards;
+  }
+  :where(.project-demo[data-playing]) .tray-afterimage {
+    animation: tray-echo .55s .65s ease-out backwards;
+  }
+  :where(.project-demo[data-playing]) .tray-afterimage-small { animation-delay: 1.12s; }
+  :where(.project-demo[data-playing]) .tray-telemetry,
+  :where(.project-demo[data-playing]) .tray-comet {
+    stroke: #d9fff5;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 2px #68ffc9);
+    animation: tray-signal 1.3s 2s ease-in-out;
+  }
+  :where(.project-demo[data-playing]) .tray-comet { animation-delay: .72s; }
+  :where(.project-demo[data-playing]) [data-view="2"] .tray-comet { animation-iteration-count: 2; }
+}
+@keyframes tray-click {
+  0% { transform: translate(-108px, 49px); opacity: .3; }
+  62% { transform: translate(0); opacity: 1; }
+  77% { transform: translate(2px, 3px); }
+  100% { transform: translate(0); }
+}
+@keyframes tray-key {
+  30% { fill: #d87563; filter: drop-shadow(0 0 6px #ffab80); }
+}
+@keyframes tray-wave {
+  0% { opacity: 0; transform: scale(.25); }
+  24% { opacity: .95; }
+  100% { opacity: 0; transform: scale(2.5); }
+}
+@keyframes tray-fold {
+  0% { transform: translate(0) scale(1); opacity: 1; }
+  14% { transform: translate(-3px, -4px) scale(1.02); opacity: 1; }
+  60% { transform: translate(135px, 68px) scale(.56) rotate(4deg); opacity: .94; }
+  90% { transform: translate(256px, 157px) scale(.15); opacity: .85; }
+  100% { transform: translate(274px, 181px) scale(.06); opacity: 0; }
+}
+@keyframes tray-echo { from { opacity: 0; } }
+@keyframes tray-signal {
+  0% { opacity: 0; stroke-dasharray: .16 1; stroke-dashoffset: .16; }
+  18%, 78% { opacity: 1; }
+  100% { opacity: 0; stroke-dasharray: .16 1; stroke-dashoffset: -1; }
 }
 
 /* Deck count-up metrics & scroll animations (compositor-only, progressive enhancement) */
