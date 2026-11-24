@@ -635,7 +635,6 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   background: var(--bg-2);
 }
 
-.av-figure img,
 .tool-figure img {
   display: block;
   max-width: 100%;
