@@ -8,7 +8,7 @@ export const APP_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)
 
 const DECK_STYLES = [
   'tokens.css', 'base.css', 'components.css', 'vault-diagram.css', 'reference-atlas-slide.css',
-  'project-diagrams.css', 'verification-atlas-motion.css', 'maker-motion.css', 'tray-motion.css', 'motion.css',
+  'project-diagrams.css', 'verification-atlas-motion.css', 'maker-motion.css', 'backtick-motion.css', 'tray-motion.css', 'motion.css',
 ];
 const CV_STYLES = ['cv-tokens.css', 'cv-base.css', 'cv-components.css', 'cv-motion.css'];
 

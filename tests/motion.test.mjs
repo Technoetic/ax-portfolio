@@ -6,6 +6,24 @@ import { APP_ROOT } from '../scripts/build.mjs';
 import { CountUp, easeOutCubic, formatCount, parseDurationToken } from '../src/js/visuals/count-up.js';
 import { ScrollReveal } from '../src/js/visuals/scroll-reveal.js';
 
+test('the shipped deck stylesheet animates each stage of the backtick replay', async () => {
+  const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
+  const asset = html.match(/href="([^"]*assets\/dist\/portfolio\.[^"]+\.css)"/)?.[1];
+  assert.ok(asset, 'the deck should load its build-specific stylesheet');
+  const css = await readFile(path.join(APP_ROOT, asset), 'utf8');
+  const scoped = css.match(/#sbt\s+:is\(([^{}]+\[data-playing\][^{}]+)\)\s*\{((?:[^{}]|\{[^{}]*\})*)\}/);
+  assert.ok(scoped, 'the backtick timeline needs a selection-scoped playback rule');
+  const [, choices, timeline] = scoped;
+  for (const value of ['1', '2', '3']) {
+    assert.ok(choices.includes(`[data-playing]:has(input[value="${value}"]:checked) [data-view="${value}"]`));
+  }
+  const activeRules = [...timeline.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+    .filter(([, , body]) => /\banimation(?:-name)?\s*:\s*bt-[\w-]+/.test(body));
+  for (const stage of ['.bt-source', '.bt-wire', '.bt-command-flight', '.bt-unescaped', '.bt-tab-gap', '.bt-verdict']) {
+    assert.ok(activeRules.some(([, selector]) => selector.includes(stage)), `missing playback animation for ${stage}`);
+  }
+});
+
 function makeClassList(initial = []) {
   const set = new Set(initial);
   return {
