@@ -11,6 +11,7 @@
 #sxc .project-demo { --demo-accent: #6de9d4; --demo-secondary: #6b97f4; }
 #sref .project-demo { --demo-accent: #cab2ff; --demo-secondary: #79beff; }
 #smv .project-demo { --demo-accent: #ffac9a; --demo-secondary: #d38bff; }
+#sbt .project-demo { --demo-accent: #ffd395; --demo-secondary: #90b9e6; }
 #sw6 .project-demo { --demo-accent: #8fd5ff; --demo-secondary: #96a4ff; }
 #sctt .project-demo { --demo-accent: #78edc4; --demo-secondary: #8db8ff; }
 
@@ -83,6 +84,31 @@
   pointer-events: none;
 }
 .demo-art > svg { display: block; width: 100%; height: auto; }
+
+.bt-console {
+  display: grid;
+  align-content: center;
+  min-height: clamp(165px, 43cqi, 270px);
+  padding: clamp(16px, 6cqi, 40px);
+  border: 1px solid #516174;
+  border-radius: 14px;
+  background: linear-gradient(125deg, #1b2737, #101923 80%);
+}
+.bt-input-label {
+  border-bottom: 1px solid #435064;
+  padding-bottom: .75em;
+  color: #bdcada;
+  font-size: clamp(12px, 2.7cqi, 15px);
+}
+.bt-case pre {
+  margin: .85em 0 0;
+  color: #f1f5fb;
+  font: 500 clamp(15px, 3.6cqi, 23px)/1.6 Consolas, ui-monospace, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bt-case code { font: inherit; }
+.bt-case mark { background: #ffd395; color: #201707; border-radius: 3px; }
 
 .demo-readout {
   display: grid;

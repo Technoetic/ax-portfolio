@@ -78,9 +78,20 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
 
   const scv = indexHtml.match(/<section\b[^>]*\bid="scv"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
   const hookTile = [...scv.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)]
-    .find(([tag]) => tag.includes(`href="${hookRepo}"`))?.[0];
-  assert.ok(hookTile, 'missing backtick-check-hook repository link in #scv');
+    .find(([tag]) => tag.includes('href="#sbt"'))?.[0];
+  assert.ok(hookTile, 'missing link from the #scv project list to #sbt');
+  const hookLink = hookTile.slice(0, hookTile.indexOf('>') + 1);
+  assert.match(hookLink, /\bdata-slide-target\b/);
+  assert.doesNotMatch(hookLink, /\btarget="_blank"/);
+  assert.ok(hookTile.includes('백틱 검사 훅'));
   assert.ok(hookTile.includes(`v${hook.version}`), '#scv project link needs the current hook version');
+
+  const hookSlide = indexHtml.match(/<section\b[^>]*\bid="sbt"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(hookSlide, 'missing backtick-check-hook slide');
+  assert.ok(hookSlide.includes(`v${hook.version}`), '#sbt needs the current hook version');
+  assert.ok(hookSlide.includes(`href="${hookRepo}"`), '#sbt must link to the project repository');
+  assert.ok(hookSlide.includes(`href="${ci.source}"`), '#sbt must link to the recorded CI run');
+  assert.ok(hookSlide.includes(ci.windowsTestExecutions.toLocaleString('ko-KR')), '#sbt needs the CI test total');
 
   const hookCard = [...cvHtml.matchAll(/<article\b[^>]*>[\s\S]*?<\/article>/g)]
     .find(([tag]) => tag.includes(`href="${hookRepo}"`))?.[0];
@@ -262,10 +273,10 @@ test('#sav explains the shared vault and session flow in native HTML', async () 
   }
 });
 
-test('each project diagram offers native controls, artwork and a matching description for every choice', async () => {
+test('each project demo offers native controls, a visual example and a matching description for every choice', async () => {
   const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
   const groups = new Set();
-  for (const id of ['sxc', 'sref', 'smv', 'sw6', 'sctt']) {
+  for (const id of ['sxc', 'sref', 'smv', 'sbt', 'sw6', 'sctt']) {
     const slide = html.match(new RegExp(`<section\\b[^>]*\\bid="${id}"[^>]*>([\\s\\S]*?)<\\/section>`))?.[1];
     assert.ok(slide, `missing #${id}`);
     const figure = slide.match(/<figure\b[^>]*aria-label="[^"]+"[^>]*>([\s\S]*?)<\/figure>/)?.[1];
@@ -283,12 +294,25 @@ test('each project diagram offers native controls, artwork and a matching descri
     const values = radios.map(radio => radio.match(/\bvalue="(\d+)"/)?.[1]);
     assert.ok(values.every(Boolean));
     assert.equal(new Set(values).size, radios.length);
-    const art = figure.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/)?.[0];
-    assert.ok(art);
-    assert.match(art, /<svg\b[^>]*aria-hidden="true"/);
-    const readout = figure.slice(figure.indexOf('class="demo-readout"'));
+    const readoutStart = figure.indexOf('class="demo-readout"');
+    assert.notEqual(readoutStart, -1, `#${id} needs a description area`);
+    const readout = figure.slice(readoutStart);
+    if (id === 'sbt') {
+      assert.equal(values.length, 3, '#sbt demonstrates three shell commands');
+      const examples = [...figure.slice(0, readoutStart).matchAll(/<div\b[^>]*\bdata-view="(\d+)"[^>]*>([\s\S]*?)<\/div>/g)];
+      assert.deepEqual(examples.map(([, value]) => value), values, '#sbt needs a code sample for each choice');
+      for (const [, value, body] of examples) {
+        assert.match(body, /<pre>\s*<code>\s*\S[\s\S]*?<\/code>\s*<\/pre>/, `#sbt example ${value} needs readable code`);
+      }
+    } else {
+      const art = figure.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/)?.[0];
+      assert.ok(art);
+      assert.match(art, /<svg\b[^>]*aria-hidden="true"/);
+      for (const value of values) {
+        assert.ok(art.includes(`data-view="${value}"`), `#${id} has no drawing for choice ${value}`);
+      }
+    }
     for (const value of values) {
-      assert.ok(art.includes(`data-view="${value}"`), `#${id} has no drawing for choice ${value}`);
       const radio = radios.find(input => input.includes(`value="${value}"`));
       const descriptionId = radio.match(/\baria-describedby="([^"]+)"/)?.[1];
       assert.ok(descriptionId && readout.includes(`data-view="${value}" id="${descriptionId}"`),

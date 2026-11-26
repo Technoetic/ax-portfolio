@@ -465,6 +465,7 @@ html[data-entry-slide="sav"]:not(.js) #sav,
 html[data-entry-slide="sxc"]:not(.js) #sxc,
 html[data-entry-slide="sref"]:not(.js) #sref,
 html[data-entry-slide="smv"]:not(.js) #smv,
+html[data-entry-slide="sbt"]:not(.js) #sbt,
 html[data-entry-slide="sw6"]:not(.js) #sw6,
 html[data-entry-slide="sctt"]:not(.js) #sctt,
 html[data-entry-slide="stut"]:not(.js) #stut,
@@ -896,10 +897,11 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   stroke-width: 1.8;
 }
 
-/* Unified 6-slide flagship visual showcase (#sav, #sxc, #sref, #smv, #sw6, #sctt) — exact pixel-locked right frame on desktop */
+/* Featured projects share the same right-hand frame on desktop. */
 #sav .split,
 #sxc .split,
 #smv .split,
+#sbt .split,
 #sw6 .split,
 #sctt .split {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
@@ -915,9 +917,9 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
   }
 }
 
-/* semantic-crosscheck (#sxc), md-viz (#smv), webapp6 (#sw6), close-to-tray-helper (#sctt) */
 #sxc h2,
 #smv h2,
+#sbt h2,
 #sw6 h2,
 #sctt h2 {
   font-size: clamp(26px, 3.2vw, 42px);
@@ -977,6 +979,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 
 #sxc .linkbtn,
 #smv .linkbtn,
+#sbt .linkbtn,
 #sw6 .linkbtn,
 #sctt .linkbtn {
   margin-top: 20px;
@@ -1606,7 +1609,7 @@ a.lg:hover {
 
 .cv-tools-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.38fr) minmax(0, 0.72fr) minmax(0, 0.77fr) minmax(0, 1.38fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin-bottom: 8px;
 }
@@ -2181,22 +2184,27 @@ a.lg:hover {
   #sw6 .bignum { font-size: clamp(52px, 6.5vw, 84px); }
   #sxc .lead,
   #smv .lead,
+  #sbt .lead,
   #sw6 .lead,
   #sctt .lead { font-size: 17px; }
   #sav .sxc-checks,
   #sxc .sxc-checks,
   #smv .sxc-checks,
+  #sbt .sxc-checks,
   #sctt .sxc-checks { gap: 8px; margin-top: var(--s2); }
   #sav .sxc-checks li,
   #sxc .sxc-checks li,
   #smv .sxc-checks li,
+  #sbt .sxc-checks li,
   #sctt .sxc-checks li { font-size: 14px; }
   #sxc .snapshot-note,
   #smv .snapshot-note,
+  #sbt .snapshot-note,
   #sw6 .snapshot-note,
   #sctt .snapshot-note { margin-top: 10px; }
   #sxc .linkbtn,
   #smv .linkbtn,
+  #sbt .linkbtn,
   #sw6 .linkbtn,
   #sctt .linkbtn { margin-top: 14px; }
 }
@@ -2632,6 +2640,7 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
   #sav .split,
   #sxc .split,
   #smv .split,
+  #sbt .split,
   #sw6 .split,
   #sctt .split,
   #sref .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; width: 100%; }
@@ -2672,6 +2681,7 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 #sxc .project-demo { --demo-accent: #6de9d4; --demo-secondary: #6b97f4; }
 #sref .project-demo { --demo-accent: #cab2ff; --demo-secondary: #79beff; }
 #smv .project-demo { --demo-accent: #ffac9a; --demo-secondary: #d38bff; }
+#sbt .project-demo { --demo-accent: #ffd395; --demo-secondary: #90b9e6; }
 #sw6 .project-demo { --demo-accent: #8fd5ff; --demo-secondary: #96a4ff; }
 #sctt .project-demo { --demo-accent: #78edc4; --demo-secondary: #8db8ff; }
 
@@ -2744,6 +2754,31 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
   pointer-events: none;
 }
 .demo-art > svg { display: block; width: 100%; height: auto; }
+
+.bt-console {
+  display: grid;
+  align-content: center;
+  min-height: clamp(165px, 43cqi, 270px);
+  padding: clamp(16px, 6cqi, 40px);
+  border: 1px solid #516174;
+  border-radius: 14px;
+  background: linear-gradient(125deg, #1b2737, #101923 80%);
+}
+.bt-input-label {
+  border-bottom: 1px solid #435064;
+  padding-bottom: .75em;
+  color: #bdcada;
+  font-size: clamp(12px, 2.7cqi, 15px);
+}
+.bt-case pre {
+  margin: .85em 0 0;
+  color: #f1f5fb;
+  font: 500 clamp(15px, 3.6cqi, 23px)/1.6 Consolas, ui-monospace, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bt-case code { font: inherit; }
+.bt-case mark { background: #ffd395; color: #201707; border-radius: 3px; }
 
 .demo-readout {
   display: grid;

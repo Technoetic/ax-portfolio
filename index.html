@@ -7,7 +7,7 @@
 <script>
   {
     // A fragment may only become :target after the deferred modules finish.
-    const routes = {"s0":"s0","sdhis":"sdhis","sav":"sav","sxc":"sxc","sref":"sref","smv":"smv","sw6":"sw6","sctt":"sctt","stut":"stut","sbcp":"sbcp","s3":"s3","scv":"scv","s6":"s6","s7":"s7","s8":"s8","s4":"sav","s5":"sav"};
+    const routes = {"s0":"s0","sdhis":"sdhis","sav":"sav","sxc":"sxc","sref":"sref","smv":"smv","sbt":"sbt","sw6":"sw6","sctt":"sctt","stut":"stut","sbcp":"sbcp","s3":"s3","scv":"scv","s6":"s6","s7":"s7","s8":"s8","s4":"sav","s5":"sav"};
     let fragment = '';
     try { fragment = decodeURIComponent(location.hash.slice(1)); } catch { /* Malformed bookmark: use the cover. */ }
     const root = document.documentElement;
@@ -16,7 +16,7 @@
     document.addEventListener('DOMContentLoaded', () => { delete root.dataset.entrySlide; }, { once: true });
   }
 </script>
-<meta name="app-build-id" content="axp-a87b912b9de9">
+<meta name="app-build-id" content="axp-bd5f370759ed">
 <title>전문준 · AX 엔지니어 포트폴리오</title>
 <meta name="description" content="빌딩 HMI 11년의 현장 경험으로 영업 DB·견적 업무와 AI 개발 흐름을 자동화합니다. 전문준의 실무 AX 사례, 에이전틱 볼트·semantic-crosscheck·md-viz·백틱 검사 훅·webapp6·close-to-tray-helper·Reference Atlas와 공개 프로젝트.">
 <meta name="author" content="전문준 (Mun Jun Jeon)">
@@ -57,7 +57,7 @@
 <!-- 선택적 배경 효과는 비동기·SRI 검증으로 로드하며 탐색을 막지 않습니다. -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./assets/dist/portfolio.axp-a87b912b9de9.css">
+<link rel="stylesheet" href="./assets/dist/portfolio.axp-bd5f370759ed.css">
 </head>
 <body>
 <a class="skip-link" href="#deck">본문으로 이동</a>
@@ -554,6 +554,56 @@
     </div>
   </section>
 
+  <section class="slide" id="sbt" data-title="백틱 검사 훅">
+    <div class="split">
+      <div>
+        <div class="kicker rise">AI 코딩 도구 · 셸 명령 검사</div>
+        <div class="project-heading rise">
+          <h2>백틱 검사 훅</h2>
+          <span class="vbadge">v0.1.0</span>
+        </div>
+        <p class="lead rise">릴리스 노트에 적은 <b>코드 이름이 게시할 때 사라질 수 있습니다.</b> 마크다운에서 코드를 감싸는 백틱(<code>&#96;</code>)을 셸이 특별한 기호로 읽기 때문입니다.</p>
+        <ul class="sxc-checks rise">
+          <li><b>검사 시점</b><span>Claude Code·Codex·Antigravity가 셸 명령을 실행하기 전</span></li>
+          <li><b>차단 알림</b><span>본문이 달라질 수 있는 백틱의 줄과 열을 표시</span></li>
+          <li><b>원문 보존</b><span>릴리스 노트를 파일에 쓰고 GitHub CLI에 파일 경로를 전달</span></li>
+        </ul>
+        <p class="snapshot-note rise"><a class="accent" href="https://github.com/Technoetic/backtick-check-hook/actions/runs/45879942164" target="_blank" rel="noopener">Windows CI 10개 조합에서 1,260건 통과<span class="sr-only"> (새 탭)</span></a>. v0.1.0을 설치한 세 도구의 실제 대화는 미시험입니다.</p>
+        <a class="linkbtn rise" href="https://github.com/Technoetic/backtick-check-hook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5"/><path d="M19 5l-9 9"/><path d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg>
+          <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/backtick-check-hook</span><span class="sr-only"> (새 탭)</span>
+        </a>
+      </div>
+      <figure class="project-demo rise" aria-label="셸 명령별 백틱 검사 예시">
+        <fieldset class="demo-picker">
+          <legend class="sr-only">예상 판정을 살펴볼 예시</legend>
+          <label><input type="radio" name="sbt-case" value="1" aria-describedby="sbt-detail-1" checked><span>Bash 명령</span></label>
+          <label><input type="radio" name="sbt-case" value="2" aria-describedby="sbt-detail-2"><span>릴리스 노트</span></label>
+          <label><input type="radio" name="sbt-case" value="3" aria-describedby="sbt-detail-3"><span>탭 출력</span></label>
+        </fieldset>
+        <div class="demo-art bt-console">
+          <div class="bt-case" data-view="1">
+            <p class="bt-input-label">Bash 입력 예시 · 실행하지 않음</p>
+            <pre><code>if false; then echo "probe <mark>&#96;x&#96;</mark> text"; fi</code></pre>
+          </div>
+          <div class="bt-case" data-view="2">
+            <p class="bt-input-label">PowerShell 입력 예시 · 실행하지 않음</p>
+            <pre><code>if ($false) { gh release create v0.0.0-probe --notes "probe <mark>&#96;x&#96;</mark> text" }</code></pre>
+          </div>
+          <div class="bt-case" data-view="3">
+            <p class="bt-input-label">PowerShell 입력 예시 · 실행하지 않음</p>
+            <pre><code>Write-Output "a<mark>&#96;t</mark>b"</code></pre>
+          </div>
+        </div>
+        <div class="demo-readout">
+          <div data-view="1" id="sbt-detail-1"><strong>예상 결과 · 차단</strong><p>Bash는 큰따옴표 안에서도 백틱 사이의 <code>x</code>를 명령으로 읽고, 그 자리에 실행 결과를 넣습니다.</p></div>
+          <div data-view="2" id="sbt-detail-2"><strong>예상 결과 · 게시 전 차단</strong><p>PowerShell이 릴리스 노트의 백틱을 해석하면 본문이 바뀝니다. 훅은 두 백틱의 위치인 1행 61열과 63열을 알려 줍니다.</p></div>
+          <div data-view="3" id="sbt-detail-3"><strong>예상 결과 · 통과</strong><p>화면에 출력할 때 <code>&#96;t</code>는 탭을 뜻합니다. 이 명령은 <code>a</code>와 <code>b</code> 사이에 탭 하나를 출력합니다.</p></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
   <section class="slide" id="sw6" data-title="webapp6">
     <div class="split">
       <div>
@@ -976,7 +1026,7 @@
           <a href="https://github.com/Technoetic/agentic-vault" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">에이전틱 볼트</span><span class="ver">v0.57.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
           <a href="https://github.com/Technoetic/semantic-crosscheck" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">semantic-crosscheck</span><span class="ver">v0.33.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
           <a href="https://github.com/Technoetic/md-viz" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">md-viz</span><span class="ver">v0.4.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
-          <a href="https://github.com/Technoetic/backtick-check-hook" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">백틱 검사 훅</span><span class="ver">v0.1.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
+          <a href="#sbt" data-slide-target><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 8-4 4 4 4m10-8 4 4-4 4m-3-12-4 16"/></svg><span class="pn">백틱 검사 훅</span><span class="ver">v0.1.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg><span class="sr-only"> 프로젝트 소개</span></a>
           <a href="https://github.com/Technoetic/webapp6" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">webapp6</span><span class="ver">v0.2.0</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
           <a href="https://github.com/Technoetic/close-to-tray-helper" target="_blank" rel="noopener"><svg class="gh" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5a3 3 0 00-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.4 0C6.5.6 5.4.9 5.4.9a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 004 7.3c0 4.6 2.8 5.7 5.5 6a3 3 0 00-.8 2.3V19"/></svg><span class="pn">close-to-tray-helper</span><span class="ver">v0.2.1</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-9 9M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"/></svg><span class="sr-only"> (새 탭)</span></a>
         </div>
@@ -1092,11 +1142,11 @@
 
 <div class="hint"><span class="desktop-only">← →, Space로 이동</span><span class="mobile-only">스와이프 또는 ‹ ›로 이동</span></div>
 <div class="nav">
-  <span class="counter" id="counter">01 / 15</span>
+  <span class="counter" id="counter">01 / 16</span>
   <button id="prev" aria-label="이전 슬라이드">‹</button>
   <button id="next" aria-label="다음 슬라이드">›</button>
 </div>
 
-<script type="module" src="./assets/dist/main.axp-a87b912b9de9.js"></script>
+<script type="module" src="./assets/dist/main.axp-bd5f370759ed.js"></script>
 </body>
 </html>

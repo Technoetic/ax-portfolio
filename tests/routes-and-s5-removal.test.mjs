@@ -21,7 +21,7 @@ test('the deck reserves its initial layout before modules load and releases it e
   assert.match(head.slice(0, startup.index), /<style media="screen">\s*html\[data-entry-slide\]\s*\{\s*overflow:\s*hidden;/,
     'the root scrollbar must stay hidden even before the external stylesheet arrives');
 
-  for (const hash of ['', '#sav', '#s4', '#s5', '#%73av', '#no-such-slide', '#%', '#constructor']) {
+  for (const hash of ['', '#sav', '#sbt', '#s4', '#s5', '#%73av', '#no-such-slide', '#%', '#constructor']) {
     const document = new EventTarget();
     document.documentElement = { dataset: {} };
     runInNewContext(startup[1], { document, location: { hash } });
@@ -31,7 +31,7 @@ test('the deck reserves its initial layout before modules load and releases it e
   }
 });
 
-test('index.html has 15 slides with #smv, #sw6, and #sctt added and #s5/#s4 retired', async () => {
+test('the 16-slide deck puts #sbt between #smv and #sw6 and retires #s5/#s4', async () => {
   const [indexHtml, cvHtml] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
@@ -41,13 +41,14 @@ test('index.html has 15 slides with #smv, #sw6, and #sctt added and #s5/#s4 reti
     m => m[1],
   );
   assert.deepEqual(sectionIds, [...SLIDE_IDS]);
-  assert.equal(sectionIds.length, 15);
-  assert.ok(sectionIds.includes('smv'), '#smv slide must exist');
-  assert.ok(sectionIds.includes('sw6'), '#sw6 slide must exist');
+  assert.equal(sectionIds.length, 16);
+  const mdVizIndex = sectionIds.indexOf('smv');
+  assert.deepEqual(sectionIds.slice(mdVizIndex, mdVizIndex + 3), ['smv', 'sbt', 'sw6']);
   assert.ok(sectionIds.includes('sctt'), '#sctt slide must exist');
   assert.ok(!sectionIds.includes('s5'), '#s5 slide must not exist');
   assert.ok(!sectionIds.includes('s4'), '#s4 slide must not exist');
-  assert.match(indexHtml, /<span class="counter" id="counter">01 \/ 15<\/span>/);
+  const initialCounter = indexHtml.match(/<span class="counter" id="counter">([^<]+)<\/span>/)?.[1];
+  assert.equal(initialCounter, '01 / 16');
 
   const forbiddenTokens = [
     'id="s5"',
@@ -93,6 +94,12 @@ test('parseSlideHash redirects #s5 and #s4 to #sav and handles deep links & unkn
   });
   assert.deepEqual(parseSlideHash('#smv'), {
     id: 'smv',
+    aliased: false,
+    unknown: false,
+    hadHash: true,
+  });
+  assert.deepEqual(parseSlideHash('#sbt'), {
+    id: 'sbt',
     aliased: false,
     unknown: false,
     hadHash: true,

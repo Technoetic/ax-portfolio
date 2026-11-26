@@ -6,7 +6,7 @@
 
 ## 구성
 
-- `src/templates/` — `index.html`(15개 섹션 덱)과 `cv.html`(웹 이력서) 원본 템플릿
+- `src/templates/` — `index.html`(16개 섹션 덱)과 `cv.html`(웹 이력서) 원본 템플릿
 - `src/css/` — 디자인 토큰(`tokens.css`), 기본 스타일(`base.css`), 컴포넌트(`components.css`, `reference-atlas-slide.css`), 이력서 레이어(`cv-*.css`)
 - `src/js/` — 책임별 ES 모듈(`main.js`, `cv-main.js`, `DeckScreen`, `CvScreen`, `VersionService`, `EntryService`, `AmbientVisuals`, `ActivityCharts`, 공통 유틸리티)
 - `scripts/build.mjs` — 외부 빌드 의존성 없이 내용 해시 정적 자산(`assets/dist/*`), `index.html`, `cv.html`, `version.json`, `pages-manifest.json` 생성
@@ -15,7 +15,7 @@
 
 ## 탐색과 배포 갱신 (웹앱 제작 6원칙)
 
-목차, 슬라이드 점, 이전/다음 버튼, 키보드 `←` `→` / `Space` / `PageUp` / `PageDown` / `Home` / `End`, 마우스 휠, 터치 스와이프를 지원합니다. 각 섹션은 해시 URL(`#s0`~`#s8`)로 공유하고 새로고침·뒤로 가기로 복원할 수 있습니다. 은퇴한 이전 섹션 주소(`#s4`, `#s5`)는 `#sav`로, `reference-atlas.html`은 `index.html#sref`로 자동 연결됩니다.
+목차, 슬라이드 점, 이전/다음 버튼, 키보드 `←` `→` / `Space` / `PageUp` / `PageDown` / `Home` / `End`, 마우스 휠, 터치 스와이프를 지원합니다. 각 섹션은 고유한 해시 주소(표지 `#s0`, 백틱 검사 훅 `#sbt` 등)로 공유하고 새로고침·뒤로 가기로 복원할 수 있습니다. 은퇴한 이전 섹션 주소(`#s4`, `#s5`)는 `#sav`로, `reference-atlas.html`은 `index.html#sref`로 자동 연결됩니다.
 
 각 HTML 문서는 빌드 식별자(`<meta name="app-build-id">`)를 내장하고 `version.json`(`cache: 'no-store'`)과 동일성(`serverBuild !== loadedBuild`)으로 배포 변경을 확인합니다. 이미 열린 탭에서 새 배포가 감지되면 강제 새로고침 대신 다음 안전한 화면 이동에서 대상 URL을 전체 문서로 자동 로드합니다.
 
@@ -46,7 +46,7 @@ exporter는 로컬 `127.0.0.1` 루프백 서버에서 `cv.html`을 열어 상대
 
 ## 주요 갱신 기록
 
-- **2026-11-27:** [백틱 검사 훅 v0.1.0](https://github.com/Technoetic/backtick-check-hook/releases/tag/v0.1.0)을 이력서와 발표본의 개발 도구 목록에 추가했습니다. [프로젝트 카드](https://technoetic.github.io/ax-portfolio/cv.html#backtick-check-hook)에서 셸이 게시 원문을 바꾸는 사례와 Windows 시험 결과를 볼 수 있습니다.
+- **2026-11-27:** [백틱 검사 훅 v0.1.0](https://github.com/Technoetic/backtick-check-hook/releases/tag/v0.1.0)의 전용 슬라이드를 md-viz와 webapp6 사이에 추가했습니다. 발표본의 개발 도구 목록에서도 이 슬라이드를 열 수 있습니다. 셸이 게시 원문을 바꿀 수 있는 사례와 Windows 시험 결과는 [전용 슬라이드](https://technoetic.github.io/ax-portfolio/#sbt)와 [이력서 프로젝트 카드](https://technoetic.github.io/ax-portfolio/cv.html#backtick-check-hook)에서 확인할 수 있습니다.
 - **2026-11-24:** 에이전틱 볼트 소개(`#sav`)와 이력서의 버전을 [공개판 v0.57.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.57.0)으로 갱신했습니다. 소개에는 독립 플러그인으로 분리된 `webapp6`와 [공개판 이후 자비스 Telegram 연동·내장 `/aside-repl` 명령 제거](https://github.com/Technoetic/agentic-vault/blob/435425e02735b32c9d806d8e694c3a22ddac3fc1/docs/releases/unreleased.md)를 반영했습니다.
 - **2026-11-23:** 웹앱 제작 6원칙·선택 모션 규칙 3호스트 플러그인 `webapp6`([v0.2.0](https://github.com/Technoetic/webapp6/releases/tag/v0.2.0), `#sw6`) 전용 슬라이드와 통일 `960×640` WebP 구조도(`assets/webapp6/webapp6-hero.webp`)를 추가해 `#sav`·`#sxc`·`#sref`·`#smv`·`#sw6`·`#sctt` 6개 슬라이드의 데스크톱 우측 이미지 좌표를 동일하게 고정했습니다. `md-viz`([v0.4.0](https://github.com/Technoetic/md-viz/releases/tag/v0.4.0), 무설치 Python stdlib 시각화 엔진 및 구조도 갱신), `agentic-vault`([v0.56.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.56.0)), `semantic-crosscheck`([v0.33.0](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.33.0)), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(229개 출처·453건 인용), GitHub 공개 저장소(165개·Pages 146개)·활동 차트(`2026.02.01–11.23`)·언어 분포 및 네이버 기술 블로그(348편)를 `index.html`·`cv.html`(6카드 2×3)·A4 3쪽 태그드 `jeon-munjun-portfolio.pdf`·Release `v1.0`에 일괄 동기화했습니다.
 - **2026-11-22:** Markdown 시각화 3호스트 플러그인 `md-viz`([v0.3.0](https://github.com/Technoetic/md-viz/releases/tag/v0.3.0), `#smv`)와 Windows 무DLL 트레이 격납·`aside-repl` 번들 도우미 `close-to-tray-helper`([v0.2.1](https://github.com/Technoetic/close-to-tray-helper/releases/tag/v0.2.1), `#sctt`) 전용 슬라이드 및 통합 `960×640` WebP 구조도를 추가해 `#sav`·`#sxc`·`#sref`·`#smv`·`#sctt` 5개 슬라이드의 데스크톱 우측 이미지 좌표를 동일하게 고정했습니다. `agentic-vault`([v0.54.1](https://github.com/Technoetic/agentic-vault/releases/tag/v0.54.1)), `semantic-crosscheck`([v0.31.1](https://github.com/Technoetic/semantic-crosscheck/releases/tag/v0.31.1)), [Reference Atlas](https://technoetic.github.io/reference-atlas/)(220개 출처·428건 인용), GitHub 공개 저장소(162개·Pages 144개)·활동 차트(`2026.02.01–11.22`)·언어 분포 및 네이버 기술 블로그(344편)를 `index.html`·`cv.html`·A4 3쪽 태그드 `jeon-munjun-portfolio.pdf`·Release `v1.0`에 일괄 동기화했습니다.
