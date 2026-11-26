@@ -582,23 +582,45 @@
           <label><input type="radio" name="sbt-case" value="3" aria-describedby="sbt-detail-3"><span>탭 출력</span></label>
         </fieldset>
         <div class="demo-art bt-console">
+          <div class="bt-toolbar">
+            <span><span class="bt-prompt" aria-hidden="true">›_</span>셸 검사 시뮬레이션</span>
+            <button type="button" data-demo-replay><span aria-hidden="true">↻</span> 다시 재생</button>
+          </div>
           <div class="bt-case" data-view="1">
-            <p class="bt-input-label">Bash 입력 예시 · 실행하지 않음</p>
-            <pre><code>if false; then echo "probe <mark>&#96;x&#96;</mark> text"; fi</code></pre>
+            <div class="bt-source">
+              <p class="bt-input-label">Bash 입력</p>
+              <pre><code>if false; then echo "probe <mark>&#96;x&#96;</mark> text"; fi</code></pre>
+            </div>
+            <div class="bt-trace" aria-hidden="true">
+              <span class="bt-token">&#96;x&#96;</span><span class="bt-wire"><i class="bt-command-flight" aria-hidden="true"></i></span>
+              <div class="bt-resolution"><span>명령 치환</span><samp class="bt-output">명령 x</samp></div>
+            </div>
           </div>
           <div class="bt-case" data-view="2">
-            <p class="bt-input-label">PowerShell 입력 예시 · 실행하지 않음</p>
-            <pre><code>if ($false) { gh release create v0.0.0-probe --notes "probe <mark>&#96;x&#96;</mark> text" }</code></pre>
+            <div class="bt-source">
+              <p class="bt-input-label">PowerShell 입력 <span class="bt-coordinates" aria-hidden="true">1행 · 61열 / 63열</span></p>
+              <pre><code>if ($false) { gh release create v0.0.0-probe --notes "probe <mark>&#96;</mark>x<mark>&#96;</mark> text" }</code></pre>
+            </div>
+            <div class="bt-trace" aria-hidden="true">
+              <span class="bt-token">&#96;x&#96;</span><span class="bt-wire"></span>
+              <div class="bt-resolution"><span>셸이 읽은 게시 본문</span><samp class="bt-output">probe <span class="bt-unescaped">x</span> text</samp></div>
+            </div>
           </div>
           <div class="bt-case" data-view="3">
-            <p class="bt-input-label">PowerShell 입력 예시 · 실행하지 않음</p>
-            <pre><code>Write-Output "a<mark>&#96;t</mark>b"</code></pre>
+            <div class="bt-source">
+              <p class="bt-input-label">PowerShell 입력</p>
+              <pre><code>Write-Output "a<mark>&#96;t</mark>b"</code></pre>
+            </div>
+            <div class="bt-trace" aria-hidden="true">
+              <span class="bt-token">a&#96;tb</span><span class="bt-wire"></span>
+              <div class="bt-resolution"><span>탭을 넣은 출력</span><samp class="bt-output bt-tab-output"><span>a</span><span class="bt-tab-gap">&#9;</span><span>b</span></samp></div>
+            </div>
           </div>
         </div>
         <div class="demo-readout">
-          <div data-view="1" id="sbt-detail-1"><strong>예상 결과 · 차단</strong><p>Bash는 큰따옴표 안에서도 백틱 사이의 <code>x</code>를 명령으로 읽고, 그 자리에 실행 결과를 넣습니다.</p></div>
-          <div data-view="2" id="sbt-detail-2"><strong>예상 결과 · 게시 전 차단</strong><p>PowerShell이 릴리스 노트의 백틱을 해석하면 본문이 바뀝니다. 훅은 두 백틱의 위치인 1행 61열과 63열을 알려 줍니다.</p></div>
-          <div data-view="3" id="sbt-detail-3"><strong>예상 결과 · 통과</strong><p>화면에 출력할 때 <code>&#96;t</code>는 탭을 뜻합니다. 이 명령은 <code>a</code>와 <code>b</code> 사이에 탭 하나를 출력합니다.</p></div>
+          <div data-view="1" id="sbt-detail-1"><strong class="bt-verdict">실행 전 차단</strong><p>Bash는 큰따옴표 안에서도 <code>x</code>를 명령으로 읽습니다. 해당 줄이 실행되면 백틱 자리에 명령의 출력이 들어갑니다.</p></div>
+          <div data-view="2" id="sbt-detail-2"><strong class="bt-verdict">게시 전 차단</strong><p>PowerShell이 백틱을 해석하면 게시 본문은 <code>probe x text</code>가 됩니다. 훅이 짚은 백틱은 1행 61열과 63열에 있습니다.</p></div>
+          <div data-view="3" id="sbt-detail-3"><strong class="bt-verdict">출력 통과</strong><p><code>&#96;t</code>는 PowerShell에서 탭 문자입니다. 훅을 통과하면 <code>a</code>와 <code>b</code> 사이에 탭 하나가 출력됩니다.</p></div>
         </div>
       </figure>
     </div>

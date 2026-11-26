@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { ProjectMotion } from '../src/js/visuals/project-motion.js';
 
-function scene() {
+function scene({ hasReplay = false } = {}) {
   const radios = [{ type: 'radio', checked: true }, { type: 'radio', checked: false }];
+  const replay = hasReplay ? new EventTarget() : null;
   const art = Object.assign(new EventTarget(), {
     style: { removeProperty() {} },
   });
@@ -12,11 +13,17 @@ function scene() {
     hasAttribute: name => attributes.has(name),
     setAttribute: name => attributes.add(name),
     removeAttribute: name => attributes.delete(name),
-    querySelector: key => key === '.demo-art' ? art : radios.find(radio => radio.checked),
+    querySelector(key) {
+      if (key === '.demo-art') return art;
+      if (key === '[data-demo-replay]') return replay;
+      if (key === 'input:checked') return radios.find(radio => radio.checked);
+      return null;
+    },
   });
   return {
-    slide: { querySelector: () => figure }, art,
+    slide: { querySelector: () => figure }, art, replay,
     playing: () => attributes.has('data-playing'),
+    replayReady: () => attributes.has('data-replay-ready'),
     choose(index, type) {
       radios.forEach((radio, i) => { radio.checked = i === index; });
       // Node's EventTarget has no DOM ancestry. Deliver the native radio's bubbling event at the figure.
@@ -39,13 +46,17 @@ function fixture() {
   win.requestAnimationFrame = action => { frames.set(++nextId, action); return nextId; };
   win.cancelAnimationFrame = id => frames.delete(id);
   win.IntersectionObserver = class {
-    constructor(callback) { this.callback = callback; observers.push(this); }
+    constructor(callback, { threshold }) {
+      this.callback = callback;
+      this.thresholds = threshold;
+      observers.push(this);
+    }
     observe(target) { this.target = target; }
     disconnect() { this.target = null; }
     report(ratio) { this.callback([{ intersectionRatio: ratio, isIntersecting: ratio > 0 }], this); }
   };
   const controller = new ProjectMotion({ root, onInteract: () => inputs++ });
-  const first = scene();
+  const first = scene({ hasReplay: true });
   controller.activateSlide(first.slide);
   return {
     first, root, win, media, timers, frames, observers, controller,
@@ -64,7 +75,7 @@ test('entry, click replay and keyboard changes each trigger one finite animation
   const f = fixture();
   f.visible(0.1);
   assert.equal(f.first.playing(), false);
-  f.visible(0.5);
+  f.visible(0.6);
   assert.equal(f.first.playing(), true);
   assert.equal(f.inputs(), 0);
   f.finish();
@@ -83,6 +94,33 @@ test('entry, click replay and keyboard changes each trigger one finite animation
   assert.equal(f.first.playing(), false);
 });
 
+test('a partially visible replay console waits for the reader or an explicit replay', () => {
+  const f = fixture();
+  assert.ok(f.observers[0].thresholds.includes(0.6), 'the browser must notify when the console reaches 60%');
+  f.visible(0.36);
+  assert.equal(f.first.playing(), false);
+  f.first.replay.dispatchEvent(new Event('click'));
+  assert.equal(f.first.playing(), true);
+  const [manualTimer] = f.timers.keys();
+  f.visible(0.6);
+  assert.deepEqual([...f.timers.keys()], [manualTimer], 'scrolling must not restart an explicit replay');
+  f.visible(0.36);
+  assert.equal(f.first.playing(), false);
+  f.visible(0.6);
+  assert.equal(f.first.playing(), true);
+  f.visible(0.36);
+  assert.equal(f.first.playing(), false, 'a nearly hidden console should end automatic playback');
+  f.visible(0.19);
+  f.first.replay.dispatchEvent(new Event('click'));
+  assert.equal(f.first.playing(), false);
+
+  const other = scene();
+  f.controller.activateSlide(other.slide);
+  f.visible(0.2);
+  assert.equal(other.playing(), true, 'other diagrams still start at 20% visibility');
+  f.controller.dispose();
+});
+
 test('viewport, motion preference, tab visibility and BFCache suspend and restore the active scene', () => {
   const f = fixture();
   const expectPlaying = active => {
@@ -91,18 +129,21 @@ test('viewport, motion preference, tab visibility and BFCache suspend and restor
   };
   f.visible(1);
   f.visible(0);
+  f.first.replay.dispatchEvent(new Event('click'));
   expectPlaying(false);
   f.visible(1);
   expectPlaying(true);
   f.media.matches = true;
   f.media.dispatchEvent(new Event('change'));
   f.first.choose(1, 'click');
+  f.first.replay.dispatchEvent(new Event('click'));
   expectPlaying(false);
   f.media.matches = false;
   f.media.dispatchEvent(new Event('change'));
   expectPlaying(true);
   f.root.hidden = true;
   f.root.dispatchEvent(new Event('visibilitychange'));
+  f.first.replay.dispatchEvent(new Event('click'));
   expectPlaying(false);
   f.win.dispatchEvent(new Event('pagehide'));
   f.root.hidden = false;
@@ -110,6 +151,33 @@ test('viewport, motion preference, tab visibility and BFCache suspend and restor
   expectPlaying(false);
   f.win.dispatchEvent(new Event('pageshow'));
   expectPlaying(true);
+});
+
+test('the replay button restarts the selected case and detaches when its slide leaves', () => {
+  const f = fixture();
+  assert.equal(f.first.replayReady(), true);
+  f.visible(1);
+  f.first.choose(1, 'change');
+  const [oldTimer] = f.timers.keys();
+  f.first.replay.dispatchEvent(new Event('click'));
+  assert.equal(f.inputs(), 2);
+  assert.equal(f.first.playing(), true);
+  assert.ok(!f.timers.has(oldTimer), 'a replay should restart the sequence from the beginning');
+  f.finish();
+  f.first.replay.dispatchEvent(new Event('click'));
+  assert.equal(f.first.playing(), true);
+  f.finish();
+
+  const other = scene();
+  f.controller.activateSlide(other.slide);
+  f.visible(1);
+  f.finish();
+  assert.equal(f.first.replayReady(), false);
+  assert.equal(other.replayReady(), false, 'a project without a replay button needs no enhancement');
+  f.first.replay.dispatchEvent(new Event('click'));
+  assert.equal(other.playing(), false, 'a detached control must not restart another project');
+  assert.equal(f.inputs(), 3);
+  f.controller.dispose();
 });
 
 test('leaving a slide and disposing cancel work and ignore late callbacks from old scenes', () => {

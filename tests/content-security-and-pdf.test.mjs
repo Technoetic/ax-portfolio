@@ -299,10 +299,29 @@ test('each project demo offers native controls, a visual example and a matching 
     const readout = figure.slice(readoutStart);
     if (id === 'sbt') {
       assert.equal(values.length, 3, '#sbt demonstrates three shell commands');
-      const examples = [...figure.slice(0, readoutStart).matchAll(/<div\b[^>]*\bdata-view="(\d+)"[^>]*>([\s\S]*?)<\/div>/g)];
+      const artwork = figure.slice(0, readoutStart);
+      const replays = [...artwork.matchAll(/<button\b[^>]*\bdata-demo-replay\b[^>]*>[\s\S]*?<\/button>/g)];
+      assert.equal(replays.length, 1, 'one replay control serves the selected case');
+      assert.match(replays[0][0], /\btype="button"/);
+      assert.match(replays[0][0], /다시\s*재생/);
+      const examples = [...artwork.matchAll(/<div\b[^>]*\bdata-view="(\d+)"[^>]*>/g)];
       assert.deepEqual(examples.map(([, value]) => value), values, '#sbt needs a code sample for each choice');
-      for (const [, value, body] of examples) {
-        assert.match(body, /<pre>\s*<code>\s*\S[\s\S]*?<\/code>\s*<\/pre>/, `#sbt example ${value} needs readable code`);
+      // Keep tab characters intact when reading the printed PowerShell example.
+      const plainText = markup => markup.replace(/<[^>]+>/g, '')
+        .replace(/&#(?:96|x60);/gi, '\x60').replace(/&#(?:9|x0?9);/gi, '\t');
+      const outcomes = ['명령 x', 'probe x text', 'a\tb'];
+      for (const [index, example] of examples.entries()) {
+        const body = artwork.slice(example.index, examples[index + 1]?.index);
+        const code = body.match(/<pre\b[^>]*>\s*<code\b[^>]*>([\s\S]*?)<\/code>\s*<\/pre>/)?.[1];
+        assert.ok(code?.trim(), `#sbt example ${example[1]} needs readable code`);
+        assert.match(code, /<mark\b[^>]*>[\s\S]*?<\/mark>/);
+        if (example[1] === '2') {
+          const columns = [...plainText(code).matchAll(/\x60/g)].map(tick => tick.index + 1);
+          assert.deepEqual(columns, [61, 63], 'the two marked backticks must stay at the reported positions');
+        }
+        const output = body.match(/<samp\b[^>]*>[\s\S]*?<\/samp>/)?.[0];
+        assert.ok(output, `#sbt example ${example[1]} needs a shell interpretation`);
+        assert.equal(plainText(output).trim(), outcomes[index]);
       }
     } else {
       const art = figure.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/)?.[0];
