@@ -241,7 +241,7 @@ test('ScrollReveal hides only below-fold targets, reveals once on IO/scrollend/f
 });
 
 test('index.html, cv.html, and motion stylesheets satisfy motion.md and desktop 6-slide figure lock contracts', async () => {
-  const [indexHtml, cvHtml, tokensCss, motionCss, cvMotionCss, countUpJs, revealJs, deckJs] = await Promise.all([
+  const [indexHtml, cvHtml, tokensCss, motionCss, cvMotionCss, countUpJs, revealJs, deckJs, metricsJson] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'src/css/tokens.css'), 'utf8'),
@@ -250,6 +250,7 @@ test('index.html, cv.html, and motion stylesheets satisfy motion.md and desktop 
     readFile(path.join(APP_ROOT, 'src/js/visuals/count-up.js'), 'utf8'),
     readFile(path.join(APP_ROOT, 'src/js/visuals/scroll-reveal.js'), 'utf8'),
     readFile(path.join(APP_ROOT, 'src/js/screens/deck-screen.js'), 'utf8'),
+    readFile(path.join(APP_ROOT, 'assets/metrics.json'), 'utf8'),
   ]);
 
   for (const token of ['--motion-countup-duration', '--motion-reveal-duration', '--motion-reveal-stagger', '--motion-reveal-distance', '--motion-ease-out']) {
@@ -264,11 +265,13 @@ test('index.html, cv.html, and motion stylesheets satisfy motion.md and desktop 
     assert.doesNotMatch(css, /visibility\s*:\s*hidden/i);
   }
   // Index has 11 KPI count-ups across #sav, #smv, #sw6, #scv, #s6, #s7
+  const { featuredTools, publicRepos, githubPagesRepos, blogPosts } = JSON.parse(metricsJson);
   const indexCounters = [...indexHtml.matchAll(/data-countup-target="(\d+)"/g)].map(m => Number(m[1]));
-  assert.deepEqual(indexCounters, [3, 10, 6, 11, 165, 5, 348, 165, 5, 146, 348]);
+  assert.deepEqual(indexCounters, [3, 10, 6, 11, publicRepos.value, featuredTools.value, blogPosts.value,
+    publicRepos.value, featuredTools.value, githubPagesRepos.value, blogPosts.value]);
   // CV has 4 KPI count-ups in #about .stats
   const cvCounters = [...cvHtml.matchAll(/data-countup-target="(\d+)"/g)].map(m => Number(m[1]));
-  assert.deepEqual(cvCounters, [11, 5, 165, 348]);
+  assert.deepEqual(cvCounters, [11, featuredTools.value, publicRepos.value, blogPosts.value]);
 
   // Every countup-value carries explicit aria-hidden="true" and zero aria-live
   for (const html of [indexHtml, cvHtml]) {
