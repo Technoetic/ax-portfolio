@@ -171,7 +171,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
-  transition: opacity 0.48s ease, transform 0.48s ease, visibility 0.48s;
+  transition: opacity 0.48s ease, transform 0.48s ease;
 }
 
 html.js .slide {
@@ -182,6 +182,7 @@ html.js .slide.active,
 html.js .slide.is-entering,
 html.js .slide.is-leaving {
   display: flex;
+  visibility: visible;
 }
 
 /* Before navigation mounts, show the bookmarked slide or the cover at its final size. */

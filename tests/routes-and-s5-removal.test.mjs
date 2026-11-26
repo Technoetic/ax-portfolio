@@ -13,6 +13,22 @@ import {
   SLIDE_IDS,
 } from '../src/js/shared/routes.js';
 
+test('keyboard navigation can focus the destination as soon as a slide transition starts', async () => {
+  const css = await readFile(path.join(APP_ROOT, 'src/css/components.css'), 'utf8');
+  const rules = [...css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([^{}]+)\{([^{}]*)\}/g)];
+  const declarations = selector => rules
+    .filter(([, selectors]) => selectors.split(',').some(item => item.trim() === selector))
+    .map(([, , body]) => body).join('\n');
+  const base = declarations('.slide');
+  assert.match(base, /\bvisibility\s*:\s*hidden\b/);
+  assert.doesNotMatch(base, /\btransition(?:-property)?\s*:[^;}]*\b(?:visibility|all)\b/);
+  for (const state of ['active', 'is-entering', 'is-leaving']) {
+    const styles = declarations(`html.js .slide.${state}`);
+    assert.match(styles, /\bdisplay\s*:\s*flex\b/, `the ${state} slide should participate in layout`);
+    assert.match(styles, /\bvisibility\s*:\s*visible\b/, `the ${state} slide should be visible immediately`);
+  }
+});
+
 test('the deck reserves its initial layout before modules load and releases it even if they fail', async () => {
   const html = await readFile(path.join(APP_ROOT, 'index.html'), 'utf8');
   const head = html.split('</head>')[0];
