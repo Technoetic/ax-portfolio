@@ -240,7 +240,7 @@ test('ScrollReveal hides only below-fold targets, reveals once on IO/scrollend/f
   sr.dispose();
 });
 
-test('index.html, cv.html, and motion stylesheets satisfy motion.md and desktop 6-slide figure lock contracts', async () => {
+test('deck and CV motion respect reduced motion, printing and accessible count-up totals', async () => {
   const [indexHtml, cvHtml, tokensCss, motionCss, cvMotionCss, countUpJs, revealJs, deckJs, metricsJson] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
