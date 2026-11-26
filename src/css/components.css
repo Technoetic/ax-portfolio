@@ -1322,7 +1322,7 @@ a.lg:hover {
 
 .cv-tools-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.38fr) minmax(0, 0.72fr) minmax(0, 0.77fr) minmax(0, 1.38fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin-bottom: 8px;
 }

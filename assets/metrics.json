@@ -15,25 +15,27 @@
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
   "featuredPlugins": {
-    "value": 4,
-    "asOf": "2026-11-23",
-    "projects": [
-      "agentic-vault",
-      "semantic-crosscheck",
-      "md-viz",
-      "webapp6"
-    ],
-    "scope": "featured_in_portfolio"
-  },
-  "featuredTools": {
     "value": 5,
-    "asOf": "2026-11-23",
+    "asOf": "2026-11-27",
     "projects": [
       "agentic-vault",
       "semantic-crosscheck",
       "md-viz",
       "webapp6",
-      "close-to-tray-helper"
+      "backtick-check-hook"
+    ],
+    "scope": "featured_in_portfolio"
+  },
+  "featuredTools": {
+    "value": 6,
+    "asOf": "2026-11-27",
+    "projects": [
+      "agentic-vault",
+      "semantic-crosscheck",
+      "md-viz",
+      "webapp6",
+      "close-to-tray-helper",
+      "backtick-check-hook"
     ],
     "scope": "featured_in_portfolio"
   },
@@ -93,6 +95,26 @@
       ],
       "source": "https://github.com/Technoetic/webapp6/releases/tag/v0.2.0",
       "commit": "05a6c35e7b64218f048b57dbc83f2a98d6bb11d5"
+    },
+    "backtick-check-hook": {
+      "version": "0.1.0",
+      "asOf": "2026-11-27",
+      "hosts": [
+        "Claude Code",
+        "Codex",
+        "Antigravity"
+      ],
+      "source": "https://github.com/Technoetic/backtick-check-hook/releases/tag/v0.1.0",
+      "commit": "5f6d9a95d1cbbe7e3b577ec6b3e918ef194dd5b1",
+      "verification": {
+        "source": "https://github.com/Technoetic/backtick-check-hook/actions/runs/45879942164",
+        "windowsPythonVersions": ["3.11", "3.12", "3.13", "3.14", "3.15"],
+        "windowsCodePages": [949, 65001],
+        "testsPerWindowsJob": 126,
+        "windowsTestExecutions": 1260,
+        "ubuntuArchiveRepeatabilityJobs": 1,
+        "liveHostSessionsTested": 0
+      }
     }
   },
   "utilityReleases": {

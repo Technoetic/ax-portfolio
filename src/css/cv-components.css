@@ -141,7 +141,11 @@ footer .contact-links { margin-top: 10px; }
   .snapshot { font-size: 8pt; }
   #projects { margin-bottom: 14px; }
   #projects .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  #projects .card.card-wide { grid-column: 1 / -1; }
+  #projects .card { padding-block: 8px; }
+  #projects .card.card-wide, #projects .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  #activity { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 14px; }
+  #activity .sec-title { grid-column: 1 / -1; }
+  #activity .reading { margin-top: 0; }
   .timeline { padding-left: 20px; }
   .entry { position: static; padding-bottom: 14px; }
   .entry:before { display: none; }

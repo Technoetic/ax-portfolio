@@ -29,6 +29,8 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
   const sxc = metrics.pluginReleases['semantic-crosscheck'];
   const mv = metrics.pluginReleases['md-viz'];
   const w6 = metrics.pluginReleases['webapp6'];
+  const hook = metrics.pluginReleases['backtick-check-hook'];
+  const hookRepo = 'https://github.com/Technoetic/backtick-check-hook';
   const ctt = metrics.utilityReleases['close-to-tray-helper'];
   const atlas = metrics.referenceAtlas;
   const esc = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -39,6 +41,15 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
   assert.deepEqual(av.hosts, ['Claude Code', 'Codex', 'Antigravity']);
   assert.deepEqual(mv.hosts, ['Claude Code', 'Codex', 'Antigravity']);
   assert.deepEqual(w6.hosts, ['Claude Code', 'Codex', 'Antigravity']);
+  assert.deepEqual(hook.hosts, ['Claude Code', 'Codex', 'Antigravity']);
+  assert.equal(hook.source, `${hookRepo}/releases/tag/v${hook.version}`);
+  for (const featured of [metrics.featuredPlugins, metrics.featuredTools]) {
+    assert.ok(featured.projects.includes('backtick-check-hook'));
+    assert.equal(featured.value, featured.projects.length);
+  }
+  const ci = hook.verification;
+  assert.equal(ci.windowsTestExecutions,
+    ci.windowsPythonVersions.length * ci.windowsCodePages.length * ci.testsPerWindowsJob);
   assert.deepEqual(ctt.hosts, ['Claude Code', 'Codex', 'Antigravity']);
   assert.ok(atlas.sources > 0 && atlas.citations > 0);
 
@@ -64,6 +75,18 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
   }
 
   assert.match(chartsJs, new RegExp(esc(metrics.activityChart.asOf)));
+
+  const scv = indexHtml.match(/<section\b[^>]*\bid="scv"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
+  const hookTile = [...scv.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)]
+    .find(([tag]) => tag.includes(`href="${hookRepo}"`))?.[0];
+  assert.ok(hookTile, 'missing backtick-check-hook repository link in #scv');
+  assert.ok(hookTile.includes(`v${hook.version}`), '#scv project link needs the current hook version');
+
+  const hookCard = [...cvHtml.matchAll(/<article\b[^>]*>[\s\S]*?<\/article>/g)]
+    .find(([tag]) => tag.includes(`href="${hookRepo}"`))?.[0];
+  assert.ok(hookCard, 'missing backtick-check-hook project card in the CV');
+  assert.ok(hookCard.includes(`v${hook.version}`));
+  assert.ok(hookCard.includes(`href="${ci.source}"`), 'hook card must link to the recorded CI run');
 
   const sbcp = indexHtml.match(/<section\b[^>]*\bid="sbcp"[^>]*>([\s\S]*?)<\/section>/)?.[1] || '';
   assert.ok(sbcp, 'missing #sbcp slide');
@@ -189,6 +212,11 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/md-viz/);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/webapp6/);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/close-to-tray-helper/);
+  const metrics = JSON.parse(await readFile(path.join(APP_ROOT, 'assets', 'metrics.json'), 'utf8'));
+  const hookCi = metrics.pluginReleases['backtick-check-hook'].verification.source;
+  for (const url of ['https://github.com/Technoetic/backtick-check-hook', hookCi]) {
+    assert.ok(latin.includes(`/URI (${url})`), `missing printed hook card link: ${url}`);
+  }
   assert.match(latin, /https:\/\/technoetic\.github\.io\/reference-atlas\//);
 
   assert.ok(!latin.includes('nova.igrowth.kr'), 'PDF must not contain dead nova.igrowth.kr URI');
