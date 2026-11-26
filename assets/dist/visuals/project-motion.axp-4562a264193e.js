@@ -1,6 +1,7 @@
 // CSS draws every scene. This controller starts a short sequence only while its artwork is visible.
 const SCENE_MS = 4600;
 const ENTRY_RATIO = 0.2;
+const CONSOLE_ENTRY_RATIO = 0.6;
 
 export class ProjectMotion {
   constructor({ root = document, onInteract } = {}) {
@@ -16,6 +17,7 @@ export class ProjectMotion {
     this.timer = null;
     this.frame = null;
     this.inView = false;
+    this.canAutoplay = false;
     this.pageHidden = false;
 
     const options = { signal: this.events.signal };
@@ -48,6 +50,7 @@ export class ProjectMotion {
     this.lastChoice = null;
     this.art = next?.querySelector('.demo-art');
     this.inView = false;
+    this.canAutoplay = false;
     if (!this.art) return;
 
     this.slideEvents = new AbortController();
@@ -70,20 +73,25 @@ export class ProjectMotion {
       this.inView = true;
       return;
     }
+    // Let visitors reach the command before its first timed reveal on a scrolling slide.
+    const isConsole = this.art.classList.contains('bt-console');
+    const autoplayRatio = isConsole ? CONSOLE_ENTRY_RATIO : ENTRY_RATIO;
     this.observer = new this.win.IntersectionObserver((entries, observer) => {
       if (observer !== this.observer) return;
       const entry = entries[entries.length - 1];
       const visible = entry.isIntersecting && entry.intersectionRatio >= ENTRY_RATIO;
-      if (visible === this.inView) return;
+      const canAutoplay = visible && entry.intersectionRatio >= autoplayRatio;
+      if (visible === this.inView && canAutoplay === this.canAutoplay) return;
       this.inView = visible;
+      this.canAutoplay = canAutoplay;
       this.syncPlayback();
-    }, { threshold: [0, ENTRY_RATIO] });
+    }, { threshold: isConsole ? [0, ENTRY_RATIO, autoplayRatio] : [0, ENTRY_RATIO] });
     this.observer.observe(this.art);
   }
 
   syncPlayback() {
-    if (!this.visible) this.stop();
-    else if (this.observer) this.play();
+    if (!this.visible || !this.canAutoplay) this.stop();
+    else if (this.observer && this.timer === null) this.play();
   }
 
   play() {

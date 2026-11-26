@@ -300,10 +300,7 @@ test('each project demo offers native controls, a visual example and a matching 
     if (id === 'sbt') {
       assert.equal(values.length, 3, '#sbt demonstrates three shell commands');
       const artwork = figure.slice(0, readoutStart);
-      const replays = [...artwork.matchAll(/<button\b[^>]*\bdata-demo-replay\b[^>]*>[\s\S]*?<\/button>/g)];
-      assert.equal(replays.length, 1, 'one replay control serves the selected case');
-      assert.match(replays[0][0], /\btype="button"/);
-      assert.match(replays[0][0], /다시\s*재생/);
+      assert.doesNotMatch(figure, /data-demo-replay|다시\s*재생/);
       const examples = [...artwork.matchAll(/<div\b[^>]*\bdata-view="(\d+)"[^>]*>/g)];
       assert.deepEqual(examples.map(([, value]) => value), values, '#sbt needs a code sample for each choice');
       // Keep tab characters intact when reading the printed PowerShell example.
