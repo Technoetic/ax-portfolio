@@ -15,18 +15,6 @@
     "source": "https://blog.naver.com/hdc-labs-nova"
   },
   "featuredPlugins": {
-    "value": 5,
-    "asOf": "2026-11-27",
-    "projects": [
-      "agentic-vault",
-      "semantic-crosscheck",
-      "md-viz",
-      "webapp6",
-      "backtick-check-hook"
-    ],
-    "scope": "featured_in_portfolio"
-  },
-  "featuredTools": {
     "value": 6,
     "asOf": "2026-11-27",
     "projects": [
@@ -34,8 +22,22 @@
       "semantic-crosscheck",
       "md-viz",
       "webapp6",
+      "backtick-check-hook",
+      "node-pg-defense"
+    ],
+    "scope": "featured_in_portfolio"
+  },
+  "featuredTools": {
+    "value": 7,
+    "asOf": "2026-11-27",
+    "projects": [
+      "agentic-vault",
+      "semantic-crosscheck",
+      "md-viz",
+      "webapp6",
       "close-to-tray-helper",
-      "backtick-check-hook"
+      "backtick-check-hook",
+      "node-pg-defense"
     ],
     "scope": "featured_in_portfolio"
   },
@@ -114,6 +116,18 @@
         "windowsTestExecutions": 1260,
         "ubuntuArchiveRepeatabilityJobs": 1,
         "liveHostSessionsTested": 0
+      }
+    },
+    "node-pg-defense": {
+      "version": "0.1.0",
+      "asOf": "2026-11-27",
+      "hosts": ["Claude Code", "Codex", "Antigravity"],
+      "source": "https://github.com/Technoetic/node-pg-defense/releases/tag/v0.1.0",
+      "commit": "bff6fcf335b14dfdf8c836f9b64f7b37a87017df",
+      "controls": {
+        "categories": 7,
+        "total": 30,
+        "source": "https://github.com/Technoetic/node-pg-defense/blob/v0.1.0/docs/controls.md"
       }
     }
   },

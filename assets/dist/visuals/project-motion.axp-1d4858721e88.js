@@ -1,7 +1,7 @@
 // CSS draws every scene. This controller starts a short sequence only while its artwork is visible.
 const SCENE_MS = 4600;
 const ENTRY_RATIO = 0.2;
-const REPLAY_ENTRY_RATIO = 0.6;
+const CONSOLE_ENTRY_RATIO = 0.6;
 
 export class ProjectMotion {
   constructor({ root = document, onInteract } = {}) {
@@ -43,7 +43,6 @@ export class ProjectMotion {
     const next = slide?.querySelector('.project-demo') ?? null;
     if (next === this.figure) return;
     this.stop();
-    this.figure?.removeAttribute('data-replay-ready');
     this.slideEvents?.abort();
     this.observer?.disconnect();
     this.observer = null;
@@ -66,14 +65,6 @@ export class ProjectMotion {
     };
     next.addEventListener('click', select, options);
     next.addEventListener('change', select, options);
-    const replay = next.querySelector('[data-demo-replay]');
-    if (replay) {
-      replay.addEventListener('click', () => {
-        this.onInteract?.();
-        this.play();
-      }, options);
-      next.setAttribute('data-replay-ready', '');
-    }
     this.art.addEventListener('pointermove', event => this.tilt(event), options);
     this.art.addEventListener('pointerleave', () => this.resetTilt(), options);
 
@@ -83,7 +74,8 @@ export class ProjectMotion {
       return;
     }
     // Let visitors reach the command before its first timed reveal on a scrolling slide.
-    const autoplayRatio = replay ? REPLAY_ENTRY_RATIO : ENTRY_RATIO;
+    const isConsole = this.art.classList.contains('bt-console');
+    const autoplayRatio = isConsole ? CONSOLE_ENTRY_RATIO : ENTRY_RATIO;
     this.observer = new this.win.IntersectionObserver((entries, observer) => {
       if (observer !== this.observer) return;
       const entry = entries[entries.length - 1];
@@ -93,7 +85,7 @@ export class ProjectMotion {
       this.inView = visible;
       this.canAutoplay = canAutoplay;
       this.syncPlayback();
-    }, { threshold: replay ? [0, ENTRY_RATIO, autoplayRatio] : [0, ENTRY_RATIO] });
+    }, { threshold: isConsole ? [0, ENTRY_RATIO, autoplayRatio] : [0, ENTRY_RATIO] });
     this.observer.observe(this.art);
   }
 

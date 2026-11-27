@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="app-build-id" content="axp-4562a264193e">
+  <meta name="app-build-id" content="axp-1d4858721e88">
   <title>전문준 · AX 엔지니어 · 이력서</title>
-  <meta name="description" content="빌딩 HMI 11년 현장 경험을 기업 업무 자동화와 AI 개발 도구로 연결하는 AX 엔지니어 전문준. 실무 프로젝트, 공개 개발 도구 6종, Reference Atlas, 경력과 연락처.">
+  <meta name="description" content="빌딩 HMI 11년 현장 경험을 기업 업무 자동화와 AI 개발 도구로 연결하는 AX 엔지니어 전문준. 실무 프로젝트, 공개 개발 도구 7종, Reference Atlas, 경력과 연락처.">
   <meta property="og:type" content="profile">
   <meta property="og:title" content="전문준 · AX 엔지니어 · 이력서">
-  <meta property="og:description" content="DHIS 변압기 제조기업 AX 프로젝트 · 에이전틱 볼트(v0.57.0) · semantic-crosscheck(v0.33.0) · md-viz(v0.4.0) · backtick-check-hook(v0.1.0) · webapp6(v0.2.0) · close-to-tray-helper(v0.2.1) · Reference Atlas · 빌딩 HMI 11년 현장 경험.">
+  <meta property="og:description" content="DHIS 변압기 제조기업 AX 프로젝트 · 에이전틱 볼트(v0.57.0) · semantic-crosscheck(v0.33.0) · Node PG Defense(v0.1.0) · md-viz(v0.4.0) · backtick-check-hook(v0.1.0) · webapp6(v0.2.0) · close-to-tray-helper(v0.2.1) · Reference Atlas · 빌딩 HMI 11년 현장 경험.">
   <meta property="og:url" content="https://technoetic.github.io/ax-portfolio/cv.html">
   <meta property="og:image" content="https://technoetic.github.io/ax-portfolio/assets/og-card.png">
   <meta property="og:image:width" content="1200">
@@ -394,7 +394,7 @@ footer .contact-links { margin-top: 10px; }
         <p class="about">코엑스 등 빌딩 현장에서 <strong>BAS·BEMS 자동제어 시스템의 시공과 유지보수</strong>를 담당했습니다. 2023년부터 재직 중 LLM을 업무에 적용했고, AI 엔지니어 양성 과정을 거쳐 2026년 기업 AX 프로젝트를 수탁했습니다. 지금은 <strong>업무 자동화와 Claude Code · Codex · Antigravity용 개발 도구</strong>를 직접 만들고 공개합니다.</p>
         <div class="stats" aria-label="경력과 공개 활동 요약">
           <div class="stat" data-reveal><b><span class="countup-value cu-d2" data-countup-target="11" aria-hidden="true">11</span><span class="sr-only countup-sr">11</span>년</b><span>빌딩 HMI 현장 경험</span><small>2014.10–2025.10</small></div>
-          <div class="stat" data-reveal data-reveal-stagger="1"><b><span class="countup-value cu-d1" data-countup-target="6" aria-hidden="true">6</span><span class="sr-only countup-sr">6</span>종</b><span>공개 개발 도구</span><small>플러그인 5종 · <span class="nw">Windows 도우미</span></small></div>
+          <div class="stat" data-reveal data-reveal-stagger="1"><b><span class="countup-value cu-d1" data-countup-target="7" aria-hidden="true">7</span><span class="sr-only countup-sr">7</span>종</b><span>공개 개발 도구</span><small>플러그인 6종 · <span class="nw">Windows 도우미</span></small></div>
           <div class="stat" data-reveal data-reveal-stagger="2"><b><span class="countup-value cu-d3" data-countup-target="165" aria-hidden="true">165</span><span class="sr-only countup-sr">165</span>개</b><span>GitHub 공개 저장소</span><small>2026-11-23 기준</small></div>
           <div class="stat" data-reveal data-reveal-stagger="3"><b><span class="countup-value cu-d3" data-countup-target="348" aria-hidden="true">348</span><span class="sr-only countup-sr">348</span>편</b><span>기술 블로그 기록</span><small>2026-11-23 기준</small></div>
         </div>
@@ -434,6 +434,13 @@ footer .contact-links { margin-top: 10px; }
             <p class="ds">설정 하나에서 PostgreSQL·온톨로지·시맨틱 레이어 모델을 만들고, 서로의 결과와 기준 SQL로 교차 대조하며 미검증 범위(not_proven)를 함께 보고합니다.</p>
             <p class="meta">PostgreSQL 17+ · RDF/OWL · SHACL · HermiT · Cube Core</p>
             <div class="card-links"><a href="https://github.com/Technoetic/semantic-crosscheck">소스·설치 안내 보기 →</a></div>
+          </article>
+          <article class="card" id="node-pg-defense" data-reveal>
+            <h3>Node PG Defense · SQL 인젝션 방어</h3>
+            <div class="chips"><span class="chip">Claude Code · Codex · Antigravity</span><span class="chip">v0.1.0 · MIT</span></div>
+            <p class="ds">Node.js와 PostgreSQL을 쓰는 앱에서 단순한 <code>pg</code> 조회의 입력값을 SQL 본문에서 분리합니다. 에이전트는 7개 분류의 방어 항목 30개를 검토하고, 운영 권한 확인이 필요한 항목을 표시합니다.</p>
+            <p class="meta">자동 변환은 01번의 일부 · 원본 백업·복구 · PostgreSQL 17 검증</p>
+            <div class="card-links"><a href="https://github.com/Technoetic/node-pg-defense">저장소 →</a><a href="https://github.com/Technoetic/node-pg-defense/blob/v0.1.0/docs/controls.md">30개 점검 항목 →</a></div>
           </article>
           <article class="card" data-reveal>
             <h3>md-viz · GitHub README 시각화</h3>
@@ -538,6 +545,6 @@ footer .contact-links { margin-top: 10px; }
       </footer>
     </div>
   </main>
-  <script type="module" src="./assets/dist/cv-main.axp-4562a264193e.js"></script>
+  <script type="module" src="./assets/dist/cv-main.axp-1d4858721e88.js"></script>
 </body>
 </html>

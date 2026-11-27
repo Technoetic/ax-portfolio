@@ -45,7 +45,9 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
   assert.equal(hook.source, `${hookRepo}/releases/tag/v${hook.version}`);
   for (const featured of [metrics.featuredPlugins, metrics.featuredTools]) {
     assert.ok(featured.projects.includes('backtick-check-hook'));
+    assert.ok(featured.projects.includes('node-pg-defense'));
     assert.equal(featured.value, featured.projects.length);
+    assert.equal(new Set(featured.projects).size, featured.value);
   }
   const ci = hook.verification;
   assert.equal(ci.windowsTestExecutions,
@@ -103,6 +105,35 @@ test('index.html, cv.html, activity-charts.js, and metrics.json stay dynamically
   assert.ok(sbcp, 'missing #sbcp slide');
   assert.doesNotMatch(sbcp, /운영 중입니다/, '#sbcp must not claim live operation without a live demo link');
   assert.doesNotMatch(sbcp, /Fly\.io 배포/, '#sbcp must not show Fly.io deploy badge without a live demo link');
+});
+
+test('Node PG Defense has reachable deck and CV entries backed by its release and control guide', async () => {
+  const [indexHtml, cvHtml, metricsJson] = await Promise.all([
+    readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
+    readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
+    readFile(path.join(APP_ROOT, 'assets', 'metrics.json'), 'utf8'),
+  ]);
+  const pg = JSON.parse(metricsJson).pluginReleases['node-pg-defense'];
+  const repo = 'https://github.com/Technoetic/node-pg-defense';
+  assert.deepEqual(pg.hosts, ['Claude Code', 'Codex', 'Antigravity']);
+  assert.equal(pg.source, `${repo}/releases/tag/v${pg.version}`);
+  assert.equal(pg.controls.source, `${repo}/blob/v${pg.version}/docs/controls.md`);
+
+  const toolList = indexHtml.match(/<section\b[^>]*\bid="scv"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(toolList);
+  assert.match(toolList, /<a\b(?=[^>]*\bhref="#spg")(?=[^>]*\bdata-slide-target\b)[^>]*>/);
+  const slide = indexHtml.match(/<section\b[^>]*\bid="spg"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  const card = cvHtml.match(/<article\b[^>]*\bid="node-pg-defense"[^>]*>[\s\S]*?<\/article>/)?.[0];
+  for (const entry of [slide, card]) {
+    assert.ok(entry, 'missing Node PG Defense project entry');
+    assert.ok(entry.includes(`href="${repo}"`));
+    assert.ok(entry.includes(`v${pg.version}`));
+    const copy = entry.replace(/<[^>]*>/g, ' ');
+    assert.match(copy, new RegExp(`${pg.controls.categories}\\s*개\\s*분류`));
+    assert.match(copy, new RegExp(`${pg.controls.total}\\s*개`));
+  }
+  assert.ok(slide.includes(`href="${pg.source}"`));
+  assert.ok(slide.includes(`href="${pg.controls.source}"`));
 });
 
 test('the cover links to the quoting case and AI tools without a quote preview', async () => {
@@ -223,6 +254,7 @@ test('jeon-munjun-portfolio.pdf is a valid tagged 3-page PDF with updated links 
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/md-viz/);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/webapp6/);
   assert.match(latin, /https:\/\/github\.com\/Technoetic\/close-to-tray-helper/);
+  assert.ok(latin.includes('/URI (https://github.com/Technoetic/node-pg-defense)'));
   const metrics = JSON.parse(await readFile(path.join(APP_ROOT, 'assets', 'metrics.json'), 'utf8'));
   const hookCi = metrics.pluginReleases['backtick-check-hook'].verification.source;
   for (const url of ['https://github.com/Technoetic/backtick-check-hook', hookCi]) {

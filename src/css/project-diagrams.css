@@ -112,6 +112,44 @@
 }
 .demo-readout a { color: var(--demo-accent); text-underline-offset: .2em; }
 
+/* The same SQL is paired with each selected email using PostgreSQL's text/values interface. */
+.pg-example { --demo-accent: #72e4cf; }
+.pg-example figcaption {
+  margin-bottom: var(--s2);
+  color: var(--fg);
+  font-size: clamp(18px, 4.1cqi, 26px);
+  line-height: 1.35;
+  font-weight: 700;
+}
+.pg-query {
+  border: 1px solid #35535b;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #11242c, #101923);
+  overflow: hidden;
+}
+.pg-query-part { padding: clamp(15px, 4.5cqi, 26px); }
+.pg-query-part h3 {
+  margin: 0 0 10px;
+  color: #acc5ce;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.pg-query pre { margin: 0; white-space: pre-wrap; }
+.pg-query code {
+  color: #e6f2f5;
+  font: 500 clamp(14px, 3.8cqi, 23px)/1.55 ui-monospace, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+.pg-query code span { color: #9dcafd; }
+.pg-query code b { color: var(--demo-accent); }
+.pg-values { background-color: #0f1a23; border-top: 1px solid #35535b; }
+.pg-values code { color: #f2ce97; }
+.pg-caption { font-size: 14px; line-height: 1.6; color: var(--fg-dim); }
+@media print {
+  .pg-query { print-color-adjust: exact; }
+  .pg-example figcaption, .pg-caption { color: #172c43; }
+}
+
 /* Keep all descriptions in the same grid cell so longer choices never move the controls. */
 .demo-art [data-view] { display: none; }
 .demo-readout [data-view] { visibility: hidden; }

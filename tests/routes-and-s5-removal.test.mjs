@@ -37,7 +37,7 @@ test('the deck reserves its initial layout before modules load and releases it e
   assert.match(head.slice(0, startup.index), /<style media="screen">\s*html\[data-entry-slide\]\s*\{\s*overflow:\s*hidden;/,
     'the root scrollbar must stay hidden even before the external stylesheet arrives');
 
-  for (const hash of ['', '#sav', '#sbt', '#s4', '#s5', '#%73av', '#no-such-slide', '#%', '#constructor']) {
+  for (const hash of ['', '#sav', '#spg', '#sbt', '#s4', '#s5', '#%73av', '#no-such-slide', '#%', '#constructor']) {
     const document = new EventTarget();
     document.documentElement = { dataset: {} };
     runInNewContext(startup[1], { document, location: { hash } });
@@ -47,7 +47,7 @@ test('the deck reserves its initial layout before modules load and releases it e
   }
 });
 
-test('the 16-slide deck puts #sbt between #smv and #sw6 and retires #s5/#s4', async () => {
+test('the 17-slide deck groups the SQL projects, preserves the tool slides, and retires #s5/#s4', async () => {
   const [indexHtml, cvHtml] = await Promise.all([
     readFile(path.join(APP_ROOT, 'index.html'), 'utf8'),
     readFile(path.join(APP_ROOT, 'cv.html'), 'utf8'),
@@ -57,14 +57,16 @@ test('the 16-slide deck puts #sbt between #smv and #sw6 and retires #s5/#s4', as
     m => m[1],
   );
   assert.deepEqual(sectionIds, [...SLIDE_IDS]);
-  assert.equal(sectionIds.length, 16);
+  assert.equal(sectionIds.length, 17);
+  const sqlIndex = sectionIds.indexOf('sxc');
+  assert.deepEqual(sectionIds.slice(sqlIndex, sqlIndex + 3), ['sxc', 'spg', 'sref']);
   const mdVizIndex = sectionIds.indexOf('smv');
   assert.deepEqual(sectionIds.slice(mdVizIndex, mdVizIndex + 3), ['smv', 'sbt', 'sw6']);
   assert.ok(sectionIds.includes('sctt'), '#sctt slide must exist');
   assert.ok(!sectionIds.includes('s5'), '#s5 slide must not exist');
   assert.ok(!sectionIds.includes('s4'), '#s4 slide must not exist');
   const initialCounter = indexHtml.match(/<span class="counter" id="counter">([^<]+)<\/span>/)?.[1];
-  assert.equal(initialCounter, '01 / 16');
+  assert.equal(initialCounter, '01 / 17');
 
   const forbiddenTokens = [
     'id="s5"',
