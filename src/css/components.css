@@ -616,6 +616,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 /* Featured projects share the same right-hand frame on desktop. */
 #sav .split,
 #sxc .split,
+#spg .split,
 #smv .split,
 #sbt .split,
 #sw6 .split,
@@ -634,6 +635,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 #sxc h2,
+#spg h2,
 #smv h2,
 #sbt h2,
 #sw6 h2,
@@ -694,6 +696,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 #sxc .linkbtn,
+#spg .linkbtn,
 #smv .linkbtn,
 #sbt .linkbtn,
 #sw6 .linkbtn,
@@ -1899,26 +1902,31 @@ a.lg:hover {
   #smv .bignum,
   #sw6 .bignum { font-size: clamp(52px, 6.5vw, 84px); }
   #sxc .lead,
+  #spg .lead,
   #smv .lead,
   #sbt .lead,
   #sw6 .lead,
   #sctt .lead { font-size: 17px; }
   #sav .sxc-checks,
   #sxc .sxc-checks,
+  #spg .sxc-checks,
   #smv .sxc-checks,
   #sbt .sxc-checks,
   #sctt .sxc-checks { gap: 8px; margin-top: var(--s2); }
   #sav .sxc-checks li,
   #sxc .sxc-checks li,
+  #spg .sxc-checks li,
   #smv .sxc-checks li,
   #sbt .sxc-checks li,
   #sctt .sxc-checks li { font-size: 14px; }
   #sxc .snapshot-note,
+  #spg .snapshot-note,
   #smv .snapshot-note,
   #sbt .snapshot-note,
   #sw6 .snapshot-note,
   #sctt .snapshot-note { margin-top: 10px; }
   #sxc .linkbtn,
+  #spg .linkbtn,
   #smv .linkbtn,
   #sbt .linkbtn,
   #sw6 .linkbtn,

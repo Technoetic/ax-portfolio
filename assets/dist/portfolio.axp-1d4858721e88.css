@@ -464,6 +464,7 @@ html.js .slide.is-leaving {
 html[data-entry-slide="sdhis"]:not(.js) #sdhis,
 html[data-entry-slide="sav"]:not(.js) #sav,
 html[data-entry-slide="sxc"]:not(.js) #sxc,
+html[data-entry-slide="spg"]:not(.js) #spg,
 html[data-entry-slide="sref"]:not(.js) #sref,
 html[data-entry-slide="smv"]:not(.js) #smv,
 html[data-entry-slide="sbt"]:not(.js) #sbt,
@@ -901,6 +902,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 /* Featured projects share the same right-hand frame on desktop. */
 #sav .split,
 #sxc .split,
+#spg .split,
 #smv .split,
 #sbt .split,
 #sw6 .split,
@@ -919,6 +921,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 #sxc h2,
+#spg h2,
 #smv h2,
 #sbt h2,
 #sw6 h2,
@@ -979,6 +982,7 @@ html[data-entry-slide]:not(.js) .slide:not(#s0) {
 }
 
 #sxc .linkbtn,
+#spg .linkbtn,
 #smv .linkbtn,
 #sbt .linkbtn,
 #sw6 .linkbtn,
@@ -2184,26 +2188,31 @@ a.lg:hover {
   #smv .bignum,
   #sw6 .bignum { font-size: clamp(52px, 6.5vw, 84px); }
   #sxc .lead,
+  #spg .lead,
   #smv .lead,
   #sbt .lead,
   #sw6 .lead,
   #sctt .lead { font-size: 17px; }
   #sav .sxc-checks,
   #sxc .sxc-checks,
+  #spg .sxc-checks,
   #smv .sxc-checks,
   #sbt .sxc-checks,
   #sctt .sxc-checks { gap: 8px; margin-top: var(--s2); }
   #sav .sxc-checks li,
   #sxc .sxc-checks li,
+  #spg .sxc-checks li,
   #smv .sxc-checks li,
   #sbt .sxc-checks li,
   #sctt .sxc-checks li { font-size: 14px; }
   #sxc .snapshot-note,
+  #spg .snapshot-note,
   #smv .snapshot-note,
   #sbt .snapshot-note,
   #sw6 .snapshot-note,
   #sctt .snapshot-note { margin-top: 10px; }
   #sxc .linkbtn,
+  #spg .linkbtn,
   #smv .linkbtn,
   #sbt .linkbtn,
   #sw6 .linkbtn,
@@ -2640,6 +2649,7 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
   #sref { justify-content: flex-start; }
   #sav .split,
   #sxc .split,
+  #spg .split,
   #smv .split,
   #sbt .split,
   #sw6 .split,
@@ -2782,6 +2792,44 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
   overflow-wrap: anywhere;
 }
 .demo-readout a { color: var(--demo-accent); text-underline-offset: .2em; }
+
+/* The same SQL is paired with each selected email using PostgreSQL's text/values interface. */
+.pg-example { --demo-accent: #72e4cf; }
+.pg-example figcaption {
+  margin-bottom: var(--s2);
+  color: var(--fg);
+  font-size: clamp(18px, 4.1cqi, 26px);
+  line-height: 1.35;
+  font-weight: 700;
+}
+.pg-query {
+  border: 1px solid #35535b;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #11242c, #101923);
+  overflow: hidden;
+}
+.pg-query-part { padding: clamp(15px, 4.5cqi, 26px); }
+.pg-query-part h3 {
+  margin: 0 0 10px;
+  color: #acc5ce;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.pg-query pre { margin: 0; white-space: pre-wrap; }
+.pg-query code {
+  color: #e6f2f5;
+  font: 500 clamp(14px, 3.8cqi, 23px)/1.55 ui-monospace, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+.pg-query code span { color: #9dcafd; }
+.pg-query code b { color: var(--demo-accent); }
+.pg-values { background-color: #0f1a23; border-top: 1px solid #35535b; }
+.pg-values code { color: #f2ce97; }
+.pg-caption { font-size: 14px; line-height: 1.6; color: var(--fg-dim); }
+@media print {
+  .pg-query { print-color-adjust: exact; }
+  .pg-example figcaption, .pg-caption { color: #172c43; }
+}
 
 /* Keep all descriptions in the same grid cell so longer choices never move the controls. */
 .demo-art [data-view] { display: none; }
@@ -3060,36 +3108,17 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
   box-shadow: 0 12px 35px #0002;
 }
 .bt-console::before { content: none; }
-.bt-toolbar, .bt-toolbar > span, .bt-toolbar button {
+.bt-toolbar {
   display: flex;
   align-items: center;
-}
-.bt-toolbar {
-  justify-content: space-between;
-  gap: 6px;
-  padding: 3px var(--bt-pad);
+  gap: 8px;
+  padding: 10px var(--bt-pad);
   border-bottom: 1px solid var(--bt-line);
   background: #1b2838;
   font-size: clamp(13px, 2.6cqi, 15px);
   font-weight: 650;
 }
-.bt-toolbar > span { gap: 8px; }
 .bt-prompt { color: var(--bt-signal); font: 700 18px/1 var(--bt-mono); }
-.bt-toolbar button {
-  visibility: hidden;
-  gap: 4px;
-  min-height: 44px;
-  padding-inline: 7px;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
-  color: #dae7f5;
-  font: inherit;
-  cursor: pointer;
-}
-.bt-toolbar button > span { font: 24px/1 var(--bt-mono); }
-.bt-toolbar button:hover { background: #2b3d51; }
-.bt-toolbar button:focus-visible { outline-offset: -2px; }
 
 /* Stack the cases in one grid cell so the longest command reserves space for every choice.
    The shared radio selectors set visibility on the selected case and its description. */
@@ -3201,9 +3230,6 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 #sbt .demo-readout p { max-width: none; margin: 5px 0 0; }
 
 @media screen and (prefers-reduced-motion: no-preference) {
-  @supports selector(:has(*)) and selector(&) {
-    #sbt .project-demo[data-replay-ready] [data-demo-replay] { visibility: visible; }
-  }
   #sbt .bt-case { animation: none; }
   #sbt :is(
     [data-playing]:has(input[value="1"]:checked) [data-view="1"],
@@ -3313,7 +3339,6 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
   #sbt .bt-console { --bt-ink: #172c43; --bt-signal: #43300e; --bt-muted: #344455; box-shadow: none; }
   .bt-console, .bt-toolbar, .bt-source, .bt-trace, .bt-token { background: white; }
   .bt-source mark { color: inherit; background: transparent; text-decoration: underline; }
-  .bt-toolbar button { display: none; }
   #sbt .bt-verdict { color: #172c43; }
   #sbt .demo-readout code { color: inherit; }
 }
