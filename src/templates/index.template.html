@@ -374,26 +374,39 @@
           <span class="linkbtn-label">GitHub에서 보기</span><span class="url">github.com/Technoetic/node-pg-defense</span><span class="sr-only"> (새 탭)</span>
         </a>
       </div>
-      <figure class="project-demo pg-example rise" aria-labelledby="pg-caption">
+      <figure class="pg-example rise" data-pg-demo aria-labelledby="pg-caption">
         <figcaption id="pg-caption">이메일이 달라지면 쿼리는 어떻게 바뀔까?</figcaption>
-        <fieldset class="demo-picker">
-          <legend class="sr-only">조회에 사용할 예시 이메일</legend>
-          <label><input type="radio" name="pg-email" value="1" checked aria-describedby="pg-value-1"><span>일반 이메일</span></label>
-          <label><input type="radio" name="pg-email" value="2" aria-describedby="pg-value-2"><span>작은따옴표가 있는 이메일</span></label>
-        </fieldset>
-        <div class="demo-art pg-query">
-          <div class="pg-query-part">
-            <h3>SQL 본문</h3>
+        <form class="pg-controls" data-pg-form>
+          <label for="pg-email-input">조회할 이메일</label>
+          <div class="pg-entry">
+            <input id="pg-email-input" data-pg-input type="text" inputmode="email" value="min@example.org" maxlength="254" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="pg-local-note">
+            <button type="submit" data-pg-run>조회 시연 <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="pg-actions">
+            <div class="pg-presets" role="group" aria-label="예시 이메일 선택">
+              <button type="button" data-pg-sample="min@example.org" aria-pressed="true">기본 이메일</button>
+              <button type="button" data-pg-sample="o'neil@example.org" aria-pressed="false">작은따옴표 포함</button>
+              <button type="button" data-pg-sample="guest@example.org" aria-pressed="false">없는 이메일</button>
+            </div>
+            <button class="pg-tour" type="button" data-pg-tour aria-pressed="false"><span data-pg-tour-label>예시 자동 재생</span></button>
+          </div>
+        </form>
+        <div class="pg-query">
+          <div class="pg-step pg-values">
+            <h3>값 배열</h3>
+            <code data-pg-values>["min@example.org"]</code>
+          </div>
+          <div class="pg-step pg-sql">
+            <h3>고정된 SQL 본문</h3>
             <pre><code><span>SELECT</span> id <span>FROM</span> people
 <span>WHERE</span> email = <b>$1</b></code></pre>
           </div>
-          <div class="pg-query-part pg-values">
-            <h3>값 배열</h3>
-            <code id="pg-value-1" data-view="1">["min@example.org"]</code>
-            <code id="pg-value-2" data-view="2">["o'neil@example.org"]</code>
+          <div class="pg-step pg-result">
+            <h3>예시 조회 결과</h3>
+            <output data-pg-result role="status" aria-atomic="true">1행 · id 12</output>
           </div>
         </div>
-        <p class="pg-caption">두 경우 모두 SQL 본문은 같습니다. 작은따옴표도 이메일의 한 글자로 전달됩니다.</p>
+        <p id="pg-local-note">이 브라우저의 예시 데이터로 조회를 시연합니다.</p>
       </figure>
     </div>
   </section>
