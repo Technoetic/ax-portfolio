@@ -86,11 +86,11 @@ test('the first visible visit previews each real sample once and never marks the
   assert.equal(f.figure.dataset.pgTouring, '');
   assert.equal(f.result['aria-live'], 'off');
   assert.equal(f.result.textContent, '1행 · id 12');
-  f.advance(1850);
+  f.advance(1700);
   assert.deepEqual(JSON.parse(f.values.textContent), ["o'neil@example.org"]);
   assert.equal(f.samples[1]['aria-pressed'], 'true');
   assert.equal(f.result.textContent, '1행 · id 27');
-  f.advance(1850);
+  f.advance(1700);
   assert.deepEqual(JSON.parse(f.values.textContent), ['guest@example.org']);
   assert.equal(f.result.textContent, '0행');
   f.advance(1600);
@@ -104,7 +104,7 @@ test('the first visible visit previews each real sample once and never marks the
 test('focus, typing, form submission and navigation cancel tours without overwriting the last edit', () => {
   const f = setup();
   f.seen(1);
-  const queued = [...f.timers.values()].find(timer => timer.due === 1850);
+  const queued = [...f.timers.values()].find(timer => timer.due === 1700);
   f.form.dispatchEvent(new Event('focusin'));
   assert.equal(f.timers.size, 0);
   assert.equal(f.figure.dataset.pgTouring, undefined);
@@ -148,8 +148,8 @@ test('an empty focused field or a browser-restored field is never overwritten by
 test('every new visit replays the examples once; a late step from an earlier visit cannot override it', () => {
   const f = setup();
   f.seen(1);
-  const stale = [...f.timers.values()].find(timer => timer.due === 1850);
-  f.advance(1850);
+  const stale = [...f.timers.values()].find(timer => timer.due === 1700);
+  f.advance(1700);
   assert.equal(f.input.value, "o'neil@example.org");
   f.revisit();
   assert.equal(f.timers.size, 0);
@@ -158,7 +158,7 @@ test('every new visit replays the examples once; a late step from an earlier vis
   assert.equal(f.input.value, 'min@example.org');
   stale.action();
   assert.equal(f.input.value, 'min@example.org');
-  f.advance(1850 + 1850 + 1600);
+  f.advance(1700 + 1700 + 1600);
   assert.equal(f.input.value, 'guest@example.org');
   assert.equal(f.figure.dataset.pgTouring, undefined);
   f.seen(1);
@@ -185,6 +185,25 @@ test('a typed value survives later visits, while choosing an example lets the ne
   f.seen(1);
   assert.equal(f.figure.dataset.pgTouring, '');
   assert.equal(f.input.value, 'min@example.org');
+});
+
+test('the automatic run ends within five seconds of starting', () => {
+  const f = setup();
+  f.seen(1);
+  f.advance(4999);
+  assert.equal(f.figure.dataset.pgTouring, '');
+  f.advance(1);
+  assert.equal(f.figure.dataset.pgTouring, undefined);
+  assert.equal(f.timers.size, 0);
+});
+
+test('Enter in the field submits the form and replays the lookup without a visible button', () => {
+  const f = setup();
+  assert.equal(f.figure.dataset.pgPlaying, undefined);
+  assert.equal(f.form.dispatchEvent(new Event('submit', { cancelable: true })), false);
+  assert.equal(f.figure.dataset.pgPlaying, '');
+  assert.ok([...f.timers.values()].some(timer => timer.due === 1600));
+  assert.equal(f.figure.dataset.pgTouring, undefined);
 });
 
 test('reduced motion never starts the examples, even on a new visit', () => {
@@ -232,7 +251,7 @@ test('reduced motion and backgrounded pages settle promptly and retain the lates
 test('BFCache hides the tour and restores the current field without scheduling another example', () => {
   const f = setup();
   f.seen(1);
-  f.advance(1850);
+  f.advance(1700);
   f.win.dispatchEvent(new Event('pagehide'));
   assert.equal(f.timers.size, 0);
   f.input.value = 'browser-restored@example.org';

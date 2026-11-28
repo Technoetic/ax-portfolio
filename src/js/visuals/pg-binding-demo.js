@@ -1,7 +1,8 @@
 // This slide models one fixed equality lookup against two local example rows.
 const PEOPLE = new Map([['min@example.org', 12], ["o'neil@example.org", 27]]);
 const PLAYBACK_MS = 1600;
-const SAMPLE_INTERVAL_MS = 1850;
+// Three examples take 1700 + 1700 + 1600 = 5000 ms, so the automatic run never exceeds five seconds.
+const SAMPLE_INTERVAL_MS = 1700;
 
 export class PgBindingDemo {
   constructor({ root = document, onInteract } = {}) {
@@ -117,6 +118,7 @@ export class PgBindingDemo {
     this.active = slide === this.slide;
     if (this.active) {
       // Every visit to the slide plays the examples once while it is visible.
+      // A run cut short by scrolling away or hiding the tab starts again on the next visit.
       this.previewed = Boolean(this.motion?.matches);
       this.observer?.observe(this.figure);
     } else {

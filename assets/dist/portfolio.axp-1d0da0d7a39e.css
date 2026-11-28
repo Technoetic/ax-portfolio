@@ -2832,7 +2832,7 @@ html:not(.js, [data-entry-slide]) .av-map:not([data-av-ready="true"]) [data-av-s
 }
 .pg-example button { cursor: pointer; font: 600 13px/1.3 var(--sans); }
 .pg-actions, .pg-presets { display: flex; flex-wrap: wrap; }
-.pg-actions { align-items: center; justify-content: space-between; gap: 4px 8px; }
+.pg-actions { align-items: center; gap: 4px 8px; }
 .pg-presets { gap: 4px; }
 .pg-presets button {
   padding: 4px 10px;

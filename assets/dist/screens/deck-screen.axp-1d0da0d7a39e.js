@@ -1,7 +1,7 @@
-import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-1657b8531888.js';
-import { VaultInteraction } from '../visuals/vault-interaction.axp-1657b8531888.js';
-import { ProjectMotion } from '../visuals/project-motion.axp-1657b8531888.js';
-import { PgBindingDemo } from '../visuals/pg-binding-demo.axp-1657b8531888.js';
+import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl, parseSlideHash } from '../shared/routes.axp-1d0da0d7a39e.js';
+import { VaultInteraction } from '../visuals/vault-interaction.axp-1d0da0d7a39e.js';
+import { ProjectMotion } from '../visuals/project-motion.axp-1d0da0d7a39e.js';
+import { PgBindingDemo } from '../visuals/pg-binding-demo.axp-1d0da0d7a39e.js';
 
 export class DeckScreen {
   constructor({
