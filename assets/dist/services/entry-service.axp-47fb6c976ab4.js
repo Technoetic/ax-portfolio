@@ -1,4 +1,4 @@
-import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl } from '../shared/routes.axp-3341c476e931.js';
+import { BOOTSTRAP_PARAM, buildReloadUrl, cleanBootstrapUrl } from '../shared/routes.axp-47fb6c976ab4.js';
 
 export class EntryService {
   constructor({
