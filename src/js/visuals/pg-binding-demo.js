@@ -12,8 +12,6 @@ export class PgBindingDemo {
     this.values = this.figure.querySelector('[data-pg-values]');
     this.result = this.figure.querySelector('[data-pg-result]');
     this.samples = this.figure.querySelectorAll('[data-pg-sample]');
-    this.tourButton = this.figure.querySelector('[data-pg-tour]');
-    this.tourLabel = this.figure.querySelector('[data-pg-tour-label]');
     const form = this.figure.querySelector('[data-pg-form]');
     this.root = root;
     this.win = root.defaultView;
@@ -22,7 +20,10 @@ export class PgBindingDemo {
     this.timer = null;
     this.tour = null;
     this.active = false;
+    // previewed: the current visit has already played the examples or the visitor took over.
     this.previewed = false;
+    // typed: the visitor wrote their own value, which a later visit must not overwrite.
+    this.typed = false;
     this.pageHidden = false;
     const options = { signal: this.events.signal };
 
@@ -38,28 +39,26 @@ export class PgBindingDemo {
         this.play();
       }
     };
-    this.input.addEventListener('input', () => update(true), options);
-    form.addEventListener('focusin', event => {
+    this.input.addEventListener('input', () => {
+      this.typed = true;
+      update(true);
+    }, options);
+    form.addEventListener('focusin', () => {
       this.previewed = true;
       onInteract?.();
-      // The toggle keeps its advertised action between focus and an Enter, Space or click.
-      if (event.target !== this.tourButton) this.pause();
+      this.pause();
     }, options);
     for (const sample of this.samples) {
       sample.addEventListener('click', () => {
         this.input.value = sample.dataset.pgSample;
+        this.typed = false;
         update();
       }, options);
     }
+    // Enter in the single field still submits the form without a visible button.
     form.addEventListener('submit', event => {
       event.preventDefault();
       update();
-    }, options);
-    this.tourButton.addEventListener('click', () => {
-      this.previewed = true;
-      onInteract?.();
-      if (this.tour) this.pause();
-      else this.startTour();
     }, options);
     root.addEventListener('visibilitychange', () => { if (root.hidden) this.pause(); }, options);
     this.win.addEventListener('pagehide', () => {
@@ -71,11 +70,9 @@ export class PgBindingDemo {
       this.render();
     }, options);
     const syncMotion = () => {
-      this.tourButton.disabled = Boolean(this.motion?.matches);
-      if (this.tourButton.disabled) {
-        this.previewed = true;
-        this.pause();
-      }
+      if (!this.motion?.matches) return;
+      this.previewed = true;
+      this.pause();
     };
     this.motion?.addEventListener('change', syncMotion, options);
     syncMotion();
@@ -85,8 +82,8 @@ export class PgBindingDemo {
         if (!entry.isIntersecting) this.pause();
         else if (entry.intersectionRatio >= 0.35 && !this.previewed && this.canAnimate) {
           this.previewed = true;
-          // A browser can restore form state without sending an input event.
-          if (this.input.value === this.input.defaultValue && !form.contains(root.activeElement)) this.startTour();
+          // A browser can restore form state without sending an input event, so only a sample value replays.
+          if (!this.typed && this.isSample(this.input.value) && !form.contains(root.activeElement)) this.startTour();
           else this.render();
         }
       }, { threshold: [0, 0.35] });
@@ -107,6 +104,10 @@ export class PgBindingDemo {
     }
   }
 
+  isSample(value) {
+    return [...this.samples].some(sample => sample.dataset.pgSample === value);
+  }
+
   get canAnimate() {
     return this.active && !this.pageHidden && !this.root.hidden && !this.motion?.matches;
   }
@@ -114,8 +115,11 @@ export class PgBindingDemo {
   activateSlide(slide) {
     if (!this.figure || this.active === (slide === this.slide)) return;
     this.active = slide === this.slide;
-    if (this.active) this.observer?.observe(this.figure);
-    else {
+    if (this.active) {
+      // Every visit to the slide plays the examples once while it is visible.
+      this.previewed = Boolean(this.motion?.matches);
+      this.observer?.observe(this.figure);
+    } else {
       this.observer?.disconnect();
       this.pause();
     }
@@ -140,8 +144,6 @@ export class PgBindingDemo {
     if (!this.canAnimate || this.tour) return;
     const tour = this.tour = { timer: null };
     this.figure.dataset.pgTouring = '';
-    this.tourLabel.textContent = '자동 재생 정지';
-    this.tourButton.setAttribute('aria-pressed', 'true');
     this.result.setAttribute('aria-live', 'off');
     const show = index => {
       if (this.tour !== tour) return;
@@ -163,8 +165,6 @@ export class PgBindingDemo {
     this.win.clearTimeout(this.tour.timer);
     this.tour = null;
     delete this.figure.dataset.pgTouring;
-    this.tourLabel.textContent = '예시 자동 재생';
-    this.tourButton.setAttribute('aria-pressed', 'false');
     this.result.setAttribute('aria-live', 'polite');
   }
 

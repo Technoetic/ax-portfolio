@@ -46,6 +46,7 @@ exporter는 로컬 `127.0.0.1` 루프백 서버에서 `cv.html`을 열어 상대
 
 ## 주요 갱신 기록
 
+- **2026-11-28:** Node PG Defense 소개를 [v0.2.0](https://github.com/Technoetic/node-pg-defense/releases/tag/v0.2.0)(8개 분류·34개 항목)으로 갱신했습니다. 슬라이드의 조회 예시는 '조회 시연'과 '예시 자동 재생' 버튼 없이 슬라이드를 열 때마다 한 번 자동으로 재생됩니다. 방문자가 직접 입력한 값은 덮어쓰지 않고, 움직임 줄이기 설정에서는 재생하지 않습니다. [프로젝트 슬라이드](https://technoetic.github.io/ax-portfolio/#spg)
 - **2026-11-27:** Node.js + PostgreSQL 전용 SQL 인젝션 방어 플러그인 Node PG Defense를 공개 프로젝트로 추가했습니다. 지원되는 `pg` 조회의 값 바인딩 자동 변환과 에이전트가 검토하는 7개 분류·30개 항목을 소개합니다. [프로젝트 슬라이드](https://technoetic.github.io/ax-portfolio/#spg) · [이력서 카드](https://technoetic.github.io/ax-portfolio/cv.html#node-pg-defense) · [v0.1.0 릴리스](https://github.com/Technoetic/node-pg-defense/releases/tag/v0.1.0)
 - **2026-11-27:** [백틱 검사 훅 v0.1.0](https://github.com/Technoetic/backtick-check-hook/releases/tag/v0.1.0)의 전용 슬라이드를 md-viz와 webapp6 사이에 추가했습니다. 발표본의 개발 도구 목록에서도 열 수 있습니다. 예시를 고르면 백틱을 찾는 과정, 셸의 해석, 훅의 판정이 차례로 재생됩니다. 셸이 게시 원문을 바꿀 수 있는 사례와 Windows 시험 결과는 [전용 슬라이드](https://technoetic.github.io/ax-portfolio/#sbt)와 [이력서 프로젝트 카드](https://technoetic.github.io/ax-portfolio/cv.html#backtick-check-hook)에서 확인할 수 있습니다.
 - **2026-11-24:** 에이전틱 볼트 소개(`#sav`)와 이력서의 버전을 [공개판 v0.57.0](https://github.com/Technoetic/agentic-vault/releases/tag/v0.57.0)으로 갱신했습니다. 소개에는 독립 플러그인으로 분리된 `webapp6`와 [공개판 이후 자비스 Telegram 연동·내장 `/aside-repl` 명령 제거](https://github.com/Technoetic/agentic-vault/blob/435425e02735b32c9d806d8e694c3a22ddac3fc1/docs/releases/unreleased.md)를 반영했습니다.

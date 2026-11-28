@@ -119,15 +119,15 @@
       }
     },
     "node-pg-defense": {
-      "version": "0.1.0",
-      "asOf": "2026-11-27",
+      "version": "0.2.0",
+      "asOf": "2026-11-28",
       "hosts": ["Claude Code", "Codex", "Antigravity"],
-      "source": "https://github.com/Technoetic/node-pg-defense/releases/tag/v0.1.0",
-      "commit": "bff6fcf335b14dfdf8c836f9b64f7b37a87017df",
+      "source": "https://github.com/Technoetic/node-pg-defense/releases/tag/v0.2.0",
+      "commit": "7a3c98d8136a61f159c4a4fdd75ffee9db07f3bf",
       "controls": {
-        "categories": 7,
-        "total": 30,
-        "source": "https://github.com/Technoetic/node-pg-defense/blob/v0.1.0/docs/controls.md"
+        "categories": 8,
+        "total": 34,
+        "source": "https://github.com/Technoetic/node-pg-defense/blob/v0.2.0/docs/controls.md"
       }
     }
   },

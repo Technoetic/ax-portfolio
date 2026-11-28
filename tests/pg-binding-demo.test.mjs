@@ -1,14 +1,16 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { PgBindingDemo } from '../src/js/visuals/pg-binding-demo.js';
 
-function setup() {
+function setup({ reduced = false } = {}) {
   const node = () => Object.assign(new EventTarget(), {
     dataset: {}, textContent: '', setAttribute(name, value) { this[name] = value; },
   });
-  const [root, win, figure, form, input, values, result, media, tourButton, tourLabel] = Array.from({ length: 10 }, node);
+  const [root, win, figure, form, input, values, result, media] = Array.from({ length: 8 }, node);
+  media.matches = reduced;
   input.defaultValue = input.value = 'min@example.org';
-  form.contains = element => [input, tourButton].includes(element);
+  form.contains = element => element === input;
   const samples = ['min@example.org', "o'neil@example.org", 'guest@example.org'].map(email => {
     const sample = node();
     sample.dataset.pgSample = email;
@@ -20,7 +22,6 @@ function setup() {
   figure.querySelectorAll = () => samples;
   figure.querySelector = selector => ({
     '[data-pg-form]': form, '[data-pg-input]': input, '[data-pg-values]': values, '[data-pg-result]': result,
-    '[data-pg-tour]': tourButton, '[data-pg-tour-label]': tourLabel,
   })[selector];
   win.matchMedia = () => media;
   const timers = new Map();
@@ -49,8 +50,9 @@ function setup() {
     }
     now = end;
   };
+  const revisit = () => { controller.activateSlide(null); controller.activateSlide(slide); };
   return { root, win, media, controller, figure, slide, form, input, values, result, samples, timers, edit, advance,
-    tourButton, tourLabel, interactions: () => interactions,
+    revisit, interactions: () => interactions,
     seen: ratio => observe([{ isIntersecting: ratio > 0, intersectionRatio: ratio }]) };
 }
 
@@ -82,7 +84,7 @@ test('the first visible visit previews each real sample once and never marks the
   f.seen(0.6);
   assert.equal(f.figure.dataset.pgPlaying, '');
   assert.equal(f.figure.dataset.pgTouring, '');
-  assert.equal(f.tourButton['aria-pressed'], 'true');
+  assert.equal(f.result['aria-live'], 'off');
   assert.equal(f.result.textContent, '1행 · id 12');
   f.advance(1850);
   assert.deepEqual(JSON.parse(f.values.textContent), ["o'neil@example.org"]);
@@ -93,7 +95,7 @@ test('the first visible visit previews each real sample once and never marks the
   assert.equal(f.result.textContent, '0행');
   f.advance(1600);
   assert.equal(f.figure.dataset.pgTouring, undefined);
-  assert.equal(f.tourButton['aria-pressed'], 'false');
+  assert.equal(f.result['aria-live'], 'polite');
   assert.equal(f.interactions(), 0);
   f.seen(0.8);
   assert.equal(f.timers.size, 0);
@@ -105,7 +107,7 @@ test('focus, typing, form submission and navigation cancel tours without overwri
   const queued = [...f.timers.values()].find(timer => timer.due === 1850);
   f.form.dispatchEvent(new Event('focusin'));
   assert.equal(f.timers.size, 0);
-  assert.equal(f.tourButton['aria-pressed'], 'false');
+  assert.equal(f.figure.dataset.pgTouring, undefined);
   f.edit('custom@example.org');
   f.edit('guest@example.org');
   queued.action();
@@ -143,22 +145,66 @@ test('an empty focused field or a browser-restored field is never overwritten by
   assert.equal(restored.timers.size, 0);
 });
 
-test('the tour button can replay and stop; a late previous step cannot override a newer tour', () => {
+test('every new visit replays the examples once; a late step from an earlier visit cannot override it', () => {
   const f = setup();
-  const toggle = () => f.tourButton.dispatchEvent(new Event('click'));
-  toggle();
+  f.seen(1);
   const stale = [...f.timers.values()].find(timer => timer.due === 1850);
   f.advance(1850);
-  toggle();
-  const stopped = f.input.value;
+  assert.equal(f.input.value, "o'neil@example.org");
+  f.revisit();
   assert.equal(f.timers.size, 0);
-  f.advance(2000);
-  assert.equal(f.input.value, stopped);
-  toggle();
+  f.seen(1);
+  assert.equal(f.figure.dataset.pgTouring, '');
+  assert.equal(f.input.value, 'min@example.org');
   stale.action();
   assert.equal(f.input.value, 'min@example.org');
-  f.controller.activateSlide(null);
+  f.advance(1850 + 1850 + 1600);
+  assert.equal(f.input.value, 'guest@example.org');
+  assert.equal(f.figure.dataset.pgTouring, undefined);
+  f.seen(1);
+  assert.equal(f.timers.size, 0, 'one visit plays the examples once');
+  f.revisit();
+  f.seen(1);
+  assert.equal(f.figure.dataset.pgTouring, '');
+  assert.equal(f.input.value, 'min@example.org');
+  assert.equal(f.interactions(), 0);
+});
+
+test('a typed value survives later visits, while choosing an example lets the next visit replay', () => {
+  const f = setup();
+  f.seen(1);
+  f.edit('custom@example.org');
+  assert.equal(f.figure.dataset.pgTouring, undefined);
+  f.revisit();
+  f.seen(1);
+  assert.equal(f.input.value, 'custom@example.org');
   assert.equal(f.timers.size, 0);
+  f.samples[2].dispatchEvent(new Event('click'));
+  assert.equal(f.input.value, 'guest@example.org');
+  f.revisit();
+  f.seen(1);
+  assert.equal(f.figure.dataset.pgTouring, '');
+  assert.equal(f.input.value, 'min@example.org');
+});
+
+test('reduced motion never starts the examples, even on a new visit', () => {
+  const f = setup({ reduced: true });
+  f.seen(1);
+  f.revisit();
+  f.seen(1);
+  assert.equal(f.figure.dataset.pgTouring, undefined);
+  assert.equal(f.timers.size, 0);
+  assert.equal(f.result.textContent, '1행 · id 12');
+});
+
+test('the published slide has no run or autoplay buttons, only the field and example choices', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const slide = html.match(/<section\b[^>]*\bid="spg"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert.ok(slide, 'missing #spg slide');
+  assert.doesNotMatch(slide, /data-pg-run|data-pg-tour/);
+  assert.doesNotMatch(slide, /조회 시연|예시 자동 재생/);
+  assert.match(slide, /<input\b[^>]*\bdata-pg-input\b/);
+  assert.equal(slide.match(/\bdata-pg-sample="/g)?.length, 3);
 });
 
 test('reduced motion and backgrounded pages settle promptly and retain the latest result', () => {
@@ -173,8 +219,6 @@ test('reduced motion and backgrounded pages settle promptly and retain the lates
   f.media.matches = true;
   f.media.dispatchEvent(new Event('change'));
   assert.equal(f.figure.dataset.pgPlaying, undefined);
-  assert.equal(f.tourButton.disabled, true);
-  f.tourButton.dispatchEvent(new Event('click'));
   assert.equal(f.figure.dataset.pgTouring, undefined);
   f.samples[1].dispatchEvent(new Event('click'));
   assert.equal(f.result.textContent, '1행 · id 27');
